@@ -11,13 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{9807F7A4-BAE7-4149-9F38-6A737B60123F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{50E3B192-2A72-4E73-8089-F5C1E6B4153E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "Storage\Storage.csproj", "{8006BBD9-B936-4C4F-AE77-BF96D9ADEAA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "..\Common\Storage\Storage.csproj", "{8006BBD9-B936-4C4F-AE77-BF96D9ADEAA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.NHibernate", "Storage.NHibernate\Storage.NHibernate.csproj", "{76EC83E0-C601-4CAF-A14A-0F497D8E2B51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.NHibernate", "..\Common\Storage.NHibernate\Storage.NHibernate.csproj", "{76EC83E0-C601-4CAF-A14A-0F497D8E2B51}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils.Extensions", "..\Common\Utils.Extensions\Utils.Extensions.csproj", "{76814548-C0CC-4CF6-8EF8-5E24A2B94A53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils.Extensions", "Utils.Extensions\Utils.Extensions.csproj", "{76814548-C0CC-4CF6-8EF8-5E24A2B94A53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +54,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8006BBD9-B936-4C4F-AE77-BF96D9ADEAA3} = {50E3B192-2A72-4E73-8089-F5C1E6B4153E}
-		{76EC83E0-C601-4CAF-A14A-0F497D8E2B51} = {50E3B192-2A72-4E73-8089-F5C1E6B4153E}
-		{76814548-C0CC-4CF6-8EF8-5E24A2B94A53} = {50E3B192-2A72-4E73-8089-F5C1E6B4153E}
 	EndGlobalSection
 EndGlobal
