@@ -1,15 +1,19 @@
 ﻿(function () {
-    var config = function ($routeProvider, $locationProvider, APP_CONFIG, USER_ROLES) {
-        $routeProvider
-            .when("/login", {
-                templateUrl:  APP_CONFIG.templateBaseUrl + "login/login-form.html",
-                controller: "loginController",
-                authorizedRoles: [USER_ROLES.any]
-            });
+    var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
 
-        $locationProvider.html5Mode(true);
+        $stateProvider.state("login", {
+            url: "/login",
+            templateUrl: APP_CONFIG.templateBaseUrl + "login/login-form.html",
+            controller: 'loginController'
+        });
+
     };
 
-    angular.module("login", ["shared", "ngRoute"])
-        .config(["$routeProvider", "$locationProvider", "APP_CONFIG", "USER_ROLES", config]);
+    angular.module("login",
+        [
+             "shared",
+             "ui.router"
+        ])
+
+        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config]);
 }());

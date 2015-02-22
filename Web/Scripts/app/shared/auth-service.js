@@ -2,24 +2,51 @@
 
     var authService = function (sessionService, $http, USER_ROLES) {
 
-        this.login = function (credentials) {
+        var me = { };
 
+        me.login = function (credentials) {
+            //return $http
+            //          .post('/login', credentials)
+            //          .then(function (res) {
+            //              Session.create(res.data.id, res.data.user.id,
+            //                             res.data.user.role);
+            //              return res.data.user;
+            //          });
+
+            return {
+                then: function (sucessCallback, errorCallback) {
+                    var user = {
+                        id: 1,
+                        username: 'Teste'
+                    };
+
+                    sessionService.create(1, 1, USER_ROLES.equipeMultivagas);
+
+                    sucessCallback(user);
+
+                    
+                }
+            }
         };
 
-        authService.isAuthenticated = function () {
+        me.isAuthenticated = function () {
             return !!sessionService.userId;
         };
 
-        authService.isAuthorized = function (authorizedRoles) {
+        me.isAuthorized = function (authorizedRoles) {
 
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
 
-            return (authService.isAuthenticated() && (authorizedRoles.indexOf(sessionService.userRole) !== -1)) || (authorizedRoles.indexOf(USER_ROLES.any) !== -1);
+            return (me.isAuthenticated() && (authorizedRoles.indexOf(sessionService.userRole) !== -1));
         };
 
-        return authService;
+        me.logout = function () {
+            sessionService.destroy();
+        };
+
+        return me;
 
     };
 

@@ -50,22 +50,53 @@ namespace Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            #region Vendor
+            
+            //ANGULAR
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                         "~/Scripts/vendor/angular/angular.js",
-                        "~/Scripts/vendor/angular/angular-route.js",
+                        "~/Scripts/vendor/angular/angular-ui-router.js",
                         "~/Scripts/vendor/angular/angular-cookies.js"
-                       ));
+                       ));                        
 
-            var scriptBundle = new ScriptBundle("~/bundles/multi-vagas")
-                .IncludeDirectory("~/Scripts/app/login", "*.js")
+            //BOOSTRAP
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/vendor/bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+                            "~/Content/bootstrap/css/bootstrap.css"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/vendor/jquery/jquery-{version}.js"
+                       ));     
+
+            //DASHGUM THEME
+            bundles.Add(new StyleBundle("~/Content/dashgum").Include(
+                            "~/Content/dashgum/css/font-awesome.css"
+                        ));
+
+            #endregion Vendor
+
+            #region multi-vagas
+
+            var scriptBundle = new ScriptBundle("~/bundles/multi-vagas-modules")
                 .IncludeDirectory("~/Scripts/app/shared", "*.js")
-                
-                .Include("~/Scripts/app/multi-vagas.js")
-                ;
+                .IncludeDirectory("~/Scripts/app/login", "*.js")
+                .IncludeDirectory("~/Scripts/app/dashboard", "*.js")
+                .IncludeDirectory("~/Scripts/app/estacionamento", "*.js");
 
             scriptBundle.Orderer = new AsIsBundleOrderer();
 
             bundles.Add(scriptBundle);
+
+            bundles.Add(new ScriptBundle("~/bundles/multi-vagas").Include("~/Scripts/app/multi-vagas.js"));
+
+            bundles.Add(new StyleBundle("~/Content/multi-vagas-dashgum").Include(
+                            "~/Content/style.css",
+                            "~/Content/style-responsive.css"
+                        ));
+
+            #endregion multi-vagas
         }
     }
 }

@@ -1,0 +1,29 @@
+﻿<header class="header black-bg">
+
+    <a href="#" class="logo"><b>MULTI-VAGAS</b></a>
+
+    <div id="top_menu" class="nav notify-row">
+
+        <ul class="nav top-menu">
+            <li ng-if="isAuthorized(userRoles.equipeMultivagas)">
+                <a href="#">Cadastrar</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+            <li><a class="logout" href="#" ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+
+
+
+</header>
+
+<section id="main-content" style="margin-left: 0px;">
+    <section class="wrapper" ui-view>
+        
+    </section>
+</section>

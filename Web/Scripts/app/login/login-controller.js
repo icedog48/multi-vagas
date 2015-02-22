@@ -1,5 +1,5 @@
 ﻿(function () {
-    var loginController = function ($scope, authService) {
+    var loginController = function ($scope, authService, $rootScope, AUTH_EVENTS, $state) {
 
         $scope.credentials = {
             username: '',
@@ -8,14 +8,14 @@
 
         $scope.login = function (credentials) {
 
-            //authService.login(credentials).then(function (user) {
-            //    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            //    $scope.setCurrentUser(user);
-            //}, function () {
-            //    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-            //});
+            authService.login(credentials).then(function (user) {
+                $scope.setCurrentUser(user);
+                
+                $state.go("estacionamentos");
+
+            });
         };
     };
 
-    angular.module("login").controller("loginController", ["$scope", "authService", loginController]);
+    angular.module("login").controller("loginController", ["$scope", "authService", "$rootScope", "AUTH_EVENTS", "$state", loginController]);
 }());

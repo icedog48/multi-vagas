@@ -11,52 +11,52 @@
         };
     }
 
-    var config = function ($routeProvider, $locationProvider, APP_CONFIG, USER_ROLES) {
-        $routeProvider
-            .when("/", {
-                templateUrl: APP_CONFIG.templateBaseUrl + "home/home.html",
-                authorizedRoles: [USER_ROLES.admin]
-            });
+    var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
 
-        $locationProvider.html5Mode(true);
+        $stateProvider.state("otherwise", {
+            url: "*path",
+            template: "",
+            controller: [
+                      '$state',
+              function ($state) {                  
+                  $state.go('estacionamentos')
+              }]
+        });
     };
 
-    var runFunction = function ($rootScope, AUTH_EVENTS, authService, $location) {
+    var runFunction = function ($rootScope, $state, AUTH_EVENTS, authService, $location) {
 
-        $rootScope.$on('$routeChangeStart', function (event, next) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            
+            var authorizedRoles = toState.roles;
 
-            var authorizedRoles = next.authorizedRoles;
-
-            if (!authService.isAuthorized(authorizedRoles)) {
+            if (!authService.isAuthorized(authorizedRoles) && (typeof (authorizedRoles) !== 'undefined')) {
+                
                 event.preventDefault();
 
                 if (authService.isAuthenticated()) {
-                    // user is not allowed
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-
-                    $location.path('/')
-
+                    $state.go('estacionamentos');
                 } else {
-                    // user is not logged in
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-
-                    $location.path('/login')
+                    $state.go('login');
                 }
             }
         });
     };
 
+    //MODULOS
     angular.module("multi-vagas",
     [
-        "ngRoute",
         "login",
-        "shared"
+        "shared",
+        "dashboard",
+        "estacionamento",
+        "ui.router"
     ])
 
-    .config(["$routeProvider", "$locationProvider", "APP_CONFIG", "USER_ROLES", config])
+    .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
 
     .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
 
-    .run(["$rootScope", "AUTH_EVENTS", "authService", "$location", runFunction]);
+    .run(["$rootScope", "$state", "AUTH_EVENTS", "authService", "$location", runFunction]);
 
 }());

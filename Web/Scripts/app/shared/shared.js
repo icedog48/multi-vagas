@@ -6,8 +6,7 @@
         equipeMultivagas: 'equipe-multivagas', // Cadastra estacionamentos
         admin: 'admin', // Gerencia estacionamentos
         funcionario: 'funcionario', // Registra entrada e saida de clientes
-        cliente: 'cliente', // Consulta e reserva vagas,
-        any: 'any'
+        cliente: 'cliente' // Consulta e reserva vagas
     })
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',

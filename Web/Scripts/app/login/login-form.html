@@ -1,5 +1,45 @@
-﻿<div>
+﻿<div id="login-page">
     
-    LOGIN
+    <div class="container">
+
+        <form class="form-login">
+            <h2 class="form-login-heading">sign in now</h2>
+
+            <div class="login-wrap">
+                <input type="text" class="form-control" placeholder="User ID" autofocus="" ng-model="credentials.username" />
+                <br />
+                <input type="password" class="form-control" placeholder="Password" ng-model="credentials.password" />                
+
+                <br />
+
+                <button class="btn btn-theme btn-block" ng-click="login(credentials)"><i class=" fa fa-lock"></i> SIGN IN</button>
+
+            </div>
+
+        </form>
+</div>
        
 </div>
+
+
+<!--<form action="/" method="post">
+
+    <div>
+        <span>Usuário</span>
+
+        <input type="text" name="txtUsuario" value="" ng-model="credentials.username" />
+    </div>
+
+    <div>
+        <span>Senha</span>
+
+        <input type="text" name="txtSenha" value="" ng-model="credentials.password" />
+    </div>
+
+    <div>
+
+        <input type="button" name="btnLogin" value="Login" ng-click="login(credentials)" />
+
+    </div>
+
+</form>-->

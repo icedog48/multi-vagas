@@ -117,10 +117,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\css\style.css" />
+    <Content Include="Content\dashgum\css\font-awesome.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\dashgum\fonts\.DS_Store" />
+    <Content Include="Content\dashgum\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\dashgum\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\dashgum\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\dashgum\fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\DEPLOY_LOCAL.pubxml" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\dashgum\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\style-responsive.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Scripts\app\dashboard\dashboard.js" />
+    <Content Include="Scripts\app\estacionamento\edit.html" />
+    <Content Include="Scripts\app\estacionamento\estacionamento-controller.js" />
+    <Content Include="Scripts\app\estacionamento\estacionamento.js" />
+    <Content Include="Scripts\app\dashboard\dashboard-controller.js" />
+    <Content Include="Scripts\app\estacionamento\lista.html" />
+    <Content Include="Scripts\vendor\angular\angular-ui-router.js" />
+    <Content Include="Scripts\vendor\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\vendor\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\vendor\bootstrap\npm.js" />
+    <Content Include="Scripts\vendor\jquery\jquery-1.11.2.js" />
     <Content Include="Views\App\Index.cshtml" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\home\home.html" />
+    <Content Include="Scripts\app\dashboard\dashboard.html" />
     <Content Include="Scripts\app\shared\auth-service.js" />
     <Content Include="Scripts\app\shared\shared.js" />
     <Content Include="Scripts\app\shared\session-service.js" />
@@ -128,8 +160,6 @@
     <Content Include="Scripts\app\login\login-form.html" />
     <Content Include="Scripts\app\login\login.js" />
     <Content Include="Scripts\vendor\angular\angular-cookies.js" />
-    <Content Include="Scripts\vendor\angular\angular-route.js" />
-    <Content Include="Scripts\vendor\angular\angular-route.min.js" />
     <Content Include="Scripts\vendor\angular\angular.js" />
     <Content Include="Scripts\vendor\angular\angular.min.js" />
     <Content Include="Scripts\app\multi-vagas.js" />

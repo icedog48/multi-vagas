@@ -1,22 +1,28 @@
 ﻿(function () {
 
-    var sessionService = function () {
+    var sessionService = function ($window) {
 
-        this.create = function (sessionId, userId, userRole) {
-            this.id = sessionId;
-            this.userId = userId;
-            this.userRole = userRole;
+        var me = typeof($window.sessionStorage.user) !== 'undefined' && JSON.parse($window.sessionStorage.user) || { };
+
+        me.create = function (sessionId, userId, userRole) {
+            me.id = sessionId;
+            me.userId = userId;
+            me.userRole = userRole;
+
+            $window.sessionStorage.user = JSON.stringify(me);
         };
 
-        this.destroy = function () {
-            this.id = null;
-            this.userId = null;
-            this.userRole = null;
+        me.destroy = function () {
+            me.id = null;
+            me.userId = null;
+            me.userRole = null;
+
+            $window.sessionStorage.removeItem("user");
         };
 
-        return this;
+        return me;
     };
 
-    angular.module("shared").service("sessionService", [sessionService]);
+    angular.module("shared").service("sessionService", ["$window", sessionService]);
 
 }());
