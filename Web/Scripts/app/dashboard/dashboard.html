@@ -2,7 +2,7 @@
 
     <a href="#" class="logo"><b>MULTI-VAGAS</b></a>
 
-    <div id="top_menu" class="nav notify-row">
+    <!--<div id="top_menu" class="nav notify-row">
 
         <ul class="nav top-menu">
             <li ng-if="isAuthorized(userRoles.equipeMultivagas)">
@@ -10,15 +10,27 @@
             </li>
         </ul>
 
-    </div>
+    </div>-->
 
-    <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-            <li><a class="logout" href="#" ng-click="logout()">Logout</a></li>
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu">
+            <li class="dropdown">
+
+                <!--<a class="logout" href="#" ng-click="logout()">Logout</a>-->
+
+                <a data-toggle="dropdown" class="dropdown-toggle">
+                    <i class="fa fa-cogs"></i>
+                </a>
+
+                <ul class="dropdown-menu" role="menu">
+                    <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
+                    <li> <a  href="#" >Perfil</a> </li>
+                    <li> <a  href="#" ng-click="logout()">Logout</a> </li>
+                </ul>
+
+            </li>
         </ul>
     </div>
-
-
 
 </header>
 

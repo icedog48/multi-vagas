@@ -60,7 +60,7 @@ namespace Web
                        ));                        
 
             //BOOSTRAP
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/vendor/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/vendor/bootstrap/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                             "~/Content/bootstrap/css/bootstrap.css"

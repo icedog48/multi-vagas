@@ -721,6 +721,10 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     opacity: 1;
 }
 
+.notify-arrow-right {
+    left: 119px;
+}
+
 .notify-arrow-yellow {
     border-color: transparent transparent #FCB322;
     border-bottom-color: #FCB322 !important;
@@ -730,6 +734,12 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-color: transparent transparent #68dff0;
     border-bottom-color: #68dff0 !important;
     border-top-color: #68dff0 !important;
+}
+
+.notify-arrow-white {
+    border-color: transparent transparent #fff;
+    border-bottom-color: #fff !important;
+    border-top-color: #fff !important;
 }
 
 
@@ -2241,3 +2251,12 @@ label {
 }
 
 
+.pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}

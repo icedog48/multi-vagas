@@ -1,18 +1,25 @@
 ﻿<div class="col-lg-12">
-    <div class="row mtbox">
+    
+    <div class="row mt">
 
-        <div class="col-md-2 col-sm-2 box0" ng-repeat="estacionamento in estacionamentos">
-            <div class="box1">
-                <h3><a href="#/dashboard/estacionamento/{{estacionamento}}" ng-bind="estacionamento"> </a></h3>
-
-            </div>
+        <div class="col-md-4 col-sm-4">
+            <input type="text" class="form-control round-form" placeholder="Filtro de estacionamentos"/>            
         </div>
 
-        <!--<ul>
-            <li ng-repeat="estacionamento in estacionamentos">
-                <a href="#/dashboard/estacionamento/{{estacionamento}}" ng-bind="estacionamento"> </a>
-            </li>
-        </ul>-->
+        <div class="col-md-2 col-sm-2">
+            <button type="button" class="btn btn-round btn-primary"><i class="fa fa-save"></i> Novo </button>
+        </div>
+
+    </div>
+
+    <div class="row mt">
+
+        <div class="col-md-2 col-sm-2 box0" ng-repeat="estacionamento in estacionamentos">
+
+            <div class="box1">
+                <h3><a href="#/dashboard/estacionamento/{{estacionamento}}" ng-bind="estacionamento"> </a></h3>
+            </div>
+        </div>
 
     </div>
 
