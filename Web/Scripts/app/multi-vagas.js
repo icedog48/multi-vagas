@@ -50,7 +50,8 @@
         "shared",
         "dashboard",
         "estacionamento",
-        "ui.router"
+        "ui.router",
+        "frapontillo.bootstrap-switch"
     ])
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])

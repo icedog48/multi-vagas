@@ -117,6 +117,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\css\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\dashgum\css\font-awesome.css" />
@@ -136,15 +138,20 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\dashgum\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\dashgum\img\mask.png" />
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
+    <Content Include="Scripts\app\estacionamento\create.html" />
     <Content Include="Scripts\app\estacionamento\edit.html" />
     <Content Include="Scripts\app\estacionamento\estacionamento-controller.js" />
     <Content Include="Scripts\app\estacionamento\estacionamento.js" />
     <Content Include="Scripts\app\dashboard\dashboard-controller.js" />
     <Content Include="Scripts\app\estacionamento\lista.html" />
+    <Content Include="Scripts\vendor\angular\angular-bootstrap-switch.js" />
     <Content Include="Scripts\vendor\angular\angular-ui-router.js" />
+    <Content Include="Scripts\vendor\bootstrap\bootstrap-switch.js" />
+    <Content Include="Scripts\vendor\bootstrap\bootstrap-switch.min.js" />
     <Content Include="Scripts\vendor\bootstrap\bootstrap.js" />
     <Content Include="Scripts\vendor\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\vendor\bootstrap\npm.js" />

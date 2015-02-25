@@ -1800,8 +1800,8 @@ label {
     position: relative;
     text-align: left;
     width: 80px;
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('dashgum/img/mask.png') 0 0 no-repeat;
+    mask: url('dashgum/img/mask.png') 0 0 no-repeat;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -2259,4 +2259,8 @@ label {
 .pull-right .dropdown-menu {
     left: auto;
     right: 0;
+}
+
+.box1 h3 {
+    font-size: 1.0em;
 }

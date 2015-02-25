@@ -56,14 +56,20 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                         "~/Scripts/vendor/angular/angular.js",
                         "~/Scripts/vendor/angular/angular-ui-router.js",
-                        "~/Scripts/vendor/angular/angular-cookies.js"
+                        "~/Scripts/vendor/angular/angular-cookies.js",
+                        "~/Scripts/vendor/angular/angular-bootstrap-switch.js"
                        ));                        
 
             //BOOSTRAP
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/vendor/bootstrap/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap")
+                .Include(
+                    "~/Scripts/vendor/bootstrap/bootstrap.js",
+                    "~/Scripts/vendor/bootstrap/bootstrap-switch.js"
+                ));
 
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-                            "~/Content/bootstrap/css/bootstrap.css"
+            bundles.Add(new StyleBundle("~/css/bootstrap").Include(
+                            "~/Content/bootstrap/css/bootstrap.css",
+                            "~/Content/bootstrap/css/bootstrap-switch.css"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -71,7 +77,7 @@ namespace Web
                        ));     
 
             //DASHGUM THEME
-            bundles.Add(new StyleBundle("~/Content/dashgum").Include(
+            bundles.Add(new StyleBundle("~/css/dashgum").Include(
                             "~/Content/dashgum/css/font-awesome.css"
                         ));
 
@@ -91,7 +97,7 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/multi-vagas").Include("~/Scripts/app/multi-vagas.js"));
 
-            bundles.Add(new StyleBundle("~/Content/multi-vagas-dashgum").Include(
+            bundles.Add(new StyleBundle("~/css/multi-vagas-dashgum").Include(
                             "~/Content/style.css",
                             "~/Content/style-responsive.css"
                         ));
