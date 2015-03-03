@@ -19,7 +19,7 @@
             controller: [
                       '$state',
               function ($state) {                  
-                  $state.go('estacionamentos')
+                  $state.go('estacionamento_list')
               }]
         });
     };
@@ -35,7 +35,7 @@
                 event.preventDefault();
 
                 if (authService.isAuthenticated()) {
-                    $state.go('estacionamentos');
+                    $state.go('estacionamento_list');
                 } else {
                     $state.go('login');
                 }

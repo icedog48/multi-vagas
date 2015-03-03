@@ -11,7 +11,7 @@
             authService.login(credentials).then(function (user) {
                 $scope.setCurrentUser(user);
                 
-                $state.go("estacionamentos");
+                $state.go("estacionamento_list");
 
             });
         };

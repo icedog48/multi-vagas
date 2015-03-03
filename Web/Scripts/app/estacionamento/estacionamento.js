@@ -1,8 +1,9 @@
 ﻿(function () {    
 
-    var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
+    var config = function ($stateProvider, APP_CONFIG, USER_ROLES, $resourceProvider) {
+
         $stateProvider
-            .state("estacionamentos", {
+            .state("estacionamento_list", {
                 parent: 'dashboard',
                 url: "/estacionamentos",
                 templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/lista.html",
@@ -11,15 +12,26 @@
             });
 
         $stateProvider
-            .state("estacionamento", {
+            .state("estacionamento_edit", {
                 parent: 'dashboard',
-                url: "/estacionamento/:id",
+                url: "/estacionamentos/:id",
                 templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/edit.html",
                 controller: 'estacionamentoController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
+
+        $stateProvider
+            .state("estacionamento_add", {
+                parent: 'dashboard',
+                url: "/estacionamento",
+                templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/edit.html",
+                controller: 'estacionamentoController',
+                roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
+            });
+
+        $resourceProvider.defaults.stripTrailingSlashes = false;
     };
 
-    angular.module("estacionamento", ["shared", "ui.router"])
-        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
+    angular.module("estacionamento", ["shared", "ui.router", "ngResource"])
+        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", "$resourceProvider", config])
 }());

@@ -18,82 +18,74 @@ namespace Storage.NHibernate
 
         private readonly ISessionFactory _SessionFactory;
 
-        private ISession _Session;
-
-        public NHibernateRepository(ISessionFactory sessionFactory)
+        public NHibernateRepository(ISession session)
         {
-            _SessionFactory = sessionFactory;
+            Session = session;
+            _SessionFactory = session.SessionFactory;            
         }
 
-        private ISession GetSession
-        {
-            get
-            {
-                if (_Session == null)
-                {
-                    try
-                    {
-                        _Session = _SessionFactory.GetCurrentSession();
-                    }
-                    catch (HibernateException)
-                    {
-                        _Session = _SessionFactory.OpenSession();
-                    }
-                    catch (Exception)
-                    {
-                        _Session = _SessionFactory.OpenSession();
-                    }
-                }
-                return _Session;
-            }
-        }
+        public ISession Session { get; set; }       
 
         public IQueryable<TEntity> Items
         {
-            get { return GetSession.Query<TEntity>(); }
+            get { return Session.Query<TEntity>(); }
         }
 
         public void Add(TEntity entity)
         {
-            GetSession.SaveOrUpdate(entity);
+            Session.SaveOrUpdate(entity);
         }
 
         public void Add(ICollection<TEntity> entities)
         {
-            this.Save(entities, Operation.ADD);
+            this.ExecuteBatch(entities, Operation.ADD);
         }
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Session.BeginTransaction();
+
+                Session.Delete(entity);
+
+                Session.Transaction.Commit();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void Remove(ICollection<TEntity> entities)
         {
-            this.Save(entities, Operation.REMOVE);
+            this.ExecuteBatch(entities, Operation.REMOVE);
         }
 
         public void Update(TEntity entity)
         {
-            var session = GetSession;
+            Session.BeginTransaction();
 
-            if (session.Contains(entity))
-                session.Update(entity);
+            if (Session.Contains(entity))
+                Session.Update(entity);
             else
-                session.Merge(entity);
+                Session.Merge(entity);
+
+            Session.Transaction.Commit();
         }
 
         public void Update(ICollection<TEntity> entities)
         {
-            this.Save(entities, Operation.UPDATE);
+            this.ExecuteBatch(entities, Operation.UPDATE);
         }
 
         public TEntity Get(object id)
         {
-            return GetSession.Get<TEntity>(id);
+            return Session.Get<TEntity>(id);
         }
 
-        private void Save(ICollection<TEntity> entities, Operation operation)
+        private void ExecuteBatch(ICollection<TEntity> entities, Operation operation)
         {
             var session = _SessionFactory.OpenStatelessSession();
 

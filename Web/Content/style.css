@@ -2263,4 +2263,29 @@ label {
 
 .box1 h3 {
     font-size: 1.0em;
+
+}
+
+/*input.ng-invalid {
+  border: 1px solid red;
+}
+
+input.ng-valid {
+  border: 1px solid green;
+}*/
+
+form .invalid_field {
+    color: red !important;
+}
+
+form .invalid_field input{
+    border: 1px solid red;
+}
+
+form .invalid_field input:focus{
+    border: 1px solid red;
+}
+
+form .form-buttons button {
+    margin-right: 10px;
 }
