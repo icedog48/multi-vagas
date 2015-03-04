@@ -17,7 +17,7 @@ namespace Web
         {
             var container = StructuremapMvc.StructureMapDependencyScope.Container;
 
-            MigrationsRunner.Run(container.GetInstance<string>("DefaultConnection"));
+            MigrationsRunner.Run(container);
 
             container.Configure(c => c.AddRegistry(new NHibernateRegistry(StructuremapMvc.StructureMapDependencyScope.Container)));
 

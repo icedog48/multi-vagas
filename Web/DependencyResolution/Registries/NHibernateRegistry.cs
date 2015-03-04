@@ -38,6 +38,8 @@ namespace Web.DependencyResolution.Registries
     using Web.App_Start;
     using Storage;
     using Storage.NHibernate;
+    using FluentMigrator.Runner.Processors;
+    using FluentMigrator.Runner.Processors.SqlServer;
 
     public class AutoMappingCfg : DefaultAutomappingConfiguration 
     {
@@ -51,17 +53,13 @@ namespace Web.DependencyResolution.Registries
     {
         public NHibernateSettingsRegistry()
         {
-            var dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
-            var dataSource = Path.Combine(dataDirectory, "multivagas.db");
-            var connectionString = string.Format(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, dataSource);
+            var connectionString = ConfigurationManager.ConnectionStrings["multivagas_db"].ConnectionString;
 
             For<string>().Add<string>(connectionString).Named("DefaultConnection");
 
-            var HBMExportPath = Path.Combine(dataDirectory, "hbm");
+            For<MigrationProcessorFactory>().Use<SqlServer2012ProcessorFactory>();
 
-            if (!Directory.Exists(HBMExportPath)) Directory.CreateDirectory(HBMExportPath);
-
-            For<string>().Add<string>(HBMExportPath).Named("HBMExportPath");
+            For<IPersistenceConfigurer>().Use<FluentNHibernate.Cfg.Db.MsSqlConfiguration>(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2012.ConnectionString(c => c.FromConnectionStringWithKey("multivagas_db")));
         }
     }
 
@@ -81,18 +79,15 @@ namespace Web.DependencyResolution.Registries
 
         public NHibernateRegistry(IContainer settingsContainer)
         {
-            var connectionString = settingsContainer.GetInstance<string>("DefaultConnection");
-            var hbmExportPath = settingsContainer.GetInstance<string>("HBMExportPath");
-
             var autoMappingCfg = new AutoMappingCfg();
 
-            var databaseCfg = SQLiteConfiguration.Standard.ConnectionString(connectionString);            
+            var databaseCfg = settingsContainer.GetInstance<IPersistenceConfigurer>(); //SQLiteConfiguration.Standard.ConnectionString(connectionString);            
 
             var sesstionFactory = Fluently.Configure()
                                              .Database(databaseCfg)
                                              .Mappings(m =>
                                              {
-                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly)).ExportTo(hbmExportPath);
+                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly));
                                              })
                                              .ExposeConfiguration(config => config.SetInterceptor(new TrackingInterceptor()))
                                              .ExposeConfiguration(cfg => cfg.Properties.Add("current_session_context_class", "thread"))
@@ -101,8 +96,8 @@ namespace Web.DependencyResolution.Registries
 
 
             For<ISessionFactory>().Singleton().Use(sesstionFactory);
-
-            For<ISession>().HttpContextScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new TrackingInterceptor()));
+            
+            For<ISession>().HybridHttpOrThreadLocalScoped().Use(context => context.GetInstance<ISessionFactory>().OpenSession(new TrackingInterceptor()));
 
             For(typeof(IRepository<>)).Use(typeof(NHibernateRepository<>));
         }

@@ -43,19 +43,11 @@ namespace Storage.NHibernate
 
         public void Remove(TEntity entity)
         {
-            try
-            {
-                Session.BeginTransaction();
+            Session.BeginTransaction();
 
-                Session.Delete(entity);
+            Session.Delete(entity);
 
-                Session.Transaction.Commit();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            Session.Transaction.Commit();
         }
 
         public void Remove(ICollection<TEntity> entities)
