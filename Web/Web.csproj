@@ -184,8 +184,7 @@
     <Content Include="Content\dashgum\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\dashgum\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\dashgum\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\dashgum\fonts\FontAwesome.otf" />
-    <Content Include="connectionStrings.config" />
+    <Content Include="Content\dashgum\fonts\FontAwesome.otf" />    
     <None Include="Properties\PublishProfiles\DEPLOY_LOCAL.pubxml" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
