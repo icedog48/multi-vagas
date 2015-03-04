@@ -62,9 +62,9 @@ namespace Web.DependencyResolution.Registries
 
             For<string>().Add<string>(connectionString).Named("DefaultConnection");
 
-            For<MigrationProcessorFactory>().Use<SqlServer2012ProcessorFactory>();
+            For<MigrationProcessorFactory>().Use<SqlServer2008ProcessorFactory>();
 
-            For<IPersistenceConfigurer>().Use<FluentNHibernate.Cfg.Db.MsSqlConfiguration>(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2012.ConnectionString(connectionString));
+            For<IPersistenceConfigurer>().Use<FluentNHibernate.Cfg.Db.MsSqlConfiguration>(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString(connectionString));
         }
     }
 
