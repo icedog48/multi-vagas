@@ -53,13 +53,18 @@ namespace Web.DependencyResolution.Registries
     {
         public NHibernateSettingsRegistry()
         {
+            
+#if DEBUG
+            var connectionString = ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
+#else
             var connectionString = ConfigurationManager.ConnectionStrings["multivagas_db"].ConnectionString;
+#endif
 
             For<string>().Add<string>(connectionString).Named("DefaultConnection");
 
             For<MigrationProcessorFactory>().Use<SqlServer2012ProcessorFactory>();
 
-            For<IPersistenceConfigurer>().Use<FluentNHibernate.Cfg.Db.MsSqlConfiguration>(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2012.ConnectionString(c => c.FromConnectionStringWithKey("multivagas_db")));
+            For<IPersistenceConfigurer>().Use<FluentNHibernate.Cfg.Db.MsSqlConfiguration>(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2012.ConnectionString(connectionString));
         }
     }
 
