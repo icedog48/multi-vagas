@@ -24,7 +24,7 @@
         });
     };
 
-    var runFunction = function ($rootScope, $state, AUTH_EVENTS, authService, $location) {
+    var runFunction = function ($rootScope, $state, authService, $location) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             
@@ -58,6 +58,6 @@
 
     .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
 
-    .run(["$rootScope", "$state", "AUTH_EVENTS", "authService", "$location", runFunction]);
+    .run(["$rootScope", "$state", "authService", "$location", runFunction]);
 
 }());

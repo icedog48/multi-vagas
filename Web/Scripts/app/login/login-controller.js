@@ -1,5 +1,5 @@
 ﻿(function () {
-    var loginController = function ($scope, authService, $rootScope, AUTH_EVENTS, $state) {
+    var loginController = function ($scope, authService, $rootScope, $state) {
 
         $scope.credentials = {
             username: '',
@@ -17,5 +17,5 @@
         };
     };
 
-    angular.module("login").controller("loginController", ["$scope", "authService", "$rootScope", "AUTH_EVENTS", "$state", loginController]);
+    angular.module("login").controller("loginController", ["$scope", "authService", "$rootScope", "$state", loginController]);
 }());

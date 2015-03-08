@@ -193,6 +193,7 @@
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\dashgum\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\dashgum\img\mask.png" />
+    <Content Include="Content\img\ajax_loader.gif" />
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
