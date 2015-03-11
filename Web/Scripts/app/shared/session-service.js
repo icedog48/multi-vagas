@@ -2,12 +2,12 @@
 
     var sessionService = function ($window) {
 
-        var me = typeof($window.sessionStorage.user) !== 'undefined' && JSON.parse($window.sessionStorage.user) || { };
+        var me = typeof ($window.sessionStorage.user) !== 'undefined' && JSON.parse($window.sessionStorage.user) || {};
 
-        me.create = function (sessionId, userId, userRole) {
+        me.create = function (sessionId, userId, userRoles) {
             me.id = sessionId;
             me.userId = userId;
-            me.userRole = userRole;
+            me.userRoles = userRoles;
 
             $window.sessionStorage.user = JSON.stringify(me);
         };
@@ -15,7 +15,7 @@
         me.destroy = function () {
             me.id = null;
             me.userId = null;
-            me.userRole = null;
+            me.userRoles = null;
 
             $window.sessionStorage.removeItem("user");
         };

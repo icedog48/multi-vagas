@@ -197,9 +197,9 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
-    <Content Include="Scripts\app\estacionamento\create.html" />
-    <Content Include="Scripts\app\estacionamento\edit.html" />
-    <Content Include="Scripts\app\estacionamento\estacionamento-controller.js" />
+    <Content Include="Scripts\app\estacionamento\lista-controller.js" />
+    <Content Include="Scripts\app\estacionamento\formulario.html" />
+    <Content Include="Scripts\app\estacionamento\formulario-controller.js" />
     <Content Include="Scripts\app\estacionamento\estacionamento-service.js" />
     <Content Include="Scripts\app\estacionamento\estacionamento.js" />
     <Content Include="Scripts\app\dashboard\dashboard-controller.js" />
@@ -236,6 +236,7 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\AppController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -253,6 +254,7 @@
     <Compile Include="ViewModelsValidation\EstacionamentoValidator.cs" />
     <Compile Include="ViewModels\Estacionamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -269,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\hbm\" />
+    <Folder Include="Scripts\app\usuario\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Migrations\Migrations.csproj">

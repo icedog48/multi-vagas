@@ -2,12 +2,11 @@
     var loginController = function ($scope, authService, $rootScope, $state) {
 
         $scope.credentials = {
-            username: '',
-            password: ''
+            Login: '',
+            Senha: ''
         };
 
         $scope.login = function (credentials) {
-
             authService.login(credentials).then(function (user) {
                 $scope.setCurrentUser(user);
                 

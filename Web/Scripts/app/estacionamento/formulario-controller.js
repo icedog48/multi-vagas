@@ -1,24 +1,18 @@
 ﻿(function () {
-    var estacionamentoController = function ($scope, $stateParams, Estacionamento, $state) {
+    var formularioController = function ($scope, Estacionamento, $state, $stateParams) {
 
-        $scope.estacionamentos = Estacionamento.query();
+        var novoCadastro = (typeof ($stateParams.id) == 'undefined');
 
-        if (typeof ($stateParams.id) !== 'undefined') {
-            
+        if (novoCadastro) {
+            $scope.estacionamento = new Estacionamento();
+        } else {
             Estacionamento.get({ id: $stateParams.id }).$promise.then(function (data) {
                 $scope.estacionamento = new Estacionamento(data);
             }, function (errResponse) {
-                console.log(errResponse);
+                alert('Estacionamento não encontrado');
 
-                $state.go("estacionamento_list");
+                $state.go('estacionamento_list');
             });
-            
-        } else {
-            $scope.estacionamento = new Estacionamento();
-        }
-
-        $scope.novoEstacionamento = function () {
-            $state.go("estacionamento_add");
         }
 
         $scope.cadastrar = function () {
@@ -81,7 +75,15 @@
                 $scope.cadastrar();
             }
         };
+
+        $scope.IsInvalid = function (formName, field) {
+            if (typeof ($scope[formName][field]) == 'undefined') throw "Field without name property: " + field;
+
+            var isInvalid = { invalid_field: $scope[formName][field].$dirty && $scope[formName][field].$invalid };
+
+            return isInvalid;
+        }
     };
 
-    angular.module("estacionamento").controller("estacionamentoController", ["$scope", "$stateParams", "Estacionamento", "$state", estacionamentoController]);
+    angular.module("estacionamento").controller("formularioController", ["$scope", "Estacionamento", "$state", "$stateParams", formularioController]);
 }());

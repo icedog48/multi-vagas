@@ -18,8 +18,8 @@
             template: "",
             controller: [
                       '$state',
-              function ($state) {                  
-                  $state.go('estacionamento_list')
+              function ($state) {
+                  $state.go('estacionamento_list');
               }]
         });
     };
@@ -34,7 +34,7 @@
                 
                 event.preventDefault();
 
-                if (authService.isAuthenticated()) {
+                if (authService.isAuthenticated() && !$state.includes('estacionamento_list')) {
                     $state.go('estacionamento_list');
                 } else {
                     $state.go('login');

@@ -5,7 +5,7 @@
     };
 
     var USER_ROLES = {
-        equipeMultivagas: 'equipe-multivagas', // Cadastra estacionamentos
+        equipeMultivagas: 'equipe_multivagas', // Cadastra estacionamentos
         admin: 'admin', // Gerencia estacionamentos
         funcionario: 'funcionario', // Registra entrada e saida de clientes
         cliente: 'cliente' // Consulta e reserva vagas
