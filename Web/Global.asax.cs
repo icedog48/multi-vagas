@@ -15,19 +15,7 @@ namespace Web
     {
         protected void Application_Start()
         {
-            var container = StructuremapMvc.StructureMapDependencyScope.Container;
-
-            MigrationsRunner.Run(container);
-
-            container.Configure(c => c.AddRegistry(new NHibernateRegistry(StructuremapMvc.StructureMapDependencyScope.Container)));
-
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            StructuremapWebApi.Start();
-
-            Automapper.Setup();
+            
         }
 
         protected void Application_EndRequest()

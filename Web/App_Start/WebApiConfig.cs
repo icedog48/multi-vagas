@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using Web.Controllers.Attributes;
 
 namespace Web
 {
@@ -39,6 +40,8 @@ namespace Web
             );
 
             config.Formatters.Add(new BrowserJsonFormatter());
+
+            //config.Filters.Add(new NHSession());
         }
     }
 }

@@ -16,7 +16,7 @@
         }
 
         $scope.cadastrar = function () {
-            $scope.estacionamento.$save()
+            Estacionamento.add($scope.estacionamento).$promise
                 .then(function (response) {
                     alert('Operação realizada com sucesso');
 

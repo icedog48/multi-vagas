@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IoC.cs" company="Web Advanced">
+// <copyright file="DefaultRegistry.cs" company="Web Advanced">
 // Copyright 2012 Web Advanced (www.webadvanced.com)
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,22 +15,35 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-namespace Web.DependencyResolution
+namespace Web.DependencyResolution.Registries
 {
-    using StructureMap;
-    using Web.DependencyResolution.Registries;
+    using FluentNHibernate.Automapping;
+    using FluentNHibernate.Cfg;
+    using Model;
+    using NHibernate;
+    using StructureMap.Configuration.DSL;
+    using StructureMap.Graph;
+    using FluentNHibernate.Cfg.Db;
+    using System.Configuration;
+    using System.IO;
+    using Service.Interfaces;
 
-    public static class IoC
+    public class ServiceRegistry : Registry
     {
-        public static IContainer Initialize()
+        #region Constructors and Destructors
+
+        public ServiceRegistry()
         {
-            return new Container(c => 
-            {
-                c.AddRegistry<DefaultRegistry>();
-                c.AddRegistry<NHibernateSettingsRegistry>();
-                c.AddRegistry<ServiceRegistry>();
-            });
+            Scan(
+                scan =>
+                {
+                    scan.AssemblyContainingType<IService>();
+                    scan.WithDefaultConventions();
+                    scan.RegisterConcreteTypesAgainstTheFirstInterface();
+
+                });
         }
+
+        #endregion
     }
 }

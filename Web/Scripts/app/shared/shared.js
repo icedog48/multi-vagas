@@ -11,7 +11,7 @@
         cliente: 'cliente' // Consulta e reserva vagas
     };
 
-    var httpInterceptor = function ($q, $rootScope) {
+    var httpInterceptor = function ($q, $rootScope, sessionService) {
         var numLoadings = 0;
 
         return {
@@ -21,6 +21,12 @@
 
                 // Show loader
                 $rootScope.$broadcast("loader_show");
+
+                //Add Authorization Header
+                if (config.headers.Authorization === 'token') {
+                    config.headers.Authorization = 'Bearer ' + sessionService.token;
+                }
+
                 return config || $q.when(config)
 
             },
@@ -65,7 +71,7 @@
         .constant("APP_CONFIG", APP_CONFIG)
         .constant("USER_ROLES", USER_ROLES)
         .config(["$httpProvider", config])
-        .factory("httpInterceptor", ["$q", "$rootScope", httpInterceptor])
+        .factory("httpInterceptor", ["$q", "$rootScope", "sessionService", httpInterceptor])
         .directive("loader", ["$rootScope", loaderDirective]);
     ;
 }());

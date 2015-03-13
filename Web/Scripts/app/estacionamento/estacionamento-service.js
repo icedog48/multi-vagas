@@ -1,11 +1,34 @@
 ﻿(function () {
 
-    var Estacionamento = function ($resource) {
-        return $resource('/api/estacionamentos/:id', { id: '@id' }, {
-            'update': { method: 'PUT' }
+    var Estacionamento = function ($resource, authService) {
+
+        var resource = $resource('/api/estacionamentos/:id', { id: '@id' }, {
+
+            'update': {
+                method: 'PUT',
+                headers: { 'Authorization': 'token' }
+            },
+
+            'query': {
+                method: 'GET',
+                isArray: true,
+                headers: { 'Authorization': 'token' }
+            },
+
+            'add': {
+                method: 'POST',
+                headers: { 'Authorization': 'token' }
+            },
+
+            'get': {
+                method: 'GET',
+                headers: { 'Authorization': 'token' }
+            },
         });
+
+        return resource;
     };
 
-    angular.module("estacionamento").service("Estacionamento", ["$resource", Estacionamento]);
+    angular.module("estacionamento").service("Estacionamento", ["$resource", "authService", Estacionamento]);
 
 }());

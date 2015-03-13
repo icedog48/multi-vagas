@@ -43,11 +43,7 @@ namespace Storage.NHibernate
 
         public void Remove(TEntity entity)
         {
-            Session.BeginTransaction();
-
             Session.Delete(entity);
-
-            Session.Transaction.Commit();
         }
 
         public void Remove(ICollection<TEntity> entities)
@@ -57,14 +53,10 @@ namespace Storage.NHibernate
 
         public void Update(TEntity entity)
         {
-            Session.BeginTransaction();
-
             if (Session.Contains(entity))
                 Session.Update(entity);
             else
                 Session.Merge(entity);
-
-            Session.Transaction.Commit();
         }
 
         public void Update(ICollection<TEntity> entities)

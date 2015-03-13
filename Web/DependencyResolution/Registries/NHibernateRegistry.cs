@@ -40,6 +40,8 @@ namespace Web.DependencyResolution.Registries
     using Storage.NHibernate;
     using FluentMigrator.Runner.Processors;
     using FluentMigrator.Runner.Processors.SqlServer;
+    using FluentNHibernate.Conventions;
+    using FluentNHibernate.Conventions.Instances;
 
     public class AutoMappingCfg : DefaultAutomappingConfiguration 
     {
@@ -78,6 +80,28 @@ namespace Web.DependencyResolution.Registries
         }
     }
 
+    public class MyManyToManyConvention : IHasManyToManyConvention
+    {
+        public void Apply(IManyToManyCollectionInstance instance)
+        {
+            var firstName = instance.EntityType.Name;
+            var secondName = instance.ChildType.Name;
+
+            if (StringComparer.OrdinalIgnoreCase.Compare(firstName, secondName) > 0)
+            {
+                instance.Table(string.Format("{0}{1}", secondName, firstName));
+                instance.Inverse();
+            }
+            else
+            {
+                instance.Table(string.Format("{0}{1}", firstName, secondName));
+                instance.Not.Inverse();
+            }
+
+            instance.Cascade.All();
+        }
+    }
+
     public class NHibernateRegistry : Registry
     {
         #region Constructors and Destructors
@@ -92,7 +116,8 @@ namespace Web.DependencyResolution.Registries
                                              .Database(databaseCfg)
                                              .Mappings(m =>
                                              {
-                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly));
+                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly).Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention()))
+                                                     .ExportTo(@"C:\Git\multi-vagas\Web\App_Data\hbm");
                                              })
                                              .ExposeConfiguration(config => config.SetInterceptor(new TrackingInterceptor()))
                                              .ExposeConfiguration(cfg => cfg.Properties.Add("current_session_context_class", "thread"))

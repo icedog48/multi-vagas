@@ -4,17 +4,17 @@
 
         var me = typeof ($window.sessionStorage.user) !== 'undefined' && JSON.parse($window.sessionStorage.user) || {};
 
-        me.create = function (sessionId, userId, userRoles) {
-            me.id = sessionId;
-            me.userId = userId;
+        me.create = function (token, user, userRoles) {
+            me.token = token;
+            me.user = user;
             me.userRoles = userRoles;
 
             $window.sessionStorage.user = JSON.stringify(me);
         };
 
         me.destroy = function () {
-            me.id = null;
-            me.userId = null;
+            me.token = null;
+            me.user = null;
             me.userRoles = null;
 
             $window.sessionStorage.removeItem("user");

@@ -9,11 +9,14 @@ using Storage;
 using AutoMapper;
 using Web.ViewModelsValidation;
 using Newtonsoft.Json;
+using Web.Controllers.Attributes;
 
 
 namespace Web.Controllers
 {
+    [NHSession]
     [Route("api/estacionamentos")]
+    [Authorize]
     public class EstacionamentoController : ApiController
     {
         public IRepository<Model.Estacionamento> Repository { get; set; }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils.Extensions;
 
 namespace Migrations._201502
 {
@@ -32,35 +33,37 @@ namespace Migrations._201502
             Insert.IntoTable("Perfil").Row(new { Nome = "funcionario" });
             Insert.IntoTable("Perfil").Row(new { Nome = "usuario" });
 
-            Create.Table("PermissaoPerfil")
-                .WithColumn("Id_Perfil").AsInt32().NotNullable().PrimaryKey()
-                .WithColumn("Id_Permissao").AsInt32().NotNullable().PrimaryKey()
+            Create.Table("PerfilPermissao")
+                .WithColumn("Perfil_Id").AsInt32().NotNullable().PrimaryKey()
+                .WithColumn("Permissao_Id").AsInt32().NotNullable().PrimaryKey()
                 ;
 
-            Create.ForeignKey("FK_PermissaoPerfil_Perfil").FromTable("PermissaoPerfil").ForeignColumn("Id_Perfil").ToTable("Perfil").PrimaryColumn("Id");
-            Create.ForeignKey("FK_PermissaoPerfil_Permissao").FromTable("PermissaoPerfil").ForeignColumn("Id_Permissao").ToTable("Permissao").PrimaryColumn("Id");
+            Create.ForeignKey("FK_PerfilPermissao_Perfil").FromTable("PerfilPermissao").ForeignColumn("Perfil_Id").ToTable("Perfil").PrimaryColumn("Id");
+            Create.ForeignKey("FK_PerfilPermissao_Permissao").FromTable("PerfilPermissao").ForeignColumn("Permissao_Id").ToTable("Permissao").PrimaryColumn("Id");
 
-            Insert.IntoTable("PermissaoPerfil").Row(new { Id_Perfil = 1, Id_Permissao = 1 });
-            Insert.IntoTable("PermissaoPerfil").Row(new { Id_Perfil = 2, Id_Permissao = 2 });
-            Insert.IntoTable("PermissaoPerfil").Row(new { Id_Perfil = 3, Id_Permissao = 3 });
-            Insert.IntoTable("PermissaoPerfil").Row(new { Id_Perfil = 4, Id_Permissao = 4 });
+            Insert.IntoTable("PerfilPermissao").Row(new { Perfil_Id = 1, Permissao_Id = 1 });
+            Insert.IntoTable("PerfilPermissao").Row(new { Perfil_Id = 2, Permissao_Id = 2 });
+            Insert.IntoTable("PerfilPermissao").Row(new { Perfil_Id = 3, Permissao_Id = 3 });
+            Insert.IntoTable("PerfilPermissao").Row(new { Perfil_Id = 4, Permissao_Id = 4 });
 
             Create.Table("Usuario")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Email").AsString(45).NotNullable()
                 .WithColumn("Senha").AsString(45).NotNullable()
                 .WithColumn("Login").AsString(45).NotNullable()
-                .WithColumn("Id_Perfil").AsInt32().NotNullable()
+                .WithColumn("Perfil_Id").AsInt32().NotNullable()
                 ;
 
-            Create.ForeignKey("FK_Usuario_Perfil").FromTable("Usuario").ForeignColumn("Id_Perfil").ToTable("Perfil").PrimaryColumn("Id");
+            Create.ForeignKey("FK_Usuario_Perfil").FromTable("Usuario").ForeignColumn("Perfil_Id").ToTable("Perfil").PrimaryColumn("Id");
+
+            Insert.IntoTable("Usuario").Row(new { Email = "contact@multivagas.com", Senha = Encryption.Encrypt("multivagas"), Login = "admin", Perfil_Id = 1 });
         }
 
         public override void Down()
         {
             Delete.Table("Usuario");
 
-            Delete.Table("PermissaoPerfil");
+            Delete.Table("PerfilPermissao");
 
             Delete.Table("Perfil");
 

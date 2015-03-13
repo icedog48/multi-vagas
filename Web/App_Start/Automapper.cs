@@ -12,6 +12,7 @@ namespace Web.App_Start
         {
             Mapper.CreateMap<Model.Estacionamento, ViewModels.Estacionamento>();
             Mapper.CreateMap<ViewModels.Estacionamento, Model.Estacionamento>();
+
         }
     }
 }
