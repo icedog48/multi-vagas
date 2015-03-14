@@ -116,8 +116,7 @@ namespace Web.DependencyResolution.Registries
                                              .Database(databaseCfg)
                                              .Mappings(m =>
                                              {
-                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly).Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention()))
-                                                     .ExportTo(@"C:\Git\multi-vagas\Web\App_Data\hbm");
+                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly).Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention()));
                                              })
                                              .ExposeConfiguration(config => config.SetInterceptor(new TrackingInterceptor()))
                                              .ExposeConfiguration(cfg => cfg.Properties.Add("current_session_context_class", "thread"))
