@@ -47,7 +47,6 @@
         };
 
         return me;
-
     };
 
     angular.module("shared").service("authService", ["sessionService", "$http", "USER_ROLES", authService]);
