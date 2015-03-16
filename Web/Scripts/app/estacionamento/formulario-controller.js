@@ -1,5 +1,5 @@
 ﻿(function () {
-    var formularioController = function ($scope, Estacionamento, $state, $stateParams) {
+    var formularioController = function ($scope, Estacionamento, $state, $stateParams, $modal) {
 
         var novoCadastro = (typeof ($stateParams.id) == 'undefined');
 
@@ -83,7 +83,35 @@
 
             return isInvalid;
         }
+
+        $scope.novaCategoria = function () {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'Scripts/app/estacionamento/categoria-vagas/formulario.html',
+                controller: 'categoriaVagasController',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    categoriaVaga: null
+                }
+            });
+
+        };
+
+        $scope.novoFuncionario = function () {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'Scripts/app/estacionamento/funcionario/formulario.html',
+                controller: 'funcionarioController',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    funcionario: null
+                }
+            });
+
+        };
     };
 
-    angular.module("estacionamento").controller("formularioController", ["$scope", "Estacionamento", "$state", "$stateParams", formularioController]);
+    angular.module("estacionamento").controller("formularioController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", formularioController]);
 }());

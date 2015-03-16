@@ -1,7 +1,7 @@
 ﻿
 <form name="frmEstacionamento" class="form-horizontal style-form" ng-submit="salvar()">
    
-     <div class="row mt">
+    <div class="row mt">
         <div class="col-sm-12 col-md-12">
             <!--Dados Empresariais-->
             <div class="form-panel">
@@ -114,20 +114,12 @@
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Vagas </h4>
 
                 <div class="form-group">
-                    <div class="col-sm-8 col-md-8">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Categoria</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor (H)</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>                    
+                    <div class="col-sm-8 col-md-8" ng-include="'Scripts/app/estacionamento/categoria-vagas/lista.html'">
+
+                    </div>
                 </div>
 
-                <button type="button" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Nova categoria </button>   
+                <button type="button" class="btn btn-round btn-primary" ng-click="novaCategoria()"><i class="fa fa-plus"></i> Nova categoria </button>   
 
             </div>
         </div>
@@ -141,19 +133,11 @@
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Funcionarios </h4>
 
                 <div class="form-group">
-                    <div class="col-sm-8 col-md-8">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Matricula</th>
-                                    <th>Nome</th>
-                                    <th>Telefone</th>
-                                </tr>
-                            </thead>
-                        </table>
+                    <div class="col-sm-8 col-md-8" ng-include="'Scripts/app/estacionamento/funcionario/lista.html'">
+                        
                     </div>                    
                 </div>
-                <button type="button" class="btn btn-round btn-primary"><i class="fa fa-plus"></i> Novo Funcionario </button>   
+                <button type="button" class="btn btn-round btn-primary" ng-click="novoFuncionario()"><i class="fa fa-plus"></i> Novo Funcionario </button>   
             </div> 
         </div>
     </div>

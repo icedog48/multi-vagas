@@ -65,7 +65,8 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap")
                 .Include(
                     "~/Scripts/vendor/bootstrap/bootstrap.js",
-                    "~/Scripts/vendor/bootstrap/bootstrap-switch.js"
+                    "~/Scripts/vendor/bootstrap/bootstrap-switch.js",
+                    "~/Scripts/vendor/bootstrap/ui-bootstrap-tpls-0.12.1.js"
                 ));
 
             bundles.Add(new StyleBundle("~/css/bootstrap").Include(
@@ -90,7 +91,10 @@ namespace Web
                 .IncludeDirectory("~/Scripts/app/shared", "*.js")
                 .IncludeDirectory("~/Scripts/app/login", "*.js")
                 .IncludeDirectory("~/Scripts/app/dashboard", "*.js")
-                .IncludeDirectory("~/Scripts/app/estacionamento", "*.js");
+                .IncludeDirectory("~/Scripts/app/estacionamento", "*.js")
+                .IncludeDirectory("~/Scripts/app/estacionamento/categoria-vagas", "*.js")
+                .IncludeDirectory("~/Scripts/app/estacionamento/funcionario", "*.js")
+                ;
 
             scriptBundle.Orderer = new AsIsBundleOrderer();
 
