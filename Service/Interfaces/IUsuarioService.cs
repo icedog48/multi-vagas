@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.Interfaces
 {
-    public interface IUsuarioService : IService
+    public interface IUsuarioService : IService<Usuario>
     {
         Usuario Login(string usuario, string senha);
 

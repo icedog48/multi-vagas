@@ -37,7 +37,8 @@ namespace Web.DependencyResolution.Registries
             Scan(
                 scan =>
                 {
-                    scan.AssemblyContainingType<IService>();
+                    scan.AssemblyContainingType(typeof(IService<>));
+
                     scan.WithDefaultConventions();
                     scan.RegisterConcreteTypesAgainstTheFirstInterface();
 

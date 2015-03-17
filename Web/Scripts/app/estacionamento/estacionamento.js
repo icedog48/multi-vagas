@@ -1,12 +1,12 @@
 ﻿(function () {    
 
-    var config = function ($stateProvider, APP_CONFIG, USER_ROLES, $resourceProvider) {
+    var config = function ($stateProvider, USER_ROLES, $resourceProvider) {
 
         $stateProvider
             .state("estacionamento_list", {
                 parent: 'dashboard',
                 url: "/estacionamentos",
-                templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/lista.html",
+                templateUrl: "Scripts/app/estacionamento/lista.html",
                 controller: 'listaController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
@@ -15,7 +15,7 @@
             .state("estacionamento_edit", {
                 parent: 'dashboard',
                 url: "/estacionamentos/:id",
-                templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/formulario.html",
+                templateUrl: "Scripts/app/estacionamento/formulario.html",
                 controller: 'formularioController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
@@ -24,7 +24,7 @@
             .state("estacionamento_add", {
                 parent: 'dashboard',
                 url: "/estacionamento",
-                templateUrl: APP_CONFIG.templateBaseUrl + "estacionamento/formulario.html",
+                templateUrl: "Scripts/app/estacionamento/formulario.html",
                 controller: 'formularioController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
@@ -33,5 +33,5 @@
     };
 
     angular.module("estacionamento", ["shared", "ui.router", "ngResource"])
-        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", "$resourceProvider", config])
+        .config(["$stateProvider", "USER_ROLES", "$resourceProvider", config])
 }());

@@ -2293,7 +2293,7 @@ form .form-buttons button {
 
 /*HTML LOADING*/
 
-.loader {
+#loaderDiv {
    position: fixed;
    top: 0;
    right: 0;
@@ -2311,4 +2311,5 @@ form .form-buttons button {
    margin-left: -32px; /* -1 * image width / 2 */
    margin-top: -32px; /* -1 * image height / 2 */
    display: block;
+   z-index:1101;
 }

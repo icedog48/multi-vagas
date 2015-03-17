@@ -43,6 +43,7 @@
         });
     };
 
+
     //MODULOS
     angular.module("multi-vagas",
     [
@@ -58,6 +59,8 @@
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
 
     .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
+
+    
 
     .run(["$rootScope", "$state", "authService", "$location", runFunction]);
 

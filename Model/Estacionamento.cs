@@ -31,5 +31,10 @@ namespace Model
         public virtual bool ConfirmaSaida { get; set; }
 
         public virtual bool PermiteReserva { get; set; }
+
+        public virtual string EnderecoFormatado()
+        {
+            return this.Logradouro + ", " + this.Bairro + ", " + this.Cidade + ", " + this.UF;
+        }
     }
 }

@@ -10,8 +10,11 @@ namespace Web.App_Start
     {
         public static void Setup() 
         {
-            Mapper.CreateMap<Model.Estacionamento, ViewModels.Estacionamento>();
-            Mapper.CreateMap<ViewModels.Estacionamento, Model.Estacionamento>();
+            Mapper.CreateMap<Model.Estacionamento, ViewModels.ListaEstacionamento>()
+                .ForMember(ViewModel => ViewModel.Endereco, map => map.MapFrom(model => model.EnderecoFormatado()));
+
+            Mapper.CreateMap<ViewModels.ListaEstacionamento, Model.Estacionamento>()
+                .ForAllMembers(map => map.Ignore());
 
         }
     }

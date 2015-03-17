@@ -38,5 +38,21 @@ namespace Service
 
             repository.Add(usuario);
         }
+
+        public IEnumerable<Usuario> GetAll()
+        {
+            return repository.Items.ToList();
+        }
+
+        public Usuario GetById(int id)
+        {
+            var list = from item in repository.Items
+                       where item.Id.Equals(id)
+                       select item;
+
+            if (!list.Any()) throw new InvalidOperationException();
+
+            return list.First();
+        }
     }
 }

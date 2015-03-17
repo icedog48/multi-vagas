@@ -278,7 +278,7 @@
     <Compile Include="Controllers\AppController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\EstacionamentoController.cs" />
+    <Compile Include="Controllers\EstacionamentosController.cs" />
     <Compile Include="DependencyResolution\Registries\ServiceRegistry.cs" />
     <Compile Include="DependencyResolution\Registries\NHibernateRegistry.cs" />
     <Compile Include="DependencyResolution\Registries\DefaultRegistry.cs" />
@@ -292,8 +292,7 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModelsValidation\EstacionamentoValidator.cs" />
-    <Compile Include="ViewModels\Estacionamento.cs" />
+    <Compile Include="ViewModels\ListaEstacionamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
