@@ -17,12 +17,10 @@
         return {
             request: function (config) {
 
-                numLoadings++;
+                numLoadings++;                
 
-                // Show loader
                 $rootScope.$broadcast("loader_show");
 
-                //Add Authorization Header
                 if (config.headers.Authorization === 'token') {
                     config.headers.Authorization = 'Bearer ' + sessionService.token;
                 }
@@ -30,24 +28,24 @@
                 return config || $q.when(config)
 
             },
-            response: function (response) {
+            response: function (config) {
+                
+                numLoadings--;                
 
-                if ((--numLoadings) === 0) {
-                    // Hide loader
+                if ((numLoadings) === 0) {
                     $rootScope.$broadcast("loader_hide");
                 }
 
-                return response || $q.when(response);
+                return config || $q.when(config);
 
             },
-            responseError: function (response) {
+            responseError: function (config) {
 
                 if (!(--numLoadings)) {
-                    // Hide loader
                     $rootScope.$broadcast("loader_hide");
                 }
 
-                return $q.reject(response);
+                return $q.reject(config);
             }
         };
     };
@@ -57,13 +55,25 @@
     };
 
     var loaderDirective = function ($rootScope) {
-        return function ($scope, element, attrs) {
-            $scope.$on("loader_show", function () {
-                return element.show();
-            });
-            return $scope.$on("loader_hide", function () {
-                return element.hide();
-            });
+
+        return {
+            restrict: 'EA',
+            link: function (scope, element) {
+
+                var shownType = element.css('display');
+
+                function hideElement() {
+                    element.css('display', 'none');
+                };                
+            
+                scope.$on('loader_show', function () {
+                    element.css('display', shownType);
+                });
+
+                scope.$on('loader_hide', hideElement);
+                                
+                hideElement();                
+            }
         };
     };
 
@@ -71,7 +81,7 @@
         .constant("APP_CONFIG", APP_CONFIG)
         .constant("USER_ROLES", USER_ROLES)
         .config(["$httpProvider", config])
+        .directive("testeloader", ["$rootScope", loaderDirective])
         .factory("httpInterceptor", ["$q", "$rootScope", "sessionService", httpInterceptor])
-        .directive("loader", ["$rootScope", loaderDirective]);
     ;
 }());

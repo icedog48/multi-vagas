@@ -43,6 +43,7 @@
         });
     };
 
+
     //MODULOS
     angular.module("multi-vagas",
     [
@@ -50,6 +51,7 @@
         "shared",
         "dashboard",
         "estacionamento",
+        "admin",
         "ui.router",
         "frapontillo.bootstrap-switch",
         "ui.bootstrap"
@@ -58,6 +60,8 @@
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
 
     .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
+
+    
 
     .run(["$rootScope", "$state", "authService", "$location", runFunction]);
 

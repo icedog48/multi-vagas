@@ -24,6 +24,13 @@
                 method: 'GET',
                 headers: { 'Authorization': 'token' }
             },
+
+            'filtrar': {
+                method: 'POST',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/estacionamentos/filtrar'
+            },
         });
 
         return resource;

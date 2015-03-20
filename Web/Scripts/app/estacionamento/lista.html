@@ -1,28 +1,119 @@
-﻿<div class="row mt">
-    <div class="col-md-12 col-sm-12">
+﻿<form name="frmFiltroEstacionamento" class="form-horizontal style-form" ng-submit="filtrarEstacionamentos(filtroEstacionamento)">
+
+    <!--Dados Empresariais-->
+    <div class="form-panel">
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Filtro de estacionamentos </h4>
 
         <div class="row mt">
+            <div class="col-sm-12 col-md-12">
+                <!--CNPJ-->
+                <div class="form-group col-sm-3 col-md-3">
+                    <label class="control-label">CNPJ</label>
+                    <input type="text" class="form-control" name="CNPJ" ng-model="filtroEstacionamento.CNPJ" >
+                </div>
 
-            <div class="col-md-3 col-sm-3">
-                <input type="text" class="form-control round-form" placeholder="Filtro de estacionamentos" />
+                <div class="form-group col-sm-1 col-md-1">
+                    &nbsp;
+                </div>
+
+                <!--Razao Social-->
+                <div class="form-group col-sm-3 col-md-3">
+                    <label class="control-label">Razao Social</label>
+                    <input type="text" class="form-control" name="RazaoSocial" ng-model="filtroEstacionamento.RazaoSocial" >
+                </div>
+
             </div>
-
-            <div class="col-md-8 col-sm-8">
-                <button type="button" class="btn btn-round btn-primary" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>
-            </div>
-
         </div>
 
         <div class="row mt">
+            <div class="col-sm-12 col-md-12">
 
-            <div class="col-md-2 col-sm-2 box0" ng-repeat="estacionamento in estacionamentos">
+                <!--UF-->
+                <div class="form-group col-sm-3 col-md-3">
+                    <label class="control-label">UF</label>
+                    <input type="text" class="form-control" name="UF" ng-model="filtroEstacionamento.UF" >
+                </div>
 
-                <div class="box1">
-                    <h3><a href="#/dashboard/estacionamentos/{{estacionamento.Id}}" ng-bind="estacionamento.RazaoSocial"> </a></h3>
+                <div class="form-group col-sm-1 col-md-1">
+                    &nbsp;
+                </div>
+
+                <!--Cidade-->
+                <div class="form-group col-sm-3 col-md-3">
+                    <label class="control-label">Cidade</label>
+                    <input type="text" class="form-control" name="Cidade" ng-model="filtroEstacionamento.Cidade" >
+                </div>
+
+                <div class="form-group col-sm-1 col-md-1">
+                    &nbsp;
+                </div>
+
+                <!--Logradouro-->
+                <div class="form-group col-sm-3 col-md-3">
+                    <label class="control-label">Logradouro</label>
+                    <input type="text" class="form-control" name="Logradouro" ng-model="filtroEstacionamento.Logradouro" >
                 </div>
             </div>
+        </div>
 
+        <!--Botoes-->
+        <div class="row mt">
+            <div class="col-sm-12 col-md-12 form-buttons">
+                <button type="submit" class="btn btn-round btn-primary pull-right"><i class="fa fa-filter"></i> Pesquisar </button>
+            </div>
         </div>
 
     </div>
-</div>
+
+    <!--Lista de estacionamentos-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>CNPJ</th>
+                        <th>Razão Social</th>
+                        <th>Telefone</th>
+                        <th>Endereço</th>
+
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr ng-repeat="estacionamento in estacionamentos">
+
+                        <td ng-bind="estacionamento.CNPJ"></td>
+
+                        <td ng-bind="estacionamento.RazaoSocial"></td>
+
+                        <td ng-bind="estacionamento.Telefone"></td>
+
+                        <td ng-bind="estacionamento.Endereco"></td>
+
+                        <td align="right"> 
+                            <a href="#" ng-click="atualizarEstacionamento(estacionamento)"> <i class="fa fa-pencil-square-o fa-2x"></i> </a> 
+                        </td>
+
+                        <td align="center">
+                            <a href="#" ng-click="excluirEstacionamento(estacionamento)"> <i class="fa fa-times fa-2x"></i> </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>
+        </div>
+    </div>
+
+</form>
+
