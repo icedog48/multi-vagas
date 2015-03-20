@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using FluentValidation;
+using Model;
 using Service.Interfaces;
 using Storage;
 using System;
@@ -12,35 +13,45 @@ namespace Service
     public abstract class CRUDService<T>: ICRUDService<T> where T : Entity
     {
         protected IRepository<T> repository;
+        protected AbstractValidator<T> validator;
 
-        public CRUDService(IRepository<T> repository)
+        public CRUDService(IRepository<T> repository, AbstractValidator<T> validator)
         {
             this.repository = repository;
+            this.validator = validator;
         }
 
-        public void Add(T obj)
+        public virtual void Add(T obj)
         {
+            var result = validator.Validate(obj);
+
+            if (!result.IsValid) throw new ValidationException(result.Errors);
+
             this.repository.Add(obj);
         }
 
-        public void Update(T obj)
+        public virtual void Update(T obj)
         {
+            var result = validator.Validate(obj);
+
+            if (!result.IsValid) throw new ValidationException(result.Errors);
+
             this.repository.Update(obj);
         }
 
-        public void Remove(T obj)
+        public virtual void Remove(T obj)
         {
             this.repository.Remove(obj);
         }
 
-        public IEnumerable<T> GetByFilter(Filters.IFilter<T> filter)
+        public virtual IEnumerable<T> GetByFilter(Filters.IFilter<T> filter)
         {
             var result = filter.Apply(repository.Items);
 
             return result.ToList();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             var list = from item in repository.Items
                                   where item.Id.Equals(id)
@@ -51,7 +62,7 @@ namespace Service
             return list.First();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return repository.Items.ToList();
         }

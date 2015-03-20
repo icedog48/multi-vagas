@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="201502\CreateTableEstacionamento.cs" />
-    <Compile Include="201503\CriateTableModuloDeSecuranca.cs" />
+    <Compile Include="201503\3 - AlterTableVagas_Sigla.cs" />
+    <Compile Include="201503\2 - CreateTableVagas.cs" />
+    <Compile Include="201503\1 - CreateTableModuloDeSecuranca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

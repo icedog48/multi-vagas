@@ -1,6 +1,7 @@
 ﻿using Model;
 using Service.Filters;
 using Service.Interfaces;
+using Service.Validations;
 using Storage;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace Service
     public class EstacionamentoService : CRUDService<Estacionamento>, IEstacionamentoService
     {
 
-        public EstacionamentoService(IRepository<Estacionamento> repository)
-            : base(repository)
+        public EstacionamentoService(IRepository<Estacionamento> repository, EstacionamentoValidator validator)
+            : base(repository, validator)
         {
             
         }

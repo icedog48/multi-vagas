@@ -1,0 +1,73 @@
+﻿<form name="frmadmin" class="form-horizontal style-form" role="form" ng-submit="filtrarAdmins(admin)">
+
+    <div class="form-panel">
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Filtro de Vagas </h4>
+        
+        <div class="row mt">
+            <div class="col-sm-12 col-md-12">
+                
+                <div class="col-sm-3 col-md-3">
+                    <label class="control-label">Estacionamento</label>
+                    
+                    <select name="Estacionamento" class="form-control" ng-model="admin.Estacionamento" ng-repeat="estacionamento in estacionamentos">
+                        <option value="{{estacionamento.Id}}"> {{ estacionamento.RazaoSocial }} </option>
+                    </select>
+
+                </div>
+
+                <div class="col-sm-1 col-md-1">
+                    &nbsp;
+                </div>
+
+                <div class="col-sm-3 col-md-3">
+                    <label class="control-label">Admin</label>
+                    <input type="text" class="form-control" name="Login" ng-model="admin.Login">
+                </div>
+            </div>
+        </div>
+
+        <!--Botoes-->
+        <div class="row mt">
+            <div class="col-sm-12 col-md-12 form-buttons">
+                <button type="submit" class="btn btn-round btn-primary pull-right"><i class="fa fa-filter"></i> Pesquisar </button>
+            </div>
+        </div>
+    </div>
+
+    <!--Lista de estacionamentos-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Estacionamento</th>
+                        <th>Adminstrador</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="admin in admins">
+
+                        <td ui-sref="admin_edit({ id: admin.Id })" ng-bind="admin.Estacionamento"></td>
+                        <td ui-sref="admin_edit({ id: admin.Id })" ng-bind="admin.Categoria"></td>
+                        <td ui-sref="admin_edit({ id: admin.Id })" ng-bind="admin.Vagas"></td>
+
+                        <td>
+                            <a ng-click="excluirAdmin(admin)"> <i class="fa fa-times fa-2x"></i> </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" ui-sref="admin_add"><i class="fa fa-plus"></i> Adicionar </button>
+        </div>
+    </div>
+
+</form>
+

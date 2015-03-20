@@ -233,6 +233,7 @@ ul.top-menu > li > .logout {
     height: 100%;
     position: fixed;
     background: #424a5d;
+    padding-top: 70px;
 }
 
 #sidebar h5 {
@@ -397,7 +398,7 @@ ul.sidebar-menu li a.active i {
 
 /* MAIN CONTENT CONFIGURATION */
 #main-content {
-    margin-left: 210px;
+    /*margin-left: 210px;*/
 }
 
 .header, .footer {
@@ -2312,4 +2313,9 @@ form .form-buttons button {
    margin-top: -32px; /* -1 * image height / 2 */
    display: block;
    z-index:1101;
+}
+
+
+[ui-sref], [ng-click] {
+  cursor: pointer;
 }

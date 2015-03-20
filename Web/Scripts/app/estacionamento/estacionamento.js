@@ -6,8 +6,8 @@
             .state("estacionamento_list", {
                 parent: 'dashboard',
                 url: "/estacionamentos",
-                templateUrl: "Scripts/app/estacionamento/lista.html",
-                controller: 'listaController',
+                templateUrl: "Scripts/app/estacionamento/filtroEstacionamento.html",
+                controller: 'filtroEstacionamentoController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
 
@@ -15,8 +15,8 @@
             .state("estacionamento_edit", {
                 parent: 'dashboard',
                 url: "/estacionamentos/:id",
-                templateUrl: "Scripts/app/estacionamento/formulario.html",
-                controller: 'formularioController',
+                templateUrl: "Scripts/app/estacionamento/formEstacionamento.html",
+                controller: 'formEstacionamentoController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
 
@@ -24,14 +24,14 @@
             .state("estacionamento_add", {
                 parent: 'dashboard',
                 url: "/estacionamento",
-                templateUrl: "Scripts/app/estacionamento/formulario.html",
-                controller: 'formularioController',
+                templateUrl: "Scripts/app/estacionamento/formEstacionamento.html",
+                controller: 'formEstacionamentoController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
 
         $resourceProvider.defaults.stripTrailingSlashes = false;
     };
 
-    angular.module("estacionamento", ["shared", "ui.router", "ngResource"])
+    angular.module("estacionamento", ["shared", "ui.router", "ngResource", "vagas"])
         .config(["$stateProvider", "USER_ROLES", "$resourceProvider", config])
 }());

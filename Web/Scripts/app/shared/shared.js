@@ -56,8 +56,6 @@
 
     var loaderDirective = function ($rootScope) {
 
-        console.log("loaderDirective");
-
         return {
             restrict: 'EA',
             link: function (scope, element) {

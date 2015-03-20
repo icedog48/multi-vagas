@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    public enum PerfilEnum
+    {
+        EQUIPE_MULTIVAGAS = 1,
+        ADMIN = 2
+    }
+
     public class Usuario : Entity
     {
         public virtual string Email { get; set; }

@@ -201,6 +201,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\css\bootstrap-sidebar.css" />
     <Content Include="Content\bootstrap\css\bootstrap-switch.css" />
     <Content Include="Content\bootstrap\css\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css.map" />
@@ -227,19 +228,25 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
-    <Content Include="Scripts\app\estacionamento\funcionario\formulario-controller.js" />
-    <Content Include="Scripts\app\estacionamento\funcionario\formulario.html" />
-    <Content Include="Scripts\app\estacionamento\funcionario\lista.html" />
-    <Content Include="Scripts\app\estacionamento\categoria-vagas\formulario-controller.js" />
-    <Content Include="Scripts\app\estacionamento\categoria-vagas\formulario.html" />
-    <Content Include="Scripts\app\estacionamento\categoria-vagas\lista.html" />
-    <Content Include="Scripts\app\estacionamento\lista-controller.js" />
-    <Content Include="Scripts\app\estacionamento\formulario.html" />
-    <Content Include="Scripts\app\estacionamento\formulario-controller.js" />
+    <Content Include="Scripts\app\admin\filtroAdmin-controller.js" />
+    <Content Include="Scripts\app\admin\filtroAdmin.html" />
+    <Content Include="Scripts\app\admin\formAdmin-controller.js" />
+    <Content Include="Scripts\app\admin\formAdmin.html" />
+    <Content Include="Scripts\app\admin\admin-service.js" />
+    <Content Include="Scripts\app\admin\admin.js" />
+    <Content Include="Scripts\app\vagas\vaga-service.js" />
+    <Content Include="Scripts\app\vagas\filtroVagas-controller.js" />
+    <Content Include="Scripts\app\vagas\vagas.js" />
+    <Content Include="Scripts\app\vagas\formVagas-controller.js" />
+    <Content Include="Scripts\app\vagas\formVagas.html" />
+    <Content Include="Scripts\app\vagas\filtroVagas.html" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamento-controller.js" />
+    <Content Include="Scripts\app\estacionamento\formEstacionamento.html" />
+    <Content Include="Scripts\app\estacionamento\formEstacionamento-controller.js" />
     <Content Include="Scripts\app\estacionamento\estacionamento-service.js" />
     <Content Include="Scripts\app\estacionamento\estacionamento.js" />
     <Content Include="Scripts\app\dashboard\dashboard-controller.js" />
-    <Content Include="Scripts\app\estacionamento\lista.html" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamento.html" />
     <Content Include="Scripts\vendor\angular\angular-bootstrap-switch.js" />
     <Content Include="Scripts\vendor\angular\angular-resource.js" />
     <Content Include="Scripts\vendor\angular\angular-ui-router.js" />
@@ -274,6 +281,8 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Attributes\NHSession.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\VagasController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\AppController.cs">
       <SubType>Code</SubType>
@@ -292,8 +301,13 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FormularioAdmin.cs" />
+    <Compile Include="ViewModels\FormularioVaga.cs" />
     <Compile Include="ViewModels\ListaEstacionamento.cs" />
+    <Compile Include="ViewModels\TabelaAdmin.cs" />
+    <Compile Include="ViewModels\TabelaEstacionamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TabelaVaga.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
