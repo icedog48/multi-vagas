@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service.Common.Filters;
 using Service.Interfaces;
 using System;
 using System.Collections.Generic;

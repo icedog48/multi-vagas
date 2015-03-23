@@ -27,16 +27,16 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public IEnumerable<TabelaVaga> Get()
+        public IEnumerable<VagaTable> Get()
         {
-            return Mapper.Map<IEnumerable<TabelaVaga>>(Service.GetAll());
+            return Mapper.Map<IEnumerable<VagaTable>>(Service.GetAll());
         }
 
-        public FormularioVaga Get(int id)
+        public VagaForm Get(int id)
         {
             try
             {
-                return Mapper.Map<FormularioVaga>(this.Service.GetById(id));
+                return Mapper.Map<VagaForm>(this.Service.GetById(id));
             }
             catch (Exception ex)
             {
@@ -44,12 +44,12 @@ namespace Web.Controllers
             }
         }
 
-        public void Post(FormularioVaga vaga)
+        public void Post(VagaForm vaga)
         {
             Service.Add(Mapper.Map<CategoriaVaga>(vaga), vaga.Quantidade);
         }
 
-        public void Put(int id, FormularioVaga vaga)
+        public void Put(int id, VagaForm vaga)
         {
             Service.Update(Mapper.Map<CategoriaVaga>(vaga));
         }
@@ -60,9 +60,9 @@ namespace Web.Controllers
         }
 
         [Route("api/vagas/filtrar")]
-        public IEnumerable<TabelaVaga> Filtrar(CategoriaVagaFilter filtro) 
+        public IEnumerable<VagaTable> Filtrar(CategoriaVagaFilter filtro) 
         {
-            return Mapper.Map<IEnumerable<TabelaVaga>>(Service.GetByFilter(filtro));
+            return Mapper.Map<IEnumerable<VagaTable>>(Service.GetByFilter(filtro));
         }
     }
 }

@@ -228,12 +228,13 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
-    <Content Include="Scripts\app\admin\filtroAdmin-controller.js" />
-    <Content Include="Scripts\app\admin\filtroAdmin.html" />
-    <Content Include="Scripts\app\admin\formAdmin-controller.js" />
-    <Content Include="Scripts\app\admin\formAdmin.html" />
-    <Content Include="Scripts\app\admin\admin-service.js" />
-    <Content Include="Scripts\app\admin\admin.js" />
+    <Content Include="Scripts\app\funcionario\filtroFuncionario-controller.js" />
+    <Content Include="Scripts\app\funcionario\filtroFuncionario.html" />
+    <Content Include="Scripts\app\funcionario\formFuncionario-controller.js" />
+    <Content Include="Scripts\app\funcionario\formFuncionario.html" />
+    <Content Include="Scripts\app\funcionario\funcionario-service.js" />
+    <Content Include="Scripts\app\funcionario\funcionario.js" />
+    <Content Include="Scripts\app\shared\perfil-service.js" />
     <Content Include="Scripts\app\vagas\vaga-service.js" />
     <Content Include="Scripts\app\vagas\filtroVagas-controller.js" />
     <Content Include="Scripts\app\vagas\vagas.js" />
@@ -281,7 +282,8 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Attributes\NHSession.cs" />
-    <Compile Include="Controllers\AdminsController.cs" />
+    <Compile Include="Controllers\FuncionariosController.cs" />
+    <Compile Include="Controllers\PerfisController.cs" />
     <Compile Include="Controllers\VagasController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\AppController.cs">
@@ -301,13 +303,15 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\FormularioAdmin.cs" />
-    <Compile Include="ViewModels\FormularioVaga.cs" />
-    <Compile Include="ViewModels\ListaEstacionamento.cs" />
-    <Compile Include="ViewModels\TabelaAdmin.cs" />
-    <Compile Include="ViewModels\TabelaEstacionamento.cs" />
+    <Compile Include="ViewModels\FuncionarioForm.cs" />
+    <Compile Include="ViewModels\PerfilCombo.cs" />
+    <Compile Include="ViewModels\UsuarioForm.cs" />
+    <Compile Include="ViewModels\VagaForm.cs" />
+    <Compile Include="ViewModels\EstacionamentoCombo.cs" />
+    <Compile Include="ViewModels\FuncionatrioTable.cs" />
+    <Compile Include="ViewModels\EstacionamentoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\TabelaVaga.cs" />
+    <Compile Include="ViewModels\VagaTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -331,9 +335,17 @@
       <Project>{e7ef33fb-d897-4cf8-9da3-764c0e5e4165}</Project>
       <Name>Migrations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model.Common\Model.Common.csproj">
+      <Project>{590169b1-163f-4b33-a9d7-b73e34368e1f}</Project>
+      <Name>Model.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ff7d41de-34c3-430f-925c-cae8645cd628}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Common\Service.Common.csproj">
+      <Project>{98084a69-5a41-49e9-a627-639ed82eee96}</Project>
+      <Name>Service.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{9807f7a4-bae7-4149-9f38-6a737b60123f}</Project>

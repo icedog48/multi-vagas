@@ -1,5 +1,6 @@
 ﻿using Model;
-using Service.Exceptions;
+using Model.Common;
+using Service.Common;
 using Service.Filters;
 using Service.Interfaces;
 using Service.Validations;
@@ -15,7 +16,7 @@ using Utils.Extensions;
 
 namespace Service
 {
-    public class CategoriaVagaService : CRUDService<CategoriaVaga>, ICategoriaVagaService
+    public class CategoriaVagaService : CRUDLogicalExclusionService<CategoriaVaga>, ICategoriaVagaService
     {
         private IRepository<Vaga> vagaRepository;
         private CategoriaVagaValidator categoriaVagaValidator;
@@ -58,6 +59,13 @@ namespace Service
             List<Vaga> listaVagas = new List<Vaga>(vagas);
 
             for (int indice = 0; indice < vagas; indice++) vagaRepository.Add(NovaVaga(indice, categoria));
+        }
+
+        protected override IQueryable<CategoriaVaga> GetActiveItems()
+        {
+            var ativo = (int)SituacaoRegistroEnum.ATIVO;
+
+            return repository.Items.Where(x => x.Estacionamento.SituacaoRegistro == ativo && x.SituacaoRegistro == ativo);
         }
     }
 

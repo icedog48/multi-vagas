@@ -27,6 +27,7 @@ namespace Web.DependencyResolution.Registries
     using System.Configuration;
     using System.IO;
     using Service.Interfaces;
+    using Service.Common.Interfaces;
 
     public class ServiceRegistry : Registry
     {
@@ -37,11 +38,10 @@ namespace Web.DependencyResolution.Registries
             Scan(
                 scan =>
                 {
-                    scan.AssemblyContainingType(typeof(IService<>));
+                    scan.AssemblyContainingType(typeof(IEstacionamentoService));
 
                     scan.WithDefaultConventions();
                     scan.RegisterConcreteTypesAgainstTheFirstInterface();
-
                 });
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,12 @@ namespace Model
     public enum PerfilEnum
     {
         EQUIPE_MULTIVAGAS = 1,
-        ADMIN = 2
+        ADMIN = 2,
+        FUNCIONARIO,
+        USUARIO
     }
 
-    public class Usuario : Entity
+    public class Usuario : LogicalExclusionEntity
     {
         public virtual string Email { get; set; }
 

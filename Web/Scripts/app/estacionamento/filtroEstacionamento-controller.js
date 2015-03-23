@@ -20,9 +20,9 @@
 
             if (confirm('Deseja realmente excluir ?')) {
 
-                var estacionamentoId = $scope.estacionamento.Id;
+                var estacionamentoId = estacionamento.Id;
 
-                $scope.estacionamento.$delete({ id: estacionamentoId })
+                Estacionamento.remove({ id: estacionamentoId }).$promise
                     .then(function () {
                         $scope.estacionamentos.forEach(function (estacionamento, index) {
 

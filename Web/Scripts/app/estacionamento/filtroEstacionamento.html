@@ -9,9 +9,7 @@
                     <label class="control-label">CNPJ</label>
                     <input type="text" class="form-control" name="CNPJ" ng-model="filtroEstacionamento.CNPJ">
                 </div>
-                <div class="col-sm-1 col-md-1">
-                    &nbsp;
-                </div>
+               
                 <!--Razao Social-->
                 <div class="col-sm-3 col-md-3">
                     <label class="control-label">Razao Social</label>
@@ -26,17 +24,15 @@
                     <label class="control-label">UF</label>
                     <input type="text" class="form-control" name="UF" ng-model="filtroEstacionamento.UF">
                 </div>
-                <div class="col-sm-1 col-md-1">
-                    &nbsp;
-                </div>
+               
+
                 <!--Cidade-->
                 <div class="col-sm-3 col-md-3">
                     <label class="control-label">Cidade</label>
                     <input type="text" class="form-control" name="Cidade" ng-model="filtroEstacionamento.Cidade">
                 </div>
-                <div class="col-sm-1 col-md-1">
-                    &nbsp;
-                </div>
+                
+
                 <!--Logradouro-->
                 <div class="col-sm-3 col-md-3">
                     <label class="control-label">Logradouro</label>
@@ -85,7 +81,7 @@
     <!--Botoes-->
     <div class="row mt">
         <div class="col-sm-12 col-md-12 form-buttons">
-            <button type="submit" class="btn btn-round btn-primary pull-right" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>
+            <button type="submit" class="btn btn-round btn-primary pull-right" name="btnNovoEstacionamento" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>
         </div>
     </div>
 </form>

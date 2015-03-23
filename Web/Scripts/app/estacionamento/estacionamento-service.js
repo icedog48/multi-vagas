@@ -31,6 +31,10 @@
                 headers: { 'Authorization': 'token' },
                 url: '/api/estacionamentos/filtrar'
             },
+            'remove': {
+                method: 'DELETE',
+                headers: { 'Authorization': 'token' }
+            },
         });
 
         return resource;

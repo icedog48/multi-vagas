@@ -48,6 +48,8 @@
 
         $scope.salvar = function (categoriaVagas)
         {
+            categoriaVagas.Estacionamento = categoriaVagas.Estacionamento.Id;
+
             if ($scope.novoCadastro) {
                 cadastrar(categoriaVagas);
             } else {

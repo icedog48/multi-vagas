@@ -9,15 +9,15 @@
     <div class="nav notify-row pull-right">
         <ul class="nav top-menu">
             <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle">
+                <a data-toggle="dropdown" class="dropdown-toggle" name="menuSettings">
                     <i class="fa fa-cogs"></i>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                     <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
                     
-                    <li><a ui-sref="estacionamento_list()"> Estacionamentos </a></li>
-                    <li><a ui-sref="admin_list()"> Administradores </a></li>
-                    <li><a ui-sref="vagas_list()"> Vagas </a></li>
+                    <li><a ui-sref="estacionamento_list()" name="MenuEstacionamentos"> Estacionamentos </a></li>
+                    <li><a ui-sref="funcionario_list()" name="MenuFuncionarios"> Funcionarios </a></li>
+                    <li><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
 
                     <li> <a href="#" ng-click="logout()">Logout</a> </li>
                 </ul>

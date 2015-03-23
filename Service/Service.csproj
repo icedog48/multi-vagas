@@ -44,32 +44,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CRUDService.cs" />
-    <Compile Include="Exceptions\ValidationException.cs" />
-    <Compile Include="Filters\AdminFilter.cs" />
+    <Compile Include="PerfilService.cs" />
+    <Compile Include="Filters\FuncionarioFilter.cs" />
     <Compile Include="Filters\CategoriaVagaFilter.cs" />
     <Compile Include="CategoriaVagaService.cs" />
     <Compile Include="Filters\EstacionamentoFilter.cs" />
-    <Compile Include="Filters\IFilter.cs" />
-    <Compile Include="Interfaces\IAdminService.cs" />
-    <Compile Include="Interfaces\ICRUDService.cs" />
+    <Compile Include="Interfaces\IFuncionarioService.cs" />
     <Compile Include="Interfaces\ICategoriaVagaService.cs" />
-    <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IEstacionamentoService.cs" />
+    <Compile Include="Interfaces\IPerfilService.cs" />
     <Compile Include="Interfaces\IUsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EstacionamentoService.cs" />
-    <Compile Include="AdminService.cs" />
+    <Compile Include="FuncionarioService.cs" />
     <Compile Include="UsuarioService.cs" />
-    <Compile Include="Validations\AdminValidator.cs" />
+    <Compile Include="Validations\FuncionarioValidator.cs" />
     <Compile Include="Validations\EstacionamentoValidator.cs" />
     <Compile Include="Validations\VagaValidator.cs" />
     <Compile Include="Validations\CategoriaVagaValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model.Common\Model.Common.csproj">
+      <Project>{590169b1-163f-4b33-a9d7-b73e34368e1f}</Project>
+      <Name>Model.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ff7d41de-34c3-430f-925c-cae8645cd628}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Common\Service.Common.csproj">
+      <Project>{98084a69-5a41-49e9-a627-639ed82eee96}</Project>
+      <Name>Service.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{8006bbd9-b936-4c4f-ae77-bf96d9adeaa3}</Project>

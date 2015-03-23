@@ -1,4 +1,5 @@
 ﻿using Model;
+using Service.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Service.Interfaces
         Usuario Login(string usuario, string senha);
 
         void Registrar(Usuario usuario);
+
+        void Atualizar(Usuario usuario);
     }
 }

@@ -54,5 +54,13 @@ namespace Service
 
             return list.First();
         }
+
+
+        public void Atualizar(Usuario usuario)
+        {
+            usuario.Senha = Encryption.Encrypt(usuario.Senha);
+
+            repository.Update(usuario);
+        }
     }
 }

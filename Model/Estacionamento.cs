@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Estacionamento : Entity
+    public class Estacionamento : LogicalExclusionEntity
     {
         public virtual string CNPJ { get; set; }
 

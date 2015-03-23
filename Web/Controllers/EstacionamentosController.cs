@@ -27,9 +27,9 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public IEnumerable<TabelaEstacionamento> Get()
+        public IEnumerable<EstacionamentoTable> Get()
         {
-            return Mapper.Map<IEnumerable<TabelaEstacionamento>>(Service.GetAll());
+            return Mapper.Map<IEnumerable<EstacionamentoTable>>(Service.GetAll());
         }
 
         public Estacionamento Get(int id)
@@ -97,9 +97,9 @@ namespace Web.Controllers
         }
 
         [Route("api/estacionamentos/filtrar")]
-        public IEnumerable<TabelaEstacionamento> Filtrar(EstacionamentoFilter filtro) 
+        public IEnumerable<EstacionamentoTable> Filtrar(EstacionamentoFilter filtro) 
         {
-            return Mapper.Map<IEnumerable<TabelaEstacionamento>>(Service.GetByFilter(filtro));
+            return Mapper.Map<IEnumerable<EstacionamentoTable>>(Service.GetByFilter(filtro));
         }
     }
 }

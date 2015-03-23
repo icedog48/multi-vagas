@@ -8,7 +8,7 @@ using Utils.Extensions;
 
 namespace Migrations._201502
 {
-    [Migration(201503091345, "Criação das tabelas de securança")]
+    [Migration(201503091345, "Criação das tabelas de segurança")]
     public class CreateTableModuloDeSecuranca : Migration
     {
         public override void Up()

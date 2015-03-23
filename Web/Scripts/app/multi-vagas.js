@@ -51,7 +51,7 @@
         "shared",
         "dashboard",
         "estacionamento",
-        "admin",
+        "funcionario",
         "ui.router",
         "frapontillo.bootstrap-switch",
         "ui.bootstrap"

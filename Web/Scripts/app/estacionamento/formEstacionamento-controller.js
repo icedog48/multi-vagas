@@ -30,7 +30,7 @@
         $scope.atualizar = function (estacionamento) {
             Estacionamento.update({ id: estacionamento.Id }, estacionamento).$promise
                 .then(function (response) {
-                    alert('Operação realizada com sucesso');
+                    alert('Operação realizada com sucesso!');
 
                     $state.go('estacionamento_list');
                 })

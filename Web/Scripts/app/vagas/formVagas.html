@@ -9,8 +9,9 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Estacionamento.$dirty && frmCategoriaVaga.Estacionamento.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Estacionamento</label>
                     <div class="col-sm-10">
-                        <select name="Estacionamento" class="form-control" ng-model="categoriaVaga.Estacionamento" >
-                            <option ng-repeat="estacionamento in estacionamentos" value="{{estacionamento.Id}}"> {{estacionamento.RazaoSocial}} </option>
+                        
+                        <select name="Estacionamento" class="form-control" ng-model="filtroFuncionario.Estacionamento" ng-options="estacionamento.Id as estacionamento.RazaoSocial for estacionamento in estacionamentos">
+                            <option value="" disabled> --- </option>
                         </select>
                             
                     </div>

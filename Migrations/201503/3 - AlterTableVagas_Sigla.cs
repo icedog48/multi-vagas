@@ -8,7 +8,7 @@ using Utils.Extensions;
 
 namespace Migrations._201502
 {
-    [Migration(201503191309, "Criação das tabelas de Vaga e Categoria de Vagas")]
+    [Migration(201503191309, "Adição do campo sigla a tabela CategoriaVaga")]
     public class AlterTableVagas_Sigla : Migration
     {
         public override void Up()
@@ -18,7 +18,7 @@ namespace Migrations._201502
 
         public override void Down()
         {
-            Alter.Table("CategoriaVaga").AlterColumn("Sigla");
+            Delete.Column("Sigla").FromTable("CategoriaVaga");
         }
     }
 }
