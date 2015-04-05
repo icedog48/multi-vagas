@@ -32,6 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppHarbor|AnyCPU'">
+    <OutputPath>bin\AppHarbor\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -66,8 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="201502\CreateTableEstacionamento.cs" />
-    <Compile Include="201503\CriateTableModuloDeSecuranca.cs" />
+    <Compile Include="201502\1 - CreateTableEstacionamento.cs" />
+    <Compile Include="201503\8 - AlterTableEstacionamentoAddUsuarioId.cs" />
+    <Compile Include="201503\7 -AlterTableUsuario.cs" />
+    <Compile Include="201503\5 -AddLogicalExclusionToTables.cs" />
+    <Compile Include="201503\4 - CreateTableFuncionario.cs" />
+    <Compile Include="201503\3 - AlterTableVagas_Sigla.cs" />
+    <Compile Include="201503\2 - CreateTableVagas.cs" />
+    <Compile Include="201503\1 - CreateTableModuloDeSecuranca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +90,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model.Common\Model.Common.csproj">
+      <Project>{590169b1-163f-4b33-a9d7-b73e34368e1f}</Project>
+      <Name>Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{ff7d41de-34c3-430f-925c-cae8645cd628}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils.Extensions\Utils.Extensions.csproj">
       <Project>{76814548-c0cc-4cf6-8ef8-5e24a2b94a53}</Project>
       <Name>Utils.Extensions</Name>

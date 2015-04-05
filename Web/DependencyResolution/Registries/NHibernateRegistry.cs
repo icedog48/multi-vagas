@@ -42,12 +42,13 @@ namespace Web.DependencyResolution.Registries
     using FluentMigrator.Runner.Processors.SqlServer;
     using FluentNHibernate.Conventions;
     using FluentNHibernate.Conventions.Instances;
+    using Model.Common;
 
     public class AutoMappingCfg : DefaultAutomappingConfiguration 
     {
         public override bool ShouldMap(System.Type type)
         {
-            return type.BaseType.Equals(typeof(Entity));
+            return type.BaseType.Equals(typeof(Entity)) || type.BaseType.Equals(typeof(LogicalExclusionEntity));
         }
     }
 
@@ -102,6 +103,15 @@ namespace Web.DependencyResolution.Registries
         }
     }
 
+    public class PropertyConvention : IPropertyConvention
+    {
+        public void Apply(IPropertyInstance instance)
+        {
+            if (instance.Property.PropertyType == typeof(TimeSpan))
+                instance.CustomType("TimeAsTimeSpan");
+        }
+    }
+
     public class NHibernateRegistry : Registry
     {
         #region Constructors and Destructors
@@ -116,7 +126,13 @@ namespace Web.DependencyResolution.Registries
                                              .Database(databaseCfg)
                                              .Mappings(m =>
                                              {
-                                                 m.AutoMappings.Add(AutoMap.Assemblies(autoMappingCfg, typeof(Entity).Assembly).Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention()));
+                                                 var automapping = AutoMap.Assemblies(autoMappingCfg, typeof(Estacionamento).Assembly)
+                                                                                .Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention())
+                                                                                .Conventions.Add<PropertyConvention>(new PropertyConvention())
+                                                                                .IgnoreBase<Entity>()
+                                                                                .IgnoreBase<LogicalExclusionEntity>();
+                                                 
+                                                 m.AutoMappings.Add(automapping);
                                              })
                                              .ExposeConfiguration(config => config.SetInterceptor(new TrackingInterceptor()))
                                              .ExposeConfiguration(cfg => cfg.Properties.Add("current_session_context_class", "thread"))

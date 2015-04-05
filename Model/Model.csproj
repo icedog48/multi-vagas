@@ -29,6 +29,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppHarbor|AnyCPU'">
+    <OutputPath>bin\AppHarbor\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -39,12 +48,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity.cs" />
     <Compile Include="Estacionamento.cs" />
     <Compile Include="Perfil.cs" />
+    <Compile Include="PerfilEnum.cs" />
     <Compile Include="Permissao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="CategoriaVaga.cs" />
+    <Compile Include="Funcionario.cs" />
+    <Compile Include="Vaga.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model.Common\Model.Common.csproj">
+      <Project>{590169b1-163f-4b33-a9d7-b73e34368e1f}</Project>
+      <Name>Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils.Extensions\Utils.Extensions.csproj">
+      <Project>{76814548-c0cc-4cf6-8ef8-5e24a2b94a53}</Project>
+      <Name>Utils.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

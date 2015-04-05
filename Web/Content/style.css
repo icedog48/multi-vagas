@@ -233,6 +233,7 @@ ul.top-menu > li > .logout {
     height: 100%;
     position: fixed;
     background: #424a5d;
+    padding-top: 70px;
 }
 
 #sidebar h5 {
@@ -397,7 +398,7 @@ ul.sidebar-menu li a.active i {
 
 /* MAIN CONTENT CONFIGURATION */
 #main-content {
-    margin-left: 210px;
+    /*margin-left: 210px;*/
 }
 
 .header, .footer {
@@ -2293,7 +2294,7 @@ form .form-buttons button {
 
 /*HTML LOADING*/
 
-.loader {
+#loaderDiv {
    position: fixed;
    top: 0;
    right: 0;
@@ -2311,4 +2312,10 @@ form .form-buttons button {
    margin-left: -32px; /* -1 * image width / 2 */
    margin-top: -32px; /* -1 * image height / 2 */
    display: block;
+   z-index:1101;
+}
+
+
+[ui-sref], [ng-click] {
+  cursor: pointer;
 }

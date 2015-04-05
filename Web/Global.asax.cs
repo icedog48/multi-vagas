@@ -1,4 +1,6 @@
 ﻿using Migrations;
+using Model;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,11 @@ namespace Web
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
+        {
+            
+        }
+
+        protected void Application_BeginRequest() 
         {
             
         }

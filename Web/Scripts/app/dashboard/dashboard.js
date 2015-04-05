@@ -1,11 +1,11 @@
 ﻿(function () {
-    var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
+    var config = function ($stateProvider, USER_ROLES) {
 
         $stateProvider
             .state("dashboard", {
                 abstract: true,
                 url: "/dashboard",
-                templateUrl: APP_CONFIG.templateBaseUrl + "dashboard/dashboard.html",
+                templateUrl: "Scripts/app/dashboard/dashboard.html",
                 controller: 'dashboardController',
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin, USER_ROLES.funcionario, USER_ROLES.cliente]
             });
@@ -19,5 +19,5 @@
              "estacionamento"
         ])
 
-        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config]);
+        .config(["$stateProvider", "USER_ROLES", config]);
 }());

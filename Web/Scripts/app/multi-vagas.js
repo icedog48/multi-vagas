@@ -9,6 +9,10 @@
         $scope.setCurrentUser = function (user) {
             $scope.currentUser = user;
         };
+
+        $scope.isAuthenticated = function () {
+            return $scope.currentUser != null;
+        }
     }
 
     var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
@@ -19,7 +23,7 @@
             controller: [
                       '$state',
               function ($state) {
-                  $state.go('estacionamento_list');
+                  $state.transitionTo('estacionamento_publico_list', null, { 'reload': true });
               }]
         });
     };
@@ -28,20 +32,21 @@
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             
-            var authorizedRoles = toState.roles;
+            var authorizedRoles = toState.roles || [];
 
-            if (!authService.isAuthorized(authorizedRoles) && (typeof (authorizedRoles) !== 'undefined')) {
-                
+            var autenticado = authService.isAuthenticated();
+
+            var autorizado = authService.isAuthorized(authorizedRoles);            
+
+            if (!(autenticado || autorizado)) {
                 event.preventDefault();
 
-                if (authService.isAuthenticated() && !$state.includes('estacionamento_list')) {
-                    $state.go('estacionamento_list');
-                } else {
-                    $state.go('login');
-                }
+                //$state.go('estacionamento_publico_list');
+                $state.transitionTo('estacionamento_publico_list', null, { 'reload': true });
             }
         });
     };
+
 
     //MODULOS
     angular.module("multi-vagas",
@@ -50,13 +55,17 @@
         "shared",
         "dashboard",
         "estacionamento",
+        "funcionario",
         "ui.router",
-        "frapontillo.bootstrap-switch"
+        "frapontillo.bootstrap-switch",
+        "ui.bootstrap"
     ])
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
 
     .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
+
+    
 
     .run(["$rootScope", "$state", "authService", "$location", runFunction]);
 
