@@ -8,7 +8,7 @@
                 url: "/funcionario",
                 templateUrl: "Scripts/app/funcionario/filtroFuncionario.html",
                 controller: 'filtroFuncionarioController',
-                roles: [USER_ROLES.equipeMultivagas, USER_ROLES.funcionario]
+                roles: [USER_ROLES.admin]
             });
 
         $stateProvider
@@ -17,7 +17,7 @@
                 url: "/funcionario/:id",
                 templateUrl: "Scripts/app/funcionario/formFuncionario.html",
                 controller: 'formFuncionarioController',
-                roles: [USER_ROLES.equipeMultivagas, USER_ROLES.funcionario]
+                roles: [USER_ROLES.admin]
             });
 
         $stateProvider
@@ -26,7 +26,7 @@
                 url: "/funcionario",
                 templateUrl: "Scripts/app/funcionario/formFuncionario.html",
                 controller: 'formFuncionarioController',
-                roles: [USER_ROLES.equipeMultivagas, USER_ROLES.funcionario]
+                roles: [USER_ROLES.admin]
             });
 
         $resourceProvider.defaults.stripTrailingSlashes = false;

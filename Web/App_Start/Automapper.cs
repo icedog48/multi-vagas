@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Model;
+using Model.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace Web.App_Start
     {
         public static void Setup()
         {
+            #region Tipos fora do modelo
+
             Mapper.CreateMap<DateTime, TimeSpan>().ConvertUsing(x => x.TimeOfDay);
             Mapper.CreateMap<TimeSpan, DateTime>().ConvertUsing(x => new DateTime(x.Ticks));
 
-            Mapper.CreateMap<string, TimeSpan>().ConvertUsing(x => 
+            Mapper.CreateMap<string, TimeSpan>().ConvertUsing(x =>
             {
                 var HH = 0;
 
@@ -23,21 +26,23 @@ namespace Web.App_Start
 
                 var mm = 0;
 
-                if (x.Length > 4) mm = Convert.ToInt32(x.Substring(3, 2));     
+                if (x.Length > 4) mm = Convert.ToInt32(x.Substring(3, 2));
 
                 var ss = 0;
 
-                if (x.Length > 7) ss = Convert.ToInt32(x.Substring(6, 2));                
+                if (x.Length > 7) ss = Convert.ToInt32(x.Substring(6, 2));
 
                 return new TimeSpan(HH, mm, ss);
             });
 
-            Mapper.CreateMap<TimeSpan, string>().ConvertUsing(x => 
+            Mapper.CreateMap<TimeSpan, string>().ConvertUsing(x =>
             {
                 return x.ToString("hh':'mm':'ss");
             });
 
-            #region Estacionamento 
+            #endregion
+
+            #region Estacionamento
 
             Mapper.CreateMap<Estacionamento, int>().ConvertUsing(x => x.Id);
             Mapper.CreateMap<int, Estacionamento>().ConvertUsing(x => new Estacionamento() { Id = x });
@@ -45,13 +50,26 @@ namespace Web.App_Start
             Mapper.CreateMap<Estacionamento, string>().ConvertUsing(x => x.RazaoSocial);
             Mapper.CreateMap<string, Estacionamento>().ConvertUsing(x => new Estacionamento() { RazaoSocial = x });
 
-            Mapper.CreateMap<Model.Estacionamento, ViewModels.EstacionamentoTable>()
+            Mapper.CreateMap<Estacionamento, EstacionamentoTable>()
                 .ForMember(ViewModel => ViewModel.Endereco, map => map.MapFrom(model => model.EnderecoFormatado()));
 
-            Mapper.CreateMap<ViewModels.EstacionamentoTable, Model.Estacionamento>()
+            Mapper.CreateMap<EstacionamentoTable, Estacionamento>()
                 .ForAllMembers(map => map.Ignore());
 
-            Mapper.CreateMap<Model.Estacionamento, ViewModels.EstacionamentoCombo>();
+            Mapper.CreateMap<Estacionamento, EstacionamentoCombo>();
+
+            Mapper.CreateMap<Estacionamento, EstacionamentoForm>();
+
+            Mapper.CreateMap<EstacionamentoForm, Estacionamento>()
+                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
+                .ForMember(model => model.Usuario, map => map.Ignore())
+                ;
+
+            Mapper.CreateMap<Estacionamento, EstacionamentoFormAdministrador>();
+
+            Mapper.CreateMap<EstacionamentoFormAdministrador, Estacionamento>()
+                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
+                ;
 
             #endregion
 
@@ -87,13 +105,22 @@ namespace Web.App_Start
 
             #region Usuario
 
-            Mapper.CreateMap<UsuarioForm, Usuario>()
-                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
+            Mapper.CreateMap<UsuarioFormFuncionario, Usuario>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
                 .ForMember(model => model.Login, map => map.Ignore())
+                .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
                 ;
 
-            Mapper.CreateMap<Usuario, UsuarioForm>();                
+            Mapper.CreateMap<Usuario, UsuarioFormFuncionario>();
+
+            Mapper.CreateMap<UsuarioFormEstacionamento, Usuario>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
+                .ForMember(model => model.Perfil, map => map.Ignore())
+                .ForMember(model => model.Senha, map => map.Ignore())
+                ;
+
+            Mapper.CreateMap<Usuario, UsuarioFormEstacionamento>();
 
             #endregion Usuario
 

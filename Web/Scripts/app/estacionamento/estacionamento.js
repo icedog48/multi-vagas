@@ -3,6 +3,15 @@
     var config = function ($stateProvider, USER_ROLES, $resourceProvider) {
 
         $stateProvider
+            .state("estacionamento_publico_list", {
+                parent: 'dashboard',
+                url: "/estacionamentos/publico",
+                templateUrl: "Scripts/app/estacionamento/filtroEstacionamentoPublico.html",
+                controller: 'filtroEstacionamentoPublicoController',
+                roles: []
+            });
+
+        $stateProvider
             .state("estacionamento_list", {
                 parent: 'dashboard',
                 url: "/estacionamentos",

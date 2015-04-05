@@ -1,15 +1,14 @@
 ﻿(function () {
     var filtroEstacionamentoController = function ($scope, Estacionamento, $state) {
-        $scope.filtroEstacionamento = {};
-
-        $scope.estacionamentos = Estacionamento.query();
+        $scope.filtroEstacionamento = {};        
 
         $scope.filtrarEstacionamentos = function (filtroEstacionamento) {
-            Estacionamento.filtrar(filtroEstacionamento).$promise.then(function (data) {                
+            Estacionamento.filtrar(filtroEstacionamento).$promise.then(function (data) {
                 $scope.estacionamentos = data;
             }, function (err) {
                 console.log(err);
             });
+
         };
 
         $scope.novoEstacionamento = function () {
@@ -38,6 +37,8 @@
                     });
             };
         };
+
+        $scope.filtrarEstacionamentos($scope.filtroEstacionamento);
     };
 
     angular.module("estacionamento").controller("filtroEstacionamentoController", ["$scope", "Estacionamento", "$state", filtroEstacionamentoController]);

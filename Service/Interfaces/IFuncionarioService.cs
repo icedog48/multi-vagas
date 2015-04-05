@@ -9,5 +9,6 @@ namespace Service.Interfaces
 {
     public interface IFuncionarioService : ICRUDService<Funcionario>
     {
+
     }
 }

@@ -228,12 +228,15 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamentoPublico.html" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamentoPublico-controller.js" />
     <Content Include="Scripts\app\funcionario\filtroFuncionario-controller.js" />
     <Content Include="Scripts\app\funcionario\filtroFuncionario.html" />
     <Content Include="Scripts\app\funcionario\formFuncionario-controller.js" />
     <Content Include="Scripts\app\funcionario\formFuncionario.html" />
     <Content Include="Scripts\app\funcionario\funcionario-service.js" />
     <Content Include="Scripts\app\funcionario\funcionario.js" />
+    <Content Include="Scripts\app\login\usuario-service.js" />
     <Content Include="Scripts\app\shared\perfil-service.js" />
     <Content Include="Scripts\app\vagas\vaga-service.js" />
     <Content Include="Scripts\app\vagas\filtroVagas-controller.js" />
@@ -281,11 +284,12 @@
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Attributes\MultivagasAuthorization.cs" />
     <Compile Include="Controllers\Attributes\NHSession.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\PerfisController.cs" />
     <Compile Include="Controllers\VagasController.cs" />
-    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AppController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -303,9 +307,12 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
+    <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />
     <Compile Include="ViewModels\PerfilCombo.cs" />
-    <Compile Include="ViewModels\UsuarioForm.cs" />
+    <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />
+    <Compile Include="ViewModels\UsuarioFormFuncionario.cs" />
     <Compile Include="ViewModels\VagaForm.cs" />
     <Compile Include="ViewModels\EstacionamentoCombo.cs" />
     <Compile Include="ViewModels\FuncionatrioTable.cs" />
@@ -367,6 +374,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppHarbor|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -7,14 +7,6 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public enum PerfilEnum
-    {
-        EQUIPE_MULTIVAGAS = 1,
-        ADMIN = 2,
-        FUNCIONARIO,
-        USUARIO
-    }
-
     public class Usuario : LogicalExclusionEntity
     {
         public virtual string Email { get; set; }
@@ -24,5 +16,10 @@ namespace Model
         public virtual string Login { get; set; }
 
         public virtual Perfil Perfil { get; set; }
+
+        public virtual bool TemPerfil(PerfilEnum perfilEnum)
+        {
+            return this.Perfil.Id == (int)perfilEnum;
+        }
     }
 }

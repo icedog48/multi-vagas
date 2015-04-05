@@ -7,22 +7,23 @@
     <a href="#" class="logo"><b>MULTI-VAGAS</b></a>
 
     <div class="nav notify-row pull-right">
-        <ul class="nav top-menu">
+        <ul class="nav top-menu" ng-show="isAuthenticated()">
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" name="menuSettings">
                     <i class="fa fa-cogs"></i>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                     <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
-                    
-                    <li><a ui-sref="estacionamento_list()" name="MenuEstacionamentos"> Estacionamentos </a></li>
-                    <li><a ui-sref="funcionario_list()" name="MenuFuncionarios"> Funcionarios </a></li>
-                    <li><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
 
+                    <li><a ui-sref="estacionamento_list()" name="MenuEstacionamentos"> Estacionamentos </a></li>
+                    <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="funcionario_list()" name="MenuFuncionarios"> Funcionarios </a></li>
+                    <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
                     <li> <a href="#" ng-click="logout()">Logout</a> </li>
                 </ul>
             </li>
         </ul>
+
+        <button ng-show="!isAuthenticated()" ui-sref="login()" name="btnLogin"> Login </button>
     </div>
 </header> 
             
@@ -30,7 +31,7 @@
 
     <section class="wrapper" ui-view></section>
 
-    <div id="loaderDiv" testeloader>
+    <div id="loaderDiv" loader>
         <img src="/Content/img/ajax_loader.gif" height="64" width="64" class="ajax-loader" />
     </div>
 

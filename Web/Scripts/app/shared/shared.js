@@ -6,7 +6,7 @@
 
     var USER_ROLES = {
         equipeMultivagas: 'equipe_multivagas', // Cadastra estacionamentos
-        admin: 'admin', // Gerencia estacionamentos
+        admin: 'administrador', // Gerencia estacionamentos
         funcionario: 'funcionario', // Registra entrada e saida de clientes
         cliente: 'cliente' // Consulta e reserva vagas
     };
@@ -81,7 +81,7 @@
         .constant("APP_CONFIG", APP_CONFIG)
         .constant("USER_ROLES", USER_ROLES)
         .config(["$httpProvider", config])
-        .directive("testeloader", ["$rootScope", loaderDirective])
+        .directive("loader", ["$rootScope", loaderDirective])
         .factory("httpInterceptor", ["$q", "$rootScope", "sessionService", httpInterceptor])
     ;
 }());

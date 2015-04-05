@@ -28,7 +28,7 @@
         };
 
         var atualizar = function (categoriaVaga) {
-            Vaga.update(categoriaVaga).$promise.then(function (data) {
+            Vaga.update({ id: categoriaVaga.Id }, categoriaVaga).$promise.then(function (data) {
                 mensagemSucesso();
             });
         };
@@ -48,8 +48,6 @@
 
         $scope.salvar = function (categoriaVagas)
         {
-            categoriaVagas.Estacionamento = categoriaVagas.Estacionamento.Id;
-
             if ($scope.novoCadastro) {
                 cadastrar(categoriaVagas);
             } else {

@@ -24,16 +24,16 @@ namespace Service.Filters
         public IQueryable<Estacionamento> Apply(IQueryable<Estacionamento> query)
         {
             if (!string.IsNullOrEmpty(CNPJ))
-                query = query.Where(estacionamento => estacionamento.CNPJ == CNPJ);
+                query = query.Where(estacionamento => estacionamento.CNPJ.Contains(CNPJ));
 
             if (!string.IsNullOrEmpty(RazaoSocial))
-                query = query.Where(estacionamento => estacionamento.RazaoSocial == RazaoSocial);
+                query = query.Where(estacionamento => estacionamento.RazaoSocial.Contains(RazaoSocial));
 
             if (!string.IsNullOrEmpty(UF))
-                query = query.Where(estacionamento => estacionamento.UF == UF);
+                query = query.Where(estacionamento => estacionamento.UF.Contains(UF));
 
             if (!string.IsNullOrEmpty(Cidade))
-                query = query.Where(estacionamento => estacionamento.Cidade == Cidade);
+                query = query.Where(estacionamento => estacionamento.Cidade.Contains(Cidade));
 
             return query;
         }

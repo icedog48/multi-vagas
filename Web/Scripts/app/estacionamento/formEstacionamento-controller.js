@@ -1,5 +1,5 @@
 ﻿(function () {
-    var formEstacionamentoController = function ($scope, Estacionamento, $state, $stateParams, $modal) {
+    var formEstacionamentoController = function ($scope, Estacionamento, $state, $stateParams, $modal, Usuario) {
 
         $scope.novoCadastro = (typeof ($stateParams.id) == 'undefined');
 
@@ -51,8 +51,31 @@
             }
         };
 
-        
+        var limparUsuario = function () {
+            var login = $scope.estacionamento.Usuario.Login;
+
+            $scope.estacionamento.Usuario = {};
+            $scope.estacionamento.Usuario.Login = login;
+            $scope.estacionamento.Usuario.Email = "";
+        }
+
+        $scope.carregarUsuario = function () {
+            Estacionamento.verificaLogin({ login: $scope.estacionamento.Usuario.Login }).$promise
+                .then(function (data) {
+                    if (typeof (data.Id) == "undefined") {
+                        limparUsuario();
+                    } else {
+                        $scope.estacionamento.Usuario = new Usuario(data);
+                    }                    
+                }, function (err) {
+                    limparUsuario();
+
+                    $scope.frmEstacionamento.Login.$invalid = true;
+
+                    alert(err.data.Message);
+                });
+        }
     };
 
-    angular.module("estacionamento").controller("formEstacionamentoController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", formEstacionamentoController]);
+    angular.module("estacionamento").controller("formEstacionamentoController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", "Usuario", formEstacionamentoController]);
 }());

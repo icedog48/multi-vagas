@@ -39,6 +39,13 @@ namespace Web.DependencyResolution.Registries
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
                 });
+
+            var usuario = new Usuario()
+            {
+                Perfil = new Perfil(PerfilEnum.USUARIO)
+            };
+
+            For<Usuario>().Use(usuario).Named("usuarioLogado");
         }
 
         #endregion

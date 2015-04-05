@@ -16,7 +16,7 @@ using Utils.Extensions;
 
 namespace Service
 {
-    public class CategoriaVagaService : CRUDLogicalExclusionService<CategoriaVaga>, ICategoriaVagaService
+    public class CategoriaVagaService : MultiVagasCRUDService<CategoriaVaga>, ICategoriaVagaService
     {
         private IRepository<Vaga> vagaRepository;
         private CategoriaVagaValidator categoriaVagaValidator;
@@ -25,9 +25,10 @@ namespace Service
             (
                 IRepository<CategoriaVaga> repository, 
                 IRepository<Vaga> vagaRepository,
-                CategoriaVagaValidator categoriaVagaValidator
+                CategoriaVagaValidator categoriaVagaValidator,
+                Usuario usuarioLogado
             )
-            : base(repository, categoriaVagaValidator)
+            : base(repository, categoriaVagaValidator, usuarioLogado)
         {
             this.vagaRepository = vagaRepository;
             this.categoriaVagaValidator = categoriaVagaValidator;
@@ -65,7 +66,23 @@ namespace Service
         {
             var ativo = (int)SituacaoRegistroEnum.ATIVO;
 
-            return repository.Items.Where(x => x.Estacionamento.SituacaoRegistro == ativo && x.SituacaoRegistro == ativo);
+            var query = repository.Items.Where(x => x.Estacionamento.SituacaoRegistro == ativo && x.SituacaoRegistro == ativo);
+
+            //Usuario ou Administrador podem listar todos os estacionamentos
+            var usuarioOUAdministrador = usuarioLogado.TemPerfil(PerfilEnum.EQUIPE_MULTIVAGAS) || usuarioLogado.TemPerfil(PerfilEnum.USUARIO);
+
+            if (usuarioOUAdministrador) return query;
+
+            query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Usuario.Id == usuarioLogado.Id);
+
+            return query;
+        }
+
+        public override void Update(CategoriaVaga categoriaVaga)
+        {
+            categoriaVaga.Vagas = vagaRepository.Items.Where(vaga => vaga.CategoriaVaga.Id == categoriaVaga.Id).ToList();
+
+            base.Update(categoriaVaga);
         }
     }
 

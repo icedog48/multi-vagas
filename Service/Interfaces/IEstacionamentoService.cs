@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service.Common.Interfaces;
+using Service.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Service.Interfaces
 {
     public interface IEstacionamentoService : ICRUDService<Estacionamento>
     {
-               
+        Usuario VerficaLogin(string login);
     }
 }

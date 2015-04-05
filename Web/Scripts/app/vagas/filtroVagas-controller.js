@@ -7,9 +7,6 @@
         $scope.filtroVagas = { Estacionamento: null, Descricao: ''};
 
         $scope.filtrarVagas = function (filtroVagas) {
-
-            filtroVagas.Estacionamento = filtroVagas.Estacionamento.Id;
-
             Vaga.filtrar(filtroVagas).$promise.then(function (data) {
                 $scope.vagas = data;
             });

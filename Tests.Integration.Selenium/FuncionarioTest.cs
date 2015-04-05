@@ -53,10 +53,7 @@ namespace Tests.Integration.Selenium
             ScreenTestHelper.FillTextBoxByName(driver, "DataAdmissao", DateTime.Now.ToString("dd/MM/yyyy"));
             ScreenTestHelper.FillTextBoxByName(driver, "Salario", "500,00");
 
-            var perfil = new SelectElement(driver.FindElement(By.Name("Perfil")));
-                perfil.SelectByIndex(1);
-
-            ScreenTestHelper.FillTextBoxByName(driver, "Email", "email@email.com.br");
+            
 
             var resultado = string.Empty;
 

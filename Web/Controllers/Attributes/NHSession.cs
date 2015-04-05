@@ -18,7 +18,7 @@ namespace Web.Controllers.Attributes
             var nhSession = container.GetInstance<ISession>();
 
             nhSession.BeginTransaction();
-
+            
             base.OnActionExecuting(actionContext);
         }
 

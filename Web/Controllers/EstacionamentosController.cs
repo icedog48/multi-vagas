@@ -12,19 +12,33 @@ using Web.Controllers.Attributes;
 using Model;
 using Service.Interfaces;
 using Service.Filters;
+using System.Security.Claims;
 
 
 namespace Web.Controllers
 {
     [NHSession]    
-    [Authorize]
     public class EstacionamentosController : ApiController
     {
         public IEstacionamentoService Service { get; set; }
 
-        public EstacionamentosController(IEstacionamentoService service)
+        public IUsuarioService UsuarioService { get; set; }
+
+        public string Senha { get; set; }
+
+        public bool UsuarioEquipeMultivagas()
+        {
+            var usuario = User as ClaimsPrincipal;
+
+            return usuario.Claims.Any(claim => claim.Type.Equals(ClaimTypes.Role) && claim.Value.Equals(PerfilEnum.EQUIPE_MULTIVAGAS.ToString()));
+        }
+
+        public EstacionamentosController(IEstacionamentoService service, IUsuarioService usuarioService)
         {
             this.Service = service;
+            this.UsuarioService = usuarioService;
+
+            this.Senha = "multivagas";
         }
 
         public IEnumerable<EstacionamentoTable> Get()
@@ -32,74 +46,71 @@ namespace Web.Controllers
             return Mapper.Map<IEnumerable<EstacionamentoTable>>(Service.GetAll());
         }
 
-        public Estacionamento Get(int id)
+        public EstacionamentoForm Get(int id)
         {
-
             try
             {
-                return this.Service.GetById(id);
+                var estacionamento = this.Service.GetById(id);
+
+                if (UsuarioEquipeMultivagas()) return Mapper.Map<EstacionamentoFormAdministrador>(estacionamento);
+
+                return Mapper.Map<EstacionamentoForm>(estacionamento);
             }
             catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+
+                throw new HttpResponseException(response);
             }
         }
 
-        public void Post(Estacionamento estacionamento)
+        [MultivagasAuthorize]
+        public void Post(EstacionamentoFormAdministrador estacionamentoForm)
         {
-            //var validationResult = Validator.Validate(estacionamento);
-
-            //if (!validationResult.IsValid)
-            //{
-            //    var response = new HttpResponseMessage(HttpStatusCode.PreconditionFailed)
-            //    {
-            //        Content = new StringContent(JsonConvert.SerializeObject(validationResult)),
-            //        ReasonPhrase = "Falha de validação."
-
-            //    };
-
-            //    throw new HttpResponseException(response);
-            //}
-
-            //Repository.Add(Mapper.Map<Model.Estacionamento>(estacionamento));
+            var estacionamento = Mapper.Map<Estacionamento>(estacionamentoForm);
 
             Service.Add(estacionamento);
         }
 
-        public void Put(int id, Estacionamento estacionamento)
+        [MultivagasAuthorize]
+        public void Put(int id, EstacionamentoFormAdministrador estacionamentoForm)
         {
-            //var validationResult = Validator.Validate(estacionamento);
+            var estacionamento = Mapper.Map<Estacionamento>(estacionamentoForm);
 
-            //if (!validationResult.IsValid)
-            //{
-            //    var response = new HttpResponseMessage(HttpStatusCode.PreconditionFailed)
-            //    {
-            //        Content = new StringContent(JsonConvert.SerializeObject(validationResult)),
-            //        ReasonPhrase = "Falha de validação."
-
-            //    };
-
-            //    throw new HttpResponseException(response);
-            //}
-
-            //Repository.Update(Mapper.Map<Model.Estacionamento>(estacionamento));
-
-            Service.Update(estacionamento);
+            Service.Update(estacionamento);   
         }
 
+        [MultivagasAuthorize]
         public void Delete(int id)
         {
-            //var estacionamento = Repository.Get(id);
-
-            //Repository.Remove(Mapper.Map<Model.Estacionamento>(estacionamento));
-
             Service.Remove(new Estacionamento() { Id = id });
         }
 
         [Route("api/estacionamentos/filtrar")]
         public IEnumerable<EstacionamentoTable> Filtrar(EstacionamentoFilter filtro) 
         {
-            return Mapper.Map<IEnumerable<EstacionamentoTable>>(Service.GetByFilter(filtro));
+            var estacionamentos = Service.GetByFilter(filtro);
+
+            return Mapper.Map<IEnumerable<EstacionamentoTable>>(estacionamentos);
+        }
+
+        [MultivagasAuthorize]
+        [Route("api/estacionamentos/verficalogin/{login}")]
+        [HttpGet]
+        public UsuarioFormEstacionamento VerficaLogin(string login)
+        {
+            try
+            {
+                Usuario usuario = Service.VerficaLogin(login);
+
+                return Mapper.Map<UsuarioFormEstacionamento>(usuario);                
+            }
+            catch (Exception ex)
+            {
+                var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message); //"O login informado não possui perfil de administrador."
+
+                throw new HttpResponseException(response);
+            }
         }
     }
 }

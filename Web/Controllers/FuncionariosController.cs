@@ -16,8 +16,8 @@ using Service.Filters;
 
 namespace Web.Controllers
 {
-    [NHSession]    
-    [Authorize]
+    [NHSession]
+    [MultivagasAuthorize]
     public class FuncionariosController : ApiController
     {
         public IFuncionarioService Service { get; set; }

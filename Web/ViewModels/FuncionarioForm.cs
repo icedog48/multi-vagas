@@ -48,6 +48,6 @@ namespace Web.ViewModels
 
         public string Obs { get; set; }
 
-        public UsuarioForm Usuario { get; set; }      
+        public UsuarioFormFuncionario Usuario { get; set; }      
     }
 }

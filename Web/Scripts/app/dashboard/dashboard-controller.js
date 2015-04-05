@@ -4,7 +4,8 @@
         $scope.logout = function () {
             authService.logout();
 
-            $state.go("login");
+            //TODO: Descobrir uma forma melhor de redirecionar para a lista publica fazendo reload da dashboard.
+            window.location.reload();
         };
     };
 

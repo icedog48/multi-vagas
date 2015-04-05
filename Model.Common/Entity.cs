@@ -8,5 +8,7 @@ namespace Model.Common
     public abstract class Entity
     {
         public virtual int Id { get; set; }
+
+        public virtual bool IsNew() { return this.Id == 0; }
     }
 }

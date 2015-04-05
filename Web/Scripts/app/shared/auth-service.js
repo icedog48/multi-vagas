@@ -30,6 +30,9 @@
                 authorizedRoles = [authorizedRoles];
             }
 
+            //Caso nao existam roles espeficicando acesso, esta autorizado.
+            if (authorizedRoles.length == 0) return true;
+
             var hasRole = false;
 
             authorizedRoles.forEach(function (role)

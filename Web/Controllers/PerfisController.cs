@@ -17,7 +17,7 @@ using Service.Filters;
 namespace Web.Controllers
 {
     [NHSession]
-    [Authorize]
+    [MultivagasAuthorize]
     public class PerfisController : ApiController
     {
         public IPerfilService Service { get; set; }

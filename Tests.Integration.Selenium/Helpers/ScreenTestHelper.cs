@@ -13,84 +13,71 @@ namespace Tests.Integration.Selenium.Helpers
     {
         public static void ClickElementByName(IWebDriver driver, string name)
         {
-            int i = 0;
-
-            while (i++ < 5)
+            WaitLoop(indice =>
             {
-                try
-                {
-                    var element = driver.FindElement(By.Name(name));
-                    
-                    element.Click();
+                var element = driver.FindElement(By.Name(name));
 
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Thread.Sleep(1000);
-                    continue;
-                }
-            }
+                element.Click();
+            });
         }
 
         public static void FillTextBoxByName(IWebDriver driver, string name, string value)
         {
-            int i = 0;
-
-            while (i++ < 5)
+            WaitLoop(indice =>
             {
-                try
-                {
-                    var textbox = driver.FindElement(By.Name(name));
-                    
-                    textbox.SendKeys(value);
+                var textbox = driver.FindElement(By.Name(name));
 
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Thread.Sleep(1000);
-                    continue;
-                }
-            }
+                textbox.SendKeys(value);
+            });
         }
-
+        
         public static void WaitForAlert(IWebDriver driver)
         {
-            int i = 0;
-
-            while (i++ < 5)
+            WaitLoop(indice =>
             {
-                try
-                {
-                    var alert = driver.SwitchTo().Alert();
-                    break;
-                }
-                catch (NoAlertPresentException e)
-                {
-                    Thread.Sleep(1000);
-                    continue;
-                }
-            }
-        }
+                var alert = driver.SwitchTo().Alert();
+            });
+        }       
 
         public static void WaitForElement(IWebDriver driver, string name)
         {
-            int i = 0;
+            WaitLoop(indice => 
+            {
+                var alert = driver.FindElement(By.Name(name));
+            });
+        }
 
-            while (i++ < 5)
+        #region WaitLoops
+
+        private static void WaitLoop(Action<int> code)
+        {
+            var i = 0;
+
+            var achou = false;
+
+            Exception exception = null;
+
+            while (i++ < 5 && !achou)
             {
                 try
                 {
-                    var alert = driver.FindElement(By.Name(name));
-                    break;
+                    code(i);
+
+                    achou = true;
                 }
-                catch (NoSuchElementException e)
+                catch (Exception e)
                 {
+                    exception = e;
                     Thread.Sleep(1000);
                     continue;
                 }
             }
+
+            if (!achou) throw new InvalidOperationException("Erro executando operação: " + code.Method.Name, exception);
         }
+
+        #endregion 
+    
+        public static Exception exception { get; set; }
     }
 }

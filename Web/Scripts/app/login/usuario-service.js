@@ -1,8 +1,8 @@
 ﻿(function () {
 
-    var Estacionamento = function ($resource, authService) {
+    var Usuario = function ($resource, authService) {
 
-        var resource = $resource('/api/estacionamentos/:id', { id: '@id' }, {
+        var resource = $resource('/api/Usuarios/:id', { id: '@id' }, {
 
             'update': {
                 method: 'PUT',
@@ -29,22 +29,22 @@
                 method: 'POST',
                 isArray: true,
                 headers: { 'Authorization': 'token' },
-                url: '/api/estacionamentos/filtrar'
+                url: '/api/Usuarios/filtrar'
             },
             'remove': {
                 method: 'DELETE',
                 headers: { 'Authorization': 'token' }
             },
-            'verificaLogin': {
-                url: 'api/estacionamentos/verficalogin/:login',
+            'getByLogin': {
+                method: 'GET',
                 headers: { 'Authorization': 'token' },
-                method: 'GET'
+                url: '/api/Usuarios/getByLogin/:login'
             },
         });
 
         return resource;
     };
 
-    angular.module("estacionamento").service("Estacionamento", ["$resource", "authService", Estacionamento]);
+    angular.module("login").service("Usuario", ["$resource", "authService", Usuario]);
 
 }());

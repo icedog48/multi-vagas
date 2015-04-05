@@ -12,23 +12,12 @@ using Xunit;
 
 namespace Tests.Integration.Selenium
 {
-    public class EstacionamentoTest
+    public class EstacionamentoTest : ScreenTest, IDisposable
     {
         [Fact(DisplayName="Como membro da equipe multivagas, devo poder cadastar um estacionamento")]
         public void ComoAdministradorDeveCadastrarEstacionamento ()
         {
-            var driver = new ChromeDriver();
-
-            driver.Navigate().GoToUrl("http://localhost:57625/");
-
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
-            wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnLogin")));
-
-            //Perfil Equipe Multivagas
-            ScreenTestHelper.FillTextBoxByName(driver, "Login", "admin");
-            ScreenTestHelper.FillTextBoxByName(driver, "Senha", "multivagas");
-
-            ScreenTestHelper.ClickElementByName(driver, "btnLogin");
+            FazerLoginComoEquipeMultivagas();
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnNovoEstacionamento")));
 
@@ -36,16 +25,24 @@ namespace Tests.Integration.Selenium
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnSalvar")));
 
-            ScreenTestHelper.FillTextBoxByName(driver, "CNPJ", DateTime.Now.ToString("ddMMyyyymm"));
-            ScreenTestHelper.FillTextBoxByName(driver, "RazaoSocial", "Teste " + DateTime.Now.ToString("ddMMyyyymmss"));
-            ScreenTestHelper.FillTextBoxByName(driver, "Telefone", "123456789");
-            ScreenTestHelper.FillTextBoxByName(driver, "Email", "email@email.com.br");
+            var CNPJ = DateTime.Now.ToString("ddMMyyyymm");
 
+            //Dados Empresariais
+            ScreenTestHelper.FillTextBoxByName(driver, "CNPJ", CNPJ);
+            ScreenTestHelper.FillTextBoxByName(driver, "RazaoSocial", "Estacionamento " + CNPJ);
+            ScreenTestHelper.FillTextBoxByName(driver, "Telefone", "912345678");
+            ScreenTestHelper.FillTextBoxByName(driver, "Email", CNPJ + "@estcionamento.com.br");
+
+            //Endereço
             ScreenTestHelper.FillTextBoxByName(driver, "CEP", "123456");
             ScreenTestHelper.FillTextBoxByName(driver, "Logradouro", "Rua Ulpiano dos Santos, 275");
             ScreenTestHelper.FillTextBoxByName(driver, "Bairro", "Bangu");
             ScreenTestHelper.FillTextBoxByName(driver, "Cidade", "Rio de Janeiro");
             ScreenTestHelper.FillTextBoxByName(driver, "UF", "RJ");
+
+            //Administrador
+            ScreenTestHelper.FillTextBoxByName(driver, "Login", CNPJ);
+            ScreenTestHelper.FillTextBoxByName(driver, "EmailUsuario", CNPJ + "@multivagas.com.br");
 
             var resultado = string.Empty;
 
@@ -68,10 +65,12 @@ namespace Tests.Integration.Selenium
                 throw ex;
             }
 
-            driver.Quit();
-
             Assert.Contains("Operação realizada com sucesso", resultado);
-            
+        }
+
+        public void Dispose()
+        {
+            driver.Quit();
         }
 
     }

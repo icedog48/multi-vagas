@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Common;
 using Service.Interfaces;
 using Storage;
 using System;
@@ -16,6 +17,8 @@ namespace Service
     {
         private IRepository<Usuario> repository;
 
+        public virtual string SenhaDefault { get; set; }
+
         public UsuarioService(IRepository<Usuario> repository)
         {
             this.repository = repository;
@@ -32,9 +35,11 @@ namespace Service
             return null;
         }
 
-        public void Registrar(Usuario usuario) 
+        public void RegistrarComSenhaDefault(Usuario usuario) 
         {
-            usuario.Senha = Encryption.Encrypt(usuario.Senha);
+            usuario.Senha = Encryption.Encrypt(SenhaDefault);
+
+            usuario.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
 
             repository.Add(usuario);
         }
@@ -55,12 +60,25 @@ namespace Service
             return list.First();
         }
 
-
         public void Atualizar(Usuario usuario)
         {
             usuario.Senha = Encryption.Encrypt(usuario.Senha);
 
             repository.Update(usuario);
+        }
+
+        public Usuario GetByLogin(string login)
+        {
+            var query = repository.Items.Where(usuario => usuario.Login == login);
+
+            if (query.Count() <= 0) return null;
+
+            return query.First();
+        }
+
+        public void Remove(Usuario usuario)
+        {
+            repository.Remove(usuario);
         }
     }
 }

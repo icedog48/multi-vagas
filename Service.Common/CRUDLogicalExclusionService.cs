@@ -59,7 +59,7 @@ namespace Service.Common
 
         public virtual T GetById(int id)
         {
-            var list = from item in GetActiveItems() 
+            var list = from item in GetActiveItems()
                        where item.Id.Equals(id)
                        select item;
 

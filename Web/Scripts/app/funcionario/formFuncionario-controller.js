@@ -48,10 +48,6 @@
             $scope.estacionamentos = data;
         });
 
-        Perfil.perfisFuncionario().$promise.then(function (data) {
-            $scope.perfis = data;
-        });
-
         $scope.salvar = function (funcionario)
         {
             if ($scope.novoCadastro) {

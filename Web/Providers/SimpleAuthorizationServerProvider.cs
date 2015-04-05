@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
+using Model;
 using Newtonsoft.Json;
 using Service.Interfaces;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using Web.App_Start;
 
 namespace WebApiAuthentication.Providers
 {
@@ -41,9 +43,16 @@ namespace WebApiAuthentication.Providers
                 return;
             }
 
+            var container = StructuremapMvc.StructureMapDependencyScope.Container;
+
+            container.Configure(c =>
+            {
+                c.For<Usuario>().Use(Usuario).Named("usuarioLogado");
+            });
+
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim(ClaimTypes.Name, this.Usuario.Login));
-            identity.AddClaim(new Claim(ClaimTypes.Role, this.Usuario.Perfil.Nome));
+                identity.AddClaim(new Claim(ClaimTypes.Name, this.Usuario.Login));
+                identity.AddClaim(new Claim(ClaimTypes.Role, this.Usuario.Perfil.Nome.ToUpper()));
 
             context.Validated(identity);
         }

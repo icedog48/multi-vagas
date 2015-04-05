@@ -16,8 +16,8 @@ using Service.Filters;
 
 namespace Web.Controllers
 {
-    [NHSession]    
-    [Authorize]
+    [NHSession]
+    [MultivagasAuthorize]
     public class VagasController : ApiController
     {
         public ICategoriaVagaService Service { get; set; }
