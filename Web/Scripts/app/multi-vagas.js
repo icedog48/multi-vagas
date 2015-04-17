@@ -58,7 +58,8 @@
         "funcionario",
         "ui.router",
         "frapontillo.bootstrap-switch",
-        "ui.bootstrap"
+        "ui.bootstrap",
+        "movimentacao"
     ])
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
