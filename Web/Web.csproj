@@ -292,6 +292,7 @@
     <Compile Include="Controllers\Attributes\NHSession.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\PerfisController.cs" />
+    <Compile Include="Controllers\MovimentacoesController.cs" />
     <Compile Include="Controllers\VagasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AppController.cs">
@@ -314,14 +315,18 @@
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />
+    <Compile Include="ViewModels\CategoriaVagaCombo.cs" />
+    <Compile Include="ViewModels\VagaCombo.cs" />
     <Compile Include="ViewModels\PerfilCombo.cs" />
     <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />
     <Compile Include="ViewModels\UsuarioFormFuncionario.cs" />
+    <Compile Include="ViewModels\MovimentacaoForm.cs" />
     <Compile Include="ViewModels\VagaForm.cs" />
     <Compile Include="ViewModels\EstacionamentoCombo.cs" />
     <Compile Include="ViewModels\FuncionatrioTable.cs" />
     <Compile Include="ViewModels\EstacionamentoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MovimentacaoTable.cs" />
     <Compile Include="ViewModels\VagaTable.cs" />
   </ItemGroup>
   <ItemGroup>

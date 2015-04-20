@@ -22,6 +22,7 @@ namespace Service
         public UsuarioService(IRepository<Usuario> repository)
         {
             this.repository = repository;
+            this.SenhaDefault = "multivagas";
         }
 
         public Usuario Login(string usuario, string senha)

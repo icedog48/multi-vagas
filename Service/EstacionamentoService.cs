@@ -70,14 +70,15 @@ namespace Service
             base.Update(estacionamento);
 
             //Caso o usuário tenha sido alterado, remove o antigo
-            if (ExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
+            if (PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
         }
 
-        protected virtual bool ExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)
+        protected virtual bool PossoExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)
         {
             var administraOutrosEstacionamentos = repository.Items.Any(x => x.Usuario.Id == usuarioAntigo.Id);
-            
-            return !administraOutrosEstacionamentos; // Só posso excluir o usuario caso ele nao administre outros estacionamentos.
+
+            // Só posso excluir o usuario caso ele nao administre outros estacionamentos.
+            return !administraOutrosEstacionamentos && usuarioAntigo.TemPerfil(PerfilEnum.ADMIN); 
         }
 
         protected virtual Usuario ObterAdministradorAntigo(int estacionamentoId)

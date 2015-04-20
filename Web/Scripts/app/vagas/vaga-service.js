@@ -35,6 +35,20 @@
                 method: 'DELETE',
                 headers: { 'Authorization': 'token' }
             },
+
+            'categoriasVaga': {
+                method: 'GET',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/vagas/categorias'
+            },
+
+            'vagasDisponiveis' : {
+                method: 'GET',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/vagas/disponiveis/:id'
+            },
         });
 
         return resource;

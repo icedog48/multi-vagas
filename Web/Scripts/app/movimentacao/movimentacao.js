@@ -6,7 +6,7 @@
             .state("registrar_entrada", {
                 parent: 'dashboard',
                 url: "/movimentacao/entrada",
-                templateUrl: "Scripts/app/movimentacao/formRegistrarEntrada.html",
+                templateUrl: "Scripts/app/movimentacao/formRegjstrarEntrada.html",
                 controller: 'formRegistrarEntradaController',
                 roles: [USER_ROLES.funcionario]
             });
@@ -19,7 +19,7 @@
             "shared",
             "ui.router",
             "ngResource",
-            "estacionamento"]
-        )
+            "estacionamento"
+        ])
         .config(["$stateProvider", "USER_ROLES", "$resourceProvider", config])
 }());

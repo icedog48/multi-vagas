@@ -73,7 +73,7 @@ namespace Web.App_Start
 
             #endregion
 
-            #region CategoriaVaga
+            #region Categoria Vaga
 
             Mapper.CreateMap<CategoriaVaga, VagaForm>()
                 .ForMember(viewModel => viewModel.Quantidade, map => map.MapFrom(model => model.Vagas.Count()))
@@ -88,6 +88,10 @@ namespace Web.App_Start
                 .ForMember(viewModel => viewModel.Vagas         , map => map.MapFrom(model => model.Vagas.Count()))
                 .ForMember(viewModel => viewModel.Categoria     , map => map.MapFrom(model => model.Descricao))
                 ;
+
+            Mapper.CreateMap<Vaga, VagaCombo>();
+
+            Mapper.CreateMap<CategoriaVaga, CategoriaVagaCombo>();
             
             #endregion
 

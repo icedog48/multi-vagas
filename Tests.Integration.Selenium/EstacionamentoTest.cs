@@ -14,7 +14,7 @@ namespace Tests.Integration.Selenium
 {
     public class EstacionamentoTest : ScreenTest, IDisposable
     {
-        [Fact(DisplayName="Como membro da equipe multivagas, devo poder cadastar um estacionamento")]
+        [Fact(DisplayName="Cadastrar Estacionamento - Como membro da equipe multivagas, devo poder cadastar um estacionamento")]
         public void ComoAdministradorDeveCadastrarEstacionamento ()
         {
             FazerLoginComoEquipeMultivagas();

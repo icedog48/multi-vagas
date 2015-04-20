@@ -64,5 +64,19 @@ namespace Web.Controllers
         {
             return Mapper.Map<IEnumerable<VagaTable>>(Service.GetByFilter(filtro));
         }
+
+        [HttpGet]
+        [Route("api/vagas/disponiveis/{id}")]
+        public IEnumerable<VagaCombo> Disponiveis(int id)
+        {
+            return Mapper.Map<IEnumerable<VagaCombo>>(Service.VagasDisponiveis(id));
+        }
+
+        [HttpGet]
+        [Route("api/vagas/categorias")]
+        public IEnumerable<CategoriaVagaCombo> Categorias()
+        {
+            return Mapper.Map<IEnumerable<CategoriaVagaCombo>>(Service.GetAll());
+        } 
     }
 }

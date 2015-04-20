@@ -19,18 +19,21 @@ namespace Service
     public class CategoriaVagaService : MultiVagasCRUDService<CategoriaVaga>, ICategoriaVagaService
     {
         private IRepository<Vaga> vagaRepository;
+        private IRepository<Funcionario> funcionarioRepository;
         private CategoriaVagaValidator categoriaVagaValidator;
 
         public CategoriaVagaService
             (
                 IRepository<CategoriaVaga> repository, 
                 IRepository<Vaga> vagaRepository,
+                IRepository<Funcionario> funcionarioRepository,
                 CategoriaVagaValidator categoriaVagaValidator,
                 Usuario usuarioLogado
             )
             : base(repository, categoriaVagaValidator, usuarioLogado)
         {
             this.vagaRepository = vagaRepository;
+            this.funcionarioRepository = funcionarioRepository;
             this.categoriaVagaValidator = categoriaVagaValidator;
         }
 
@@ -73,7 +76,9 @@ namespace Service
 
             if (usuarioOUAdministrador) return query;
 
-            query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Usuario.Id == usuarioLogado.Id);
+            var funcionario = funcionarioRepository.Items.Where(x => x.Usuario.Id == usuarioLogado.Id).FirstOrDefault();
+
+            query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Id == funcionario.Estacionamento.Id);
 
             return query;
         }
@@ -83,6 +88,12 @@ namespace Service
             categoriaVaga.Vagas = vagaRepository.Items.Where(vaga => vaga.CategoriaVaga.Id == categoriaVaga.Id).ToList();
 
             base.Update(categoriaVaga);
+        }
+
+
+        public IEnumerable<Vaga> VagasDisponiveis(int categoriaId)
+        {
+            return vagaRepository.Items.Where(vaga => vaga.Disponivel && vaga.CategoriaVaga.Id == categoriaId);
         }
     }
 

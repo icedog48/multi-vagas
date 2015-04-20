@@ -16,8 +16,12 @@
                     <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
 
                     <li><a ui-sref="estacionamento_list()" name="MenuEstacionamentos"> Estacionamentos </a></li>
+                    
                     <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="funcionario_list()" name="MenuFuncionarios"> Funcionarios </a></li>
                     <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
+
+                    <li ng-show="isAuthorized(userRoles.funcionario)"><a ui-sref="registrar_entrada()" name="MenuRegistrarEntrada"> Registrar Entrada </a></li>
+                    
                     <li> <a href="#" ng-click="logout()">Logout</a> </li>
                 </ul>
             </li>
