@@ -18,38 +18,63 @@ namespace Service
 {
     public class MovimentacaoService : MultiVagasCRUDService<Movimentacao>, IMovimentacaoService
     {
-        private IRepository<Funcionario> funcionarioRepository;
+        private IFuncionarioService funcionarioService;
+        private IRepository<Vaga> vagaRepository;
 
-        public MovimentacaoService(IRepository<Movimentacao> repository, MovimentacaoValidator validator, Usuario usuarioLogado, IRepository<Funcionario> funcionarioRepository)
+        public MovimentacaoService(IRepository<Movimentacao> repository, MovimentacaoValidator validator, Usuario usuarioLogado, IFuncionarioService funcionarioService, IRepository<Vaga> vagaRepository)
             : base(repository, validator, usuarioLogado)
         {
-            this.funcionarioRepository = funcionarioRepository;
+            this.funcionarioService = funcionarioService;
+            this.vagaRepository = vagaRepository;
         }
 
         protected override IQueryable<Movimentacao> GetActiveItems()
         {
-            var ativo = (int)SituacaoRegistroEnum.ATIVO;
-
-            var query = repository.Items.Where(x => x.SituacaoRegistro == ativo);
+            var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
 
             return query;
         }
 
         public void RegistrarEntrada(Movimentacao movimentacao)
         {
-            var funcionario = funcionarioRepository.Items.Where(x => x.Usuario.Id == usuarioLogado.Id).FirstOrDefault();
+            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
-            movimentacao.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
-            movimentacao.FuncionarioEntrada = funcionario;
-            movimentacao.Entrada = DateTime.Now;
-            movimentacao.Ticket = DateTime.Now.ToString("yyyyMMddHHmmss");
+            movimentacao.Vaga = GetVagaById(movimentacao.Vaga.Id);
 
-            repository.Add(movimentacao);
+            movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
+
+            this.Add(movimentacao);
+        }
+
+        private Vaga GetVagaById(int vagaId)
+        {
+            return vagaRepository.Items.Where(x => x.Id == vagaId).FirstOrDefault();
         }
 
         public void RegistrarSaida(Movimentacao movimentacao)
         {
-            throw new NotImplementedException();
+            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
+
+            movimentacao.Vaga = GetVagaById(movimentacao.Vaga.Id);
+
+            movimentacao.RegistrarSaida(DateTime.Now, funcionario);
+
+            this.Update(movimentacao);
+        }
+
+
+        public void AtualizarVaga(Movimentacao movimentacao, Vaga novaVaga)
+        {
+            var vagaAntiga = movimentacao.Vaga;
+                vagaAntiga.Disponivel = true;
+            vagaRepository.Update(vagaAntiga);
+
+            novaVaga.Disponivel = false;
+            vagaRepository.Update(novaVaga);
+
+            movimentacao.Vaga = novaVaga;
+
+            repository.Update(movimentacao);
         }
     }
 }

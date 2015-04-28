@@ -1,0 +1,66 @@
+﻿<form name="frmFiltroMovimentacao" class="form-horizontal style-form" role="form" ng-submit="filtrar(filtroMovimentacao)">
+    <!--Dados Empresariais-->
+    <div class="form-panel">
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Filtro de movimentações </h4>
+        <div class="row mt">
+            <div class="col-sm-12 col-md-12">
+
+                <!--Ticket-->
+                <div class="col-sm-3 col-md-3">
+                    <label class="control-label">Ticket</label>
+                    <input type="text" class="form-control" name="Ticket" ng-model="filtroMovimentacao.Ticket">
+                </div>
+               
+                <!--Placa-->
+                <div class="col-sm-3 col-md-3">
+                    <label class="control-label">Placa</label>
+                    <input type="text" class="form-control" name="Placa" ng-model="filtroMovimentacao.Placa">
+                </div>
+            </div>
+        </div>
+        
+        <!--Botoes-->
+        <div class="row mt">
+            <div class="col-sm-12 col-md-12 form-buttons">
+                <button type="submit" class="btn btn-round btn-primary pull-right"><i class="fa fa-filter"></i> Pesquisar </button>
+            </div>
+        </div>
+    </div>
+
+    <!--Lista de estacionamentos-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Placa</th>
+                        <th>Vaga</th>
+                        <th>Entrada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="movimentacao in movimentacoes">
+
+                        <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Ticket"></td>
+                        <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Placa"></td>
+                        <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Vaga"></td>
+                        <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Entrada"></td>
+
+                        <td align="center">
+                            <a ui-sref="registrar_saida({ id: movimentacao.Id })"> <i class="fa fa-times fa-2x"></i> </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" name="btnNovaMovimentacao" ng-click="novaMovimentacao()"><i class="fa fa-plus"></i> Novo </button>
+        </div>
+    </div>
+</form>
+

@@ -1,8 +1,14 @@
 ﻿(function () {
 
-    var mainController = function ($scope, authService, USER_ROLES) {
+    var mainController = function ($scope, authService, USER_ROLES, sessionService) {
 
-        $scope.currentUser = null;
+        if (authService.isAuthenticated()) { //Caso o usuario esteja autenticado, recupera os dados da sessao
+            $scope.currentUser = sessionService;
+        }
+        else {
+            $scope.currentUser = null;
+        }
+        
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = authService.isAuthorized;
 
@@ -23,12 +29,12 @@
             controller: [
                       '$state',
               function ($state) {
-                  $state.transitionTo('estacionamento_publico_list', null, { 'reload': true });
+                  $state.go('movimentacao_list');
               }]
         });
     };
 
-    var runFunction = function ($rootScope, $state, authService, $location) {
+    var runFunction = function ($rootScope, $state, authService, $location, USER_ROLES) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             
@@ -36,13 +42,24 @@
 
             var autenticado = authService.isAuthenticated();
 
-            var autorizado = authService.isAuthorized(authorizedRoles);            
+            var autorizado = authService.isAuthorized(authorizedRoles);
 
-            if (!(autenticado || autorizado)) {
+            if (!autenticado && (toState.name != "estacionamento_publico_list" && toState.name != "login")) {
                 event.preventDefault();
 
-                //$state.go('estacionamento_publico_list');
-                $state.transitionTo('estacionamento_publico_list', null, { 'reload': true });
+                $state.go('estacionamento_publico_list');
+            }
+
+            if (autenticado && !autorizado) {
+                event.preventDefault();                
+
+                if (authService.isAuthorized([USER_ROLES.equipeMultivagas, USER_ROLES.admin])) {
+                    $state.go('estacionamento_list');
+                } else if (authService.isAuthorized(USER_ROLES.funcionario)) {
+                    $state.go('movimentacao_list');
+                } else {
+                    $state.go('estacionamento_publico_list');
+                }
             }
         });
     };
@@ -64,10 +81,8 @@
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])
 
-    .controller("mainController", ["$scope", "authService", "USER_ROLES", mainController])
+    .controller("mainController", ["$scope", "authService", "USER_ROLES", "sessionService", mainController])
 
-    
-
-    .run(["$rootScope", "$state", "authService", "$location", runFunction]);
+    .run(["$rootScope", "$state", "authService", "$location", "USER_ROLES", runFunction]);
 
 }());

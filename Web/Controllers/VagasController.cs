@@ -27,42 +27,18 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public IEnumerable<VagaTable> Get()
-        {
-            return Mapper.Map<IEnumerable<VagaTable>>(Service.GetAll());
-        }
-
-        public VagaForm Get(int id)
+        [HttpGet]
+        [Route("api/vagas/{id}")]
+        public VagaCombo Get(int id)
         {
             try
             {
-                return Mapper.Map<VagaForm>(this.Service.GetById(id));
+                return Mapper.Map<VagaCombo>(this.Service.GetVagaById(id));
             }
             catch (Exception ex)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-        }
-
-        public void Post(VagaForm vaga)
-        {
-            Service.Add(Mapper.Map<CategoriaVaga>(vaga), vaga.Quantidade);
-        }
-
-        public void Put(int id, VagaForm vaga)
-        {
-            Service.Update(Mapper.Map<CategoriaVaga>(vaga));
-        }
-
-        public void Delete(int id)
-        {
-            Service.Remove(new CategoriaVaga() { Id = id });
-        }
-
-        [Route("api/vagas/filtrar")]
-        public IEnumerable<VagaTable> Filtrar(CategoriaVagaFilter filtro) 
-        {
-            return Mapper.Map<IEnumerable<VagaTable>>(Service.GetByFilter(filtro));
         }
 
         [HttpGet]

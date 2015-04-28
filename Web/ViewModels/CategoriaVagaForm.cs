@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class VagaForm
+    public class CategoriaVagaForm
     {
         public int Id { get; set; }
 

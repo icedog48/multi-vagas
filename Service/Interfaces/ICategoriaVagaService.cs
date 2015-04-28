@@ -13,5 +13,7 @@ namespace Service.Interfaces
         void Add(CategoriaVaga categoria, int vagas);
 
         IEnumerable<Vaga> VagasDisponiveis(int categoriaId);
+
+        Vaga GetVagaById(int id);
     }
 }

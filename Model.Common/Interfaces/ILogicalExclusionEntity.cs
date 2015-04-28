@@ -8,6 +8,6 @@ namespace Model.Common.Interfaces
 {
     public interface ILogicalExclusionEntity
     {
-        int SituacaoRegistro { get; set; }
+        SituacaoRegistroEnum SituacaoRegistro { get; set; }
     }
 }

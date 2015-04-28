@@ -1,13 +1,13 @@
 ﻿(function () {
-    var formVagasController = function ($scope, $stateParams, Vaga, $state, Estacionamento) {
+    var formVagasController = function ($scope, $stateParams, CategoriaVaga, $state, Estacionamento) {
 
         var novoCadastro = (typeof ($stateParams.id) == 'undefined');
 
         var categoriaVaga = {};
 
         var carregarDados = function (vagaId) {
-            Vaga.get({ id: vagaId }).$promise.then(function (data) {                
-                $scope.categoriaVaga = new Vaga(data);
+            CategoriaVaga.get({ id: vagaId }).$promise.then(function (data) {
+                $scope.categoriaVaga = new CategoriaVaga(data);
             }, function (errResponse) {
                 alert('Vaga não encontrada.');
 
@@ -22,19 +22,19 @@
         };
 
         var cadastrar = function (categoriaVaga) {
-            Vaga.add(categoriaVaga).$promise.then(function (data) {
+            CategoriaVaga.add(categoriaVaga).$promise.then(function (data) {
                 mensagemSucesso();
             });
         };
 
         var atualizar = function (categoriaVaga) {
-            Vaga.update({ id: categoriaVaga.Id }, categoriaVaga).$promise.then(function (data) {
+            CategoriaVaga.update({ id: categoriaVaga.Id }, categoriaVaga).$promise.then(function (data) {
                 mensagemSucesso();
             });
         };
 
         if (novoCadastro) {
-            $scope.categoriaVaga = new Vaga();
+            $scope.categoriaVaga = new CategoriaVaga();
         } else {
             carregarDados($stateParams.id);
         }
@@ -56,5 +56,5 @@
         };
     };
 
-    angular.module("vagas").controller("formVagasController", ["$scope", "$stateParams", "Vaga", "$state", "Estacionamento", formVagasController]);
+    angular.module("vagas").controller("formVagasController", ["$scope", "$stateParams", "CategoriaVaga", "$state", "Estacionamento", formVagasController]);
 }());

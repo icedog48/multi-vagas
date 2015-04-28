@@ -14,6 +14,11 @@ namespace Model.Common
 
     public abstract class LogicalExclusionEntity : Entity, ILogicalExclusionEntity
     {
-        public virtual int SituacaoRegistro { get; set; }
+        public LogicalExclusionEntity()
+        {
+            this.SituacaoRegistro = SituacaoRegistroEnum.ATIVO;
+        }
+
+        public virtual SituacaoRegistroEnum SituacaoRegistro { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace Model
 {
     public class Movimentacao : LogicalExclusionEntity
     {
+
         public virtual string Ticket { get; set; }
                 
         public virtual DateTime Entrada { get; set; }
@@ -28,5 +29,21 @@ namespace Model
         public virtual DateTime? Saida { get; set; }
 
         public virtual decimal? ValorPago { get; set; }
+
+        public virtual void RegistrarEntrada(DateTime entrada, Funcionario funcionario) 
+        {
+            this.FuncionarioEntrada = funcionario;
+
+            this.Entrada = entrada;
+            this.Ticket = entrada.ToString("yyyyMMddHHmmss");
+            this.Vaga.Disponivel = false;
+        }
+
+        public virtual void RegistrarSaida(DateTime saida, Funcionario funcionario)
+        {
+            this.FuncionarioSaida = funcionario;
+            this.Saida = saida;
+            this.Vaga.Disponivel = true;
+        }
     }
 }

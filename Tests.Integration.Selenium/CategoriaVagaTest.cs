@@ -48,9 +48,10 @@ namespace Tests.Integration.Selenium
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
 
             var categoria = DateTime.Now.ToString("ddMMyyyymm");
+            var sigla = DateTime.Now.ToString("mmss");
 
             ScreenTestHelper.FillTextBoxByName(driver, "Descricao", "Categoria " + categoria);
-            ScreenTestHelper.FillTextBoxByName(driver, "Sigla", "CA");
+            ScreenTestHelper.FillTextBoxByName(driver, "Sigla", sigla);
             ScreenTestHelper.FillTextBoxByName(driver, "Quantidade", "10");
             ScreenTestHelper.FillTextBoxByName(driver, "ValorHora", "5,00");
 

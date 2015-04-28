@@ -32,11 +32,13 @@ namespace Web.Controllers
             return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetAll());
         }
 
-        public MovimentacaoForm Get(int id)
+        [HttpGet]
+        [Route("api/movimentacoes/{id}")]
+        public MovimentacaoEntradaForm Get(int id)
         {
             try
             {
-                return Mapper.Map<MovimentacaoForm>(this.Service.GetById(id));
+                return Mapper.Map<MovimentacaoEntradaForm>(this.Service.GetById(id));
             }
             catch (Exception ex)
             {
@@ -45,13 +47,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public void RegistrarEntrada(MovimentacaoForm vaga)
+        public void RegistrarEntrada(MovimentacaoEntradaForm vaga)
         {
             Service.RegistrarEntrada(Mapper.Map<Movimentacao>(vaga));
         }
 
         [HttpPut]
-        public void RegistrarSaida(int id, MovimentacaoForm vaga)
+        public void RegistrarSaida(int id, MovimentacaoSaidaForm vaga)
         {
             Service.RegistrarSaida(Mapper.Map<Movimentacao>(vaga));
         }
@@ -61,10 +63,19 @@ namespace Web.Controllers
             Service.Remove(new Movimentacao() { Id = id });
         }
 
-        [Route("api/vagas/filtrar")]
+        [Route("api/movimentacoes/filtrar")]
         public IEnumerable<MovimentacaoTable> Filtrar(MovimentacaoFilter filtro) 
         {
             return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetByFilter(filtro));
+        }
+
+        [HttpPut]
+        [Route("api/movimentacoes/{id}")]
+        public void AtualizarVaga(int id, int vagaId)
+        {
+            var movimentacao = Service.GetById(id);                
+
+            Service.AtualizarVaga(movimentacao, Mapper.Map<Vaga>(vagaId));
         }
     }
 }

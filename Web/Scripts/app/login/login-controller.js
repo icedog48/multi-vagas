@@ -8,10 +8,13 @@
 
         $scope.login = function (credentials) {
             authService.login(credentials).then(function (user) {
-
                 $scope.setCurrentUser(user);
 
-                $state.go("estacionamento_list");
+                if (authService.isAuthorized($scope.userRoles.funcionario)) {
+                    $state.go('movimentacao_list');
+                } else {
+                    $state.go('estacionamento_list');
+                }
 
             }, function (err) {
 

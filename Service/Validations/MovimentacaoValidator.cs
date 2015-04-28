@@ -17,6 +17,15 @@ namespace Service.Validations
         public MovimentacaoValidator(IRepository<Movimentacao> repository)
         {
             this.repository = repository;
+
+            RuleFor(movimentacao => movimentacao.Placa)
+                .NotEmpty()
+                .Must(NaoRegistrarEntradaSemSaida);
+        }
+
+        private bool NaoRegistrarEntradaSemSaida(Movimentacao movimentacao, string placa)
+        {
+            return !repository.Items.Any(x => x.Placa == placa && x.Id != movimentacao.Id && x.Saida == null);
         }
     }
 }

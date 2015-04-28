@@ -18,12 +18,14 @@ namespace Service
 {
     public class EstacionamentoService : MultiVagasCRUDService<Estacionamento>, IEstacionamentoService
     {
-        private IUsuarioService usuarioService;        
+        private IUsuarioService usuarioService;
+        private IFuncionarioService funcionarioService;
 
-        public EstacionamentoService(IRepository<Estacionamento> repository, EstacionamentoValidator validator, IUsuarioService usuarioService, Usuario usuarioLogado)
+        public EstacionamentoService(IRepository<Estacionamento> repository, EstacionamentoValidator validator, IUsuarioService usuarioService, IFuncionarioService funcionarioService, Usuario usuarioLogado)
             : base(repository, validator, usuarioLogado)
         {
             this.usuarioService = usuarioService;
+            this.funcionarioService = funcionarioService;
         }    
 
         protected virtual void RegistrarAdministrador(Usuario obj)
@@ -35,14 +37,18 @@ namespace Service
 
         protected override IQueryable<Estacionamento> GetActiveItems()
         {
-            var query = repository.Items.Where(x => x.SituacaoRegistro == (int)SituacaoRegistroEnum.ATIVO);;
+            var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);            
 
-            //Usuario ou Administrador podem listar todos os estacionamentos
-            var usuarioOUAdministrador = usuarioLogado.TemPerfil(PerfilEnum.EQUIPE_MULTIVAGAS) || usuarioLogado.TemPerfil(PerfilEnum.USUARIO);
+            if (usuarioLogado.TemPerfil(PerfilEnum.ADMIN))
+            {
+                query = query.Where(estacionamento => estacionamento.Usuario.Id == usuarioLogado.Id);
+            }
+            else if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO))
+            {
+                var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
-            if (usuarioOUAdministrador) return query;
-
-            query = query.Where(estacionamento => estacionamento.Usuario.Id == usuarioLogado.Id);
+                query = query.Where(estacionamento => estacionamento.Id == funcionario.Estacionamento.Id);
+            }
 
             return query;
         }

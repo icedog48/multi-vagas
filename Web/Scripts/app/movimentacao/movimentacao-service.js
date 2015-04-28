@@ -42,11 +42,16 @@
                 headers: { 'Authorization': 'token' },
                 method: 'POST'
             },
+
+            'atualizarVaga': {
+                method: 'PUT',
+                headers: { 'Authorization': 'token' }
+            },
         });
 
         return resource;
     };
 
-    angular.module("Movimentacao").service("Movimentacao", ["$resource", "authService", Movimentacao]);
+    angular.module("movimentacao").service("Movimentacao", ["$resource", "authService", Movimentacao]);
 
 }());

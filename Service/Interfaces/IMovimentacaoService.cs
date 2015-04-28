@@ -13,5 +13,7 @@ namespace Service.Interfaces
         void RegistrarEntrada(Movimentacao movimentacao);
 
         void RegistrarSaida(Movimentacao movimentacao);
+
+        void AtualizarVaga(Movimentacao movimentacao, Vaga vaga);
     }
 }

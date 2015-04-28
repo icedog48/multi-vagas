@@ -19,21 +19,21 @@ namespace Service
     public class CategoriaVagaService : MultiVagasCRUDService<CategoriaVaga>, ICategoriaVagaService
     {
         private IRepository<Vaga> vagaRepository;
-        private IRepository<Funcionario> funcionarioRepository;
+        private IFuncionarioService funcionarioService;
         private CategoriaVagaValidator categoriaVagaValidator;
 
         public CategoriaVagaService
             (
                 IRepository<CategoriaVaga> repository, 
                 IRepository<Vaga> vagaRepository,
-                IRepository<Funcionario> funcionarioRepository,
+                IFuncionarioService funcionarioService,
                 CategoriaVagaValidator categoriaVagaValidator,
                 Usuario usuarioLogado
             )
             : base(repository, categoriaVagaValidator, usuarioLogado)
         {
             this.vagaRepository = vagaRepository;
-            this.funcionarioRepository = funcionarioRepository;
+            this.funcionarioService = funcionarioService;
             this.categoriaVagaValidator = categoriaVagaValidator;
         }
 
@@ -67,18 +67,21 @@ namespace Service
 
         protected override IQueryable<CategoriaVaga> GetActiveItems()
         {
-            var ativo = (int)SituacaoRegistroEnum.ATIVO;
+            var ativo = SituacaoRegistroEnum.ATIVO;
 
             var query = repository.Items.Where(x => x.Estacionamento.SituacaoRegistro == ativo && x.SituacaoRegistro == ativo);
 
-            //Usuario ou Administrador podem listar todos os estacionamentos
-            var usuarioOUAdministrador = usuarioLogado.TemPerfil(PerfilEnum.EQUIPE_MULTIVAGAS) || usuarioLogado.TemPerfil(PerfilEnum.USUARIO);
+            if (usuarioLogado.TemPerfil(PerfilEnum.ADMIN))
+            {
+                query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Usuario.Id == usuarioLogado.Id);
+            }
 
-            if (usuarioOUAdministrador) return query;
+            if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO))
+            {
+                var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
-            var funcionario = funcionarioRepository.Items.Where(x => x.Usuario.Id == usuarioLogado.Id).FirstOrDefault();
-
-            query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Id == funcionario.Estacionamento.Id);
+                query = query.Where(categoriaVaga => categoriaVaga.Estacionamento.Id == funcionario.Estacionamento.Id);
+            }
 
             return query;
         }
@@ -94,6 +97,12 @@ namespace Service
         public IEnumerable<Vaga> VagasDisponiveis(int categoriaId)
         {
             return vagaRepository.Items.Where(vaga => vaga.Disponivel && vaga.CategoriaVaga.Id == categoriaId);
+        }
+
+
+        public Vaga GetVagaById(int id)
+        {
+            return vagaRepository.Items.Where(vaga => vaga.Id == id).FirstOrDefault();
         }
     }
 

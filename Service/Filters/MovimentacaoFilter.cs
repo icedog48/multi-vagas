@@ -11,9 +11,19 @@ namespace Service.Filters
 {
     public class MovimentacaoFilter : IFilter<Movimentacao>
     {
+        public string Placa { get; set; }
+
+        public string Ticket { get; set; }
+
 
         public IQueryable<Movimentacao> Apply(IQueryable<Movimentacao> query)
         {
+            if (!string.IsNullOrEmpty(Placa))
+                query = query.Where(movimentacao => movimentacao.Placa.Contains(Placa));
+
+            if (!string.IsNullOrEmpty(Ticket))
+                query = query.Where(movimentacao => movimentacao.Ticket.Contains(Ticket));
+
             return query;
         }
     }

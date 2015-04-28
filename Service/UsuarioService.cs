@@ -40,8 +40,6 @@ namespace Service
         {
             usuario.Senha = Encryption.Encrypt(SenhaDefault);
 
-            usuario.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
-
             repository.Add(usuario);
         }
 

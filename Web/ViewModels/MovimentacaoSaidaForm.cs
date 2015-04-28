@@ -5,7 +5,8 @@ using System.Web;
 
 namespace Web.ViewModels
 {
-    public class MovimentacaoForm
+    public class MovimentacaoSaidaForm
     {
+
     }
 }

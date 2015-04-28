@@ -75,25 +75,37 @@ namespace Web.App_Start
 
             #region Categoria Vaga
 
-            Mapper.CreateMap<CategoriaVaga, VagaForm>()
+            Mapper.CreateMap<int, CategoriaVaga>().ConvertUsing(x => new CategoriaVaga() { Id = x });
+            Mapper.CreateMap<CategoriaVaga, int>().ConvertUsing(x => x.Id);
+
+            Mapper.CreateMap<CategoriaVaga, CategoriaVagaForm>()
                 .ForMember(viewModel => viewModel.Quantidade, map => map.MapFrom(model => model.Vagas.Count()))
                 ; 
 
-            Mapper.CreateMap<VagaForm, CategoriaVaga>()
+            Mapper.CreateMap<CategoriaVagaForm, CategoriaVaga>()
                 .ForMember(model => model.Vagas, map => map.Ignore())
                 .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
                 ;
 
-            Mapper.CreateMap<CategoriaVaga, VagaTable>()
+            Mapper.CreateMap<CategoriaVaga, CategoriaVagaTable>()
                 .ForMember(viewModel => viewModel.Vagas         , map => map.MapFrom(model => model.Vagas.Count()))
                 .ForMember(viewModel => viewModel.Categoria     , map => map.MapFrom(model => model.Descricao))
                 ;
 
-            Mapper.CreateMap<Vaga, VagaCombo>();
+            Mapper.CreateMap<Vaga, VagaCombo>()
+                .ForMember(model => model.CategoriaVaga, map => map.MapFrom(viewModel => viewModel.CategoriaVaga.Descricao))
+                ;
 
             Mapper.CreateMap<CategoriaVaga, CategoriaVagaCombo>();
             
             #endregion
+
+            #region Vaga
+
+            Mapper.CreateMap<int, Vaga>().ConvertUsing(x => new Vaga() { Id = x });
+            Mapper.CreateMap<Vaga, int>().ConvertUsing(x => x.Id);
+
+            #endregion Vaga
 
             #region Perfil
 
@@ -147,6 +159,37 @@ namespace Web.App_Start
                 ;
 
             #endregion Funcionario
+
+            #region Cliente
+
+            Mapper.CreateMap<int?, Cliente>().ConvertUsing(x => (x.HasValue) ? new Cliente() { Id = x.Value } : null);
+            Mapper.CreateMap<Cliente, int?>().ConvertUsing(x => (x == null) ? Convert.ToInt32(null) : x.Id);
+
+            #endregion Cliente
+
+            #region Movimentacao
+
+            Mapper.CreateMap<MovimentacaoEntradaForm, Movimentacao>()
+                .ForMember(model => model.Entrada, map => map.Ignore())
+                .ForMember(model => model.FuncionarioEntrada, map => map.Ignore())
+                .ForMember(model => model.FuncionarioSaida, map => map.Ignore())
+                .ForMember(model => model.Saida, map => map.Ignore())
+                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
+                .ForMember(model => model.Ticket, map => map.Ignore())
+                .ForMember(model => model.TipoPagamento, map => map.Ignore())
+                .ForMember(model => model.ValorPago, map => map.Ignore())
+                ;
+
+            Mapper.CreateMap<Movimentacao, MovimentacaoEntradaForm>()
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+            ;
+
+            Mapper.CreateMap<Movimentacao, MovimentacaoTable>()
+                .ForMember(viewModel => viewModel.Entrada, map => map.MapFrom(model => model.Entrada.ToString("dd/MM/yyyy HH:mm")))
+                .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
+                ;
+
+            #endregion Movimentacao
 
             Mapper.AssertConfigurationIsValid();
         }
