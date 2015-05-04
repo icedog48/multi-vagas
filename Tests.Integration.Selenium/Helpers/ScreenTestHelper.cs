@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,38 +14,70 @@ namespace Tests.Integration.Selenium.Helpers
     {
         public static void ClickElementByName(IWebDriver driver, string name)
         {
-            WaitLoop(indice =>
+            try
             {
-                var element = driver.FindElement(By.Name(name));
+                WaitLoop(indice =>
+                {
+                    var element = driver.FindElement(By.Name(name));
 
-                element.Click();
-            });
+                    element.Click();
+                });
+            }
+            catch (Exception ex)
+            {
+                var msgErro = string.Format("Erro clicando elemento.: {0}", name);
+                throw new InvalidOperationException(msgErro, ex);
+            }
         }
 
         public static void FillTextBoxByName(IWebDriver driver, string name, string value)
         {
-            WaitLoop(indice =>
+            try
             {
-                var textbox = driver.FindElement(By.Name(name));
+                WaitLoop(indice =>
+                {
+                    var textbox = driver.FindElement(By.Name(name));
 
-                textbox.SendKeys(value);
-            });
+                    textbox.SendKeys(value);
+                });
+            }
+            catch (Exception ex)
+            {
+                var msgErro = string.Format("Erro preenchendo elemento.: {0}, com valor '{1}'", name, value);
+                throw new InvalidOperationException(msgErro, ex);
+            }
+            
         }
         
         public static void WaitForAlert(IWebDriver driver)
         {
-            WaitLoop(indice =>
+            try
             {
-                var alert = driver.SwitchTo().Alert();
-            });
+                WaitLoop(indice =>
+                {
+                    var alert = driver.SwitchTo().Alert();
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Erro esperando por alerta.", ex);
+            }
         }       
 
         public static void WaitForElement(IWebDriver driver, string name)
         {
-            WaitLoop(indice => 
+            try
             {
-                var alert = driver.FindElement(By.Name(name));
-            });
+                WaitLoop(indice =>
+                {
+                    var alert = driver.FindElement(By.Name(name));
+                });
+            }
+            catch (Exception ex)
+            {
+                var msgErro = string.Format("Erro esperando por elemento.: {0}", name);
+                throw new InvalidOperationException(msgErro, ex);
+            }
         }
 
         #region WaitLoops
@@ -73,11 +106,29 @@ namespace Tests.Integration.Selenium.Helpers
                 }
             }
 
-            if (!achou) throw new InvalidOperationException("Erro executando operação: " + code.Method.Name, exception);
+            if (!achou) throw exception;
         }
 
         #endregion 
     
         public static Exception exception { get; set; }
+
+        public static void ChooseElementInList(IWebDriver driver, string name, int elementIndex)
+        {
+            try
+            {
+                WaitLoop(indice =>
+                {
+                    var selectElement = new SelectElement(driver.FindElement(By.Name(name)));
+                        selectElement.SelectByIndex(elementIndex);
+                });
+            }
+            catch (Exception ex)
+            {
+                var msgErro = string.Format("Erro selecionando inddice, {0} no elemento.: {1}", elementIndex, name);
+                
+                throw new InvalidOperationException(msgErro, ex);
+            }
+        }
     }
 }

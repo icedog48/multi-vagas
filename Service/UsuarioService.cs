@@ -22,6 +22,7 @@ namespace Service
         public UsuarioService(IRepository<Usuario> repository)
         {
             this.repository = repository;
+            this.SenhaDefault = "multivagas";
         }
 
         public Usuario Login(string usuario, string senha)
@@ -38,8 +39,6 @@ namespace Service
         public void RegistrarComSenhaDefault(Usuario usuario) 
         {
             usuario.Senha = Encryption.Encrypt(SenhaDefault);
-
-            usuario.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
 
             repository.Add(usuario);
         }

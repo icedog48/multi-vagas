@@ -1,13 +1,13 @@
 ﻿(function () {
-    var filtroVagasController = function ($scope, Vaga, Estacionamento) {
+    var filtroVagasController = function ($scope, CategoriaVaga, Estacionamento) {
         $scope.estacionamentos = Estacionamento.query();
 
-        $scope.vagas = Vaga.query();
+        $scope.vagas = CategoriaVaga.query();
 
         $scope.filtroVagas = { Estacionamento: null, Descricao: ''};
 
         $scope.filtrarVagas = function (filtroVagas) {
-            Vaga.filtrar(filtroVagas).$promise.then(function (data) {
+            CategoriaVaga.filtrar(filtroVagas).$promise.then(function (data) {
                 $scope.vagas = data;
             });
         };
@@ -18,7 +18,7 @@
 
                 var vagaId = vaga.Id;
 
-                Vaga.remove({ id: vagaId }).$promise.then(function () {
+                CategoriaVaga.remove({ id: vagaId }).$promise.then(function () {
                     $scope.vagas.forEach(function (vaga, index) {
                             if (vaga.Id == vagaId) {
                                 $scope.vagas.splice(index, 1);
@@ -30,5 +30,5 @@
 
     };
 
-    angular.module("vagas").controller("filtroVagasController", ["$scope", "Vaga", "Estacionamento", filtroVagasController]);
+    angular.module("vagas").controller("filtroVagasController", ["$scope", "CategoriaVaga", "Estacionamento", filtroVagasController]);
 }());

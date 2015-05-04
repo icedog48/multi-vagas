@@ -2,8 +2,6 @@
     var filtroEstacionamentoPublicoController = function ($scope, Estacionamento, $state) {
         $scope.filtroEstacionamento = {};
 
-        console.log('controller certo');
-
         $scope.filtrarEstacionamentos = function (filtroEstacionamento) {
             Estacionamento.filtrar(filtroEstacionamento).$promise.then(function (data) {
                 $scope.estacionamentos = data;

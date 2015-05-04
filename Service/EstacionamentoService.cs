@@ -18,12 +18,24 @@ namespace Service
 {
     public class EstacionamentoService : MultiVagasCRUDService<Estacionamento>, IEstacionamentoService
     {
-        private IUsuarioService usuarioService;        
+        private readonly IUsuarioService usuarioService;
+        private readonly IFuncionarioService funcionarioService;
+        private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
-        public EstacionamentoService(IRepository<Estacionamento> repository, EstacionamentoValidator validator, IUsuarioService usuarioService, Usuario usuarioLogado)
+        public EstacionamentoService
+            (
+                IRepository<Estacionamento> repository, 
+                EstacionamentoValidator validator, 
+                IUsuarioService usuarioService, 
+                IFuncionarioService funcionarioService, 
+                Usuario usuarioLogado,
+                IRepository<TipoPagamento> tipoPagamentoRepository
+            )
             : base(repository, validator, usuarioLogado)
         {
             this.usuarioService = usuarioService;
+            this.funcionarioService = funcionarioService;
+            this.tipoPagamentoRepository = tipoPagamentoRepository;
         }    
 
         protected virtual void RegistrarAdministrador(Usuario obj)
@@ -35,14 +47,18 @@ namespace Service
 
         protected override IQueryable<Estacionamento> GetActiveItems()
         {
-            var query = repository.Items.Where(x => x.SituacaoRegistro == (int)SituacaoRegistroEnum.ATIVO);;
+            var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);            
 
-            //Usuario ou Administrador podem listar todos os estacionamentos
-            var usuarioOUAdministrador = usuarioLogado.TemPerfil(PerfilEnum.EQUIPE_MULTIVAGAS) || usuarioLogado.TemPerfil(PerfilEnum.USUARIO);
+            if (usuarioLogado.TemPerfil(PerfilEnum.ADMIN))
+            {
+                query = query.Where(estacionamento => estacionamento.Usuario.Id == usuarioLogado.Id);
+            }
+            else if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO))
+            {
+                var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
-            if (usuarioOUAdministrador) return query;
-
-            query = query.Where(estacionamento => estacionamento.Usuario.Id == usuarioLogado.Id);
+                query = query.Where(estacionamento => estacionamento.Id == funcionario.Estacionamento.Id);
+            }
 
             return query;
         }
@@ -70,14 +86,15 @@ namespace Service
             base.Update(estacionamento);
 
             //Caso o usuário tenha sido alterado, remove o antigo
-            if (ExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
+            if (PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
         }
 
-        protected virtual bool ExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)
+        protected virtual bool PossoExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)
         {
             var administraOutrosEstacionamentos = repository.Items.Any(x => x.Usuario.Id == usuarioAntigo.Id);
-            
-            return !administraOutrosEstacionamentos; // Só posso excluir o usuario caso ele nao administre outros estacionamentos.
+
+            // Só posso excluir o usuario caso ele nao administre outros estacionamentos.
+            return !administraOutrosEstacionamentos && usuarioAntigo.TemPerfil(PerfilEnum.ADMIN); 
         }
 
         protected virtual Usuario ObterAdministradorAntigo(int estacionamentoId)
@@ -92,6 +109,11 @@ namespace Service
             if (usuario != null && !usuario.TemPerfil(PerfilEnum.ADMIN)) throw new UnauthorizedAccessException("O login informado não possui perfil de administrador.");
 
             return usuario;
+        }
+
+        public IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId)
+        {
+            return tipoPagamentoRepository.Items.Where(x => x.Estacionamento.Id == estacionamentoId);
         }
     }
 

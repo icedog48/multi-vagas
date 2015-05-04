@@ -41,8 +41,6 @@ namespace Service
             var usuario = usuarioService.GetById(obj.Usuario.Id);
                 usuario.Login = obj.Matricula;
                 usuario.Email = obj.Usuario.Email;
-                usuario.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
-
 
             obj.Usuario = usuario;
 
@@ -51,7 +49,7 @@ namespace Service
 
         protected override IQueryable<Funcionario> GetActiveItems()
         {
-            var ativo = (int)SituacaoRegistroEnum.ATIVO;
+            var ativo = SituacaoRegistroEnum.ATIVO;
 
             //Obtem todos os funcionarios onde o funcionario E etacionamento esta com situacao de registro ATIVO
             var query = repository.Items.Where(x => x.SituacaoRegistro == ativo && x.Estacionamento.SituacaoRegistro == ativo);
@@ -62,6 +60,11 @@ namespace Service
             query = query.Where(funcionario => funcionario.Estacionamento.Usuario.Id == usuarioLogado.Id);
 
             return query;
+        }
+
+        public Funcionario GetFuncionarioByUsuario(Usuario usuario)
+        {
+            return repository.Items.Where(x => x.Usuario.Id == usuario.Id).FirstOrDefault();
         }
     }
 }

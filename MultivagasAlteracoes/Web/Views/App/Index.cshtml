@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="multi-vagas">
+<head>
+    <base href="/" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Multi-Vagas </title>
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/dashgum")
+    @Styles.Render("~/css/multi-vagas-dashgum")
+
+</head>
+<body ng-controller="mainController">
+
+    <section id="container">
+
+        <div ui-view></div>
+    
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @Scripts.Render("~/bundles/multi-vagas-modules")
+    @Scripts.Render("~/bundles/multi-vagas")
+
+    
+
+</body>
+</html>

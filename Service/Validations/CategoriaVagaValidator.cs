@@ -29,12 +29,12 @@ namespace Service.Validations
 
         private bool DescricaoNaoRepetida(CategoriaVaga categoriaVaga, string descricao)
         {
-            return !repository.Items.Any(categoria => categoria.Descricao == descricao && categoria.Id != categoriaVaga.Id);
+            return !repository.Items.Any(categoria => categoria.Descricao == descricao && categoria.Id != categoriaVaga.Id && categoria.Estacionamento.Id == categoriaVaga.Estacionamento.Id);
         }
 
         private bool SiglaNaoRepetida(CategoriaVaga categoriaVaga, string sigla)
         {
-            return !repository.Items.Any(categoria => categoria.Sigla == sigla && categoria.Id != categoriaVaga.Id);
+            return !repository.Items.Any(categoria => categoria.Sigla == sigla && categoria.Id != categoriaVaga.Id && categoria.Estacionamento.Id == categoriaVaga.Estacionamento.Id    );
         }
     }
 }

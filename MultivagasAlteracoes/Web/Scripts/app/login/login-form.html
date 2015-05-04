@@ -1,0 +1,22 @@
+﻿<div id="login-page">
+    
+    <div class="container">
+
+        <form class="form-login">
+            <h2 class="form-login-heading">Tela de Autenticação</h2>
+
+            <div class="login-wrap">
+                <input type="text" class="form-control" placeholder="Usuário" name="Login" autofocus="" ng-model="credentials.Login" />
+                <br />
+                <input type="password" class="form-control" placeholder="Senha" name="Senha" ng-model="credentials.Senha" />                
+
+                <br />
+
+                <button class="btn btn-theme btn-block" name="btnLogin" ng-click="login(credentials)"><i class=" fa fa-lock"></i> LOGIN </button>
+
+            </div>
+
+        </form>
+    </div>
+       
+</div>
