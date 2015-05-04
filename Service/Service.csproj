@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\MovimentacaoFilter.cs" />
+    <Compile Include="MovimentacaoService.cs" />
+    <Compile Include="Interfaces\IMovimentacaoService.cs" />
     <Compile Include="MultiVagasCRUDService.cs" />
     <Compile Include="PerfilService.cs" />
     <Compile Include="Filters\FuncionarioFilter.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="EstacionamentoService.cs" />
     <Compile Include="FuncionarioService.cs" />
     <Compile Include="UsuarioService.cs" />
+    <Compile Include="Validations\MovimentacaoValidator.cs" />
     <Compile Include="Validations\FuncionarioValidator.cs" />
     <Compile Include="Validations\EstacionamentoValidator.cs" />
     <Compile Include="Validations\VagaValidator.cs" />

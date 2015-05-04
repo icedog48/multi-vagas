@@ -1,0 +1,64 @@
+﻿<form name="frmRegistrarEntrada" class="form-horizontal style-form" ng-submit="salvar(movimentacao)">
+
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+            <!--Dados de Entrada-->
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Dados de Entrada </h4>
+
+                <!--Placa-->
+                <div class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.Placa.$dirty && frmRegistrarEntrada.Placa.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Placa</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Placa" ng-model="movimentacao.Placa" ng-disabled="edicao" required>
+                    </div>
+                </div>
+
+                <!--Vaga Atual-->
+                <div ng-if="edicao" class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.Vaga.$dirty && frmRegistrarEntrada.Vaga.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Categoria - Vaga Atual</label>
+                    <div class="col-sm-10">
+                        <span ng-bind="vagaAtual"></span>
+                    </div>
+                </div>
+
+                <!-- Categoria Vaga-->
+                <div class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.CategoriaVaga.$dirty && frmRegistrarEntrada.CategoriaVaga.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Categoria da vaga</label>
+                    <div class="col-sm-10">
+
+                        <select name="CategoriaVaga" class="form-control" ng-model="movimentacao.CategoriaVaga" ng-change="listarVagas(movimentacao.CategoriaVaga)" ng-options="categoriaVaga.Id as categoriaVaga.Descricao for categoriaVaga in categoriasVaga" required>
+                            <option value="" disabled> --- </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!--Vaga-->
+                <div class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.Vaga.$dirty && frmRegistrarEntrada.Vaga.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Vaga</label>
+                    <div class="col-sm-10">
+
+                        <select name="Vaga" class="form-control" ng-model="movimentacao.Vaga" ng-options="vaga.Id as vaga.Codigo for vaga in vagasDisponiveis" required>
+                            <option value="" disabled> --- </option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" name="btnSalvar"><i class="fa fa-save"></i> Salvar </button>
+
+            <button type="button" class="btn btn-round btn-primary pull-right" ui-sref="movimentacao_list()" name=" btncancelar"><i class="fa fa-arrow-left"></i> Cancelar </button>
+        </div>
+    </div>
+</form>
+
+
+

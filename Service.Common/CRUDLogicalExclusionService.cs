@@ -24,8 +24,6 @@ namespace Service.Common
 
         public virtual void Add(T obj)
         {
-            obj.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
-
             var result = validator.Validate(obj);
 
             if (!result.IsValid) throw new ValidationException(result.Errors);
@@ -35,8 +33,6 @@ namespace Service.Common
 
         public virtual void Update(T obj)
         {
-            obj.SituacaoRegistro = (int)SituacaoRegistroEnum.ATIVO;
-
             var result = validator.Validate(obj);
 
             if (!result.IsValid) throw new ValidationException(result.Errors);
@@ -47,7 +43,7 @@ namespace Service.Common
         public virtual void Remove(T obj)
         {
             obj = this.GetById(obj.Id);
-            obj.SituacaoRegistro = (int)SituacaoRegistroEnum.INATIVO;
+            obj.SituacaoRegistro = SituacaoRegistroEnum.INATIVO;
 
             this.repository.Update(obj);
         }
@@ -70,7 +66,7 @@ namespace Service.Common
 
         public virtual IEnumerable<T> GetAll()
         {
-            return GetActiveItems();
+            return GetActiveItems().ToList();
         }
 
         protected abstract IQueryable<T> GetActiveItems() ;        

@@ -10,5 +10,6 @@ namespace Service.Interfaces
     public interface IFuncionarioService : ICRUDService<Funcionario>
     {
 
+        Funcionario GetFuncionarioByUsuario(Usuario usuario);
     }
 }

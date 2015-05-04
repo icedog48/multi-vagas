@@ -43,6 +43,11 @@ namespace Web.DependencyResolution.Registries
     using FluentNHibernate.Conventions;
     using FluentNHibernate.Conventions.Instances;
     using Model.Common;
+    using FluentNHibernate.Conventions.AcceptanceCriteria;
+    using FluentNHibernate.Conventions.Inspections;
+    using Storage.Nhibernate.Mapping.Conventions;
+    using Storage.Nhibernate.Mapping.Interceptors;
+    using Storage.Nhibernate.Mapping;
 
     public class AutoMappingCfg : DefaultAutomappingConfiguration 
     {
@@ -71,47 +76,6 @@ namespace Web.DependencyResolution.Registries
         }
     }
 
-    public class TrackingInterceptor : EmptyInterceptor
-    {
-        public override NHibernate.SqlCommand.SqlString OnPrepareStatement(NHibernate.SqlCommand.SqlString sql)
-        {
-            Console.WriteLine(sql.ToString());
-
-            return base.OnPrepareStatement(sql);
-        }
-    }
-
-    public class MyManyToManyConvention : IHasManyToManyConvention
-    {
-        public void Apply(IManyToManyCollectionInstance instance)
-        {
-            var firstName = instance.EntityType.Name;
-            var secondName = instance.ChildType.Name;
-
-            if (StringComparer.OrdinalIgnoreCase.Compare(firstName, secondName) > 0)
-            {
-                instance.Table(string.Format("{0}{1}", secondName, firstName));
-                instance.Inverse();
-            }
-            else
-            {
-                instance.Table(string.Format("{0}{1}", firstName, secondName));
-                instance.Not.Inverse();
-            }
-
-            instance.Cascade.All();
-        }
-    }
-
-    public class PropertyConvention : IPropertyConvention
-    {
-        public void Apply(IPropertyInstance instance)
-        {
-            if (instance.Property.PropertyType == typeof(TimeSpan))
-                instance.CustomType("TimeAsTimeSpan");
-        }
-    }
-
     public class NHibernateRegistry : Registry
     {
         #region Constructors and Destructors
@@ -126,13 +90,10 @@ namespace Web.DependencyResolution.Registries
                                              .Database(databaseCfg)
                                              .Mappings(m =>
                                              {
-                                                 var automapping = AutoMap.Assemblies(autoMappingCfg, typeof(Estacionamento).Assembly)
+                                                 m.FluentMappings.AddFromAssembly(typeof(EstacionamentoMap).Assembly)
                                                                                 .Conventions.Add<MyManyToManyConvention>(new MyManyToManyConvention())
                                                                                 .Conventions.Add<PropertyConvention>(new PropertyConvention())
-                                                                                .IgnoreBase<Entity>()
-                                                                                .IgnoreBase<LogicalExclusionEntity>();
-                                                 
-                                                 m.AutoMappings.Add(automapping);
+                                                                                .Conventions.Add<EnumConvention>(new EnumConvention());
                                              })
                                              .ExposeConfiguration(config => config.SetInterceptor(new TrackingInterceptor()))
                                              .ExposeConfiguration(cfg => cfg.Properties.Add("current_session_context_class", "thread"))

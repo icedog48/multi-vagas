@@ -41,6 +41,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -57,10 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\EntityMap.cs" />
+    <Compile Include="Mapping\LogicalExclusionEntityMap.cs" />
     <Compile Include="NHibernateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model.Common\Model.Common.csproj">
+      <Project>{590169b1-163f-4b33-a9d7-b73e34368e1f}</Project>
+      <Name>Model.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Storage\Storage.csproj">
       <Project>{8006bbd9-b936-4c4f-ae77-bf96d9adeaa3}</Project>
       <Name>Storage</Name>

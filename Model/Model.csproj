@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Movimentacao.cs" />
     <Compile Include="Estacionamento.cs" />
+    <Compile Include="TipoPagamento.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="PerfilEnum.cs" />
     <Compile Include="Permissao.cs" />

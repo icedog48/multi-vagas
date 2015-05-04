@@ -1,0 +1,168 @@
+﻿<form name="frmFuncionario" class="form-horizontal style-form" ng-submit="salvar(funcionario)">
+
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Identificação </h4>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Estacionamento.$dirty && frmFuncionario.Estacionamento.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Estacionamento</label>
+                    <div class="col-sm-10">
+                        
+                        <select name="Estacionamento" class="form-control" ng-model="funcionario.Estacionamento" ng-options="estacionamento.Id as estacionamento.RazaoSocial for estacionamento in estacionamentos" required>
+                            <option value="" disabled> --- </option>
+                        </select>
+                            
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Nome.$dirty && frmFuncionario.Nome.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Nome" ng-model="funcionario.Nome" required>
+                    </div>
+                </div> 
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.CPF.$dirty && frmFuncionario.CPF.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">CPF</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="CPF" ng-model="funcionario.CPF" required>
+                    </div>
+                </div>  
+                
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Telefone.$dirty && frmFuncionario.Telefone.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Telefone</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" name="Telefone" ng-model="funcionario.Telefone" required>
+                    </div>
+                </div>     
+                
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Email.$dirty && frmFuncionario.Email.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">E-mail</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="Email" ng-model="funcionario.Usuario.Email" required>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+            <!--Endereço-->
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Endereço </h4>
+                <!--CEP-->
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.CEP.$dirty && frmFuncionario.CEP.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">CEP</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="CEP" ng-model="funcionario.CEP" required>
+                    </div>
+                </div>
+
+                <!--Logradouro-->
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Logradouro.$dirty && frmFuncionario.Logradouro.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Logradouro</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Logradouro" ng-model="funcionario.Logradouro" required>
+                    </div>
+                </div>
+
+                <!--UF-->
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.UF.$dirty && frmFuncionario.UF.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">UF</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="UF" ng-model="funcionario.UF" required>
+                    </div>
+                </div>
+
+                <!--Cidade-->
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Cidade.$dirty && frmFuncionario.Cidade.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Cidade</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Cidade" ng-model="funcionario.Cidade" required>
+                    </div>
+                </div>
+
+                <!--Bairro-->
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Bairro.$dirty && frmFuncionario.Bairro.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Bairro</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Bairro" ng-model="funcionario.Bairro" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Contratação </h4>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Matricula.$dirty && frmFuncionario.Matricula.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Matrícula</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Matricula" ng-model="funcionario.Matricula" required >
+                    </div>
+                </div> 
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.HoraInicio.$dirty && frmFuncionario.HoraInicio.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Hora Inicio</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="HoraInicio" ng-model="funcionario.HoraInicio" required>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.HoraSaida.$dirty && frmFuncionario.HoraSaida.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Hora Saída</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="HoraSaida" ng-model="funcionario.HoraSaida" required>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.CargaHoraria.$dirty && frmFuncionario.CargaHoraria.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Carga Horária</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="CargaHoraria" ng-model="funcionario.CargaHoraria" required>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.DataAdmissao.$dirty && frmFuncionario.DataAdmissao.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Data Admissão</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="DataAdmissao" ng-model="funcionario.DataAdmissao" required>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Salario.$dirty && frmFuncionario.Salario.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Salário</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="Salario" ng-model="funcionario.Salario" required>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Obs.$dirty && frmFuncionario.Obs.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Observação</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" ng-model="funcionario.Obs"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" name="btnSalvar"><i class="fa fa-save"></i> Salvar </button>
+
+            <button type="button" class="btn btn-round btn-primary pull-right" ui-sref="funcionario_list()"><i class="fa fa-arrow-left"></i> Cancelar </button>
+        </div>
+    </div>
+
+</form>

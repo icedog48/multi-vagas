@@ -11,5 +11,9 @@ namespace Service.Interfaces
     public interface ICategoriaVagaService : ICRUDService<CategoriaVaga>
     {
         void Add(CategoriaVaga categoria, int vagas);
+
+        IEnumerable<Vaga> VagasDisponiveis(int categoriaId);
+
+        Vaga GetVagaById(int id);
     }
 }

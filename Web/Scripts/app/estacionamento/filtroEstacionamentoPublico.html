@@ -64,10 +64,10 @@
                 <tbody>
                     <tr ng-repeat="estacionamento in estacionamentos">
 
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.CNPJ"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.RazaoSocial"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Telefone"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Endereco"></td>
+                        <td ng-bind="estacionamento.CNPJ"></td>
+                        <td ng-bind="estacionamento.RazaoSocial"></td>
+                        <td ng-bind="estacionamento.Telefone"></td>
+                        <td ng-bind="estacionamento.Endereco"></td>
                                                 
                     </tr>
                 </tbody>

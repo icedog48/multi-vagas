@@ -228,6 +228,14 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
+    <Content Include="Scripts\app\movimentacao\filtroMovimentacao-controller.js" />
+    <Content Include="Scripts\app\movimentacao\filtroMovimentacao.html" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarSaida.html" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarSaida-controller.js" />
+    <Content Include="Scripts\app\movimentacao\movimentacao-service.js" />
+    <Content Include="Scripts\app\movimentacao\movimentacao.js" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarEntrada-controller.js" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarEntrada.html" />
     <Content Include="Scripts\app\estacionamento\filtroEstacionamentoPublico.html" />
     <Content Include="Scripts\app\estacionamento\filtroEstacionamentoPublico-controller.js" />
     <Content Include="Scripts\app\funcionario\filtroFuncionario-controller.js" />
@@ -238,6 +246,7 @@
     <Content Include="Scripts\app\funcionario\funcionario.js" />
     <Content Include="Scripts\app\login\usuario-service.js" />
     <Content Include="Scripts\app\shared\perfil-service.js" />
+    <Content Include="Scripts\app\vagas\categoriaVaga-service.js" />
     <Content Include="Scripts\app\vagas\vaga-service.js" />
     <Content Include="Scripts\app\vagas\filtroVagas-controller.js" />
     <Content Include="Scripts\app\vagas\vagas.js" />
@@ -274,7 +283,9 @@
     <Content Include="Scripts\vendor\angular\angular.js" />
     <Content Include="Scripts\vendor\angular\angular.min.js" />
     <Content Include="Scripts\app\multi-vagas.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Automapper.cs" />
@@ -288,6 +299,8 @@
     <Compile Include="Controllers\Attributes\NHSession.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\PerfisController.cs" />
+    <Compile Include="Controllers\MovimentacoesController.cs" />
+    <Compile Include="Controllers\CategoriasVagaController.cs" />
     <Compile Include="Controllers\VagasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AppController.cs">
@@ -310,15 +323,20 @@
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />
+    <Compile Include="ViewModels\CategoriaVagaCombo.cs" />
+    <Compile Include="ViewModels\MovimentacaoSaidaForm.cs" />
+    <Compile Include="ViewModels\VagaCombo.cs" />
     <Compile Include="ViewModels\PerfilCombo.cs" />
     <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />
     <Compile Include="ViewModels\UsuarioFormFuncionario.cs" />
-    <Compile Include="ViewModels\VagaForm.cs" />
+    <Compile Include="ViewModels\MovimentacaoForm.cs" />
+    <Compile Include="ViewModels\CategoriaVagaForm.cs" />
     <Compile Include="ViewModels\EstacionamentoCombo.cs" />
     <Compile Include="ViewModels\FuncionatrioTable.cs" />
     <Compile Include="ViewModels\EstacionamentoTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\VagaTable.cs" />
+    <Compile Include="ViewModels\MovimentacaoTable.cs" />
+    <Compile Include="ViewModels\CategoriaVagaTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -357,6 +375,10 @@
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{9807f7a4-bae7-4149-9f38-6a737b60123f}</Project>
       <Name>Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Storage.NHibernate.Mapping\Storage.NHibernate.Mapping.csproj">
+      <Project>{a2756bff-5c5d-4031-bcd9-0ed45394a925}</Project>
+      <Name>Storage.NHibernate.Mapping</Name>
     </ProjectReference>
     <ProjectReference Include="..\Storage.NHibernate\Storage.NHibernate.csproj">
       <Project>{76ec83e0-c601-4caf-a14a-0f497d8e2b51}</Project>
