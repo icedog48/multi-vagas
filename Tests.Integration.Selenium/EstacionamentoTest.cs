@@ -70,7 +70,7 @@ namespace Tests.Integration.Selenium
 
         public void Dispose()
         {
-            driver.Quit();
+            QuitWebDriver();
         }
 
     }

@@ -38,14 +38,12 @@ namespace Tests.Integration.Selenium
             ScreenTestHelper.ClickElementByName(driver, "MenuVagas");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnAdicionar")));
+            
             ScreenTestHelper.ClickElementByName(driver, "btnAdicionar");
 
             ScreenTestHelper.WaitForElement(driver, "Estacionamento");
 
-            var estacionamento = new SelectElement(driver.FindElement(By.Name("Estacionamento")));
-                estacionamento.SelectByIndex(1);
-
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            ScreenTestHelper.ChooseElementInList(driver, "Estacionamento", 1);
 
             var categoria = DateTime.Now.ToString("ddMMyyyymm");
             var sigla = DateTime.Now.ToString("mmss");
@@ -83,7 +81,7 @@ namespace Tests.Integration.Selenium
 
         public void Dispose()
         {
-            driver.Quit();
+            QuitWebDriver();
         }
     }
 }

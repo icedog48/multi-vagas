@@ -230,6 +230,8 @@
     <Content Include="Scripts\app\dashboard\dashboard.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao-controller.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao.html" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarSaida.html" />
+    <Content Include="Scripts\app\movimentacao\formRegistrarSaida-controller.js" />
     <Content Include="Scripts\app\movimentacao\movimentacao-service.js" />
     <Content Include="Scripts\app\movimentacao\movimentacao.js" />
     <Content Include="Scripts\app\movimentacao\formRegistrarEntrada-controller.js" />
@@ -281,7 +283,9 @@
     <Content Include="Scripts\vendor\angular\angular.js" />
     <Content Include="Scripts\vendor\angular\angular.min.js" />
     <Content Include="Scripts\app\multi-vagas.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Automapper.cs" />
@@ -325,7 +329,7 @@
     <Compile Include="ViewModels\PerfilCombo.cs" />
     <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />
     <Compile Include="ViewModels\UsuarioFormFuncionario.cs" />
-    <Compile Include="ViewModels\MovimentacaoEntradaForm.cs" />
+    <Compile Include="ViewModels\MovimentacaoForm.cs" />
     <Compile Include="ViewModels\CategoriaVagaForm.cs" />
     <Compile Include="ViewModels\EstacionamentoCombo.cs" />
     <Compile Include="ViewModels\FuncionatrioTable.cs" />

@@ -18,14 +18,24 @@ namespace Service
 {
     public class EstacionamentoService : MultiVagasCRUDService<Estacionamento>, IEstacionamentoService
     {
-        private IUsuarioService usuarioService;
-        private IFuncionarioService funcionarioService;
+        private readonly IUsuarioService usuarioService;
+        private readonly IFuncionarioService funcionarioService;
+        private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
-        public EstacionamentoService(IRepository<Estacionamento> repository, EstacionamentoValidator validator, IUsuarioService usuarioService, IFuncionarioService funcionarioService, Usuario usuarioLogado)
+        public EstacionamentoService
+            (
+                IRepository<Estacionamento> repository, 
+                EstacionamentoValidator validator, 
+                IUsuarioService usuarioService, 
+                IFuncionarioService funcionarioService, 
+                Usuario usuarioLogado,
+                IRepository<TipoPagamento> tipoPagamentoRepository
+            )
             : base(repository, validator, usuarioLogado)
         {
             this.usuarioService = usuarioService;
             this.funcionarioService = funcionarioService;
+            this.tipoPagamentoRepository = tipoPagamentoRepository;
         }    
 
         protected virtual void RegistrarAdministrador(Usuario obj)
@@ -99,6 +109,11 @@ namespace Service
             if (usuario != null && !usuario.TemPerfil(PerfilEnum.ADMIN)) throw new UnauthorizedAccessException("O login informado não possui perfil de administrador.");
 
             return usuario;
+        }
+
+        public IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId)
+        {
+            return tipoPagamentoRepository.Items.Where(x => x.Estacionamento.Id == estacionamentoId);
         }
     }
 

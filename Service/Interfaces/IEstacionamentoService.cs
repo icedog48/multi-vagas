@@ -12,5 +12,7 @@ namespace Service.Interfaces
     public interface IEstacionamentoService : ICRUDService<Estacionamento>
     {
         Usuario VerficaLogin(string login);
+
+        IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId);
     }
 }

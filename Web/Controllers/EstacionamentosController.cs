@@ -33,7 +33,11 @@ namespace Web.Controllers
             return usuario.Claims.Any(claim => claim.Type.Equals(ClaimTypes.Role) && claim.Value.Equals(PerfilEnum.EQUIPE_MULTIVAGAS.ToString()));
         }
 
-        public EstacionamentosController(IEstacionamentoService service, IUsuarioService usuarioService)
+        public EstacionamentosController
+            (
+                IEstacionamentoService service, 
+                IUsuarioService usuarioService
+            )
         {
             this.Service = service;
             this.UsuarioService = usuarioService;
@@ -112,6 +116,12 @@ namespace Web.Controllers
 
                 throw new HttpResponseException(response);
             }
+        }
+
+        [Route("api/estacionamentos/tipospagamento/{estacionamentoId}")]
+        public IEnumerable<TipoPagamento> GetTiposPagamento(int estacionamentoId)
+        {
+            return Service.GetListTipoPagamento(estacionamentoId);
         }
     }
 }

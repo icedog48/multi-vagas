@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,5 +112,23 @@ namespace Tests.Integration.Selenium.Helpers
         #endregion 
     
         public static Exception exception { get; set; }
+
+        public static void ChooseElementInList(IWebDriver driver, string name, int elementIndex)
+        {
+            try
+            {
+                WaitLoop(indice =>
+                {
+                    var selectElement = new SelectElement(driver.FindElement(By.Name(name)));
+                        selectElement.SelectByIndex(elementIndex);
+                });
+            }
+            catch (Exception ex)
+            {
+                var msgErro = string.Format("Erro selecionando inddice, {0} no elemento.: {1}", elementIndex, name);
+                
+                throw new InvalidOperationException(msgErro, ex);
+            }
+        }
     }
 }

@@ -169,7 +169,7 @@ namespace Web.App_Start
 
             #region Movimentacao
 
-            Mapper.CreateMap<MovimentacaoEntradaForm, Movimentacao>()
+            Mapper.CreateMap<MovimentacaoForm, Movimentacao>()
                 .ForMember(model => model.Entrada, map => map.Ignore())
                 .ForMember(model => model.FuncionarioEntrada, map => map.Ignore())
                 .ForMember(model => model.FuncionarioSaida, map => map.Ignore())
@@ -180,7 +180,7 @@ namespace Web.App_Start
                 .ForMember(model => model.ValorPago, map => map.Ignore())
                 ;
 
-            Mapper.CreateMap<Movimentacao, MovimentacaoEntradaForm>()
+            Mapper.CreateMap<Movimentacao, MovimentacaoForm>()
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
             ;
 

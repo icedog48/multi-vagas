@@ -69,6 +69,7 @@ namespace Service
                 vagaAntiga.Disponivel = true;
             vagaRepository.Update(vagaAntiga);
 
+            novaVaga = vagaRepository.Get(novaVaga.Id);
             novaVaga.Disponivel = false;
             vagaRepository.Update(novaVaga);
 

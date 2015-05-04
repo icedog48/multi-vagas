@@ -38,14 +38,15 @@
             },
 
             'registrarEntrada': {
-                url: 'api/movimentacoes/registrarEntrada',
+                url: 'api/movimentacoes/registrarentrada',
                 headers: { 'Authorization': 'token' },
                 method: 'POST'
             },
 
             'atualizarVaga': {
-                method: 'PUT',
-                headers: { 'Authorization': 'token' }
+                method: 'POST',
+                headers: { 'Authorization': 'token' },
+                url: 'api/movimentacoes/atualizarvaga',
             },
         });
 

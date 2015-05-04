@@ -40,6 +40,13 @@
                 headers: { 'Authorization': 'token' },
                 method: 'GET'
             },
+
+            'listarTipoPagamento': {
+                url: 'api/estacionamentos/tipospagamento/:estacionamentoId',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                method: 'GET'
+            },
         });
 
         return resource;

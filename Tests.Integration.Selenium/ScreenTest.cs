@@ -10,6 +10,7 @@ using Model;
 using StructureMap;
 using Service.Filters;
 using Service.Interfaces;
+using System.Diagnostics;
 
 namespace Tests.Integration.Selenium
 {
@@ -105,5 +106,21 @@ namespace Tests.Integration.Selenium
         }
 
         #endregion Estacionamento Teste
+
+        protected virtual void QuitWebDriver()
+        {
+            try
+            {
+                driver.Quit();
+
+                var processList = Process.GetProcessesByName("chromedriver");
+
+                processList.ToList().ForEach(x => x.Kill());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

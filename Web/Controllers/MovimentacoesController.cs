@@ -34,11 +34,11 @@ namespace Web.Controllers
 
         [HttpGet]
         [Route("api/movimentacoes/{id}")]
-        public MovimentacaoEntradaForm Get(int id)
+        public MovimentacaoForm Get(int id)
         {
             try
             {
-                return Mapper.Map<MovimentacaoEntradaForm>(this.Service.GetById(id));
+                return Mapper.Map<MovimentacaoForm>(this.Service.GetById(id));
             }
             catch (Exception ex)
             {
@@ -47,15 +47,17 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public void RegistrarEntrada(MovimentacaoEntradaForm vaga)
+        [Route("api/movimentacoes/registrarentrada")]
+        public void RegistrarEntrada(MovimentacaoForm movimentacao)
         {
-            Service.RegistrarEntrada(Mapper.Map<Movimentacao>(vaga));
+            Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
         }
 
-        [HttpPut]
-        public void RegistrarSaida(int id, MovimentacaoSaidaForm vaga)
+        [HttpPost]
+        [Route("api/movimentacoes/registrarentrada")]
+        public void RegistrarSaida(MovimentacaoSaidaForm movimentacao)
         {
-            Service.RegistrarSaida(Mapper.Map<Movimentacao>(vaga));
+            Service.RegistrarSaida(Mapper.Map<Movimentacao>(movimentacao));
         }
 
         public void Delete(int id)
@@ -69,13 +71,13 @@ namespace Web.Controllers
             return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetByFilter(filtro));
         }
 
-        [HttpPut]
-        [Route("api/movimentacoes/{id}")]
-        public void AtualizarVaga(int id, int vagaId)
+        [HttpPost]
+        [Route("api/movimentacoes/atualizarvaga")]
+        public void AtualizarVaga(MovimentacaoForm entrada)
         {
-            var movimentacao = Service.GetById(id);                
+            var movimentacao = Service.GetById(entrada.Id);
 
-            Service.AtualizarVaga(movimentacao, Mapper.Map<Vaga>(vagaId));
+            Service.AtualizarVaga(movimentacao, Mapper.Map<Vaga>(entrada.Vaga));
         }
     }
 }

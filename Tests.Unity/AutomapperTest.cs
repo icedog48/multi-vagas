@@ -23,12 +23,12 @@ namespace Tests.Unity
             this.container = IoCHelper.Initialize();
         }
 
-        [Fact]
+        [Fact(DisplayName="Movimentação - Automapper")]
         public void DeveMapearEntidadeMovimentacao() 
         {
             Automapper.Setup();
 
-            var movimentacaoForm = new MovimentacaoEntradaForm()
+            var movimentacaoForm = new MovimentacaoForm()
             {
                 Cliente = null,
                 CategoriaVaga = 1,
@@ -39,7 +39,7 @@ namespace Tests.Unity
             var movimentacao = Mapper.Map<Movimentacao>(movimentacaoForm);
                 movimentacao.Vaga.CategoriaVaga = new CategoriaVaga() { Id = 1 };
 
-            movimentacaoForm = Mapper.Map<MovimentacaoEntradaForm>(movimentacao);
+            movimentacaoForm = Mapper.Map<MovimentacaoForm>(movimentacao);
 
         }
     }
