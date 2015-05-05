@@ -35,6 +35,16 @@ namespace Service
             return query;
         }
 
+        public void RegistrarEntrada()
+        {
+            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
+
+            var movimentacao = new Movimentacao();
+                movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
+
+            this.Add(movimentacao);
+        }
+
         public void RegistrarEntrada(Movimentacao movimentacao)
         {
             var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
