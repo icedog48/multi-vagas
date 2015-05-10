@@ -54,7 +54,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        [Route("api/movimentacoes/registrarentrada")]
+        [Route("api/movimentacoes/registrarsaida")]
         public void RegistrarSaida(MovimentacaoSaidaForm movimentacao)
         {
             Service.RegistrarSaida(Mapper.Map<Movimentacao>(movimentacao));

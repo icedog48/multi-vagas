@@ -43,11 +43,18 @@
                 method: 'POST'
             },
 
+            'registrarEntradaExpressa': {
+                url: 'api/movimentacoes/registrarentradaexpressa',
+                headers: { 'Authorization': 'token' },
+                method: 'POST'
+            },
+
             'atualizarVaga': {
                 method: 'POST',
                 headers: { 'Authorization': 'token' },
                 url: 'api/movimentacoes/atualizarvaga',
             },
+            
         });
 
         return resource;

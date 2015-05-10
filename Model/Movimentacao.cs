@@ -36,7 +36,9 @@ namespace Model
 
             this.Entrada = entrada;
             this.Ticket = entrada.ToString("yyyyMMddHHmmss");
-            this.Vaga.Disponivel = false;
+
+            if (this.Vaga != null)
+                this.Vaga.Disponivel = false;            
         }
 
         public virtual void RegistrarSaida(DateTime saida, Funcionario funcionario)
