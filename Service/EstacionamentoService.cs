@@ -74,6 +74,20 @@ namespace Service
         {
             var usuarioAntigo = ObterAdministradorAntigo(estacionamento.Id);
 
+            if (estacionamento.Usuario != null)
+            {
+                var novoUsuario = usuarioService.GetByLogin(estacionamento.Usuario.Login);
+
+                if (novoUsuario == null)
+                {
+                    estacionamento.Usuario.ClearId();
+                }
+                else
+                {
+                    estacionamento.Usuario = novoUsuario;
+                }
+            }            
+
             if (estacionamento.Usuario == null) // Recupera o usuario antigo, caso venha da tela sem o usuario preenchido
             {
                 estacionamento.Usuario = usuarioAntigo;
