@@ -10,5 +10,10 @@ namespace Model.Common
         public virtual int Id { get; set; }
 
         public virtual bool IsNew() { return this.Id == 0; }
+
+        public virtual void ClearId() 
+        {
+            this.Id = 0;
+        }
     }
 }
