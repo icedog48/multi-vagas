@@ -263,6 +263,8 @@
     <Content Include="Scripts\vendor\angular\angular-bootstrap-switch.js" />
     <Content Include="Scripts\vendor\angular\angular-resource.js" />
     <Content Include="Scripts\vendor\angular\angular-ui-router.js" />
+    <Content Include="Scripts\vendor\angular\masks.js" />
+    <Content Include="Scripts\vendor\angular\masks.min.js" />
     <Content Include="Scripts\vendor\bootstrap\bootstrap-switch.js" />
     <Content Include="Scripts\vendor\bootstrap\bootstrap-switch.min.js" />
     <Content Include="Scripts\vendor\bootstrap\bootstrap.js" />
