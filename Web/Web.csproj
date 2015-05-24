@@ -228,8 +228,13 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
-    <Content Include="Scripts\app\login\formRegistrar.html" />
-    <Content Include="Scripts\app\login\formRegistrar-controllerr.js" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamentoReserva.html" />
+    <Content Include="Scripts\app\estacionamento\filtroEstacionamentoReserva-controller.js" />
+    <Content Include="Scripts\app\login\formAlterarSenha.html" />
+    <Content Include="Scripts\app\login\formAlterarSenha-controller.js" />
+    <Content Include="Scripts\app\login\formRegistrarCliente.html" />
+    <Content Include="Scripts\app\login\formRegistrarCliente-controller.js" />
+    <Content Include="Scripts\app\login\cliente-service.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao-controller.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao.html" />
     <Content Include="Scripts\app\movimentacao\formRegistrarSaida.html" />
@@ -301,6 +306,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Attributes\MultivagasAuthorization.cs" />
     <Compile Include="Controllers\Attributes\NHSession.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\FuncionariosController.cs" />
     <Compile Include="Controllers\PerfisController.cs" />
     <Compile Include="Controllers\MovimentacoesController.cs" />
@@ -324,12 +330,14 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ClienteForm.cs" />
     <Compile Include="ViewModels\TipoPagamentoCombo.cs" />
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />
     <Compile Include="ViewModels\CategoriaVagaCombo.cs" />
     <Compile Include="ViewModels\MovimentacaoSaidaForm.cs" />
+    <Compile Include="ViewModels\UsuarioForm.cs" />
     <Compile Include="ViewModels\VagaCombo.cs" />
     <Compile Include="ViewModels\PerfilCombo.cs" />
     <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />
@@ -358,7 +366,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\hbm\" />
-    <Folder Include="Scripts\app\usuario\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Migrations\Migrations.csproj">

@@ -7,10 +7,8 @@ namespace Web.ViewModels
 {
     public class UsuarioForm
     {
-        public int Id { get; set; }
+        public string Login { get; set; }
 
-        public int Perfil { get; set; }
-
-        public string Email { get; set; }
+        public string Senha { get; set; }
     }
 }

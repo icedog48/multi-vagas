@@ -60,6 +60,7 @@ namespace WebApiAuthentication.Providers
         public override Task TokenEndpointResponse(OAuthTokenEndpointResponseContext context)
         {
             context.AdditionalResponseParameters.Add("Usuario", this.Usuario.Login);
+            context.AdditionalResponseParameters.Add("AlterarSenha", this.Usuario.AlterarSenha);
             context.AdditionalResponseParameters.Add("Permissoes", JsonConvert.SerializeObject(this.Usuario.Perfil.Permissoes.Select(x => x.Nome)));
 
             return base.TokenEndpointResponse(context);

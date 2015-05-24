@@ -17,9 +17,9 @@ namespace Model
         ADMIN = 2,
         
         [Description("Funcionario")]
-        FUNCIONARIO,
+        FUNCIONARIO = 3,
 
         [Description("Usuário")]
-        USUARIO
+        USUARIO = 4
     }
 }

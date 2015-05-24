@@ -21,5 +21,7 @@ namespace Model
         {
             return this.Perfil.Id == (int)perfilEnum;
         }
+
+        public virtual bool AlterarSenha { get; set; }
     }
 }

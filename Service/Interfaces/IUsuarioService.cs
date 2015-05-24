@@ -14,10 +14,12 @@ namespace Service.Interfaces
 
         void RegistrarComSenhaDefault(Usuario usuario);
 
-        void Atualizar(Usuario usuario);
-
         Usuario GetByLogin(string login);
 
         void Remove(Usuario usuario);
+
+        void AlterarSenha(Usuario usuario);
+
+        void Registrar(Usuario usuario);
     }
 }

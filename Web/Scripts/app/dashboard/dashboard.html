@@ -17,6 +17,10 @@
                     <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
 
                     <li ng-show="isAuthorized(userRoles.funcionario)"><a ui-sref="movimentacao_list()" name="MenuMovimentacoes"> Movimentações </a></li>
+
+                    <li ng-show="isAuthorized(userRoles.usuario)"><a ui-sref="estacionamento_reserva_list()" name="MenuReserva"> Reservar Vaga </a></li>
+
+                    <li ng-show="isAuthenticated()"><a ui-sref="alterar_senha()" name="MenuAlterarSenha"> Alterar Senha </a></li>
                     
                     <li> <a href="#" ng-click="logout()">Logout</a> </li>
                 </ul>

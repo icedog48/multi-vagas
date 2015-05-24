@@ -126,6 +126,7 @@ namespace Web.App_Start
                 .ForMember(model => model.Login, map => map.Ignore())
                 .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
                 ;
 
             Mapper.CreateMap<Usuario, UsuarioFormFuncionario>();
@@ -134,9 +135,20 @@ namespace Web.App_Start
                 .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
                 .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
                 ;
 
             Mapper.CreateMap<Usuario, UsuarioFormEstacionamento>();
+
+
+            Mapper.CreateMap<UsuarioForm, Usuario>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
+                .ForMember(model => model.Perfil, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
+                .ForMember(model => model.Email, map => map.Ignore())
+                .ForMember(model => model.Senha, map => map.MapFrom(viewModel => viewModel.Senha))
+                .ForMember(model => model.Id, map => map.Ignore())
+                ;
 
             #endregion Usuario
 
@@ -164,6 +176,16 @@ namespace Web.App_Start
 
             Mapper.CreateMap<int?, Cliente>().ConvertUsing(x => (x.HasValue) ? new Cliente() { Id = x.Value } : null);
             Mapper.CreateMap<Cliente, int?>().ConvertUsing(x => (x == null) ? Convert.ToInt32(null) : x.Id);
+
+            Mapper.CreateMap<Cliente, ClienteForm>()
+                .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.ConfirmacaoSenha, map => map.Ignore())
+                ;
+
+            Mapper.CreateMap<ClienteForm, Cliente>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
+                .ForMember(model => model.Usuario, map => map.Ignore())
+                ;
 
             #endregion Cliente
 

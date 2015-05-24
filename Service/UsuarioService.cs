@@ -39,6 +39,7 @@ namespace Service
         public void RegistrarComSenhaDefault(Usuario usuario) 
         {
             usuario.Senha = Encryption.Encrypt(SenhaDefault);
+            usuario.AlterarSenha = true;
 
             repository.Add(usuario);
         }
@@ -59,13 +60,6 @@ namespace Service
             return list.First();
         }
 
-        public void Atualizar(Usuario usuario)
-        {
-            usuario.Senha = Encryption.Encrypt(usuario.Senha);
-
-            repository.Update(usuario);
-        }
-
         public Usuario GetByLogin(string login)
         {
             var query = repository.Items.Where(usuario => usuario.Login == login);
@@ -78,6 +72,25 @@ namespace Service
         public void Remove(Usuario usuario)
         {
             repository.Remove(usuario);
+        }
+
+        public void AlterarSenha(Usuario usuario)
+        {
+            var senha = Encryption.Encrypt(usuario.Senha);
+
+            usuario = this.GetByLogin(usuario.Login);
+            usuario.Senha = senha;
+            usuario.AlterarSenha = false;
+
+            repository.Update(usuario);
+        }
+
+
+        public void Registrar(Usuario usuario)
+        {
+            usuario.Senha = Encryption.Encrypt(usuario.Senha);            
+
+            repository.Add(usuario);
         }
     }
 }

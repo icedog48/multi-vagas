@@ -1,0 +1,22 @@
+﻿<div id="login-page">
+    
+    <div class="container">
+
+        <form class="form-login">
+            <h2 class="form-login-heading">Alterar Senha</h2>
+
+            <div class="login-wrap">
+
+                <input type="password" class="form-control" placeholder="Senha" name="Senha" ng-model="cliente.Senha" />
+                <br />
+
+                <input type="password" class="form-control" placeholder="Confirmação de senha" name="ConfirmacaoSenha" ng-model="cliente.ConfirmacaoSenha" />
+                <br />
+
+                <button class="btn btn-theme btn-block" name="btnLogin" ng-click="alterarSenha(cliente)"><i class=" fa fa-lock"></i> SALVAR </button>
+            </div>
+
+        </form>
+    </div>
+       
+</div>

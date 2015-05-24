@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Web.ViewModels
 {
-    public class Cliente : LogicalExclusionEntity
+    public class ClienteForm
     {
+        public int Id { get; set; }
+
         public virtual string Nome { get; set; }
                    
         public virtual string CPF { get; set; }
@@ -17,6 +19,8 @@ namespace Model
                    
         public virtual string Email { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        public virtual string Senha { get; set; }
+
+        public virtual string ConfirmacaoSenha { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿(function () {
-    var config = function ($stateProvider, APP_CONFIG) {
+    var config = function ($stateProvider, APP_CONFIG, USER_ROLES) {
 
         $stateProvider.state("login", {
             url: "/login",
@@ -10,8 +10,15 @@
 
         $stateProvider.state("registrar", {
             url: "/registrar",
-            templateUrl: APP_CONFIG.templateBaseUrl + "login/formRegistrar.html",
-            controller: 'formRegistrarController'
+            templateUrl: APP_CONFIG.templateBaseUrl + "login/formRegistrarCliente.html",
+            controller: 'formRegistrarClienteController'
+        });
+
+        $stateProvider.state("alterar_senha", {
+            url: "/alterarsenha",
+            templateUrl: APP_CONFIG.templateBaseUrl + "login/formAlterarSenha.html",
+            controller: 'formAlterarSenhaController',
+            roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin, USER_ROLES.funcionario, USER_ROLES.usuario]
         });
 
     };
@@ -22,5 +29,5 @@
              "ui.router"
         ])
 
-        .config(["$stateProvider", "APP_CONFIG", config]);
+        .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config]);
 }());
