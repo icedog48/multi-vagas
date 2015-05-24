@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils.Extensions;
 
-namespace Migrations._201502
+namespace Migrations._201503
 {
     [Migration(201503211115, "Adição do campo SituacaoRegistro as tabelas existentes")]
     public class AddLogicalExclusionToTables : Migration

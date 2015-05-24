@@ -27,7 +27,6 @@
                     });
             };
         };
-
     };
 
     angular.module("vagas").controller("filtroVagasController", ["$scope", "CategoriaVaga", "Estacionamento", filtroVagasController]);

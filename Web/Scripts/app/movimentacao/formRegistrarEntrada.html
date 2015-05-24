@@ -6,11 +6,19 @@
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Dados de Entrada </h4>
 
+                <!--Data/Hora-->
+                <div class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.Placa.$dirty && frmRegistrarEntrada.Placa.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Data/Hora</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Entrada" ng-model="movimentacao.Entrada" disabled required >
+                    </div>
+                </div>
+
                 <!--Placa-->
                 <div class="form-group" ng-class="{ invalid_field: frmRegistrarEntrada.Placa.$dirty && frmRegistrarEntrada.Placa.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Placa</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Placa" ng-model="movimentacao.Placa" ng-disabled="edicao" required>
+                        <input type="text" class="form-control" name="Placa" ng-model="movimentacao.Placa" ng-disabled="edicao" required maxlength="7">
                     </div>
                 </div>
 

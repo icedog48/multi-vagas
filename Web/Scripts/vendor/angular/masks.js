@@ -719,6 +719,7 @@ if (objectTypes[typeof module]) {
 			}
 		};
 	})
+
 	.directive('uiBrIeMask',function() {
 
 		var ieMasks = {

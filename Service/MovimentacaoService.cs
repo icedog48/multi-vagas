@@ -18,19 +18,31 @@ namespace Service
 {
     public class MovimentacaoService : MultiVagasCRUDService<Movimentacao>, IMovimentacaoService
     {
-        private IFuncionarioService funcionarioService;
-        private IRepository<Vaga> vagaRepository;
+        private readonly IFuncionarioService funcionarioService;
+        private readonly IRepository<Vaga> vagaRepository;
+        private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
-        public MovimentacaoService(IRepository<Movimentacao> repository, MovimentacaoValidator validator, Usuario usuarioLogado, IFuncionarioService funcionarioService, IRepository<Vaga> vagaRepository)
+        public MovimentacaoService
+            (
+                MovimentacaoValidator validator, 
+                Usuario usuarioLogado,
+                IRepository<Movimentacao> repository,     
+                IFuncionarioService funcionarioService, 
+                IRepository<Vaga> vagaRepository,
+                IRepository<TipoPagamento> tipoPagamentoRepository
+            )
             : base(repository, validator, usuarioLogado)
         {
             this.funcionarioService = funcionarioService;
             this.vagaRepository = vagaRepository;
+            this.tipoPagamentoRepository = tipoPagamentoRepository;
         }
 
         protected override IQueryable<Movimentacao> GetActiveItems()
         {
             var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
+
+            if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO)) query = query.Where(x => !x.Saida.HasValue);
 
             return query;
         }
@@ -77,6 +89,7 @@ namespace Service
         {
             var vagaAntiga = movimentacao.Vaga;
                 vagaAntiga.Disponivel = true;
+
             vagaRepository.Update(vagaAntiga);
 
             novaVaga = vagaRepository.Get(novaVaga.Id);
@@ -86,6 +99,13 @@ namespace Service
             movimentacao.Vaga = novaVaga;
 
             repository.Update(movimentacao);
+        }
+
+        public IEnumerable<TipoPagamento> GetTiposPagamento()
+        {
+            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
+
+            return tipoPagamentoRepository.Items.Where(x => x.Estacionamento.Id == funcionario.Estacionamento.Id).ToList();
         }
     }
 }

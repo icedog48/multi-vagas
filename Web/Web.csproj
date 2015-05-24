@@ -228,6 +228,8 @@
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Scripts\app\dashboard\dashboard.js" />
+    <Content Include="Scripts\app\login\formRegistrar.html" />
+    <Content Include="Scripts\app\login\formRegistrar-controllerr.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao-controller.js" />
     <Content Include="Scripts\app\movimentacao\filtroMovimentacao.html" />
     <Content Include="Scripts\app\movimentacao\formRegistrarSaida.html" />
@@ -322,6 +324,7 @@
     </Compile>
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TipoPagamentoCombo.cs" />
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />

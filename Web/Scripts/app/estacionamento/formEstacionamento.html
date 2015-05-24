@@ -50,7 +50,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmEstacionamento.CEP.$dirty && frmEstacionamento.CEP.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">CEP</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="CEP" ng-model="estacionamento.CEP" required>
+                        <input type="text" class="form-control" name="CEP" ng-model="estacionamento.CEP" required ui-br-cep-mask>
                     </div>
                 </div>
 

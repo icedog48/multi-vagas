@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils.Extensions;
 
-namespace Migrations._201502
+namespace Migrations._201503
 {
     [Migration(201503171619, "Criação das tabelas de Vaga e Categoria de Vagas")]
     public class CreateTableVagas : Migration

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils.Extensions;
 
-namespace Migrations._201502
+namespace Migrations._201504
 {
     [Migration(201504231640, "Criação da tabela de movimentação")]
     public class CreateTableMovimentacao : Migration

@@ -23,7 +23,9 @@
             </li>
         </ul>
 
-        <button ng-show="!isAuthenticated()" ui-sref="login()" name="btnLogin"> Login </button>
+        <button ng-show="!isAuthenticated()" ui-sref="login()" class="btn btn-theme" name="btnLogin"> Login </button>
+
+        <button ng-show="!isAuthenticated()" ui-sref="registrar()" class="btn btn-theme" name="btnLogin"> Registrar </button>
     </div>
 </header> 
             
@@ -36,3 +38,4 @@
     </div>
 
 </section>
+

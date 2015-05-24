@@ -1,5 +1,5 @@
 ﻿(function () {
-    var formRegistrarEntradaController = function ($scope, $state, Vaga, Movimentacao, $stateParams) {
+    var formRegistrarEntradaController = function ($scope, $state, Vaga, Movimentacao, $stateParams, $filter) {
 
         var edicao = (typeof ($stateParams.id) != 'undefined');
 
@@ -52,10 +52,9 @@
                 listarVagas(movimentacao.CategoriaVaga);
 
                 $scope.movimentacao = movimentacao;
+                $scope.movimentacao.Entrada = $filter('date')($scope.movimentacao.Entrada, 'dd/MM/yyyy HH:mm');
                 
                 Vaga.get({ id: movimentacao.Vaga }).$promise.then(function (data) {
-                    console.log(data);
-
                     $scope.vagaAtual = data.CategoriaVaga + " - " + data.Codigo;
                 });
             }, function (errResponse) {
@@ -69,6 +68,8 @@
             carregarDados($stateParams.id);            
         } else {
             $scope.movimentacao = {};
+            $scope.movimentacao.Entrada = $filter('date')(new Date(), 'dd/MM/yyyy HH:mm');;
+
             $scope.vagasDisponiveis = [];
         }
 
@@ -76,7 +77,34 @@
         $scope.listarVagas = listarVagas;
         $scope.edicao = edicao;
         $scope.salvar = salvar;
+
+        $scope.$watch('movimentacao.Placa', function (newValue, oldValue) {
+
+            if (typeof (newValue) !== 'undefined') {
+
+                var numberPattern = /^\d+$/;
+                var letterPattern = /^[a-zA-Z]+$/;
+
+                var isValid = true;
+
+                for (var i = 0; i < newValue.length; i++) {
+                    if (i < 3) {
+                        isValid = letterPattern.test(newValue.charAt(i));
+                    } else {
+                        isValid = numberPattern.test(newValue.charAt(i));
+                    }
+
+                    if (!isValid) break;
+                }
+
+                if (isValid) {
+                    $scope.movimentacao.Placa = newValue.toUpperCase();
+                } else {
+                    $scope.movimentacao.Placa = oldValue ? oldValue.toUpperCase() : '';
+                }
+            }
+        }, true);
     };
 
-    angular.module("movimentacao").controller("formRegistrarEntradaController", ["$scope", "$state", "Vaga", "Movimentacao", "$stateParams", formRegistrarEntradaController]);
+    angular.module("movimentacao").controller("formRegistrarEntradaController", ["$scope", "$state", "Vaga", "Movimentacao", "$stateParams", "$filter", formRegistrarEntradaController]);
 }());
