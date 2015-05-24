@@ -44,7 +44,7 @@
 
             var autorizado = authService.isAuthorized(authorizedRoles);
 
-            if (!autenticado && (toState.name != "estacionamento_publico_list" && toState.name != "login")) {
+            if (!autenticado && (toState.name != "estacionamento_publico_list" && toState.name != "login" && toState.name != "registrar")) {
                 event.preventDefault();
 
                 $state.go('estacionamento_publico_list');
@@ -76,7 +76,8 @@
         "movimentacao",
         "ui.router",
         "frapontillo.bootstrap-switch",
-        "ui.bootstrap"
+        "ui.bootstrap",
+        "ui.utils.masks"
     ])
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])

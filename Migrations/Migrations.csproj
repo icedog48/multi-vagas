@@ -76,8 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="201502\1 - CreateTableEstacionamento.cs" />
-    <Compile Include="201503\09 - CreateTableMovimentacao.cs" />
-    <Compile Include="201503\10 - AlterTableMovimentacao.cs" />
+    <Compile Include="201504\09 - CreateTableMovimentacao.cs" />
+    <Compile Include="201504\10 - AlterTableMovimentacao.cs" />
     <Compile Include="201503\08 - AlterTableEstacionamentoAddUsuarioId.cs" />
     <Compile Include="201503\07 -AlterTableUsuario.cs" />
     <Compile Include="201503\05 -AddLogicalExclusionToTables.cs" />

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils.Extensions;
 
-namespace Migrations._201502
+namespace Migrations._201503
 {
     [Migration(201503222336, "Alteracao do campo Senha na tabela de Usuarios para 255 caracteres")]
     public class AlterTableUsuario : Migration

@@ -16,6 +16,6 @@ namespace Service.Interfaces
 
         void AtualizarVaga(Movimentacao movimentacao, Vaga vaga);
 
-        void RegistrarEntrada();
+        IEnumerable<TipoPagamento> GetTiposPagamento();
     }
 }

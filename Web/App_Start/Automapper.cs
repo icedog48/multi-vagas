@@ -189,7 +189,15 @@ namespace Web.App_Start
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
                 ;
 
-            #endregion Movimentacao
+            #endregion Movimentacao            
+
+            #region TipoPagamento
+
+            Mapper.CreateMap<int, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Id = x });
+
+            Mapper.CreateMap<TipoPagamento, TipoPagamentoCombo>();
+
+            #endregion TipoPagamento
 
             Mapper.AssertConfigurationIsValid();
         }

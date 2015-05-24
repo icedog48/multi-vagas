@@ -25,6 +25,13 @@
                 headers: { 'Authorization': 'token' }
             },
 
+            'listarTiposPagamento': {
+                method: 'GET',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: 'api/movimentacoes/tipospagamento',
+            },
+
             'filtrar': {
                 method: 'POST',
                 isArray: true,
@@ -53,6 +60,12 @@
                 method: 'POST',
                 headers: { 'Authorization': 'token' },
                 url: 'api/movimentacoes/atualizarvaga',
+            },
+
+            'registrarSaida': {
+                url: 'api/movimentacoes/registrarsaida/:id',
+                headers: { 'Authorization': 'token' },
+                method: 'PUT'
             },
             
         });

@@ -20,21 +20,21 @@
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Nome.$dirty && frmFuncionario.Nome.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Nome</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Nome" ng-model="funcionario.Nome" required>
+                        <input type="text" class="form-control" name="Nome" ng-model="funcionario.Nome" required >
                     </div>
                 </div> 
 
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.CPF.$dirty && frmFuncionario.CPF.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">CPF</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="CPF" ng-model="funcionario.CPF" required>
+                        <input type="text" class="form-control" name="CPF" ng-model="funcionario.CPF" required ui-br-cpf-mask>
                     </div>
                 </div>  
                 
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Telefone.$dirty && frmFuncionario.Telefone.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Telefone</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" name="Telefone" ng-model="funcionario.Telefone" required>
+                        <input type="tel" class="form-control" name="Telefone" ng-model="funcionario.Telefone" required ui-br-phone-number >
                     </div>
                 </div>     
                 
@@ -58,7 +58,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.CEP.$dirty && frmFuncionario.CEP.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">CEP</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="CEP" ng-model="funcionario.CEP" required>
+                        <input type="text" class="form-control" name="CEP" ng-model="funcionario.CEP" required ui-br-cep-mask>
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.UF.$dirty && frmFuncionario.UF.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">UF</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="UF" ng-model="funcionario.UF" required>
+                        <input type="text" class="form-control" name="UF" ng-model="funcionario.UF" required maxlength="2">
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmFuncionario.Matricula.$dirty && frmFuncionario.Matricula.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Matrícula</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Matricula" ng-model="funcionario.Matricula" required >
+                        <input type="text" class="form-control" name="Matricula" ng-model="funcionario.Matricula" required maxlength="10">
                     </div>
                 </div> 
 

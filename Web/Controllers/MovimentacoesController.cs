@@ -53,11 +53,15 @@ namespace Web.Controllers
             Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
         }
 
-        [HttpPost]
-        [Route("api/movimentacoes/registrarsaida")]
-        public void RegistrarSaida(MovimentacaoSaidaForm movimentacao)
+        [HttpPut]
+        [Route("api/movimentacoes/registrarsaida/{id}")]
+        public void RegistrarSaida(int id, MovimentacaoSaidaForm movimentacaoSaida)
         {
-            Service.RegistrarSaida(Mapper.Map<Movimentacao>(movimentacao));
+            var movimentacao = Service.GetById(id);
+                movimentacao.TipoPagamento = Mapper.Map<TipoPagamento>(movimentacaoSaida.TipoPagamento);
+                movimentacao.ValorPago = movimentacaoSaida.ValorPago;    
+
+            Service.RegistrarSaida(movimentacao);
         }
 
         public void Delete(int id)
@@ -78,6 +82,13 @@ namespace Web.Controllers
             var movimentacao = Service.GetById(entrada.Id);
 
             Service.AtualizarVaga(movimentacao, Mapper.Map<Vaga>(entrada.Vaga));
+        }
+
+        [HttpGet]
+        [Route("api/movimentacoes/tipospagamento")]
+        public IEnumerable<TipoPagamentoCombo> ListarTiposPagamento()
+        {
+            return Mapper.Map<IEnumerable<TipoPagamentoCombo>>(Service.GetTiposPagamento());
         }
     }
 }
