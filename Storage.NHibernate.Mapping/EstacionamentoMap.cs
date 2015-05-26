@@ -26,9 +26,10 @@ namespace Storage.Nhibernate.Mapping
 
             Map(x => x.ConfirmaSaida);
             Map(x => x.PermiteReserva);
-            Map(x => x.Vagas);
 
             References(x => x.Usuario);
+
+            HasMany(x => x.CagetoriasVaga);
         }
     }
 }

@@ -54,33 +54,21 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>CNPJ</th>
                         <th>Razão Social</th>
                         <th>Telefone</th>
                         <th>Endereço</th>
+                        <th>Vagas Disponíveis</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="estacionamento in estacionamentos">
-
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.CNPJ"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.RazaoSocial"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Telefone"></td>
-                        <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Endereco"></td>
-
-                        <td align="center">
-                            <!--<a ng-click="excluirEstacionamento(estacionamento)"> <i class="fa fa-times fa-2x"></i> </a>-->
-                        </td>
+                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.RazaoSocial"></td>
+                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.Telefone"></td>
+                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.Endereco"></td>
+                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.VagasDisponiveis"></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-    
-    <!--Botoes-->
-    <div class="row mt">
-        <div class="col-sm-12 col-md-12 form-buttons">
-            <!--<button type="submit" class="btn btn-round btn-primary pull-right" name="btnNovoEstacionamento" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>-->
         </div>
     </div>
 </form>

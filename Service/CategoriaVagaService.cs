@@ -18,26 +18,38 @@ namespace Service
 {
     public class CategoriaVagaService : MultiVagasCRUDService<CategoriaVaga>, ICategoriaVagaService
     {
-        private IRepository<Vaga> vagaRepository;
-        private IFuncionarioService funcionarioService;
-        private CategoriaVagaValidator categoriaVagaValidator;
+        private readonly IRepository<Vaga> vagaRepository;
+        private readonly IRepository<Reserva> reservaRepository;
+
+        private readonly CategoriaVagaValidator categoriaVagaValidator;
+        
+        private readonly IClienteService clienteService;
+        private readonly IFuncionarioService funcionarioService;
 
         public CategoriaVagaService
             (
-                IRepository<CategoriaVaga> repository, 
+                IRepository<CategoriaVaga> repository,
                 IRepository<Vaga> vagaRepository,
+                IRepository<Reserva> reservaRepository,
+
                 IFuncionarioService funcionarioService,
+                IClienteService clienteService,
+
                 CategoriaVagaValidator categoriaVagaValidator,
                 Usuario usuarioLogado
             )
             : base(repository, categoriaVagaValidator, usuarioLogado)
         {
             this.vagaRepository = vagaRepository;
+            this.reservaRepository = reservaRepository;
+
             this.funcionarioService = funcionarioService;
+            this.clienteService = clienteService;
+
             this.categoriaVagaValidator = categoriaVagaValidator;
         }
 
-        protected virtual Vaga NovaVaga(int indice, CategoriaVaga categoria) 
+        protected virtual Vaga NovaVaga(int indice, CategoriaVaga categoria)
         {
             var codigo = categoria.Sigla;
 
@@ -47,7 +59,7 @@ namespace Service
             }
 
             codigo += indice;
-            
+
             return new Vaga()
             {
                 Codigo = codigo,
@@ -56,7 +68,7 @@ namespace Service
             };
         }
 
-        public virtual void Add(CategoriaVaga categoria, int vagas) 
+        public virtual void Add(CategoriaVaga categoria, int vagas)
         {
             this.Add(categoria);
 
@@ -103,6 +115,20 @@ namespace Service
         public Vaga GetVagaById(int id)
         {
             return vagaRepository.Items.Where(vaga => vaga.Id == id).FirstOrDefault();
+        }
+
+        public void ReservarVaga(Reserva reserva)
+        {
+            reserva.Cliente = clienteService.GetClienteByUsuario(usuarioLogado);
+
+            reserva.Vaga.Disponivel = false;
+
+            this.reservaRepository.Add(reserva);
+        }
+
+        public IList<CategoriaVaga> GetByEstacionamento(Estacionamento estacionamento)
+        {
+            return GetActiveItems().Where(x => x.Estacionamento.Id == estacionamento.Id).ToList();
         }
     }
 

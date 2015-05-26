@@ -22,6 +22,19 @@
                 headers: { 'Authorization': 'token' },
                 url: '/api/vagas/disponiveis/:id'
             },
+
+            'reservarVaga': {
+                method: 'POST',
+                headers: { 'Authorization': 'token' },
+                url: '/api/vagas/reservar'
+            },
+
+            'categoriasVagaEstacionamento': {
+                method: 'GET',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/vagas/categorias/:id'
+            },
         });
 
         return resource;

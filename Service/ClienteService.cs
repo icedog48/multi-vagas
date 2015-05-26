@@ -51,5 +51,10 @@ namespace Service
 
             repository.Add(cliente);
         }
+
+        public Cliente GetClienteByUsuario(Usuario usuario)
+        {
+            return repository.Items.Where(x => x.Usuario.Id == usuario.Id).FirstOrDefault();
+        }
     }
 }

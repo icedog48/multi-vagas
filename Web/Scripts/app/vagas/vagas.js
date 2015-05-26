@@ -29,6 +29,17 @@
                 roles: [USER_ROLES.equipeMultivagas, USER_ROLES.admin]
             });
 
+
+        $stateProvider
+           .state("reservar_vaga", {
+               parent: 'dashboard',
+               url: "/vagas/reservar",
+               templateUrl: "Scripts/app/vagas/formReservaVaga.html",
+               controller: 'formReservaVagaController',
+               roles: [USER_ROLES.usuario]
+           });
+
+
         $resourceProvider.defaults.stripTrailingSlashes = false;
     };
 

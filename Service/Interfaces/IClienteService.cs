@@ -11,5 +11,7 @@ namespace Service.Interfaces
     {
 
         void Add(Cliente cliente, string senha);
+
+        Cliente GetClienteByUsuario(Usuario usuario);
     }
 }

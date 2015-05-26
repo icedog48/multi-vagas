@@ -254,6 +254,8 @@
     <Content Include="Scripts\app\login\usuario-service.js" />
     <Content Include="Scripts\app\shared\perfil-service.js" />
     <Content Include="Scripts\app\vagas\categoriaVaga-service.js" />
+    <Content Include="Scripts\app\vagas\formReservaVaga.html" />
+    <Content Include="Scripts\app\vagas\formReservaVaga-controller.js" />
     <Content Include="Scripts\app\vagas\vaga-service.js" />
     <Content Include="Scripts\app\vagas\filtroVagas-controller.js" />
     <Content Include="Scripts\app\vagas\vagas.js" />
@@ -338,6 +340,7 @@
     <Compile Include="ViewModels\CategoriaVagaCombo.cs" />
     <Compile Include="ViewModels\MovimentacaoSaidaForm.cs" />
     <Compile Include="ViewModels\UsuarioForm.cs" />
+    <Compile Include="ViewModels\ReservaForm.cs" />
     <Compile Include="ViewModels\VagaCombo.cs" />
     <Compile Include="ViewModels\PerfilCombo.cs" />
     <Compile Include="ViewModels\UsuarioFormEstacionamento.cs" />

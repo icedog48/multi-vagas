@@ -15,7 +15,7 @@
                 } else if (authService.isAuthorized($scope.userRoles.funcionario)) {
                     $state.go('movimentacao_list');
                 } else if (authService.isAuthorized($scope.userRoles.usuario)) {
-                    $state.go('estacionamento_publico_list');
+                    $state.go('estacionamento_reserva_list');
                 } else {
                     $state.go('estacionamento_list');
                 }

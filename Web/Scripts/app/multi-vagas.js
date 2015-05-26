@@ -57,6 +57,8 @@
                     $state.go('estacionamento_list');
                 } else if (authService.isAuthorized(USER_ROLES.funcionario)) {
                     $state.go('movimentacao_list');
+                } else if (authService.isAuthorized(USER_ROLES.usuario)) {
+                    $state.go('estacionamento_reserva_list');
                 } else {
                     $state.go('estacionamento_publico_list');
                 }

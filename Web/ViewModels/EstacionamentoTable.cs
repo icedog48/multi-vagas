@@ -16,5 +16,7 @@ namespace Web.ViewModels
         public string Telefone { get; set; }
 
         public string Endereco { get; set; }
+
+        public int VagasDisponiveis { get; set; }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="PerfilMap.cs" />
     <Compile Include="PermissaoMap.cs" />
     <Compile Include="TipoPagamentoMap.cs" />
+    <Compile Include="ReservaMap.cs" />
     <Compile Include="VagaMap.cs" />
     <Compile Include="Conventions\EnumConvention.cs" />
     <Compile Include="Conventions\MyManyToManyConvention.cs" />

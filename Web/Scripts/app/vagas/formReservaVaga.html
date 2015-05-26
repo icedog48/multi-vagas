@@ -1,0 +1,42 @@
+﻿<form name="formReservaVaga" class="form-horizontal style-form" ng-submit="salvar(reserva)">
+
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12">
+
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Reserva de Vagas </h4>
+
+                <!-- Data Reserva -->
+                <div class="form-group" ng-class="{ invalid_field: formReservaVaga.Data.$dirty && formReservaVaga.Data.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Data Admissão</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" name="Data" ng-model="reserva.Data" required>
+                    </div>
+                </div>
+
+                <!-- Categoria Vaga-->
+                <div class="form-group" ng-class="{ invalid_field: formReservaVaga.CategoriaVaga.$dirty && formReservaVaga.CategoriaVaga.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Categoria da vaga</label>
+                    <div class="col-sm-10">
+
+                        <select name="CategoriaVaga" class="form-control" ng-model="reserva.CategoriaVaga" ng-options="categoriaVaga.Id as categoriaVaga.Descricao for categoriaVaga in categoriasVaga" required>
+                            <option value="" disabled> --- </option>
+                        </select>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Botoes-->
+    <div class="row mt">
+        <div class="col-sm-12 col-md-12 form-buttons">
+            <button type="submit" class="btn btn-round btn-primary pull-right" name="btnSalvar"><i class="fa fa-save"></i> Salvar </button>
+
+            <button type="button" class="btn btn-round btn-primary pull-right" ui-sref="estacionamento_reserva_list()"><i class="fa fa-arrow-left"></i> Cancelar </button>
+        </div>
+    </div>
+
+</form>
