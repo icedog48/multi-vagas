@@ -130,7 +130,7 @@ namespace Service
 
         public IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId)
         {
-            return tipoPagamentoRepository.Items.Where(x => x.Estacionamento.Id == estacionamentoId);
+            return tipoPagamentoRepository.Items;
         }
     }
 

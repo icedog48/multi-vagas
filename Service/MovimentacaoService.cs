@@ -103,9 +103,7 @@ namespace Service
 
         public IEnumerable<TipoPagamento> GetTiposPagamento()
         {
-            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
-
-            return tipoPagamentoRepository.Items.Where(x => x.Estacionamento.Id == funcionario.Estacionamento.Id).ToList();
+            return tipoPagamentoRepository.Items.ToList();
         }
     }
 }

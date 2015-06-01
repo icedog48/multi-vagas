@@ -27,6 +27,41 @@
                 </div>
 
             </div>
+
+            <div class="form-panel">
+                <h4 class="mb"><i class="fa fa-angle-right"></i> Dados de pagamento </h4>
+
+                <!-- Cartão de credito  -->
+                <div class="form-group" ng-class="{ invalid_field: formReservaVaga.NumeroCartao.$dirty && formReservaVaga.NumeroCartao.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Cartão de crédito</label>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <input type="text" class="form-control" name="NumeroCartao" ng-model="reserva.CartaoCredito.Numero" required maxlength="16" >
+                    </div>
+                </div>
+
+
+                <!-- Validade do cartão  -->
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Validade</label>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <input type="text" class="form-control" name="Ano" ng-model="reserva.CartaoCredito.Validade.Ano" required maxlength="4" placeholder="Ano">
+                    </div>
+
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <input type="text" class="form-control" name="Mes" ng-model="reserva.CartaoCredito.Validade.Mes" required maxlength="2" placeholder="Mes">
+                    </div>
+                </div>
+
+                <!-- Código de Segurança  -->
+                <div class="form-group" ng-class="{ invalid_field: formReservaVaga.CodigoSeguranca.$dirty && formReservaVaga.CodigoSeguranca.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Código de Segurança</label>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <input type="text" class="form-control" name="CodigoSeguranca" ng-model="reserva.CartaoCredito.CodigoSeguranca" required maxlength="3">
+                    </div>
+                </div>
+
+
+            </div>
         </div>
     </div>
 

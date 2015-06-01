@@ -13,12 +13,6 @@ namespace Web.ViewModels
 
         public string Placa { get; set; }
 
-        public int CategoriaVaga { get; set; }
-
-        public int Vaga { get; set; }
-
-        public int? Cliente { get; set; }
-
         public DateTime Entrada { get; set; }
     }
 }

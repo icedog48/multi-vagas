@@ -20,6 +20,8 @@
             cliente.Login = sessionService.user ;
 
             Usuario.alterarSenha(cliente).$promise.then(function (data) {
+                $scope.currentUser.alterarSenha = false;
+
                 mensagemSucesso();
             }, function (errResponse) {
                 showErrorMessage(errResponse);

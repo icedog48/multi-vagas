@@ -77,6 +77,8 @@
   <ItemGroup>
     <Compile Include="201502\1 - CreateTableEstacionamento.cs" />
     <Compile Include="201504\09 - CreateTableMovimentacao.cs" />
+    <Compile Include="201505\15- InsertIntoTipoPagamento.cs" />
+    <Compile Include="201505\14- AlterTablesTipoPagamentoEstacionamento.cs" />
     <Compile Include="201505\13- CreateTableReserva.cs" />
     <Compile Include="201505\12 - CreateUniqueIndex.cs" />
     <Compile Include="201505\11 - AlterTableUsuario.cs" />

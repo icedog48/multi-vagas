@@ -34,11 +34,11 @@ namespace Web.Controllers
 
         [HttpGet]
         [Route("api/movimentacoes/{id}")]
-        public MovimentacaoForm Get(int id)
+        public MovimentacaoEntradaForm Get(int id)
         {
             try
             {
-                return Mapper.Map<MovimentacaoForm>(this.Service.GetById(id));
+                return Mapper.Map<MovimentacaoEntradaForm>(this.Service.GetById(id));
             }
             catch (Exception ex)
             {
@@ -48,9 +48,23 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/movimentacoes/registrarentrada")]
-        public void RegistrarEntrada(MovimentacaoForm movimentacao)
+        public void RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
         {
             Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+        }
+
+        [HttpGet]
+        [Route("api/movimentacoes/prepararsaida/{movimentacao}")]
+        public MovimentacaoSaidaForm PrepararSaida(int movimentacao)
+        {
+            try
+            {
+                return Mapper.Map<MovimentacaoSaidaForm>(this.Service.GetById(movimentacao));
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
 
         [HttpPut]
@@ -77,7 +91,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/movimentacoes/atualizarvaga")]
-        public void AtualizarVaga(MovimentacaoForm entrada)
+        public void AtualizarVaga(MovimentacaoEntradaForm entrada)
         {
             var movimentacao = Service.GetById(entrada.Id);
 

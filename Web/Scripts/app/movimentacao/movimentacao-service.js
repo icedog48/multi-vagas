@@ -67,6 +67,12 @@
                 headers: { 'Authorization': 'token' },
                 method: 'PUT'
             },
+
+            'prepararSaida': {
+                url: 'api/movimentacoes/prepararsaida/:movimentacao',
+                headers: { 'Authorization': 'token' },
+                method: 'GET'
+            },
             
         });
 

@@ -37,8 +37,6 @@ namespace Model
 
         public virtual DateTime DataAdmissao { get; set; }
 
-        public virtual TimeSpan CargaHoraria { get; set; }
-
         public virtual decimal Salario { get; set; }
 
         public virtual string Obs { get; set; }

@@ -333,6 +333,7 @@
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClienteForm.cs" />
+    <Compile Include="ViewModels\MovimentacaoEntradaForm.cs" />
     <Compile Include="ViewModels\TipoPagamentoCombo.cs" />
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
