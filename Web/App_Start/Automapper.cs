@@ -40,6 +40,13 @@ namespace Web.App_Start
                 return x.ToString("hh':'mm':'ss");
             });
 
+            Mapper.CreateMap<DateTime, string>().ConvertUsing(x => x.ToString("dd/MM/yyyy HH:mm:ss"));
+            Mapper.CreateMap<string, DateTime>().ConvertUsing(x => Convert.ToDateTime(x));
+
+
+            Mapper.CreateMap<DateTime?, string>().ConvertUsing(x => (x.HasValue) ? x.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty);
+            Mapper.CreateMap<string, DateTime?>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? Convert.ToDateTime(x) : (DateTime?)null);
+
             #endregion
 
             #region Estacionamento
@@ -238,7 +245,17 @@ namespace Web.App_Start
             Mapper.CreateMap<Movimentacao, MovimentacaoTable>()
                 .ForMember(viewModel => viewModel.Entrada, map => map.MapFrom(model => model.Entrada.ToString("dd/MM/yyyy HH:mm")))
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
-                ;
+            ;
+
+            Mapper.CreateMap<Movimentacao, MovimentacaoPorPeriodoTable>()
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+                .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
+                .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
+                .ForMember(viewModel => viewModel.Data, map => map.MapFrom(model => model.Entrada.Date.ToString("dd/MM/yyyy")))
+                .ForMember(viewModel => viewModel.HorasReferencia, map => map.MapFrom(model => model.HorasReferencia))
+                .ForMember(viewModel => viewModel.TipoPagamento, map => map.MapFrom(model => model.TipoPagamento))
+            ;
 
             #endregion Movimentacao            
 
@@ -246,6 +263,9 @@ namespace Web.App_Start
 
             Mapper.CreateMap<int, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Id = x });
             Mapper.CreateMap<TipoPagamento, int>().ConvertUsing(x => x.Id);
+
+            Mapper.CreateMap<string, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Descricao = x });
+            Mapper.CreateMap<TipoPagamento, string>().ConvertUsing(x => x.Descricao);
 
             Mapper.CreateMap<TipoPagamento, TipoPagamentoCombo>();
 

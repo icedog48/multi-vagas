@@ -1,0 +1,28 @@
+<div class="row mt" id="movimentacoesPorPeriodo">
+    <div class="col-sm-12 col-md-12  table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Estacionamento</th>
+                    <th>Placa</th>
+                    <th>Categoria</th>
+                    <th>Pagamento</th>
+                    <th>Data</th>
+                    <th>Estadia(H)</th>
+                    <th>Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="movimentacao in movimentacoes">
+                    <td ng-bind="movimentacao.Estacionamento"></td>
+                    <td ng-bind="movimentacao.Placa"></td>
+                    <td ng-bind="movimentacao.CategoriaVaga"></td>
+                    <td ng-bind="movimentacao.TipoPagamento"></td>
+                    <td ng-bind="movimentacao.Data"></td>
+                    <td ng-bind="movimentacao.HorasReferencia"></td>
+                    <td> {{movimentacao.ValorPago | currency:"R$ "}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

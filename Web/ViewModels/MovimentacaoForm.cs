@@ -13,6 +13,6 @@ namespace Web.ViewModels
 
         public string Placa { get; set; }
 
-        public DateTime Entrada { get; set; }
+        public string Entrada { get; set; }
     }
 }

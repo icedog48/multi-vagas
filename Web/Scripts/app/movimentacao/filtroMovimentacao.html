@@ -27,9 +27,9 @@
         </div>
     </div>
 
-    <!--Lista de estacionamentos-->
+    <!--Lista de movimentacoes-->
     <div class="row mt">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-12  table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -41,12 +41,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="movimentacao in movimentacoes">
-
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Ticket"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Placa"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Vaga"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Entrada"></td>
-
                         <td align="center">
                             <a ui-sref="registrar_saida({ id: movimentacao.Id })"> <i class="fa fa-check-square fa-2x"></i> </a>
                         </td>

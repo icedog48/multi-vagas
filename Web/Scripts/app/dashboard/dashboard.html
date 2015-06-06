@@ -2,37 +2,108 @@
 
     <a href="#" class="logo"><b>MULTI-VAGAS</b></a>
 
+    <!--Perfil-->
+
     <div class="nav notify-row pull-right">
         <ul class="nav top-menu" ng-show="isAuthenticated()">
             <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" name="menuSettings">
-                    <i class="fa fa-cogs"></i>
+                <a data-toggle="dropdown" class="dropdown-toggle" name="menuPerfil">
+
+                    <i class="fa fa-user"></i>
+
+                    <span>Perfil</span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
+
+                    <li ng-show="isAuthenticated()"><a ui-sref="alterar_senha()" name="MenuAlterarSenha"> Alterar Senha </a></li>
+
+                    <li> <a href="#" ng-click="logout()">Logout</a> </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!--Relatórios-->
+
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu" ng-show="isAuthenticated() && isAuthorized(userRoles.admin)">
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" name="menuRelatorios">
+                    <i class="fa fa-file"></i>
+                    <span> Relatórios</span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <div class="notify-arrow notify-arrow-right notify-arrow-white" style="left: 185px !important;"></div>
+
+                    <li ng-show="isAuthorized([userRoles.admin])"><a ui-sref="filrar_movimentacoes_por_periodo()" name="MenuEstacionamentos"> Movimentação por período </a></li>
+
+                    <li ng-show="isAuthorized([userRoles.admin])"><a ui-sref="filrar_movimentacoes_por_estadia()" name="MenuEstacionamentos"> Movimentação por estadia </a></li>
+
+                    <li ng-show="isAuthorized([userRoles.admin])"><a ui-sref="filrar_movimentacoes_por_categoria()" name="MenuEstacionamentos"> Movimentação por categoria </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!--Cadastros-->
+
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu" ng-show="isAuthenticated() && isAuthorized([userRoles.equipeMultivagas, userRoles.admin])">
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" name="menuCadastros">
+
+                    <i class="fa fa-folder-open"></i>
+
+                    <span>Cadastros</span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                     <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
 
                     <li ng-show="isAuthorized([userRoles.equipeMultivagas, userRoles.admin])"><a ui-sref="estacionamento_list()" name="MenuEstacionamentos"> Estacionamentos </a></li>
-                    
+
                     <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="funcionario_list()" name="MenuFuncionarios"> Funcionarios </a></li>
+
                     <li ng-show="isAuthorized(userRoles.admin)"><a ui-sref="vagas_list()" name="MenuVagas"> Vagas </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Operações -->
+
+    <div class="nav notify-row pull-right">
+        <ul class="nav top-menu" ng-show="isAuthenticated() && isAuthorized([userRoles.funcionario, userRoles.usuario])">
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" name="menuOperações">
+
+                    <i class="fa fa-folder-open"></i>
+
+                    <span>Operações</span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <div class="notify-arrow notify-arrow-right notify-arrow-white"></div>
 
                     <li ng-show="isAuthorized(userRoles.funcionario)"><a ui-sref="movimentacao_list()" name="MenuMovimentacoes"> Movimentações </a></li>
 
                     <li ng-show="isAuthorized(userRoles.usuario)"><a ui-sref="estacionamento_reserva_list()" name="MenuReserva"> Reservar Vaga </a></li>
-
-                    <li ng-show="isAuthenticated()"><a ui-sref="alterar_senha()" name="MenuAlterarSenha"> Alterar Senha </a></li>
-                    
-                    <li> <a href="#" ng-click="logout()">Logout</a> </li>
                 </ul>
             </li>
         </ul>
+    </div>
+
+    <!-- Login -->
+
+    <div class="nav notify-row pull-right">
 
         <button ng-show="!isAuthenticated()" ui-sref="login()" class="btn btn-theme" name="btnLogin"> Login </button>
 
         <button ng-show="!isAuthenticated()" ui-sref="registrar()" class="btn btn-theme" name="btnLogin"> Registrar </button>
+
     </div>
-</header> 
-            
+
+</header>
+
 <section id="main-content">
 
     <section class="wrapper" ui-view></section>

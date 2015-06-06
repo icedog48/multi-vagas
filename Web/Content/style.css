@@ -458,7 +458,7 @@ a.logo span {
 .notify-row {
     float: left;
     margin-top: 15px;
-    margin-left: 92px;
+    margin-left: 0px;
 }
 
 .notify-row .notification span.label {

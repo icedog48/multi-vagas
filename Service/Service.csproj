@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\MovimentacaoPorPeriodoFilter.cs" />
     <Compile Include="Filters\MovimentacaoFilter.cs" />
     <Compile Include="ClienteService.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />

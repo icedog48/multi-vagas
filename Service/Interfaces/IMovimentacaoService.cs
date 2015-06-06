@@ -1,5 +1,6 @@
 ﻿using Model;
 using Service.Common.Interfaces;
+using Service.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,7 @@ namespace Service.Interfaces
         void AtualizarVaga(Movimentacao movimentacao, Vaga vaga);
 
         IEnumerable<TipoPagamento> GetTiposPagamento();
+
+        IEnumerable<Movimentacao> ListarPorPeriodo(MovimentacaoPorPeriodoFilter filter);
     }
 }

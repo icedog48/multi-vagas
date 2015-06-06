@@ -34,7 +34,7 @@ namespace Tests.Unity
                 CategoriaVaga = 1,
                 Vaga = 1,
                 Placa = "1234",
-                Entrada = DateTime.Now,
+                Entrada = DateTime.Now.ToString(),
                 Ticket = "123456"
             };
 
@@ -58,7 +58,7 @@ namespace Tests.Unity
                 Placa = "1234",
                 ValorPago = 1,
                 TipoPagamento = 1,
-                Entrada = DateTime.Now,
+                Entrada = DateTime.Now.ToString(),
                 Ticket = "123456"
             };
 

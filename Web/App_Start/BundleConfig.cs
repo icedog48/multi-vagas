@@ -96,6 +96,7 @@ namespace Web
                 .IncludeDirectory("~/Scripts/app/vagas", "*.js")
                 .IncludeDirectory("~/Scripts/app/funcionario", "*.js")
                 .IncludeDirectory("~/Scripts/app/movimentacao", "*.js")
+                .IncludeDirectory("~/Scripts/app/relatorios", "*.js")
                 ;
 
             scriptBundle.Orderer = new AsIsBundleOrderer();

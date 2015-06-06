@@ -39,6 +39,13 @@
                 url: '/api/movimentacoes/filtrar'
             },
 
+            'filtrarPorPeriodo': {
+                method: 'POST',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/movimentacoes/periodo'
+            },
+
             'remove': {
                 method: 'DELETE',
                 headers: { 'Authorization': 'token' }

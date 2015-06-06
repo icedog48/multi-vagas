@@ -30,7 +30,7 @@ namespace Web
             //Adiciona as configurações do NHibernate para criação de sessão, repositories etc
             container.Configure(c => c.AddRegistry(new NHibernateRegistry(container)));
 
-            ConfigureOAuth(app, container);
+            ConfigureOAuth(app);
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -41,14 +41,14 @@ namespace Web
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
         }
 
-        public void ConfigureOAuth(IAppBuilder app, IContainer container)
+        public void ConfigureOAuth(IAppBuilder app)
         {
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new SimpleAuthorizationServerProvider(container.GetInstance<IUsuarioService>())
+                Provider = new SimpleAuthorizationServerProvider()
             };
 
             // Token Generation

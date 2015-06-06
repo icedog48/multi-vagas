@@ -37,7 +37,7 @@
 
     <!--Lista de estacionamentos-->
     <div class="row mt">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-12  table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -51,13 +51,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="funcionario in funcionarios">
-
                         <td ui-sref="funcionario_edit({ id: funcionario.Id })" ng-bind="funcionario.Estacionamento"></td>
                         <td ui-sref="funcionario_edit({ id: funcionario.Id })" ng-bind="funcionario.Matricula"></td>
                         <td ui-sref="funcionario_edit({ id: funcionario.Id })" ng-bind="funcionario.Nome"></td>
                         <td ui-sref="funcionario_edit({ id: funcionario.Id })" ng-bind="funcionario.Telefone"></td>
                         <td ui-sref="funcionario_edit({ id: funcionario.Id })" ng-bind="funcionario.Perfil"></td>
-
                         <td>
                             <a ng-click="excluirFuncionario(funcionario)"> <i class="fa fa-times fa-2x"></i> </a>
                         </td>

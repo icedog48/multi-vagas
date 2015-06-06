@@ -76,6 +76,7 @@
         "estacionamento",
         "funcionario",
         "movimentacao",
+        "relatorios",
         "ui.router",
         "frapontillo.bootstrap-switch",
         "ui.bootstrap",

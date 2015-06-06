@@ -8,6 +8,8 @@
 
         $scope.login = function (credentials) {
             authService.login(credentials).then(function (user) {
+                console.log(user);
+
                 $scope.setCurrentUser(user);
 
                 if (user.AlterarSenha) {

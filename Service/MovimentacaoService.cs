@@ -1,6 +1,7 @@
 ﻿using Model;
 using Model.Common;
 using Service.Common;
+using Service.Filters;
 using Service.Interfaces;
 using Service.Validations;
 using Storage;
@@ -104,6 +105,11 @@ namespace Service
         public IEnumerable<TipoPagamento> GetTiposPagamento()
         {
             return tipoPagamentoRepository.Items.ToList();
+        }
+
+        public IEnumerable<Movimentacao> ListarPorPeriodo(MovimentacaoPorPeriodoFilter filter) 
+        {
+            return filter.Apply(GetActiveItems()).ToList();
         }
     }
 }

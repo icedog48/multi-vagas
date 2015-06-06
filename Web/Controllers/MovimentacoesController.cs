@@ -27,9 +27,9 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public IEnumerable<MovimentacaoTable> Get()
+        public IEnumerable<MovimentacaoPorPeriodoTable> Get()
         {
-            return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetAll());
+            return Mapper.Map<IEnumerable<MovimentacaoPorPeriodoTable>>(Service.GetAll());
         }
 
         [HttpGet]
@@ -44,6 +44,16 @@ namespace Web.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
+        }
+
+
+        [HttpPost]
+        [Route("api/movimentacoes/periodo")]
+        public IEnumerable<MovimentacaoPorPeriodoTable> Get(MovimentacaoPorPeriodoFilter filter)
+        {
+            var movimentacoes = Service.ListarPorPeriodo(filter);
+
+            return Mapper.Map<IEnumerable<MovimentacaoPorPeriodoTable>>(movimentacoes);
         }
 
         [HttpPost]
