@@ -1,6 +1,7 @@
 ﻿using Model;
 using Model.Common;
 using Service.Common;
+using Service.Filters;
 using Service.Interfaces;
 using Service.Validations;
 using Storage;
@@ -18,21 +19,43 @@ namespace Service
 {
     public class MovimentacaoService : MultiVagasCRUDService<Movimentacao>, IMovimentacaoService
     {
-        private IFuncionarioService funcionarioService;
-        private IRepository<Vaga> vagaRepository;
+        private readonly IFuncionarioService funcionarioService;
+        private readonly IRepository<Vaga> vagaRepository;
+        private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
-        public MovimentacaoService(IRepository<Movimentacao> repository, MovimentacaoValidator validator, Usuario usuarioLogado, IFuncionarioService funcionarioService, IRepository<Vaga> vagaRepository)
+        public MovimentacaoService
+            (
+                MovimentacaoValidator validator, 
+                Usuario usuarioLogado,
+                IRepository<Movimentacao> repository,     
+                IFuncionarioService funcionarioService, 
+                IRepository<Vaga> vagaRepository,
+                IRepository<TipoPagamento> tipoPagamentoRepository
+            )
             : base(repository, validator, usuarioLogado)
         {
             this.funcionarioService = funcionarioService;
             this.vagaRepository = vagaRepository;
+            this.tipoPagamentoRepository = tipoPagamentoRepository;
         }
 
         protected override IQueryable<Movimentacao> GetActiveItems()
         {
             var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
 
+            if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO)) query = query.Where(x => !x.Saida.HasValue);
+
             return query;
+        }
+
+        public void RegistrarEntrada()
+        {
+            var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
+
+            var movimentacao = new Movimentacao();
+                movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
+
+            this.Add(movimentacao);
         }
 
         public void RegistrarEntrada(Movimentacao movimentacao)
@@ -67,6 +90,7 @@ namespace Service
         {
             var vagaAntiga = movimentacao.Vaga;
                 vagaAntiga.Disponivel = true;
+
             vagaRepository.Update(vagaAntiga);
 
             novaVaga = vagaRepository.Get(novaVaga.Id);
@@ -76,6 +100,16 @@ namespace Service
             movimentacao.Vaga = novaVaga;
 
             repository.Update(movimentacao);
+        }
+
+        public IEnumerable<TipoPagamento> GetTiposPagamento()
+        {
+            return tipoPagamentoRepository.Items.ToList();
+        }
+
+        public IEnumerable<Movimentacao> ListarPorPeriodo(MovimentacaoPorPeriodoFilter filter) 
+        {
+            return filter.Apply(GetActiveItems()).ToList();
         }
     }
 }

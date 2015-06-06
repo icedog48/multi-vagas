@@ -40,8 +40,6 @@ namespace Web.ViewModels
 
         public string HoraSaida { get; set; }
 
-        public string CargaHoraria { get; set; }
-
         public DateTime DataAdmissao { get; set; }
 
         public decimal Salario { get; set; }

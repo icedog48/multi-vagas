@@ -50,6 +50,8 @@ namespace Service.Common
 
         public virtual IEnumerable<T> GetByFilter(Service.Common.Filters.IFilter<T> filter)
         {
+            if (filter == null) return GetActiveItems();
+
             return filter.Apply(GetActiveItems()); 
         }
 

@@ -14,8 +14,6 @@ namespace Storage.Nhibernate.Mapping
         public TipoPagamentoMap()
         {
             Map(x => x.Descricao);
-
-            References(x => x.Estacionamento);
         }
     }
 }

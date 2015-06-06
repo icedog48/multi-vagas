@@ -44,7 +44,7 @@
 
             var autorizado = authService.isAuthorized(authorizedRoles);
 
-            if (!autenticado && (toState.name != "estacionamento_publico_list" && toState.name != "login")) {
+            if (!autenticado && (toState.name != "estacionamento_publico_list" && toState.name != "login" && toState.name != "registrar")) {
                 event.preventDefault();
 
                 $state.go('estacionamento_publico_list');
@@ -57,6 +57,8 @@
                     $state.go('estacionamento_list');
                 } else if (authService.isAuthorized(USER_ROLES.funcionario)) {
                     $state.go('movimentacao_list');
+                } else if (authService.isAuthorized(USER_ROLES.usuario)) {
+                    $state.go('estacionamento_reserva_list');
                 } else {
                     $state.go('estacionamento_publico_list');
                 }
@@ -74,9 +76,11 @@
         "estacionamento",
         "funcionario",
         "movimentacao",
+        "relatorios",
         "ui.router",
         "frapontillo.bootstrap-switch",
-        "ui.bootstrap"
+        "ui.bootstrap",
+        "ui.utils.masks"
     ])
 
     .config(["$stateProvider", "APP_CONFIG", "USER_ROLES", config])

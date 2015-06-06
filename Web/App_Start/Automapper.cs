@@ -40,6 +40,13 @@ namespace Web.App_Start
                 return x.ToString("hh':'mm':'ss");
             });
 
+            Mapper.CreateMap<DateTime, string>().ConvertUsing(x => x.ToString("dd/MM/yyyy HH:mm:ss"));
+            Mapper.CreateMap<string, DateTime>().ConvertUsing(x => Convert.ToDateTime(x));
+
+
+            Mapper.CreateMap<DateTime?, string>().ConvertUsing(x => (x.HasValue) ? x.Value.ToString("dd/MM/yyyy HH:mm:ss") : string.Empty);
+            Mapper.CreateMap<string, DateTime?>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? Convert.ToDateTime(x) : (DateTime?)null);
+
             #endregion
 
             #region Estacionamento
@@ -78,6 +85,9 @@ namespace Web.App_Start
             Mapper.CreateMap<int, CategoriaVaga>().ConvertUsing(x => new CategoriaVaga() { Id = x });
             Mapper.CreateMap<CategoriaVaga, int>().ConvertUsing(x => x.Id);
 
+            Mapper.CreateMap<string, CategoriaVaga>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? new CategoriaVaga() { Descricao = x } : null);
+            Mapper.CreateMap<CategoriaVaga, string>().ConvertUsing(x => (x == null) ? Convert.ToString(null) : x.Descricao);
+
             Mapper.CreateMap<CategoriaVaga, CategoriaVagaForm>()
                 .ForMember(viewModel => viewModel.Quantidade, map => map.MapFrom(model => model.Vagas.Count()))
                 ; 
@@ -105,6 +115,9 @@ namespace Web.App_Start
             Mapper.CreateMap<int, Vaga>().ConvertUsing(x => new Vaga() { Id = x });
             Mapper.CreateMap<Vaga, int>().ConvertUsing(x => x.Id);
 
+            Mapper.CreateMap<string, Vaga>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? new Vaga() { Codigo = x } : null);
+            Mapper.CreateMap<Vaga, string>().ConvertUsing(x => (x == null) ? Convert.ToString(null) : x.Codigo);
+
             #endregion Vaga
 
             #region Perfil
@@ -126,6 +139,7 @@ namespace Web.App_Start
                 .ForMember(model => model.Login, map => map.Ignore())
                 .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
                 ;
 
             Mapper.CreateMap<Usuario, UsuarioFormFuncionario>();
@@ -134,9 +148,20 @@ namespace Web.App_Start
                 .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
                 .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
                 ;
 
             Mapper.CreateMap<Usuario, UsuarioFormEstacionamento>();
+
+
+            Mapper.CreateMap<UsuarioForm, Usuario>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
+                .ForMember(model => model.Perfil, map => map.Ignore())
+                .ForMember(model => model.AlterarSenha, map => map.Ignore())
+                .ForMember(model => model.Email, map => map.Ignore())
+                .ForMember(model => model.Senha, map => map.MapFrom(viewModel => viewModel.Senha))
+                .ForMember(model => model.Id, map => map.Ignore())
+                ;
 
             #endregion Usuario
 
@@ -147,7 +172,6 @@ namespace Web.App_Start
                 .ForMember(model => model.Usuario, map => map.MapFrom(model => model.Usuario))
                 .ForMember(model => model.HoraInicio, map => map.MapFrom(model => model.HoraInicio))
                 .ForMember(model => model.HoraSaida, map => map.MapFrom(model => model.HoraSaida))
-                .ForMember(model => model.CargaHoraria, map => map.MapFrom(model => model.CargaHoraria))
                 ;
 
             Mapper.CreateMap<Funcionario, FuncionarioForm>()
@@ -165,11 +189,24 @@ namespace Web.App_Start
             Mapper.CreateMap<int?, Cliente>().ConvertUsing(x => (x.HasValue) ? new Cliente() { Id = x.Value } : null);
             Mapper.CreateMap<Cliente, int?>().ConvertUsing(x => (x == null) ? Convert.ToInt32(null) : x.Id);
 
+            Mapper.CreateMap<string, Cliente>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? new Cliente() { Nome = x } : null);
+            Mapper.CreateMap<Cliente, string>().ConvertUsing(x => (x == null) ? Convert.ToString(null) : x.Nome);
+
+            Mapper.CreateMap<Cliente, ClienteForm>()
+                .ForMember(model => model.Senha, map => map.Ignore())
+                .ForMember(model => model.ConfirmacaoSenha, map => map.Ignore())
+                ;
+
+            Mapper.CreateMap<ClienteForm, Cliente>()
+                .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
+                .ForMember(model => model.Usuario, map => map.Ignore())
+                ;
+
             #endregion Cliente
 
             #region Movimentacao
 
-            Mapper.CreateMap<MovimentacaoForm, Movimentacao>()
+            Mapper.CreateMap<MovimentacaoEntradaForm, Movimentacao>()
                 .ForMember(model => model.Entrada, map => map.Ignore())
                 .ForMember(model => model.FuncionarioEntrada, map => map.Ignore())
                 .ForMember(model => model.FuncionarioSaida, map => map.Ignore())
@@ -178,18 +215,61 @@ namespace Web.App_Start
                 .ForMember(model => model.Ticket, map => map.Ignore())
                 .ForMember(model => model.TipoPagamento, map => map.Ignore())
                 .ForMember(model => model.ValorPago, map => map.Ignore())
-                ;
+                .ForMember(model => model.Vaga, map => map.MapFrom(viewModel => viewModel.Vaga))
+                .ForMember(model => model.Cliente, map => map.MapFrom(viewModel => viewModel.Cliente))
+            ;
 
-            Mapper.CreateMap<Movimentacao, MovimentacaoForm>()
+            Mapper.CreateMap<MovimentacaoSaidaForm, Movimentacao>()
+                .ForMember(model => model.Entrada, map => map.Ignore())
+                .ForMember(model => model.FuncionarioEntrada, map => map.Ignore())
+                .ForMember(model => model.FuncionarioSaida, map => map.Ignore())
+                .ForMember(model => model.Saida, map => map.Ignore())
+                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
+                .ForMember(model => model.Ticket, map => map.Ignore())
+                .ForMember(model => model.TipoPagamento, map => map.MapFrom(viewModel => viewModel.TipoPagamento))
+                .ForMember(model => model.ValorPago, map => map.MapFrom(viewModel => viewModel.ValorPago))
+                .ForMember(model => model.Vaga, map => map.MapFrom(viewModel => viewModel.Vaga))
+                .ForMember(model => model.Cliente, map => map.MapFrom(viewModel => viewModel.Cliente))
+            ;
+            
+            Mapper.CreateMap<Movimentacao, MovimentacaoEntradaForm>()
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+            ;
+
+            Mapper.CreateMap<Movimentacao, MovimentacaoSaidaForm>()
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+                .ForMember(viewModel => viewModel.TipoPagamento, map => map.Ignore())
+                .ForMember(viewModel => viewModel.ValorVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga.ValorHora))
             ;
 
             Mapper.CreateMap<Movimentacao, MovimentacaoTable>()
                 .ForMember(viewModel => viewModel.Entrada, map => map.MapFrom(model => model.Entrada.ToString("dd/MM/yyyy HH:mm")))
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
-                ;
+            ;
 
-            #endregion Movimentacao
+            Mapper.CreateMap<Movimentacao, MovimentacaoPorPeriodoTable>()
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+                .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
+                .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
+                .ForMember(viewModel => viewModel.Data, map => map.MapFrom(model => model.Entrada.Date.ToString("dd/MM/yyyy")))
+                .ForMember(viewModel => viewModel.HorasReferencia, map => map.MapFrom(model => model.HorasReferencia))
+                .ForMember(viewModel => viewModel.TipoPagamento, map => map.MapFrom(model => model.TipoPagamento))
+            ;
+
+            #endregion Movimentacao            
+
+            #region TipoPagamento
+
+            Mapper.CreateMap<int, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Id = x });
+            Mapper.CreateMap<TipoPagamento, int>().ConvertUsing(x => x.Id);
+
+            Mapper.CreateMap<string, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Descricao = x });
+            Mapper.CreateMap<TipoPagamento, string>().ConvertUsing(x => x.Descricao);
+
+            Mapper.CreateMap<TipoPagamento, TipoPagamentoCombo>();
+
+            #endregion TipoPagamento
 
             Mapper.AssertConfigurationIsValid();
         }

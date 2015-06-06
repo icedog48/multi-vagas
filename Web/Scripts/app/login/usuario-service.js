@@ -2,7 +2,7 @@
 
     var Usuario = function ($resource, authService) {
 
-        var resource = $resource('/api/Usuarios/:id', { id: '@id' }, {
+        var resource = $resource('/api/usuarios/:id', { id: '@id' }, {
 
             'update': {
                 method: 'PUT',
@@ -12,11 +12,6 @@
             'query': {
                 method: 'GET',
                 isArray: true,
-                headers: { 'Authorization': 'token' }
-            },
-
-            'add': {
-                method: 'POST',
                 headers: { 'Authorization': 'token' }
             },
 
@@ -31,14 +26,22 @@
                 headers: { 'Authorization': 'token' },
                 url: '/api/Usuarios/filtrar'
             },
+
             'remove': {
                 method: 'DELETE',
                 headers: { 'Authorization': 'token' }
             },
+
             'getByLogin': {
                 method: 'GET',
                 headers: { 'Authorization': 'token' },
                 url: '/api/Usuarios/getByLogin/:login'
+            },
+
+            'alterarSenha': {
+                method: 'POST',
+                headers: { 'Authorization': 'token' },
+                url: '/api/usuarios/alterarsenha'
             },
         });
 

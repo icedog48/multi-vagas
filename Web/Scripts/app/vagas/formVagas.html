@@ -27,7 +27,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Sigla.$dirty && frmCategoriaVaga.Sigla.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Sigla</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Sigla" ng-model="categoriaVaga.Sigla" required ng-readonly="naoPodeAlterar">
+                        <input type="text" class="form-control" name="Sigla" ng-model="categoriaVaga.Sigla" required ng-readonly="naoPodeAlterar" maxlength="3">
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.ValorHora.$dirty && frmCategoriaVaga.ValorHora.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Valor Hora</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="ValorHora" ng-model="categoriaVaga.ValorHora" required>
+                        <input type="text" class="form-control" name="ValorHora" ng-model="categoriaVaga.ValorHora" required ui-number-mask>
                     </div>
                 </div>
 

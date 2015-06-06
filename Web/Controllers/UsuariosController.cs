@@ -24,9 +24,13 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public void Logout() 
+        [HttpPost]
+        [Route("api/usuarios/alterarsenha")]
+        public void AlterarSenha (UsuarioForm usuarioForm) 
         {
+            var usuario = Mapper.Map<Usuario>(usuarioForm);
 
-        }
+            Service.AlterarSenha(usuario);
+        }        
     }
 }

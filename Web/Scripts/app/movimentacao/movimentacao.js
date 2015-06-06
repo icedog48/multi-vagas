@@ -14,7 +14,7 @@
         $stateProvider
             .state("registrar_saida", {
                 parent: 'dashboard',
-                url: "/movimentacao/saida",
+                url: "/movimentacao/saida/:id",
                 templateUrl: "Scripts/app/movimentacao/formRegistrarSaida.html",
                 controller: 'formRegistrarSaidaController',
                 roles: [USER_ROLES.funcionario]

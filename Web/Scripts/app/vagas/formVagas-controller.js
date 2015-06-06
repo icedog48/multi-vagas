@@ -54,6 +54,25 @@
                 atualizar(categoriaVagas)
             }
         };
+
+        $scope.$watch('categoriaVaga.Sigla', function (newValue, oldValue) {
+
+            if (typeof (newValue) !== 'undefined' && newValue != '') {
+
+                var letterPattern = /^[a-zA-Z]+$/;
+
+                var isValid = letterPattern.test(newValue);                
+
+                if (isValid) {
+                    $scope.categoriaVaga.Sigla = newValue.toUpperCase();
+                } else if (typeof (oldValue) !== 'undefined') {
+                    $scope.categoriaVaga.Sigla = oldValue.toUpperCase();
+                } else {
+                    $scope.categoriaVaga.Sigla = '';
+                }
+            }
+
+        }, true);
     };
 
     angular.module("vagas").controller("formVagasController", ["$scope", "$stateParams", "CategoriaVaga", "$state", "Estacionamento", formVagasController]);

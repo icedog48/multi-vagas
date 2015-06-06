@@ -76,14 +76,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="201502\1 - CreateTableEstacionamento.cs" />
-    <Compile Include="201503\9 - CreateTableMovimentacao.cs" />
-    <Compile Include="201503\8 - AlterTableEstacionamentoAddUsuarioId.cs" />
-    <Compile Include="201503\7 -AlterTableUsuario.cs" />
-    <Compile Include="201503\5 -AddLogicalExclusionToTables.cs" />
-    <Compile Include="201503\4 - CreateTableFuncionario.cs" />
-    <Compile Include="201503\3 - AlterTableVagas_Sigla.cs" />
-    <Compile Include="201503\2 - CreateTableVagas.cs" />
-    <Compile Include="201503\1 - CreateTableModuloDeSecuranca.cs" />
+    <Compile Include="201504\09 - CreateTableMovimentacao.cs" />
+    <Compile Include="201505\15- InsertIntoTipoPagamento.cs" />
+    <Compile Include="201505\14- AlterTablesTipoPagamentoEstacionamento.cs" />
+    <Compile Include="201505\13- CreateTableReserva.cs" />
+    <Compile Include="201505\12 - CreateUniqueIndex.cs" />
+    <Compile Include="201505\11 - AlterTableUsuario.cs" />
+    <Compile Include="201505\10 - AlterTableMovimentacao.cs" />
+    <Compile Include="201503\08 - AlterTableEstacionamentoAddUsuarioId.cs" />
+    <Compile Include="201503\07 -AlterTableUsuario.cs" />
+    <Compile Include="201503\05 -AddLogicalExclusionToTables.cs" />
+    <Compile Include="201503\04 - CreateTableFuncionario.cs" />
+    <Compile Include="201503\03 - AlterTableVagas_Sigla.cs" />
+    <Compile Include="201503\02 - CreateTableVagas.cs" />
+    <Compile Include="201503\01 - CreateTableModuloDeSecuranca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

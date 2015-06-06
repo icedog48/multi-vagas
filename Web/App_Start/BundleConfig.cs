@@ -58,7 +58,8 @@ namespace Web
                         "~/Scripts/vendor/angular/angular-ui-router.js",
                         "~/Scripts/vendor/angular/angular-cookies.js",
                         "~/Scripts/vendor/angular/angular-bootstrap-switch.js",
-                        "~/Scripts/vendor/angular/angular-resource.js"
+                        "~/Scripts/vendor/angular/angular-resource.js",
+                        "~/Scripts/vendor/angular/masks.js"
                        ));                        
 
             //BOOSTRAP
@@ -95,6 +96,7 @@ namespace Web
                 .IncludeDirectory("~/Scripts/app/vagas", "*.js")
                 .IncludeDirectory("~/Scripts/app/funcionario", "*.js")
                 .IncludeDirectory("~/Scripts/app/movimentacao", "*.js")
+                .IncludeDirectory("~/Scripts/app/relatorios", "*.js")
                 ;
 
             scriptBundle.Orderer = new AsIsBundleOrderer();

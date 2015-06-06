@@ -24,7 +24,6 @@ namespace Storage.Nhibernate.Mapping
             Map(x => x.CPF);
             Map(x => x.Salario);
             Map(x => x.Obs);
-            Map(x => x.CargaHoraria);
             Map(x => x.DataAdmissao);
             Map(x => x.HoraInicio);
             Map(x => x.HoraSaida);

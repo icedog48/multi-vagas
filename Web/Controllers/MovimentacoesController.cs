@@ -27,18 +27,18 @@ namespace Web.Controllers
             this.Service = service;
         }
 
-        public IEnumerable<MovimentacaoTable> Get()
+        public IEnumerable<MovimentacaoPorPeriodoTable> Get()
         {
-            return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetAll());
+            return Mapper.Map<IEnumerable<MovimentacaoPorPeriodoTable>>(Service.GetAll());
         }
 
         [HttpGet]
         [Route("api/movimentacoes/{id}")]
-        public MovimentacaoForm Get(int id)
+        public MovimentacaoEntradaForm Get(int id)
         {
             try
             {
-                return Mapper.Map<MovimentacaoForm>(this.Service.GetById(id));
+                return Mapper.Map<MovimentacaoEntradaForm>(this.Service.GetById(id));
             }
             catch (Exception ex)
             {
@@ -46,18 +46,46 @@ namespace Web.Controllers
             }
         }
 
+
         [HttpPost]
-        [Route("api/movimentacoes/registrarentrada")]
-        public void RegistrarEntrada(MovimentacaoForm movimentacao)
+        [Route("api/movimentacoes/periodo")]
+        public IEnumerable<MovimentacaoPorPeriodoTable> Get(MovimentacaoPorPeriodoFilter filter)
         {
-            Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+            var movimentacoes = Service.ListarPorPeriodo(filter);
+
+            return Mapper.Map<IEnumerable<MovimentacaoPorPeriodoTable>>(movimentacoes);
         }
 
         [HttpPost]
         [Route("api/movimentacoes/registrarentrada")]
-        public void RegistrarSaida(MovimentacaoSaidaForm movimentacao)
+        public void RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
         {
-            Service.RegistrarSaida(Mapper.Map<Movimentacao>(movimentacao));
+            Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+        }
+
+        [HttpGet]
+        [Route("api/movimentacoes/prepararsaida/{movimentacao}")]
+        public MovimentacaoSaidaForm PrepararSaida(int movimentacao)
+        {
+            try
+            {
+                return Mapper.Map<MovimentacaoSaidaForm>(this.Service.GetById(movimentacao));
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/movimentacoes/registrarsaida/{id}")]
+        public void RegistrarSaida(int id, MovimentacaoSaidaForm movimentacaoSaida)
+        {
+            var movimentacao = Service.GetById(id);
+                movimentacao.TipoPagamento = Mapper.Map<TipoPagamento>(movimentacaoSaida.TipoPagamento);
+                movimentacao.ValorPago = movimentacaoSaida.ValorPago;    
+
+            Service.RegistrarSaida(movimentacao);
         }
 
         public void Delete(int id)
@@ -73,11 +101,18 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/movimentacoes/atualizarvaga")]
-        public void AtualizarVaga(MovimentacaoForm entrada)
+        public void AtualizarVaga(MovimentacaoEntradaForm entrada)
         {
             var movimentacao = Service.GetById(entrada.Id);
 
             Service.AtualizarVaga(movimentacao, Mapper.Map<Vaga>(entrada.Vaga));
+        }
+
+        [HttpGet]
+        [Route("api/movimentacoes/tipospagamento")]
+        public IEnumerable<TipoPagamentoCombo> ListarTiposPagamento()
+        {
+            return Mapper.Map<IEnumerable<TipoPagamentoCombo>>(Service.GetTiposPagamento());
         }
     }
 }

@@ -12,6 +12,15 @@
             });
 
         $stateProvider
+            .state("estacionamento_reserva_list", {
+                parent: 'dashboard',
+                url: "/estacionamentos/reserva",
+                templateUrl: "Scripts/app/estacionamento/filtroEstacionamentoReserva.html",
+                controller: 'filtroEstacionamentoReservaController',
+                roles: [USER_ROLES.usuario]
+            });
+
+        $stateProvider
             .state("estacionamento_list", {
                 parent: 'dashboard',
                 url: "/estacionamentos",

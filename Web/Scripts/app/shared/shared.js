@@ -8,7 +8,7 @@
         equipeMultivagas: 'equipe_multivagas', // Cadastra estacionamentos
         admin: 'administrador', // Gerencia estacionamentos
         funcionario: 'funcionario', // Registra entrada e saida de clientes
-        cliente: 'cliente' // Consulta e reserva vagas
+        usuario: 'usuario' // Consulta e reserva vagas
     };
 
     var httpInterceptor = function ($q, $rootScope, sessionService) {
