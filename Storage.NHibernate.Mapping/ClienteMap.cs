@@ -17,6 +17,8 @@ namespace Storage.Nhibernate.Mapping
             Map(x => x.CPF);
             Map(x => x.Email);            
             Map(x => x.Telefone);
+
+            References(x => x.Usuario);
         }
     }
 }

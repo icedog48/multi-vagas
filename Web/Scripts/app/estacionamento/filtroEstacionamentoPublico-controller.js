@@ -11,7 +11,7 @@
 
         };
 
-        $scope.filtrarEstacionamentos($scope.filtroEstacionamento);
+        $scope.filtrarEstacionamentos($scope.filtrarEstacionamentos);
     };
 
     angular.module("estacionamento").controller("filtroEstacionamentoPublicoController", ["$scope", "Estacionamento", "$state", filtroEstacionamentoPublicoController]);

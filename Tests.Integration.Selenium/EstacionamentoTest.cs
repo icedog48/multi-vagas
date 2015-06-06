@@ -25,7 +25,7 @@ namespace Tests.Integration.Selenium
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnSalvar")));
 
-            var CNPJ = DateTime.Now.ToString("ddMMyyyymm");
+            var CNPJ = DateTime.Now.ToString("ddMMyyyyHHmmss");
 
             //Dados Empresariais
             ScreenTestHelper.FillTextBoxByName(driver, "CNPJ", CNPJ);
@@ -34,7 +34,7 @@ namespace Tests.Integration.Selenium
             ScreenTestHelper.FillTextBoxByName(driver, "Email", CNPJ + "@estcionamento.com.br");
 
             //Endereço
-            ScreenTestHelper.FillTextBoxByName(driver, "CEP", "123456");
+            ScreenTestHelper.FillTextBoxByName(driver, "CEP", "21830205");
             ScreenTestHelper.FillTextBoxByName(driver, "Logradouro", "Rua Ulpiano dos Santos, 275");
             ScreenTestHelper.FillTextBoxByName(driver, "Bairro", "Bangu");
             ScreenTestHelper.FillTextBoxByName(driver, "Cidade", "Rio de Janeiro");

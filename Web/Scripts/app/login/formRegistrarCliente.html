@@ -1,0 +1,30 @@
+﻿<div id="login-page">
+    
+    <div class="container">
+
+        <form class="form-login" name="frmRegistrarCliente" ng-submit="registrar(cliente)">
+            <h2 class="form-login-heading">Registrar usuário</h2>
+
+            <div class="login-wrap">
+                <input type="text" class="form-control" placeholder="Nome" name="Nome" autofocus="" ng-model="cliente.Nome" required />
+                <br />
+                <input type="text" class="form-control" placeholder="CPF" name="CPF" autofocus="" ng-model="cliente.CPF" required ui-br-cpf-mask />
+                <br />
+                <input type="text" class="form-control" placeholder="Telefone" name="Telefone" autofocus="" ng-model="cliente.Telefone" required ui-br-phone-number />
+                <br />
+                <input type="email" class="form-control" placeholder="Email" name="Email" autofocus="" ng-model="cliente.Email" required />
+                <br />
+
+                <input type="password" class="form-control" placeholder="Senha" name="Senha" ng-model="cliente.Senha" required />
+                <br />
+
+                <input type="password" class="form-control" placeholder="Confirmação de senha" name="ConfirmacaoSenha" required ng-model="cliente.ConfirmacaoSenha" />
+                <br />
+
+                <button type="submit" class="btn btn-theme btn-block" name="btnLogin"><i class=" fa fa-lock"></i> REGISTRAR </button>
+            </div>
+
+        </form>
+    </div>
+       
+</div>

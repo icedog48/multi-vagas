@@ -15,5 +15,9 @@ namespace Service.Interfaces
         IEnumerable<Vaga> VagasDisponiveis(int categoriaId);
 
         Vaga GetVagaById(int id);
+
+        void ReservarVaga(Reserva reserva);
+
+        IList<CategoriaVaga> GetByEstacionamento(Estacionamento estacionamento);
     }
 }

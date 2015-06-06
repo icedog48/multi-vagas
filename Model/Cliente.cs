@@ -16,5 +16,7 @@ namespace Model
         public virtual string Telefone { get; set; }
                    
         public virtual string Email { get; set; }
+
+        public virtual Usuario Usuario { get; set; }
     }
 }

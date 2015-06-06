@@ -35,7 +35,7 @@
         };
 
         var carregarDados = function (movimentacaoId) {
-            Movimentacao.get({ id: movimentacaoId }).$promise.then(function (data) {
+            Movimentacao.prepararSaida({ movimentacao: movimentacaoId }).$promise.then(function (data) {
 
                 $scope.movimentacao = new Movimentacao(data);
                 $scope.movimentacao.Entrada = $filter('date')($scope.movimentacao.Entrada, 'dd/MM/yyyy HH:mm');

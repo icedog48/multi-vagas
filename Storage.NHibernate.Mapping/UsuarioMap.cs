@@ -15,7 +15,8 @@ namespace Storage.Nhibernate.Mapping
         {
             Map(x => x.Email);
             Map(x => x.Login);
-            Map(x => x.Senha);   
+            Map(x => x.Senha);
+            Map(x => x.AlterarSenha);   
 
             References(x => x.Perfil);
         }

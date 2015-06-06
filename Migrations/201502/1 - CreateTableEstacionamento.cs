@@ -14,7 +14,7 @@ namespace Migrations._201502
         {
             Create.Table("Estacionamento")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("CNPJ").AsString(10).NotNullable()
+                .WithColumn("CNPJ").AsString(14).NotNullable()
                 .WithColumn("RazaoSocial").AsString(255).NotNullable()
                 .WithColumn("Vagas").AsInt32().NotNullable()
                 .WithColumn("Telefone").AsString(10).NotNullable()

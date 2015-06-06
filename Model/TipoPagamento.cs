@@ -14,7 +14,5 @@ namespace Model
         }
 
         public virtual string Descricao { get; set; }
-
-        public virtual Estacionamento Estacionamento { get; set; }
     }
 }

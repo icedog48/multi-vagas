@@ -13,13 +13,13 @@
 
         var showErrorMessage = function (errCode) {
             alert("Erro inesperado.");
-        }
+        };
 
         var listarVagas = function (categoriaVaga) {
             Vaga.vagasDisponiveis({ id: categoriaVaga }).$promise.then(function (data) {
                 $scope.vagasDisponiveis = data;
             });
-        }
+        };
 
         var registrar = function (movimentacao) {
             Movimentacao.registrarEntrada(movimentacao).$promise.then(function (response) {

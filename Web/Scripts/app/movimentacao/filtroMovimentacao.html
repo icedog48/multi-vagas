@@ -27,9 +27,9 @@
         </div>
     </div>
 
-    <!--Lista de estacionamentos-->
+    <!--Lista de movimentacoes-->
     <div class="row mt">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-12  table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -41,14 +41,12 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="movimentacao in movimentacoes">
-
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Ticket"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Placa"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Vaga"></td>
                         <td ui-sref="editar_entrada({ id: movimentacao.Id })" ng-bind="movimentacao.Entrada"></td>
-
                         <td align="center">
-                            <a ui-sref="registrar_saida({ id: movimentacao.Id })"> <i class="fa fa-times fa-2x"></i> </a>
+                            <a ui-sref="registrar_saida({ id: movimentacao.Id })"> <i class="fa fa-check-square fa-2x"></i> </a>
                         </td>
                     </tr>
                 </tbody>
@@ -60,8 +58,6 @@
     <div class="row mt">
         <div class="col-sm-12 col-md-12 form-buttons">
             <button type="submit" class="btn btn-round btn-primary pull-right" name="btnRegistrarEntrada" ui-sref="registrar_entrada()"><i class="fa fa-plus"></i> Registrar Entrada </button>
-
-            <!--<button type="submit" class="btn btn-round btn-primary pull-right" name="btnRegistrarEntradaExpressa" ng-click="registrarEntradaExpressa()"><i class="fa fa-plus"></i> Registrar Entrada Expressa </button>-->
         </div>
     </div>
 </form>

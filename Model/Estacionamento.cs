@@ -13,8 +13,6 @@ namespace Model
 
         public virtual string RazaoSocial { get; set; }
 
-        public virtual int Vagas { get; set; }
-
         public virtual string Telefone { get; set; }
 
         public virtual string Email { get; set; }
@@ -38,6 +36,18 @@ namespace Model
         public virtual string EnderecoFormatado()
         {
             return this.Logradouro + ", " + this.Bairro + ", " + this.Cidade + ", " + this.UF;
+        }
+
+        private readonly IList<CategoriaVaga> cagetoriasVaga;
+
+        public virtual IList<CategoriaVaga> CagetoriasVaga { get { return cagetoriasVaga; } }
+
+        public virtual int VagasDisponiveis
+        {
+            get
+            {
+                return this.cagetoriasVaga.SelectMany( x => x.Vagas).Where( x => x.Disponivel).Count();
+            }
         }
     }
 }

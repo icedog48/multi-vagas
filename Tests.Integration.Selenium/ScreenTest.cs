@@ -25,7 +25,7 @@ namespace Tests.Integration.Selenium
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
-        protected string urlApp = "http://localhost:57625/";
+        protected string urlApp = "http://multivagas.apphb.com/";
 
         public Usuario EquipeMultivagas
         {

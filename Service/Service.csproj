@@ -53,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\MovimentacaoPorPeriodoFilter.cs" />
     <Compile Include="Filters\MovimentacaoFilter.cs" />
+    <Compile Include="ClienteService.cs" />
+    <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="MovimentacaoService.cs" />
     <Compile Include="Interfaces\IMovimentacaoService.cs" />
     <Compile Include="MultiVagasCRUDService.cs" />
@@ -71,6 +74,7 @@
     <Compile Include="EstacionamentoService.cs" />
     <Compile Include="FuncionarioService.cs" />
     <Compile Include="UsuarioService.cs" />
+    <Compile Include="Validations\ClienteValidator.cs" />
     <Compile Include="Validations\MovimentacaoValidator.cs" />
     <Compile Include="Validations\FuncionarioValidator.cs" />
     <Compile Include="Validations\EstacionamentoValidator.cs" />

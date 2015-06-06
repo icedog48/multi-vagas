@@ -47,5 +47,29 @@ namespace Model
             this.Saida = saida;
             this.Vaga.Disponivel = true;
         }
+
+        public virtual int HorasReferencia 
+        {
+            get
+            {
+                var tempo = DateTime.Now - this.Entrada;
+
+                var resto = tempo.TotalHours - Convert.ToInt32(tempo.TotalHours);
+
+                var horas = Convert.ToInt32(tempo.TotalHours);
+
+                if (resto > 0) horas += 1;
+
+                return horas;
+            }
+        }
+
+        public virtual decimal ValorAPagar 
+        {
+            get
+            {
+                return Math.Round(this.HorasReferencia * this.Vaga.CategoriaVaga.ValorHora, 2);
+            }
+        }
     }
 }

@@ -20,26 +20,52 @@ namespace Tests.Unity
 
         public AutomapperTest()
         {
-            this.container = IoCHelper.Initialize();
+            //this.container = IoCHelper.Initialize();
         }
 
-        [Fact(DisplayName="Movimentação - Automapper")]
-        public void DeveMapearEntidadeMovimentacao() 
+        [Fact(DisplayName="Movimentação Entrada - Automapper")]
+        public void DeveMapearEntidadeMovimentacaoEntrada() 
         {
             Automapper.Setup();
 
-            var movimentacaoForm = new MovimentacaoForm()
+            var movimentacaoForm = new MovimentacaoEntradaForm()
             {
                 Cliente = null,
                 CategoriaVaga = 1,
                 Vaga = 1,
-                Placa = "1234"
+                Placa = "1234",
+                Entrada = DateTime.Now.ToString(),
+                Ticket = "123456"
             };
 
             var movimentacao = Mapper.Map<Movimentacao>(movimentacaoForm);
                 movimentacao.Vaga.CategoriaVaga = new CategoriaVaga() { Id = 1 };
 
-            movimentacaoForm = Mapper.Map<MovimentacaoForm>(movimentacao);
+            movimentacaoForm = Mapper.Map<MovimentacaoEntradaForm>(movimentacao);
+
+        }
+
+        [Fact(DisplayName = "Movimentação Saida - Automapper")]
+        public void DeveMapearEntidadeMovimentacaoSaida()
+        {
+            Automapper.Setup();
+
+            var movimentacaoForm = new MovimentacaoSaidaForm()
+            {
+                Cliente = null,
+                CategoriaVaga = "CategoriaVaga",
+                Vaga = "Vaga",
+                Placa = "1234",
+                ValorPago = 1,
+                TipoPagamento = 1,
+                Entrada = DateTime.Now.ToString(),
+                Ticket = "123456"
+            };
+
+            var movimentacao = Mapper.Map<Movimentacao>(movimentacaoForm);
+            movimentacao.Vaga.CategoriaVaga = new CategoriaVaga() { Id = 1 };
+
+            movimentacaoForm = Mapper.Map<MovimentacaoSaidaForm>(movimentacao);
 
         }
     }

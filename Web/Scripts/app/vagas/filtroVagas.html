@@ -32,7 +32,7 @@
 
     <!--Lista de estacionamentos-->
     <div class="row mt">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-12  table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -44,12 +44,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="vaga in vagas">
-
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Estacionamento"></td>
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Categoria"></td>
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Vagas"></td>
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.ValorHora"></td>
-
                         <td>
                             <a ng-click="excluirVaga(vaga)"> <i class="fa fa-times fa-2x"></i> </a>
                         </td>
