@@ -50,13 +50,13 @@ namespace Migrations._201503
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Email").AsString(45).NotNullable()
                 .WithColumn("Senha").AsString(45).NotNullable()
-                .WithColumn("Login").AsString(45).NotNullable()
+                .WithColumn("NomeUsuario").AsString(45).NotNullable()
                 .WithColumn("Perfil_Id").AsInt32().NotNullable()
                 ;
 
             Create.ForeignKey("FK_Usuario_Perfil").FromTable("Usuario").ForeignColumn("Perfil_Id").ToTable("Perfil").PrimaryColumn("Id");
 
-            Insert.IntoTable("Usuario").Row(new { Email = "contact@multivagas.com", Senha = Encryption.Encrypt("multivagas"), Login = "admin", Perfil_Id = 1 });
+            Insert.IntoTable("Usuario").Row(new { Email = "multivagas@multivagas.com", Senha = Encryption.Encrypt("multivagas"), NomeUsuario = "Equipe Multivagas", Perfil_Id = 1 });
         }
 
         public override void Down()

@@ -22,8 +22,6 @@ namespace Web.Controllers
     {
         public IEstacionamentoService Service { get; set; }
 
-        public IUsuarioService UsuarioService { get; set; }
-
         public string Senha { get; set; }
 
         private bool UsuarioEquipeMultivagas()
@@ -35,12 +33,10 @@ namespace Web.Controllers
 
         public EstacionamentosController
             (
-                IEstacionamentoService service, 
-                IUsuarioService usuarioService
+                IEstacionamentoService service
             )
         {
             this.Service = service;
-            this.UsuarioService = usuarioService;
 
             this.Senha = "multivagas";
         }
@@ -73,8 +69,6 @@ namespace Web.Controllers
         {
             var estacionamento = Mapper.Map<Estacionamento>(estacionamentoForm);
 
-            //this.VerficaLogin(estacionamentoForm.Usuario.Login);
-
             Service.Add(estacionamento);
         }
 
@@ -82,8 +76,6 @@ namespace Web.Controllers
         public void Put(int id, EstacionamentoFormAdministrador estacionamentoForm)
         {
             var estacionamento = Mapper.Map<Estacionamento>(estacionamentoForm);
-
-            //this.VerficaLogin(estacionamentoForm.Usuario.Login);
 
             Service.Update(estacionamento);   
         }
@@ -101,22 +93,6 @@ namespace Web.Controllers
 
             return Mapper.Map<IEnumerable<EstacionamentoTable>>(estacionamentos);
         }
-
-        //private UsuarioFormEstacionamento VerficaLogin(string login)
-        //{
-        //    try
-        //    {
-        //        Usuario usuario = Service.VerficaLogin(login);
-
-        //        return Mapper.Map<UsuarioFormEstacionamento>(usuario);                
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "ADMINISTRADOR_INVALIDO"); //"O login informado não possui perfil de administrador."
-
-        //        throw new HttpResponseException(response);
-        //    }
-        //}
 
         [Route("api/estacionamentos/tipospagamento/{estacionamentoId}")]
         public IEnumerable<TipoPagamento> GetTiposPagamento(int estacionamentoId)

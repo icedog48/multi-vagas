@@ -76,7 +76,7 @@ namespace Service
 
             if (estacionamento.Usuario != null)
             {
-                var novoUsuario = usuarioService.GetByLogin(estacionamento.Usuario.Login);
+                var novoUsuario = usuarioService.GetByEmail(estacionamento.Usuario.Email);
 
                 if (novoUsuario == null)
                 {
@@ -84,6 +84,7 @@ namespace Service
                 }
                 else
                 {
+                    novoUsuario.NomeUsuario = estacionamento.Usuario.NomeUsuario;
                     estacionamento.Usuario = novoUsuario;
                 }
             }            
@@ -95,6 +96,10 @@ namespace Service
             else if (estacionamento.Usuario != null && estacionamento.Usuario.IsNew())
             {
                 RegistrarAdministrador(estacionamento.Usuario);
+            }
+            else
+            {
+                usuarioService.Update(estacionamento.Usuario);   
             }
 
             base.Update(estacionamento);
@@ -121,7 +126,7 @@ namespace Service
         
         public virtual Usuario VerficaLogin(string login)
         {
-            var usuario = usuarioService.GetByLogin(login);
+            var usuario = usuarioService.GetByEmail(login);
 
             if (usuario != null && !usuario.TemPerfil(PerfilEnum.ADMIN)) throw new UnauthorizedAccessException("O login informado não possui perfil de administrador.");
 

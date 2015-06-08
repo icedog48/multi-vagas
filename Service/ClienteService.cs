@@ -39,7 +39,7 @@ namespace Service
             {
                 AlterarSenha = false,
                 Email = cliente.Email,
-                Login = cliente.Email,
+                NomeUsuario = cliente.Email,
                 Perfil = new Perfil(PerfilEnum.USUARIO),
                 Senha = senha,
                 SituacaoRegistro = SituacaoRegistroEnum.ATIVO

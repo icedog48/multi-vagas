@@ -75,6 +75,7 @@
     <Compile Include="FuncionarioService.cs" />
     <Compile Include="UsuarioService.cs" />
     <Compile Include="Validations\ClienteValidator.cs" />
+    <Compile Include="Validations\UsuarioValidator.cs" />
     <Compile Include="Validations\MovimentacaoValidator.cs" />
     <Compile Include="Validations\FuncionarioValidator.cs" />
     <Compile Include="Validations\EstacionamentoValidator.cs" />

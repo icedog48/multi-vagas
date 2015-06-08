@@ -30,7 +30,7 @@ namespace Tests.Integration.Selenium
         {
             var estacionamentoTeste = ObterEstacionamentoTeste();
 
-            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.Login, "multivagas");
+            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.NomeUsuario, "multivagas");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnNovoEstacionamento")));
 

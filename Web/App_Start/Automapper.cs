@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Web.ViewModels;
+using Utils.Extensions;
 
 namespace Web.App_Start
 {
@@ -20,24 +21,14 @@ namespace Web.App_Start
 
             Mapper.CreateMap<string, TimeSpan>().ConvertUsing(x =>
             {
-                var HH = 0;
+                var datetime = Convert.ToDateTime(x);
 
-                if (x.Length > 1) HH = Convert.ToInt32(x.Substring(0, 2));
-
-                var mm = 0;
-
-                if (x.Length > 4) mm = Convert.ToInt32(x.Substring(3, 2));
-
-                var ss = 0;
-
-                if (x.Length > 7) ss = Convert.ToInt32(x.Substring(6, 2));
-
-                return new TimeSpan(HH, mm, ss);
+                return datetime.TimeOfDay;
             });
 
             Mapper.CreateMap<TimeSpan, string>().ConvertUsing(x =>
             {
-                return x.ToString("hh':'mm':'ss");
+                return new DateTime(x.Ticks).ToString();
             });
 
             Mapper.CreateMap<DateTime, string>().ConvertUsing(x => x.ToString("dd/MM/yyyy HH:mm:ss"));
@@ -136,7 +127,7 @@ namespace Web.App_Start
 
             Mapper.CreateMap<UsuarioFormFuncionario, Usuario>()
                 .ForMember(model => model.SituacaoRegistro, map => map.MapFrom(viewModel => (int)SituacaoRegistroEnum.ATIVO))
-                .ForMember(model => model.Login, map => map.Ignore())
+                .ForMember(model => model.NomeUsuario, map => map.Ignore())
                 .ForMember(model => model.Perfil, map => map.Ignore())
                 .ForMember(model => model.Senha, map => map.Ignore())
                 .ForMember(model => model.AlterarSenha, map => map.Ignore())

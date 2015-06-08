@@ -41,7 +41,7 @@ namespace Tests.Integration.Selenium
             ScreenTestHelper.FillTextBoxByName(driver, "UF", "RJ");
 
             //Administrador
-            ScreenTestHelper.FillTextBoxByName(driver, "Login", CNPJ);
+            ScreenTestHelper.FillTextBoxByName(driver, "NomeUsuario", CNPJ);
             ScreenTestHelper.FillTextBoxByName(driver, "EmailUsuario", CNPJ + "@multivagas.com.br");
 
             var resultado = string.Empty;

@@ -12,6 +12,8 @@ using Web.Controllers.Attributes;
 using Model;
 using Service.Interfaces;
 using Service.Filters;
+using System.Text;
+using FluentValidation;
 
 
 namespace Web.Controllers
@@ -53,7 +55,20 @@ namespace Web.Controllers
 
         public void Put(int id, FuncionarioForm admin)
         {
-            Service.Update(Mapper.Map<Funcionario>(admin));
+            try
+            {
+                Service.Update(Mapper.Map<Funcionario>(admin));
+            }
+            catch (ValidationException ex)
+            {
+                var errors = new StringBuilder();
+
+                foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
+
+                var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Ambiguous, errors.ToString());
+
+                throw new HttpResponseException(response);
+            }
         }
 
         public void Delete(int id)

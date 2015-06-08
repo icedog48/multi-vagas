@@ -16,7 +16,7 @@ namespace Tests.Integration.Selenium
 {
     public struct  Usuario 
     {
-        public string Login { get; set; }
+        public string Email { get; set; }
 
         public string Senha { get; set; }
     }
@@ -25,13 +25,13 @@ namespace Tests.Integration.Selenium
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
-        protected string urlApp = "http://multivagas.apphb.com/";
+        protected string urlApp = "http://localhost:57625";
 
         public Usuario EquipeMultivagas
         {
             get
             {
-                return new Usuario() { Login = "admin", Senha = "multivagas" };
+                return new Usuario() { Email = "multivagas@multivagas.com", Senha = "multivagas" };
             }
         }
 
@@ -45,7 +45,7 @@ namespace Tests.Integration.Selenium
         /// </summary>
         protected virtual void FazerLoginComoEquipeMultivagas()
         {
-            FazerLoginComoEquipeMultivagas(EquipeMultivagas.Login, EquipeMultivagas.Senha);
+            FazerLoginComoEquipeMultivagas(EquipeMultivagas.Email, EquipeMultivagas.Senha);
         }
 
         protected virtual void FazerLoginComoEquipeMultivagas(string usuario, string senha)
@@ -61,7 +61,7 @@ namespace Tests.Integration.Selenium
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnLogin")));
 
-            ScreenTestHelper.FillTextBoxByName(driver, "Login", usuario);
+            ScreenTestHelper.FillTextBoxByName(driver, "Email", usuario);
             ScreenTestHelper.FillTextBoxByName(driver, "Senha", senha);
 
             ScreenTestHelper.ClickElementByName(driver, "btnLogin");
@@ -97,7 +97,7 @@ namespace Tests.Integration.Selenium
                 RazaoSocial = RazaoSocialEstacionamentoTeste,
                 Telefone = "123456789",
                 UF = "RJ",
-                Usuario = new Model.Usuario() { Login = "admin_teste", Email = "admin_teste@multivagas.com" },
+                Usuario = new Model.Usuario() { NomeUsuario = "admin_teste", Email = "admin_teste@multivagas.com" },
             };
 
             estacionamentoService.Add(estacionamentoDeTeste);

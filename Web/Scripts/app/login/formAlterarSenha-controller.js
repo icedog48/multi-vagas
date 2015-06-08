@@ -17,7 +17,7 @@
 
         var alterarSenha = function (cliente) {
 
-            cliente.Login = sessionService.user ;
+            cliente.NomeUsuario = sessionService.user ;
 
             Usuario.alterarSenha(cliente).$promise.then(function (data) {
                 $scope.currentUser.alterarSenha = false;

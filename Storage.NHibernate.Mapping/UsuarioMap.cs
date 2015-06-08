@@ -14,7 +14,7 @@ namespace Storage.Nhibernate.Mapping
         public UsuarioMap()
         {
             Map(x => x.Email);
-            Map(x => x.Login);
+            Map(x => x.NomeUsuario);
             Map(x => x.Senha);
             Map(x => x.AlterarSenha);   
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using Web.App_Start;
 using Web.Controllers.Attributes;
@@ -28,7 +29,11 @@ namespace Web.Controllers
         [Route("api/usuarios/alterarsenha")]
         public void AlterarSenha (UsuarioForm usuarioForm) 
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+
             var usuario = Mapper.Map<Usuario>(usuarioForm);
+                usuario.Email = claimsIdentity.FindFirst(ClaimTypes.Email).Value;
+                
 
             Service.AlterarSenha(usuario);
         }        

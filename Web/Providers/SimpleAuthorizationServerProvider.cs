@@ -51,7 +51,7 @@ namespace WebApiAuthentication.Providers
             });
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim(ClaimTypes.Name, this.Usuario.Login));
+                identity.AddClaim(new Claim(ClaimTypes.Email, this.Usuario.Email));
                 identity.AddClaim(new Claim(ClaimTypes.Role, this.Usuario.Perfil.Nome.ToUpper()));
 
             context.Validated(identity);
@@ -59,7 +59,7 @@ namespace WebApiAuthentication.Providers
 
         public override Task TokenEndpointResponse(OAuthTokenEndpointResponseContext context)
         {
-            context.AdditionalResponseParameters.Add("Usuario", this.Usuario.Login);
+            context.AdditionalResponseParameters.Add("Usuario", this.Usuario.NomeUsuario);
             context.AdditionalResponseParameters.Add("AlterarSenha", this.Usuario.AlterarSenha);
             context.AdditionalResponseParameters.Add("Permissoes", JsonConvert.SerializeObject(this.Usuario.Perfil.Permissoes.Select(x => x.Nome)));
 
