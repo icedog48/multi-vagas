@@ -12,6 +12,8 @@ using Web.Controllers.Attributes;
 using Model;
 using Service.Interfaces;
 using Service.Filters;
+using FluentValidation;
+using System.Text;
 
 
 namespace Web.Controllers
@@ -46,12 +48,26 @@ namespace Web.Controllers
 
         public void Post(CategoriaVagaForm vaga)
         {
-            Service.Add(Mapper.Map<CategoriaVaga>(vaga), vaga.Quantidade);
+            try
+            {
+                Service.Add(Mapper.Map<CategoriaVaga>(vaga), vaga.Quantidade);
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
         }
 
         public void Put(int id, CategoriaVagaForm vaga)
         {
-            Service.Update(Mapper.Map<CategoriaVaga>(vaga));
+            try
+            {
+                Service.Update(Mapper.Map<CategoriaVaga>(vaga));
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
         }
 
         public void Delete(int id)
@@ -63,6 +79,17 @@ namespace Web.Controllers
         public IEnumerable<CategoriaVagaTable> Filtrar(CategoriaVagaFilter filtro) 
         {
             return Mapper.Map<IEnumerable<CategoriaVagaTable>>(Service.GetByFilter(filtro));
+        }
+
+        private void ThrowHttpResponseException(ValidationException ex)
+        {
+            var errors = new StringBuilder();
+
+            foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
+
+            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, errors.ToString());
+
+            throw new HttpResponseException(response);
         }
     }
 }

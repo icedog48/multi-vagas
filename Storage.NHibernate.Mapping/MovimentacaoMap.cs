@@ -18,6 +18,7 @@ namespace Storage.Nhibernate.Mapping
             Map(x => x.Placa);
             Map(x => x.Ticket);
             Map(x => x.ValorPago);
+            Map(x => x.Estadia);
 
             References(x => x.Cliente);
             References(x => x.TipoPagamento);

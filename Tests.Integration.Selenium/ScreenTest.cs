@@ -97,7 +97,7 @@ namespace Tests.Integration.Selenium
                 RazaoSocial = RazaoSocialEstacionamentoTeste,
                 Telefone = "123456789",
                 UF = "RJ",
-                Usuario = new Model.Usuario() { NomeUsuario = "admin_teste", Email = "admin_teste@multivagas.com" },
+                Usuario = new Model.Usuario() { NomeUsuario = "admin_teste", Email = "admin_teste@multivagas.com", AlterarSenha = false },
             };
 
             estacionamentoService.Add(estacionamentoDeTeste);

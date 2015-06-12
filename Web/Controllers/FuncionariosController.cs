@@ -50,7 +50,15 @@ namespace Web.Controllers
 
         public void Post(FuncionarioForm funcionarioForm)
         {
-            Service.Add(Mapper.Map<Funcionario>(funcionarioForm));
+            try
+            {
+                Service.Add(Mapper.Map<Funcionario>(funcionarioForm));
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
+            
         }
 
         public void Put(int id, FuncionarioForm admin)
@@ -61,14 +69,19 @@ namespace Web.Controllers
             }
             catch (ValidationException ex)
             {
-                var errors = new StringBuilder();
-
-                foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
-
-                var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Ambiguous, errors.ToString());
-
-                throw new HttpResponseException(response);
+                ThrowHttpResponseException(ex);
             }
+        }
+
+        private void ThrowHttpResponseException(ValidationException ex)
+        {
+            var errors = new StringBuilder();
+
+            foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
+
+            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, errors.ToString());
+
+            throw new HttpResponseException(response);
         }
 
         public void Delete(int id)

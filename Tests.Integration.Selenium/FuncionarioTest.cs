@@ -31,11 +31,11 @@ namespace Tests.Integration.Selenium
         {
             var estacionamentoTeste = ObterEstacionamentoTeste();
 
-            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.NomeUsuario, "multivagas");
+            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.Email, "multivagas");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnNovoEstacionamento")));
 
-            ScreenTestHelper.ClickElementByName(driver, "menuSettings");
+            ScreenTestHelper.ClickElementByName(driver, "menuCadastros");
             ScreenTestHelper.ClickElementByName(driver, "MenuFuncionarios");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnAdicionar")));
@@ -48,20 +48,18 @@ namespace Tests.Integration.Selenium
             var funcionario = DateTime.Now.ToString("ddMMyyyymm");
 
             ScreenTestHelper.FillTextBoxByName(driver, "Nome", "Funcionario " + funcionario);
-            ScreenTestHelper.FillTextBoxByName(driver, "CPF", funcionario);
-            ScreenTestHelper.FillTextBoxByName(driver, "Telefone", "123456789");
+            ScreenTestHelper.FillTextBoxByName(driver, "CPF", "0" + funcionario);
+            ScreenTestHelper.FillTextBoxByName(driver, "Telefone", "21945677894");
             ScreenTestHelper.FillTextBoxByName(driver, "Email", funcionario + "@multivagas.com.br");
 
-            ScreenTestHelper.FillTextBoxByName(driver, "CEP", "123456");
+            ScreenTestHelper.FillTextBoxByName(driver, "CEP", "21831375");
             ScreenTestHelper.FillTextBoxByName(driver, "Logradouro", "Rua Ulpiano dos Santos, 275");
             ScreenTestHelper.FillTextBoxByName(driver, "Bairro", "Bangu");
             ScreenTestHelper.FillTextBoxByName(driver, "Cidade", "Rio de Janeiro");
             ScreenTestHelper.FillTextBoxByName(driver, "UF", "RJ");                             
 
-            ScreenTestHelper.FillTextBoxByName(driver, "Matricula", funcionario);
             ScreenTestHelper.FillTextBoxByName(driver, "HoraInicio", "08:00");
             ScreenTestHelper.FillTextBoxByName(driver, "HoraSaida", "18:00");
-            ScreenTestHelper.FillTextBoxByName(driver, "CargaHoraria", "08:00");
             ScreenTestHelper.FillTextBoxByName(driver, "DataAdmissao", DateTime.Now.ToString("dd/MM/yyyy"));
             ScreenTestHelper.FillTextBoxByName(driver, "Salario", "500,00");            
 

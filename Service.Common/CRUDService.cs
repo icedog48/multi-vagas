@@ -47,7 +47,7 @@ namespace Service.Common
 
         public virtual IEnumerable<T> GetByFilter(Service.Common.Filters.IFilter<T> filter)
         {
-            return filter.Apply(repository.Items); 
+            return filter.Apply(repository.Items).ToList(); 
         }
 
         public virtual T GetById(int id)

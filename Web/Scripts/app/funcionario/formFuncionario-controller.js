@@ -29,9 +29,11 @@
         };
 
         var mensagemErro = function (errResponse) {
-            if (errResponse.status == 300) {
+            if (errResponse.status == 500) {
                 alert(errResponse.data.Message);
             } else {
+                console.log(errResponse);
+
                 alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
             }
         }
@@ -95,7 +97,18 @@
             }
         };
 
+        var inputCpf = function (newValue, oldValue) {
+            var isValid = true;
+
+            if (typeof (newValue) !== 'undefined') {
+                isValid = newValue.length == 11;
+            }
+
+            $scope.cpfInvalido = !isValid;
+        };
+
         $scope.$watch('funcionario.Matricula', inputNumber, true);
+        $scope.$watch('funcionario.CPF', inputCpf, true);
     };
 
     angular.module("funcionario").controller("formFuncionarioController", ["$scope", "$stateParams", "Funcionario", "$state", "Estacionamento", "Perfil", "$filter", formFuncionarioController]);

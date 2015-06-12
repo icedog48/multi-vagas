@@ -32,9 +32,12 @@ namespace Service
             obj.Usuario.NomeUsuario = obj.Matricula;
             obj.Usuario.Perfil = new Perfil(PerfilEnum.FUNCIONARIO);
 
-            usuarioService.RegistrarComSenhaDefault(obj.Usuario);
+            repository.ExecuteTransaction(() => 
+            {
+                usuarioService.RegistrarComSenhaDefault(obj.Usuario);
 
-            base.Add(obj);
+                base.Add(obj);
+            });
         }
 
         public override void Update(Funcionario obj)

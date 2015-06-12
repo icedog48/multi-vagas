@@ -51,9 +51,27 @@ namespace Web.Controllers
         [Route("api/movimentacoes/periodo")]
         public IEnumerable<MovimentacaoPorPeriodoTable> Get(MovimentacaoPorPeriodoFilter filter)
         {
-            var movimentacoes = Service.ListarPorPeriodo(filter);
+            var movimentacoes = Service.GetByFilter(filter);
 
             return Mapper.Map<IEnumerable<MovimentacaoPorPeriodoTable>>(movimentacoes);
+        }
+
+        [HttpPost]
+        [Route("api/movimentacoes/categoria")]
+        public IEnumerable<MovimentacaoPorCategoriaTable> Get(MovimentacaoPorCategoriaFilter filter)
+        {
+            var movimentacoes = Service.GetByFilter(filter);
+
+            return Mapper.Map<IEnumerable<MovimentacaoPorCategoriaTable>>(movimentacoes);
+        }
+
+        [HttpPost]
+        [Route("api/movimentacoes/estadia")]
+        public IEnumerable<MovimentacaoPorEstadiaTable> Get(MovimentacaoPorEstadiaFilter filter)
+        {
+            var movimentacoes = Service.GetByFilter(filter);
+
+            return Mapper.Map<IEnumerable<MovimentacaoPorEstadiaTable>>(movimentacoes);
         }
 
         [HttpPost]

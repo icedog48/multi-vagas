@@ -66,7 +66,11 @@
 
                 limparUsuario();
 
-                alert("O NomeUsuario informado não possui perfil válido para administrar o estacionamento.");
+                alert("O Usuário informado não possui perfil válido para administrar o estacionamento.");
+            } else {
+                console.log(errResponse);
+
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
             }
         };
 

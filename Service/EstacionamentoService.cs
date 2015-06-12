@@ -65,9 +65,12 @@ namespace Service
 
         public override void Add(Estacionamento obj)
         {
-            RegistrarAdministrador(obj.Usuario);
+            repository.ExecuteTransaction(() => 
+            {
+                RegistrarAdministrador(obj.Usuario);
 
-            base.Add(obj);
+                base.Add(obj);
+            });
         }
 
         public override void Update(Estacionamento estacionamento)
@@ -87,28 +90,31 @@ namespace Service
                     novoUsuario.NomeUsuario = estacionamento.Usuario.NomeUsuario;
                     estacionamento.Usuario = novoUsuario;
                 }
-            }            
-
-            if (estacionamento.Usuario == null) // Recupera o usuario antigo, caso venha da tela sem o usuario preenchido
-            {
-                estacionamento.Usuario = usuarioAntigo;
-            }
-            else if (estacionamento.Usuario != null && estacionamento.Usuario.IsNew())
-            {
-                RegistrarAdministrador(estacionamento.Usuario);
-            }
-            else
-            {
-                usuarioService.Update(estacionamento.Usuario);   
             }
 
-            base.Update(estacionamento);
+            repository.ExecuteTransaction(() => 
+            {
+                if (estacionamento.Usuario == null) // Recupera o usuario antigo, caso venha da tela sem o usuario preenchido
+                {
+                    estacionamento.Usuario = usuarioAntigo;
+                }
+                else if (estacionamento.Usuario != null && estacionamento.Usuario.IsNew())
+                {
+                    RegistrarAdministrador(estacionamento.Usuario);
+                }
+                else
+                {
+                    usuarioService.Update(estacionamento.Usuario);
+                }
 
-            //Caso o usuário tenha sido alterado, remove o antigo
+                base.Update(estacionamento);
 
-            bool alterouUsuario = estacionamento.Usuario.Id != usuarioAntigo.Id;
+                //Caso o usuário tenha sido alterado, remove o antigo
 
-            if (alterouUsuario && PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
+                bool alterouUsuario = estacionamento.Usuario.Id != usuarioAntigo.Id;
+
+                if (alterouUsuario && PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);
+            });
         }
 
         protected virtual bool PossoExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)

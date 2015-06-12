@@ -253,11 +253,16 @@
     <Content Include="Scripts\app\funcionario\funcionario-service.js" />
     <Content Include="Scripts\app\funcionario\funcionario.js" />
     <Content Include="Scripts\app\login\usuario-service.js" />
+    <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorEstadia.html" />
+    <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorEstadia-controller.js" />
+    <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorCategoria.html" />
+    <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorCategoria-controller.js" />
     <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorPeriodo-controller.js" />
     <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorPeriodo.html" />
-    <Content Include="Scripts\app\relatorios\relatorios.js" />
+    <Content Include="Scripts\app\relatorios\movimentacaoPorEstadia-template.html" />
+    <Content Include="Scripts\app\relatorios\movimentacaoPorCategoria-template.html" />
     <Content Include="Scripts\app\relatorios\movimentacaoPorPeriodo-template.html" />
-    <Content Include="Scripts\app\relatorios\report-template.html" />
+    <Content Include="Scripts\app\relatorios\relatorios.js" />
     <Content Include="Scripts\app\shared\perfil-service.js" />
     <Content Include="Scripts\app\vagas\categoriaVaga-service.js" />
     <Content Include="Scripts\app\vagas\formReservaVaga.html" />
@@ -341,6 +346,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ClienteForm.cs" />
     <Compile Include="ViewModels\MovimentacaoEntradaForm.cs" />
+    <Compile Include="ViewModels\MovimentacaoPorCategoriaTable.cs" />
+    <Compile Include="ViewModels\MovimentacaoPorEstadiaTable.cs" />
     <Compile Include="ViewModels\MovimentacaoTable.cs" />
     <Compile Include="ViewModels\TipoPagamentoCombo.cs" />
     <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />

@@ -248,6 +248,26 @@ namespace Web.App_Start
                 .ForMember(viewModel => viewModel.TipoPagamento, map => map.MapFrom(model => model.TipoPagamento))
             ;
 
+            Mapper.CreateMap<Movimentacao, MovimentacaoPorCategoriaTable>()
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+                .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
+                .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
+                .ForMember(viewModel => viewModel.Data, map => map.MapFrom(model => model.Entrada.Date.ToString("dd/MM/yyyy")))
+                .ForMember(viewModel => viewModel.HorasReferencia, map => map.MapFrom(model => model.HorasReferencia))
+                .ForMember(viewModel => viewModel.TipoPagamento, map => map.MapFrom(model => model.TipoPagamento))
+            ;
+
+            Mapper.CreateMap<Movimentacao, MovimentacaoPorEstadiaTable>()
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
+                .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
+                .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
+                .ForMember(viewModel => viewModel.Data, map => map.MapFrom(model => model.Entrada.Date.ToString("dd/MM/yyyy")))
+                .ForMember(viewModel => viewModel.HorasReferencia, map => map.MapFrom(model => model.HorasReferencia))
+                .ForMember(viewModel => viewModel.TipoPagamento, map => map.MapFrom(model => model.TipoPagamento))
+            ;
+
             #endregion Movimentacao            
 
             #region TipoPagamento
