@@ -29,7 +29,7 @@ namespace Storage.Nhibernate.Mapping
 
             References(x => x.Usuario);
 
-            HasMany(x => x.CagetoriasVaga);
+            HasMany(x => x.CagetoriasVaga).Inverse();
         }
     }
 }

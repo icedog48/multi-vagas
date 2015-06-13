@@ -10,16 +10,22 @@ namespace Service.Interfaces
 {
     public interface IUsuarioService : IService<Usuario>
     {
-        Usuario Login(string usuario, string senha);
+        Usuario Login(string email, string senha);
 
         void RegistrarComSenhaDefault(Usuario usuario);
 
-        Usuario GetByLogin(string login);
+        Usuario GetByEmail(string email);
 
         void Remove(Usuario usuario);
 
         void AlterarSenha(Usuario usuario);
 
         void Registrar(Usuario usuario);
+
+        void Update(Usuario usuario);
+
+        void ValidateInstance(Usuario usuario);
+
+        void ResetSenha(Usuario usuario);
     }
 }

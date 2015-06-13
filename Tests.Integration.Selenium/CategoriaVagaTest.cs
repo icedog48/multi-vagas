@@ -30,11 +30,11 @@ namespace Tests.Integration.Selenium
         {
             var estacionamentoTeste = ObterEstacionamentoTeste();
 
-            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.Login, "multivagas");
+            FazerLoginComoEquipeMultivagas(estacionamentoTeste.Usuario.Email, "multivagas");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnNovoEstacionamento")));
 
-            ScreenTestHelper.ClickElementByName(driver, "menuSettings");
+            ScreenTestHelper.ClickElementByName(driver, "menuCadastros");
             ScreenTestHelper.ClickElementByName(driver, "MenuVagas");
 
             wait.Until(x => ExpectedConditions.ElementIsVisible(By.Name("btnAdicionar")));
@@ -49,7 +49,7 @@ namespace Tests.Integration.Selenium
             var sigla = DateTime.Now.ToString("mmss");
 
             ScreenTestHelper.FillTextBoxByName(driver, "Descricao", "Categoria " + categoria);
-            ScreenTestHelper.FillTextBoxByName(driver, "Sigla", sigla);
+            ScreenTestHelper.FillTextBoxByName(driver, "Sigla", "SGL");
             ScreenTestHelper.FillTextBoxByName(driver, "Quantidade", "10");
             ScreenTestHelper.FillTextBoxByName(driver, "ValorHora", "5,00");
 

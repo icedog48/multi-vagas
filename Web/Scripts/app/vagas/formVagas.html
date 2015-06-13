@@ -20,7 +20,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Descricao.$dirty && frmCategoriaVaga.Descricao.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Categoria de Vaga</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Descricao" ng-model="categoriaVaga.Descricao" required>
+                        <input type="text" class="form-control" name="Descricao" ng-model="categoriaVaga.Descricao" required maxlength="45">
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Quantidade.$dirty && frmCategoriaVaga.Quantidade.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Quantidade</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="Quantidade" ng-model="categoriaVaga.Quantidade" required ng-readonly="naoPodeAlterar">
+                        <input type="text" class="form-control" name="Quantidade" ng-model="categoriaVaga.Quantidade" required ng-readonly="naoPodeAlterar">
                     </div>
                 </div>
 

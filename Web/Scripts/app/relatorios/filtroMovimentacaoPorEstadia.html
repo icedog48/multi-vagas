@@ -1,34 +1,35 @@
 ﻿<form name="frmFiltroMovimentacao" class="form-horizontal style-form" role="form" ng-submit="filtrar(filtro)">
 
     <div class="form-panel">
-        <h4 class="mb"><i class="fa fa-angle-right"></i> Filtro de movimentações por período </h4>
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Filtro de movimentações por tempo de estadia </h4>
         <div class="row mt">
             <div class="col-sm-12 col-md-12">
                 <div class="col-sm-3 col-md-3">
                     <label class="control-label">Estacionamento</label>
+                    
                     <select name="Estacionamento" class="form-control" ng-model="filtro.Estacionamento" ng-options="estacionamento.RazaoSocial for estacionamento in estacionamentos">
                         <option value=""> --- </option>
                     </select>
                 </div>
-
             </div>
         </div>
+
         <div class="row mt">
             <div class="col-sm-12 col-md-12">
                 <div class="col-sm-3 col-md-3">
-                    <label class="control-label"> Data inicial </label>
+                    <label class="control-label">Estadia (H) - Inicio</label>
 
-                    <input type="date" class="form-control" name="DataInicial" ng-model="filtro.DataInicial" required>
+                    <input type="time" class="form-control" name="HorasReferenciaInicio" ng-model="filtro.HorasReferenciaInicio">
                 </div>
 
                 <div class="col-sm-3 col-md-3">
-                    <label class="control-label"> Data final </label>
+                    <label class="control-label">Estadia (H) - Fim</label>
 
-                    <input type="date" class="form-control" name="DataFinal" ng-model="filtro.DataFinal" required>
+                    <input type="time" class="form-control" name="HorasReferenciaFim" ng-model="filtro.HorasReferenciaFim">
                 </div>
-
             </div>
         </div>
+       
 
         <!--Botoes-->
         <div class="row mt">
@@ -47,6 +48,7 @@
                     <tr>
                         <th>Estacionamento</th>
                         <th>Placa</th>
+                        <th>Categoria</th>
                         <th>Pagamento</th>
                         <th>Data</th>
                         <th>Estadia(H)</th>
@@ -57,6 +59,7 @@
                     <tr ng-repeat="movimentacao in movimentacoes">
                         <td ng-bind="movimentacao.Estacionamento"></td>
                         <td ng-bind="movimentacao.Placa"></td>
+                        <td ng-bind="movimentacao.CategoriaVaga"></td>
                         <td ng-bind="movimentacao.TipoPagamento"></td>
                         <td ng-bind="movimentacao.Data"></td>
                         <td ng-bind="movimentacao.HorasReferencia"></td>

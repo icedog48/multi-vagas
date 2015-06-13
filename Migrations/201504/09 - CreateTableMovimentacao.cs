@@ -23,7 +23,7 @@ namespace Migrations._201504
                 .WithColumn("Id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("Nome").AsString(255).NotNullable()
                 .WithColumn("CPF").AsString(11).NotNullable()
-                .WithColumn("Telefone").AsString(10).NotNullable()
+                .WithColumn("Telefone").AsString(11).NotNullable()
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("SituacaoRegistro").AsInt32().NotNullable().WithDefaultValue((int)SituacaoRegistroEnum.ATIVO);
                 ;

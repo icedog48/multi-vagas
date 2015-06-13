@@ -14,12 +14,12 @@ namespace Migrations._201505
     {
         public override void Up()
         {
-            Alter.Table("Usuario").AlterColumn("Login").AsString(45).NotNullable().Unique("UQ_Login_Usuario");
+            Alter.Table("Usuario").AlterColumn("Email").AsString(45).NotNullable().Unique("UQ_Email_Usuario");
             
             Alter.Table("Cliente").AlterColumn("Email").AsString(255).NotNullable().Unique("UQ_Email_Cliente");
             Alter.Table("Cliente").AlterColumn("CPF").AsString(11).NotNullable().Unique("UQ_CPF_Cliente");
             
-            Alter.Table("Estacionamento").AlterColumn("CNPJ").AsString(10).NotNullable().Unique("UQ_CNPJ_Estacionamento");
+            Alter.Table("Estacionamento").AlterColumn("CNPJ").AsString(14).NotNullable().Unique("UQ_CNPJ_Estacionamento");
 
             Alter.Table("Funcionario").AlterColumn("CPF").AsString(11).NotNullable().Unique("UQ_CPF_Funcionario");
             Alter.Table("Funcionario").AlterColumn("Matricula").AsString(10).NotNullable().Unique("UQ_Matricula_Funcionario");
@@ -27,7 +27,7 @@ namespace Migrations._201505
 
         public override void Down()
         {
-            Delete.Index("UQ_Login_Usuario");
+            Delete.Index("UQ_Email_Usuario");
             
             Delete.Index("UQ_Email_Cliente");
             Delete.Index("UQ_CPF_Cliente");

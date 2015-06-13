@@ -28,21 +28,27 @@ namespace Service
 
         public override void Add(Funcionario obj)
         {
-            obj.Usuario.Login = obj.Matricula;
+            obj.Matricula = DateTime.Now.ToString("MMddHHmmss");
+            obj.Usuario.NomeUsuario = obj.Matricula;
             obj.Usuario.Perfil = new Perfil(PerfilEnum.FUNCIONARIO);
 
-            usuarioService.RegistrarComSenhaDefault(obj.Usuario);
+            repository.ExecuteTransaction(() => 
+            {
+                usuarioService.RegistrarComSenhaDefault(obj.Usuario);
 
-            base.Add(obj);
+                base.Add(obj);
+            });
         }
 
         public override void Update(Funcionario obj)
         {
             var usuario = usuarioService.GetById(obj.Usuario.Id);
-                usuario.Login = obj.Matricula;
+                usuario.NomeUsuario = obj.Matricula;
                 usuario.Email = obj.Usuario.Email;
 
             obj.Usuario = usuario;
+
+            usuarioService.ValidateInstance(obj.Usuario);
 
             base.Update(obj);
         }

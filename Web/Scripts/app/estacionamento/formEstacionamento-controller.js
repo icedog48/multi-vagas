@@ -23,7 +23,7 @@
                     $state.go('estacionamento_list');
                 })
                 .catch(function (errResponse) {
-                    showErrorMessage(errResponse.data.Message);
+                    showErrorMessage(errResponse);
                 });
         };
 
@@ -35,7 +35,7 @@
                     $state.go('estacionamento_list');
                 })
                 .catch(function (errResponse) {
-                    showErrorMessage(errResponse.data.Message);
+                    showErrorMessage(errResponse);
                 });
         };
 
@@ -52,23 +52,36 @@
         };
 
         var limparUsuario = function () {
-            var login = $scope.estacionamento.Usuario.Login;
+            var NomeUsuario = $scope.estacionamento.Usuario.NomeUsuario;
 
             $scope.estacionamento.Usuario = {};
-            $scope.estacionamento.Usuario.Login = "";
+            $scope.estacionamento.Usuario.NomeUsuario = "";
             $scope.estacionamento.Usuario.Email = "";
         }
 
-        var showErrorMessage = function (errCode) {
-            if (errCode == "ADMINISTRADOR_INVALIDO") {
+        var showErrorMessage = function (errResponse) {
+            if (errResponse.status == 400) {
+                alert(errResponse.data.Message);
+            } else {
+                console.log(errResponse);
 
-                $scope.frmEstacionamento.Login.$invalid = true;
-
-                limparUsuario();
-
-                alert("O login informado não possui perfil válido para administrar o estacionamento.");
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
             }
-        }
+        };
+
+        var inputCnpj = function (newValue, oldValue) {
+            var isValid = true;
+
+            if (typeof (newValue) !== 'undefined') {
+                isValid = newValue.length == 14;
+            }
+
+            $scope.cnpjInvalido = !isValid;
+        };
+
+        $scope.cnpjInvalido = false;
+
+        $scope.$watch('estacionamento.CNPJ', inputCnpj, true);
     };
 
     angular.module("estacionamento").controller("formEstacionamentoController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", "Usuario", formEstacionamentoController]);

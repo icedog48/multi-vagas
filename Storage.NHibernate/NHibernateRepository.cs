@@ -104,5 +104,15 @@ namespace Storage.NHibernate
                 throw;
             }
         }
+
+        public void ExecuteTransaction(Action action) 
+        {
+            using (var transaction = this.Session.BeginTransaction())
+            {
+                action();
+
+                transaction.Commit();
+            }
+        }
     }
 }

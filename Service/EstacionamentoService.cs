@@ -65,45 +65,66 @@ namespace Service
 
         public override void Add(Estacionamento obj)
         {
-            RegistrarAdministrador(obj.Usuario);
+            repository.ExecuteTransaction(() => 
+            {
+                obj.Usuario = usuarioService.GetByEmail(obj.Email);
 
-            base.Add(obj);
+                if (obj.Usuario == null)
+                {
+                    obj.Usuario = new Usuario() 
+                    {
+                        Email = obj.Email,
+                        NomeUsuario = obj.RazaoSocial
+                    };
+
+                    RegistrarAdministrador(obj.Usuario);
+                }
+                else if (obj.Usuario.SituacaoRegistro == SituacaoRegistroEnum.INATIVO)
+                {
+                    usuarioService.ResetSenha(obj.Usuario);
+                }
+
+                base.Add(obj);
+            });
         }
 
         public override void Update(Estacionamento estacionamento)
         {
-            var usuarioAntigo = ObterAdministradorAntigo(estacionamento.Id);
+            var usuarioAntigo = GetAdministradorById(estacionamento.Id);
 
-            if (estacionamento.Usuario != null)
+            estacionamento.Usuario = usuarioService.GetByEmail(estacionamento.Email);
+
+            repository.ExecuteTransaction(() => 
             {
-                var novoUsuario = usuarioService.GetByLogin(estacionamento.Usuario.Login);
-
-                if (novoUsuario == null)
+                if (estacionamento.Usuario == null)
                 {
-                    estacionamento.Usuario.ClearId();
+                    estacionamento.Usuario = new Usuario()
+                    {
+                        Email = estacionamento.Email,
+                        NomeUsuario = estacionamento.RazaoSocial
+                    };
+
+                    RegistrarAdministrador(estacionamento.Usuario);
                 }
-                else
+                else if (estacionamento.Usuario.SituacaoRegistro == SituacaoRegistroEnum.INATIVO)
                 {
-                    estacionamento.Usuario = novoUsuario;
+                    estacionamento.Usuario.NomeUsuario = estacionamento.RazaoSocial;
+                    usuarioService.ResetSenha(estacionamento.Usuario);
                 }
-            }            
+                else if (!estacionamento.Usuario.NomeUsuario.Equals(estacionamento.RazaoSocial))
+                {
+                    estacionamento.Usuario.NomeUsuario = estacionamento.RazaoSocial;
+                    usuarioService.Update(estacionamento.Usuario);
+                }
 
-            if (estacionamento.Usuario == null) // Recupera o usuario antigo, caso venha da tela sem o usuario preenchido
-            {
-                estacionamento.Usuario = usuarioAntigo;
-            }
-            else if (estacionamento.Usuario != null && estacionamento.Usuario.IsNew())
-            {
-                RegistrarAdministrador(estacionamento.Usuario);
-            }
+                base.Update(estacionamento);
 
-            base.Update(estacionamento);
+                //Caso o usuário tenha sido alterado, remove o antigo
 
-            //Caso o usuário tenha sido alterado, remove o antigo
+                bool alterouUsuario = estacionamento.Usuario.Id != usuarioAntigo.Id;
 
-            bool alterouUsuario = estacionamento.Usuario.Id != usuarioAntigo.Id;
-
-            if (alterouUsuario && PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);            
+                if (alterouUsuario && PossoExcluirUsuarioAntigo(estacionamento, usuarioAntigo)) usuarioService.Remove(usuarioAntigo);
+            });
         }
 
         protected virtual bool PossoExcluirUsuarioAntigo(Estacionamento estacionamento, Usuario usuarioAntigo)
@@ -114,14 +135,14 @@ namespace Service
             return !administraOutrosEstacionamentos && usuarioAntigo.TemPerfil(PerfilEnum.ADMIN); 
         }
 
-        protected virtual Usuario ObterAdministradorAntigo(int estacionamentoId)
+        protected virtual Usuario GetAdministradorById(int estacionamentoId)
         {
             return this.GetById(estacionamentoId).Usuario;
         }
         
         public virtual Usuario VerficaLogin(string login)
         {
-            var usuario = usuarioService.GetByLogin(login);
+            var usuario = usuarioService.GetByEmail(login);
 
             if (usuario != null && !usuario.TemPerfil(PerfilEnum.ADMIN)) throw new UnauthorizedAccessException("O login informado não possui perfil de administrador.");
 
@@ -131,6 +152,19 @@ namespace Service
         public IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId)
         {
             return tipoPagamentoRepository.Items;
+        }
+
+        public override void Remove(Estacionamento obj)
+        {
+            obj.Usuario = GetAdministradorById(obj.Id);
+            obj.Usuario.SituacaoRegistro = SituacaoRegistroEnum.INATIVO;
+
+            repository.ExecuteTransaction(() => 
+            {
+                usuarioService.Update(obj.Usuario);
+
+                base.Remove(obj);
+            });
         }
     }
 

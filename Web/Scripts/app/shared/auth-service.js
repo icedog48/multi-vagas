@@ -5,8 +5,7 @@
         var me = { };
 
         me.login = function (credentials) {
-
-            var data = "grant_type=password&username=" + credentials.Login + "&password=" + credentials.Senha;
+            var data = "grant_type=password&username=" + credentials.Email + "&password=" + credentials.Senha;
 
             return $http
                       .post('/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
