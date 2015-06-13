@@ -73,7 +73,7 @@ namespace Web.Controllers
             }
         }
 
-        private void ThrowHttpResponseException(ValidationException ex)
+        protected virtual void ThrowHttpResponseException(ValidationException ex)
         {
             var errors = new StringBuilder();
 

@@ -21,7 +21,8 @@ namespace Service.Validations
             RuleFor(usuario => usuario.Email)
                 .NotEmpty()
                 .NotNull().WithMessage("O campo Email deve ser preenchido.")
-                .Must(HaveUniqueEmail).WithMessage("Existe outro usuario cadastrado com o Email informado.");
+                .Must(HaveUniqueEmail).WithMessage("Existe um usuário cadastrado com o Email informado.")
+                .Must(HaveUniqueEmailInactive).WithMessage("Existe um usuário INATIVO cadastrado com o Email informado.");
 
             RuleFor(usuario => usuario.Senha)
                 .NotEmpty()
@@ -35,9 +36,14 @@ namespace Service.Validations
                 .NotNull().WithMessage("O campo Perfil deve ser preenchido.");
         }
 
+        protected virtual bool HaveUniqueEmailInactive(Usuario usuario, string email)
+        {
+            return !repository.Items.Any(x => x.Email == email && x.Id != usuario.Id && x.SituacaoRegistro == Model.Common.SituacaoRegistroEnum.INATIVO);
+        }
+
         protected virtual bool HaveUniqueEmail(Usuario usuario, string email)
         {
-            return !repository.Items.Any(x => x.Email == email && x.Id != usuario.Id);
+            return !repository.Items.Any(x => x.Email == email && x.Id != usuario.Id && x.SituacaoRegistro == Model.Common.SituacaoRegistroEnum.ATIVO);
         }
     }
 }

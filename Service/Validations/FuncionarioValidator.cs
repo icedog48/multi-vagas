@@ -48,7 +48,7 @@ namespace Service.Validations
             RuleFor(funcionario => funcionario.UF)
                 .NotEmpty()
                 .NotNull().WithMessage("O campo UF deve ser preenchido.")
-                .Length(2, 3).WithMessage("O campo UF deve ter entre 2 e 3 caracteres.");
+                .Length(2).WithMessage("O campo UF deve ter 2 caracteres.");
 
             RuleFor(funcionario => funcionario.Cidade)
                 .NotEmpty()

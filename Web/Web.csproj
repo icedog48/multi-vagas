@@ -350,7 +350,6 @@
     <Compile Include="ViewModels\MovimentacaoPorEstadiaTable.cs" />
     <Compile Include="ViewModels\MovimentacaoTable.cs" />
     <Compile Include="ViewModels\TipoPagamentoCombo.cs" />
-    <Compile Include="ViewModels\EstacionamentoFormAdministrador.cs" />
     <Compile Include="ViewModels\EstacionamentoForm.cs" />
     <Compile Include="ViewModels\FuncionarioForm.cs" />
     <Compile Include="ViewModels\CategoriaVagaCombo.cs" />

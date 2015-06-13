@@ -33,7 +33,7 @@ namespace Service
         {
             senha = Encryption.Encrypt(senha);
 
-            var query = repository.Items.Where(x => x.Email == email && x.Senha == senha);
+            var query = repository.Items.Where(x => x.Email == email && x.Senha == senha && x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
 
             if (query.Any()) return query.First();
 
@@ -112,6 +112,16 @@ namespace Service
             var result = validator.Validate(usuario);
 
             if (!result.IsValid) throw new ValidationException(result.Errors);
+        }
+
+
+        public void ResetSenha(Usuario usuario)
+        {
+            usuario.SituacaoRegistro = SituacaoRegistroEnum.ATIVO;
+            usuario.Senha = Encryption.Encrypt(SenhaDefault);
+            usuario.AlterarSenha = true;
+
+            repository.Update(usuario);
         }
     }
 }

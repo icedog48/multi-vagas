@@ -23,7 +23,7 @@
                     $state.go('estacionamento_list');
                 })
                 .catch(function (errResponse) {
-                    showErrorMessage(errResponse.data.Message);
+                    showErrorMessage(errResponse);
                 });
         };
 
@@ -35,7 +35,7 @@
                     $state.go('estacionamento_list');
                 })
                 .catch(function (errResponse) {
-                    showErrorMessage(errResponse.data.Message);
+                    showErrorMessage(errResponse);
                 });
         };
 
@@ -59,14 +59,9 @@
             $scope.estacionamento.Usuario.Email = "";
         }
 
-        var showErrorMessage = function (errCode) {
-            if (errCode == "ADMINISTRADOR_INVALIDO") {
-
-                $scope.frmEstacionamento.NomeUsuario.$invalid = true;
-
-                limparUsuario();
-
-                alert("O Usuário informado não possui perfil válido para administrar o estacionamento.");
+        var showErrorMessage = function (errResponse) {
+            if (errResponse.status == 400) {
+                alert(errResponse.data.Message);
             } else {
                 console.log(errResponse);
 

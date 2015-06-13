@@ -69,7 +69,7 @@
                         <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Telefone"></td>
                         <td ui-sref="estacionamento_edit({ id: estacionamento.Id })" ng-bind="estacionamento.Endereco"></td>
 
-                        <td align="center">
+                        <td align="center" ng-if="isAuthorized([userRoles.equipeMultivagas])">
                             <a ng-click="excluirEstacionamento(estacionamento)"> <i class="fa fa-times fa-2x"></i> </a>
                         </td>
                     </tr>
@@ -79,7 +79,7 @@
     </div>
 
     <!--Botoes-->
-    <div class="row mt">
+    <div class="row mt" ng-if="isAuthorized([userRoles.equipeMultivagas])">
         <div class="col-sm-12 col-md-12 form-buttons">
             <button type="submit" class="btn btn-round btn-primary pull-right" name="btnNovoEstacionamento" ng-click="novoEstacionamento()"><i class="fa fa-plus"></i> Novo </button>
         </div>

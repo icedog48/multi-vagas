@@ -25,5 +25,7 @@ namespace Service.Interfaces
         void Update(Usuario usuario);
 
         void ValidateInstance(Usuario usuario);
+
+        void ResetSenha(Usuario usuario);
     }
 }

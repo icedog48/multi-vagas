@@ -61,13 +61,7 @@ namespace Web.App_Start
             Mapper.CreateMap<EstacionamentoForm, Estacionamento>()
                 .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
                 .ForMember(model => model.Usuario, map => map.Ignore())
-                ;
-
-            Mapper.CreateMap<Estacionamento, EstacionamentoFormAdministrador>();
-
-            Mapper.CreateMap<EstacionamentoFormAdministrador, Estacionamento>()
-                .ForMember(model => model.SituacaoRegistro, map => map.Ignore())
-                ;
+            ;
 
             #endregion
 
