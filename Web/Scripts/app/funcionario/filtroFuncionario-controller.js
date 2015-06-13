@@ -7,7 +7,14 @@
         $scope.filtroFuncionario = { Estacionamento: null, Descricao: ''};
 
         $scope.filtrarFuncionarios = function (filtroFuncionario) {
-            Funcionario.filtrar(filtroFuncionario).$promise.then(function (data) {
+            
+            var filtro = {
+                Estacionamento: filtroFuncionario.Estacionamento.Id,
+                Matricula: filtroFuncionario.Matricula,
+                Nome: filtroFuncionario.Nome
+            };
+            
+            Funcionario.filtrar(filtro).$promise.then(function (data) {
                 $scope.funcionarios = data;
             });
         };

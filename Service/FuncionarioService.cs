@@ -42,14 +42,6 @@ namespace Service
 
         public override void Update(Funcionario obj)
         {
-            var usuario = usuarioService.GetById(obj.Usuario.Id);
-                usuario.NomeUsuario = obj.Matricula;
-                usuario.Email = obj.Usuario.Email;
-
-            obj.Usuario = usuario;
-
-            usuarioService.ValidateInstance(obj.Usuario);
-
             base.Update(obj);
         }
 
@@ -75,6 +67,8 @@ namespace Service
 
         public override void Remove(Funcionario obj)
         {
+            obj = this.GetById(obj.Id);
+
             repository.ExecuteTransaction(() => 
             {
                 obj.Usuario.SituacaoRegistro = SituacaoRegistroEnum.INATIVO;

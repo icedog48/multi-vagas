@@ -107,8 +107,31 @@
             $scope.cpfInvalido = !isValid;
         };
 
+        var inputUf = function (newValue, oldValue) {
+            if (typeof (newValue) !== 'undefined') {
+
+                var letterPattern = /^[a-zA-Z]+$/;
+
+                var isValid = true;
+
+                for (var i = 0; i < newValue.length; i++) {
+                    isValid = letterPattern.test(newValue.charAt(i));
+
+                    if (!isValid) break;
+                }
+
+                if (isValid) {
+                    $scope.funcionario.UF = newValue.toUpperCase();
+                } else {
+                    $scope.funcionario.UF = oldValue ? oldValue.toUpperCase() : '';
+                }
+            }
+        };
+
         $scope.$watch('funcionario.Matricula', inputNumber, true);
         $scope.$watch('funcionario.CPF', inputCpf, true);
+        $scope.$watch('funcionario.UF', inputUf, true);
+        
     };
 
     angular.module("funcionario").controller("formFuncionarioController", ["$scope", "$stateParams", "Funcionario", "$state", "Estacionamento", "Perfil", "$filter", formFuncionarioController]);

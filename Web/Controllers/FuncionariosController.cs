@@ -67,9 +67,9 @@ namespace Web.Controllers
             {
                 Service.Update(Mapper.Map<Funcionario>(admin));
             }
-            catch (ValidationException ex)
+            catch (Exception ex)
             {
-                ThrowHttpResponseException(ex);
+                ThrowHttpResponseException((ValidationException)ex);
             }
         }
 

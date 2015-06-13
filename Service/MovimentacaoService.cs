@@ -43,7 +43,12 @@ namespace Service
         {
             var query = repository.Items.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
 
-            if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO)) query = query.Where(x => !x.Saida.HasValue);
+            if (usuarioLogado.TemPerfil(PerfilEnum.FUNCIONARIO)) 
+            {
+                var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
+
+                query = query.Where(x => !x.Saida.HasValue && x.Vaga.CategoriaVaga.Estacionamento.Id == funcionario.Estacionamento.Id);
+            }   
 
             return query;
         }

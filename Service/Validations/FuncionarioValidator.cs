@@ -62,7 +62,12 @@ namespace Service.Validations
 
             RuleFor(funcionario => funcionario.DataAdmissao)
                 .NotNull()
-                .GreaterThan(DateTime.MinValue).WithMessage("O campo Data da Admissão deve ser preenchido.");
+                .GreaterThan(DateTime.MinValue).WithMessage("O campo Data da Admissão deve ser preenchido.")
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("O campo Data da Admissão deve ser menor ou igual do que a data atual.");
+
+            RuleFor(funcionario => funcionario.HoraSaida)
+                .NotNull()
+                .GreaterThan(x => x.HoraInicio).WithMessage("O campo Hora de Saida deve ser maior do que o campo Hora de Entrada.");
 
             RuleFor(funcionario => funcionario.Salario)
                 .GreaterThan(0).WithMessage("O campo Salário deve ser preenchido.");
