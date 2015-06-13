@@ -70,11 +70,14 @@ namespace Service
 
         public virtual void Add(CategoriaVaga categoria, int vagas)
         {
-            this.Add(categoria);
+            repository.ExecuteTransaction(() => 
+            {
+                this.Add(categoria);
 
-            List<Vaga> listaVagas = new List<Vaga>(vagas);
+                List<Vaga> listaVagas = new List<Vaga>(vagas);
 
-            for (int indice = 0; indice < vagas; indice++) vagaRepository.Add(NovaVaga(indice, categoria));
+                for (int indice = 0; indice < vagas; indice++) vagaRepository.Add(NovaVaga(indice, categoria));
+            });
         }
 
         protected override IQueryable<CategoriaVaga> GetActiveItems()

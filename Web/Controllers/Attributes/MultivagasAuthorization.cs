@@ -3,6 +3,7 @@ using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
@@ -20,7 +21,9 @@ namespace Web.Controllers.Attributes
                 
                 var usuarioService = container.GetInstance<IUsuarioService>();
 
-                var usuario = usuarioService.GetByLogin(HttpContext.Current.User.Identity.Name);
+                var claimIdentity = (ClaimsIdentity)HttpContext.Current.User.Identity;
+
+                var usuario = usuarioService.GetByEmail(claimIdentity.FindFirst(ClaimTypes.Email).Value);
 
                 //Coloca uma instancia do objeto Usuario disponivel para ser injetado nos serviços            
                 container.Configure(c =>

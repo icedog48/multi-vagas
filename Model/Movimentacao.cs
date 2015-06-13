@@ -45,6 +45,7 @@ namespace Model
         {
             this.FuncionarioSaida = funcionario;
             this.Saida = saida;
+            this.estadia = this.HorasReferencia;
             this.Vaga.Disponivel = true;
         }
 
@@ -52,7 +53,7 @@ namespace Model
         {
             get
             {
-                var tempo = DateTime.Now - this.Entrada;
+                var tempo = (this.Saida.HasValue) ? this.Saida.Value - this.Entrada : DateTime.Now - this.Entrada;
 
                 var resto = tempo.TotalHours - Convert.ToInt32(tempo.TotalHours);
 
@@ -71,5 +72,9 @@ namespace Model
                 return Math.Round(this.HorasReferencia * this.Vaga.CategoriaVaga.ValorHora, 2);
             }
         }
+
+        private int? estadia;
+
+        public virtual int? Estadia { get { return estadia; } }
     }
 }

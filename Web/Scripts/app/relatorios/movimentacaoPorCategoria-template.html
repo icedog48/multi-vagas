@@ -1,5 +1,5 @@
 ﻿<div class="form-panel">
-    <h3 class="mb"><i class="fa fa-angle-right"></i> Relatório de movimentações por período </h3>
+    <h3 class="mb"><i class="fa fa-angle-right"></i> Relatório de movimentações por categoria </h3>
 </div>
 
 <div class="row mt" id="movimentacoesPorPeriodo">
@@ -9,6 +9,7 @@
                 <tr>
                     <th>Estacionamento</th>
                     <th>Placa</th>
+                    <th>Categoria</th>
                     <th>Pagamento</th>
                     <th>Data</th>
                     <th>Estadia(H)</th>
@@ -19,6 +20,7 @@
                 <tr ng-repeat="movimentacao in movimentacoes">
                     <td ng-bind="movimentacao.Estacionamento"></td>
                     <td ng-bind="movimentacao.Placa"></td>
+                    <td ng-bind="movimentacao.CategoriaVaga"></td>
                     <td ng-bind="movimentacao.TipoPagamento"></td>
                     <td ng-bind="movimentacao.Data"></td>
                     <td ng-bind="movimentacao.HorasReferencia"></td>

@@ -13,7 +13,7 @@ namespace Model
 
         public virtual string Senha { get; set; }
 
-        public virtual string Login { get; set; }
+        public virtual string NomeUsuario { get; set; }
 
         public virtual Perfil Perfil { get; set; }
 

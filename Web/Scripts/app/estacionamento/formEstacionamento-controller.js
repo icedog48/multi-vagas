@@ -52,23 +52,41 @@
         };
 
         var limparUsuario = function () {
-            var login = $scope.estacionamento.Usuario.Login;
+            var NomeUsuario = $scope.estacionamento.Usuario.NomeUsuario;
 
             $scope.estacionamento.Usuario = {};
-            $scope.estacionamento.Usuario.Login = "";
+            $scope.estacionamento.Usuario.NomeUsuario = "";
             $scope.estacionamento.Usuario.Email = "";
         }
 
         var showErrorMessage = function (errCode) {
             if (errCode == "ADMINISTRADOR_INVALIDO") {
 
-                $scope.frmEstacionamento.Login.$invalid = true;
+                $scope.frmEstacionamento.NomeUsuario.$invalid = true;
 
                 limparUsuario();
 
-                alert("O login informado não possui perfil válido para administrar o estacionamento.");
+                alert("O Usuário informado não possui perfil válido para administrar o estacionamento.");
+            } else {
+                console.log(errResponse);
+
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
             }
-        }
+        };
+
+        var inputCnpj = function (newValue, oldValue) {
+            var isValid = true;
+
+            if (typeof (newValue) !== 'undefined') {
+                isValid = newValue.length == 14;
+            }
+
+            $scope.cnpjInvalido = !isValid;
+        };
+
+        $scope.cnpjInvalido = false;
+
+        $scope.$watch('estacionamento.CNPJ', inputCnpj, true);
     };
 
     angular.module("estacionamento").controller("formEstacionamentoController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", "Usuario", formEstacionamentoController]);

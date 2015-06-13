@@ -23,5 +23,7 @@ namespace Storage
         void Update(ICollection<TEntity> entities);
 
         TEntity Get(object id); 
+
+        void ExecuteTransaction(Action action) ;
     }
 }

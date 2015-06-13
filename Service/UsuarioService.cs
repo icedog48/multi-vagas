@@ -1,6 +1,8 @@
-﻿using Model;
+﻿using FluentValidation;
+using Model;
 using Model.Common;
 using Service.Interfaces;
+using Service.Validations;
 using Storage;
 using System;
 using System.Collections.Generic;
@@ -16,20 +18,22 @@ namespace Service
     public class UsuarioService : IUsuarioService
     {
         private IRepository<Usuario> repository;
+        private UsuarioValidator validator;
 
         public virtual string SenhaDefault { get; set; }
 
-        public UsuarioService(IRepository<Usuario> repository)
+        public UsuarioService(IRepository<Usuario> repository, UsuarioValidator validator)
         {
             this.repository = repository;
+            this.validator = validator;
             this.SenhaDefault = "multivagas";
         }
 
-        public Usuario Login(string usuario, string senha)
+        public Usuario Login(string email, string senha)
         {
             senha = Encryption.Encrypt(senha);
 
-            var query = repository.Items.Where(x => x.Login == usuario && x.Senha == senha);
+            var query = repository.Items.Where(x => x.Email == email && x.Senha == senha);
 
             if (query.Any()) return query.First();
 
@@ -40,6 +44,8 @@ namespace Service
         {
             usuario.Senha = Encryption.Encrypt(SenhaDefault);
             usuario.AlterarSenha = true;
+
+            ValidateInstance(usuario);
 
             repository.Add(usuario);
         }
@@ -60,9 +66,9 @@ namespace Service
             return list.First();
         }
 
-        public Usuario GetByLogin(string login)
+        public Usuario GetByEmail(string email)
         {
-            var query = repository.Items.Where(usuario => usuario.Login == login);
+            var query = repository.Items.Where(usuario => usuario.Email == email);
 
             if (query.Count() <= 0) return null;
 
@@ -78,19 +84,34 @@ namespace Service
         {
             var senha = Encryption.Encrypt(usuario.Senha);
 
-            usuario = this.GetByLogin(usuario.Login);
+            usuario = this.GetByEmail(usuario.Email);
             usuario.Senha = senha;
             usuario.AlterarSenha = false;
 
             repository.Update(usuario);
         }
-
-
+        
         public void Registrar(Usuario usuario)
         {
-            usuario.Senha = Encryption.Encrypt(usuario.Senha);            
+            usuario.Senha = Encryption.Encrypt(usuario.Senha);
+
+            ValidateInstance(usuario);
 
             repository.Add(usuario);
+        }
+        
+        public void Update(Usuario usuario)
+        {
+            ValidateInstance(usuario);
+
+            repository.Update(usuario);
+        }
+
+        public void ValidateInstance(Usuario usuario)
+        {
+            var result = validator.Validate(usuario);
+
+            if (!result.IsValid) throw new ValidationException(result.Errors);
         }
     }
 }

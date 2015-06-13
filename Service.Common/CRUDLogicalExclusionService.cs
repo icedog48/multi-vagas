@@ -52,7 +52,7 @@ namespace Service.Common
         {
             if (filter == null) return GetActiveItems();
 
-            return filter.Apply(GetActiveItems()); 
+            return filter.Apply(GetActiveItems()).ToList();
         }
 
         public virtual T GetById(int id)

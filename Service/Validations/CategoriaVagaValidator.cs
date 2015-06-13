@@ -20,11 +20,11 @@ namespace Service.Validations
 
             RuleFor(categoria => categoria.Descricao)
                 .NotEmpty()
-                .Must(DescricaoNaoRepetida);
+                .Must(DescricaoNaoRepetida).WithMessage("Já existe uma categoria com a descrição informada.");
 
             RuleFor(categoria => categoria.Sigla)
                 .NotEmpty()
-                .Must(SiglaNaoRepetida);
+                .Must(SiglaNaoRepetida).WithMessage("Já existe uma categoria com a sigla informada."); ;
         }
 
         private bool DescricaoNaoRepetida(CategoriaVaga categoriaVaga, string descricao)

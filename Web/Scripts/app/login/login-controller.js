@@ -2,14 +2,13 @@
     var loginController = function ($scope, authService, $rootScope, $state) {
 
         $scope.credentials = {
-            Login: '',
+            Email: '',
             Senha: ''
         };
 
         $scope.login = function (credentials) {
             authService.login(credentials).then(function (user) {
-                console.log(user);
-
+                
                 $scope.setCurrentUser(user);
 
                 if (user.AlterarSenha) {

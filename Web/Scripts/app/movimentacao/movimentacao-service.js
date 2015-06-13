@@ -46,6 +46,20 @@
                 url: '/api/movimentacoes/periodo'
             },
 
+            'filtrarPorCategoria': {
+                method: 'POST',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/movimentacoes/categoria'
+            },
+
+            'filtrarPorEstadia': {
+                method: 'POST',
+                isArray: true,
+                headers: { 'Authorization': 'token' },
+                url: '/api/movimentacoes/estadia'
+            },
+
             'remove': {
                 method: 'DELETE',
                 headers: { 'Authorization': 'token' }
