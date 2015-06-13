@@ -15,6 +15,8 @@ using Service.Filters;
 using System.Security.Claims;
 using FluentValidation;
 using System.Text;
+using System.Web;
+using Web.App_Start;
 
 
 namespace Web.Controllers
@@ -41,6 +43,8 @@ namespace Web.Controllers
 
         public IEnumerable<EstacionamentoTable> Get()
         {
+            var usuario = User as ClaimsPrincipal;
+
             return Mapper.Map<IEnumerable<EstacionamentoTable>>(Service.GetAll());
         }
 
@@ -101,6 +105,21 @@ namespace Web.Controllers
         [Route("api/estacionamentos/filtrar")]
         public IEnumerable<EstacionamentoTable> Filtrar(EstacionamentoFilter filtro) 
         {
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var container = StructuremapMvc.StructureMapDependencyScope.Container;
+
+                var usuario = new Usuario() 
+                {
+                };
+
+                //Coloca uma instancia do objeto Usuario disponivel para ser injetado nos serviços            
+                container.Configure(c =>
+                { 
+                    c.For<Usuario>().Use(usuario).Named("usuarioLogado");
+                });
+            }
+            
             var estacionamentos = Service.GetByFilter(filtro);
 
             return Mapper.Map<IEnumerable<EstacionamentoTable>>(estacionamentos);

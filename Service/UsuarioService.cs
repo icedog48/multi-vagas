@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Model;
 using Model.Common;
 using Service.Interfaces;
@@ -82,6 +83,14 @@ namespace Service
 
         public void AlterarSenha(Usuario usuario)
         {
+            if (string.IsNullOrEmpty(usuario.Senha))
+            {
+                var failure = new List<ValidationFailure>();
+                    failure.Add(new ValidationFailure("Senha", "O campo senha deve ser preenchido."));
+
+                throw new ValidationException(failure);
+            }
+
             var senha = Encryption.Encrypt(usuario.Senha);
 
             usuario = this.GetByEmail(usuario.Email);

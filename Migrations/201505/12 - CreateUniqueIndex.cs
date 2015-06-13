@@ -27,15 +27,15 @@ namespace Migrations._201505
 
         public override void Down()
         {
-            Delete.Index("UQ_Email_Usuario");
-            
-            Delete.Index("UQ_Email_Cliente");
-            Delete.Index("UQ_CPF_Cliente");
+            Delete.Index("UQ_Email_Usuario").OnTable("Usuario");
 
-            Delete.Index("UQ_CNPJ_Estacionamento");
+            Delete.Index("UQ_Email_Cliente").OnTable("Cliente");
+            Delete.Index("UQ_CPF_Cliente").OnTable("Cliente");
 
-            Delete.Index("UQ_CPF_Funcionario");
-            Delete.Index("UQ_Matricula_Funcionario");
+            Delete.Index("UQ_CNPJ_Estacionamento").OnTable("Estacionamento");
+
+            Delete.Index("UQ_CPF_Funcionario").OnTable("Funcionario");
+            Delete.Index("UQ_Matricula_Funcionario").OnTable("Funcionario"); 
         }
     }
 }

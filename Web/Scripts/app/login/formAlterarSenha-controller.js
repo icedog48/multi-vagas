@@ -11,23 +11,34 @@
             }
         };
 
-        var showErrorMessage = function (errCode) {
-            alert("Erro inesperado.");
+        var showErrorMessage = function (errResponse) {
+            if (errResponse.status == 400) {
+                alert(errResponse.data.Message);
+            } else {
+                console.log(errResponse);
+
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
+            }
         };
 
         var alterarSenha = function (cliente) {
 
-            cliente.NomeUsuario = sessionService.user ;
+            cliente.NomeUsuario = sessionService.user;
 
-            Usuario.alterarSenha(cliente).$promise.then(function (data) {
-                $scope.currentUser.alterarSenha = false;
+            if (cliente.Senha == cliente.ConfirmacaoSenha) {
+                Usuario.alterarSenha(cliente).$promise.then(function (data) {
+                    $scope.currentUser.alterarSenha = false;
 
-                mensagemSucesso();
-            }, function (errResponse) {
-                showErrorMessage(errResponse);
-            });
+                    mensagemSucesso();
+                }, function (errResponse) {
+                    showErrorMessage(errResponse);
+                });
+            } else {
+                alert("O campo senha e o campo confirmação de senha possuem valores diferentes.");
+            }
         }
 
+        $scope.cliente = {};
         $scope.alterarSenha = alterarSenha;
     };
 

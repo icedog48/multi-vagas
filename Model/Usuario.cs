@@ -19,7 +19,7 @@ namespace Model
 
         public virtual bool TemPerfil(PerfilEnum perfilEnum)
         {
-            return this.Perfil.Id == (int)perfilEnum;
+            return this.Perfil != null && this.Perfil.Id == (int)perfilEnum;
         }
 
         public virtual bool AlterarSenha { get; set; }

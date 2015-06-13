@@ -79,7 +79,7 @@ namespace Web.Controllers
 
             foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
 
-            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, errors.ToString());
+            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, errors.ToString());
 
             throw new HttpResponseException(response);
         }
@@ -89,7 +89,7 @@ namespace Web.Controllers
             Service.Remove(new Funcionario() { Id = id });
         }
 
-        [Route("api/admins/filtrar")]
+        [Route("api/funcionario/filtrar")]
         public IEnumerable<FuncionatioTable> Filtrar(FuncionarioFilter filtro) 
         {
             return Mapper.Map<IEnumerable<FuncionatioTable>>(Service.GetByFilter(filtro));

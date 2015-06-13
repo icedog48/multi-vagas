@@ -29,7 +29,7 @@
         };
 
         var mensagemErro = function (errResponse) {
-            if (errResponse.status == 500) {
+            if (errResponse.status == 400) {
                 alert(errResponse.data.Message);
             } else {
                 console.log(errResponse);

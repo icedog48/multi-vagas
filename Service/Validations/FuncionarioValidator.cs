@@ -35,6 +35,7 @@ namespace Service.Validations
             RuleFor(funcionario => funcionario.CPF)
                 .NotEmpty()
                 .NotNull().WithMessage("O campo CPF deve ser preenchido.")
+                .Length(11).WithMessage("O campo CPF deve ter 11 números.")
                 .Must(HaveUniqueCPF).WithMessage("Existe outro funcionario cadastrado com o cpf informado.");
 
             RuleFor(funcionario => funcionario.Logradouro)
@@ -69,7 +70,7 @@ namespace Service.Validations
 
         protected virtual bool HaveUniqueCPF(Funcionario funcionario, string cpf)
         {
-            return !repository.Items.Any(x => x.CPF == cpf && x.Id != funcionario.Id);
+            return !repository.Items.Any(x => x.CPF == cpf && x.Id != funcionario.Id && x.SituacaoRegistro == Model.Common.SituacaoRegistroEnum.ATIVO);
         }
     }
 }

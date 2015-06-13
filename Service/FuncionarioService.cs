@@ -72,5 +72,16 @@ namespace Service
         {
             return repository.Items.Where(x => x.Usuario.Id == usuario.Id).FirstOrDefault();
         }
+
+        public override void Remove(Funcionario obj)
+        {
+            repository.ExecuteTransaction(() => 
+            {
+                obj.Usuario.SituacaoRegistro = SituacaoRegistroEnum.INATIVO;
+                usuarioService.Update(obj.Usuario);
+
+                base.Remove(obj);
+            });
+        }
     }
 }
