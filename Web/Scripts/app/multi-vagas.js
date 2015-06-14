@@ -8,7 +8,7 @@
         else {
             $scope.currentUser = null;
         }
-        
+
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = authService.isAuthorized;
 

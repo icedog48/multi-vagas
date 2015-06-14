@@ -12,6 +12,8 @@ using Web.Controllers.Attributes;
 using Model;
 using Service.Interfaces;
 using Service.Filters;
+using FluentValidation;
+using System.Text;
 
 
 namespace Web.Controllers
@@ -78,7 +80,14 @@ namespace Web.Controllers
         [Route("api/movimentacoes/registrarentrada")]
         public void RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
         {
-            Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+            try
+            {
+                Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
         }
 
         [HttpGet]
@@ -99,11 +108,18 @@ namespace Web.Controllers
         [Route("api/movimentacoes/registrarsaida/{id}")]
         public void RegistrarSaida(int id, MovimentacaoSaidaForm movimentacaoSaida)
         {
-            var movimentacao = Service.GetById(id);
-                movimentacao.TipoPagamento = Mapper.Map<TipoPagamento>(movimentacaoSaida.TipoPagamento);
-                movimentacao.ValorPago = movimentacaoSaida.ValorPago;    
+            try
+            {
+                var movimentacao = Service.GetById(id);
+                    movimentacao.TipoPagamento = Mapper.Map<TipoPagamento>(movimentacaoSaida.TipoPagamento);
+                    movimentacao.ValorPago = movimentacaoSaida.ValorPago;
 
-            Service.RegistrarSaida(movimentacao);
+                Service.RegistrarSaida(movimentacao);
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
         }
 
         public void Delete(int id)
@@ -131,6 +147,17 @@ namespace Web.Controllers
         public IEnumerable<TipoPagamentoCombo> ListarTiposPagamento()
         {
             return Mapper.Map<IEnumerable<TipoPagamentoCombo>>(Service.GetTiposPagamento());
+        }
+
+        protected virtual void ThrowHttpResponseException(ValidationException ex)
+        {
+            var errors = new StringBuilder();
+
+            foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
+
+            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, errors.ToString());
+
+            throw new HttpResponseException(response);
         }
     }
 }

@@ -19,7 +19,9 @@ namespace Service.Validations
             this.repository = repository;
 
             RuleFor(movimentacao => movimentacao.Placa)
-                .Must(NaoRegistrarEntradaSemSaida);
+                .NotEmpty()
+                .NotNull().WithMessage("O campo placa deve ser preenchido.")
+                .Must(NaoRegistrarEntradaSemSaida).WithMessage("Já foi registrada uma entrada para a placa '{0}'", x => x.Placa);
         }
 
         private bool NaoRegistrarEntradaSemSaida(Movimentacao movimentacao, string placa)

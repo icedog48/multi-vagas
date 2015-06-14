@@ -45,11 +45,14 @@ namespace Service
                 SituacaoRegistro = SituacaoRegistroEnum.ATIVO
             };
 
-            usuarioService.Registrar(usuario);
+            repository.ExecuteTransaction(() => 
+            {
+                usuarioService.Registrar(usuario);
 
-            cliente.Usuario = usuario;
+                cliente.Usuario = usuario;
 
-            repository.Add(cliente);
+                repository.Add(cliente);
+            });
         }
 
         public Cliente GetClienteByUsuario(Usuario usuario)

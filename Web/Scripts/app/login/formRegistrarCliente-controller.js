@@ -6,8 +6,14 @@
             $state.go('login');
         };
 
-        var showErrorMessage = function (errCode) {
-            alert("Erro inesperado.");
+        var showErrorMessage = function (errResponse) {
+            if (errResponse.status == 400) {
+                alert(errResponse.data.Message);
+            } else {
+                console.log(errResponse);
+
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
+            }
         };
 
         var registrar = function (cliente) {

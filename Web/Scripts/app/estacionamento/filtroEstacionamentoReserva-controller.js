@@ -3,6 +3,11 @@
         $scope.filtroEstacionamento = { };
 
         var filtrarEstacionamentos = function (filtroEstacionamento) {
+            if (!filtroEstacionamento) {
+                filtroEstacionamento = { };
+            }
+
+            filtroEstacionamento.PermiteReserva = true;
 
             console.log(filtroEstacionamento);
 

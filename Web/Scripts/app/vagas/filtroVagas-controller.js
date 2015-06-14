@@ -7,7 +7,16 @@
         $scope.filtroVagas = { Estacionamento: null, Descricao: ''};
 
         $scope.filtrarVagas = function (filtroVagas) {
-            CategoriaVaga.filtrar(filtroVagas).$promise.then(function (data) {
+
+            var filtro = {
+                Estacionamento: (filtroVagas.Estacionamento) ? filtroVagas.Estacionamento.Id : null,
+                Descricao: filtroVagas.Descricao
+            };
+
+            console.log(filtro);
+
+            CategoriaVaga.filtrar(filtro).$promise.then(function (data) {
+                console.log(data);
                 $scope.vagas = data;
             });
         };

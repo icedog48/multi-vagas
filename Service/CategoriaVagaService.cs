@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using FluentValidation;
+using Model;
 using Model.Common;
 using Service.Common;
 using Service.Filters;
@@ -76,7 +77,7 @@ namespace Service
 
                 List<Vaga> listaVagas = new List<Vaga>(vagas);
 
-                for (int indice = 0; indice < vagas; indice++) vagaRepository.Add(NovaVaga(indice, categoria));
+                for (int indice = 1; indice <= vagas; indice++) vagaRepository.Add(NovaVaga(indice, categoria));
             });
         }
 
@@ -125,6 +126,12 @@ namespace Service
             reserva.Cliente = clienteService.GetClienteByUsuario(usuarioLogado);
 
             reserva.Vaga.Disponivel = false;
+
+            var reservaValidator = new ReservaValidator(reservaRepository);
+                
+            var result = reservaValidator.Validate(reserva);
+
+            if (!result.IsValid) throw new ValidationException(result.Errors);            
 
             this.reservaRepository.Add(reserva);
         }

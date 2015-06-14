@@ -81,6 +81,7 @@
     <Compile Include="Validations\MovimentacaoValidator.cs" />
     <Compile Include="Validations\FuncionarioValidator.cs" />
     <Compile Include="Validations\EstacionamentoValidator.cs" />
+    <Compile Include="Validations\ReservaValidator.cs" />
     <Compile Include="Validations\VagaValidator.cs" />
     <Compile Include="Validations\CategoriaVagaValidator.cs" />
   </ItemGroup>

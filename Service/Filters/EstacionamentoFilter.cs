@@ -21,6 +21,8 @@ namespace Service.Filters
 
         public string Cidade { get; set; }
 
+        public bool? PermiteReserva { get; set; }
+
         public IQueryable<Estacionamento> Apply(IQueryable<Estacionamento> query)
         {
             if (!string.IsNullOrEmpty(CNPJ))
@@ -34,6 +36,9 @@ namespace Service.Filters
 
             if (!string.IsNullOrEmpty(Cidade))
                 query = query.Where(estacionamento => estacionamento.Cidade.Contains(Cidade));
+
+            if (this.PermiteReserva.HasValue)
+                query = query.Where(estacionamento => estacionamento.PermiteReserva == this.PermiteReserva.Value);
 
             return query;
         }

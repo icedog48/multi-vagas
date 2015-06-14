@@ -12,6 +12,8 @@ using Web.Controllers.Attributes;
 using Model;
 using Service.Interfaces;
 using Service.Filters;
+using FluentValidation;
+using System.Text;
 
 
 namespace Web.Controllers
@@ -30,9 +32,27 @@ namespace Web.Controllers
         [Route("api/clientes")]
         public void Registrar(ClienteForm clienteForm)
         {
-            var cliente = Mapper.Map<Cliente>(clienteForm);
+            try
+            {
+                var cliente = Mapper.Map<Cliente>(clienteForm);
 
-            this.Service.Add(cliente, clienteForm.Senha);
+                this.Service.Add(cliente, clienteForm.Senha);
+            }
+            catch (ValidationException ex)
+            {
+                ThrowHttpResponseException(ex);
+            }
+        }
+
+        protected virtual void ThrowHttpResponseException(ValidationException ex)
+        {
+            var errors = new StringBuilder();
+
+            foreach (var error in ex.Errors) errors.AppendLine(error.ErrorMessage);
+
+            var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, errors.ToString());
+
+            throw new HttpResponseException(response);
         }
     }
 }

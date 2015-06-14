@@ -13,7 +13,7 @@
 
                           sessionService.create(response.data.access_token, response.data.Usuario, JSON.parse(response.data.Permissoes));
 
-                          return response.data;
+                          return sessionService;
                        });
         };
 

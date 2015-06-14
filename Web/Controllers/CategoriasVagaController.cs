@@ -46,6 +46,7 @@ namespace Web.Controllers
             }
         }
 
+
         public void Post(CategoriaVagaForm vaga)
         {
             try
@@ -75,7 +76,8 @@ namespace Web.Controllers
             Service.Remove(new CategoriaVaga() { Id = id });
         }
 
-        [Route("api/vagas/filtrar")]
+        [HttpPost]
+        [Route("api/categoriasvaga/filtrar")]
         public IEnumerable<CategoriaVagaTable> Filtrar(CategoriaVagaFilter filtro) 
         {
             return Mapper.Map<IEnumerable<CategoriaVagaTable>>(Service.GetByFilter(filtro));

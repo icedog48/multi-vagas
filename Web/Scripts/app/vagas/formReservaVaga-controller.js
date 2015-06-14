@@ -7,8 +7,14 @@
             $state.go("estacionamento_reserva_list");
         };
 
-        var showErrorMessage = function (errCode) {
-            alert("Erro inesperado.");
+        var showErrorMessage = function (errResponse) {
+            if (errResponse.status == 400) {
+                alert(errResponse.data.Message);
+            } else {
+                console.log(errResponse);
+
+                alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
+            }
         };
 
         var salvar = function (reserva) {
@@ -16,7 +22,7 @@
             Vaga.reservarVaga(reserva).$promise.then(function (response) {
                 mensagemSucesso();
             }, function (errResponse) {
-                showErrorMessage(errResponse.data.Message);
+                showErrorMessage(errResponse);
             });
 
         };

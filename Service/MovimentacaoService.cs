@@ -57,10 +57,13 @@ namespace Service
         {
             var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
-            var movimentacao = new Movimentacao();
-                movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
+            repository.ExecuteTransaction(() =>
+            {
+                var movimentacao = new Movimentacao();
+                    movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
 
-            this.Add(movimentacao);
+                this.Add(movimentacao);
+            });
         }
 
         public void RegistrarEntrada(Movimentacao movimentacao)
@@ -69,9 +72,12 @@ namespace Service
 
             movimentacao.Vaga = GetVagaById(movimentacao.Vaga.Id);
 
-            movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
+            repository.ExecuteTransaction(() => 
+            {
+                movimentacao.RegistrarEntrada(DateTime.Now, funcionario);
 
-            this.Add(movimentacao);
+                this.Add(movimentacao);
+            });
         }
 
         private Vaga GetVagaById(int vagaId)
@@ -85,9 +91,12 @@ namespace Service
 
             movimentacao.Vaga = GetVagaById(movimentacao.Vaga.Id);
 
-            movimentacao.RegistrarSaida(DateTime.Now, funcionario);
+            repository.ExecuteTransaction(() =>
+            {
+                movimentacao.RegistrarSaida(DateTime.Now, funcionario);
 
-            this.Update(movimentacao);
+                this.Update(movimentacao);
+            });
         }
 
 

@@ -29,7 +29,7 @@
                 method: 'POST',
                 isArray: true,
                 headers: { 'Authorization': 'token' },
-                url: '/api/vagas/filtrar'
+                url: '/api/categoriasvaga/filtrar'
             },
             'remove': {
                 method: 'DELETE',

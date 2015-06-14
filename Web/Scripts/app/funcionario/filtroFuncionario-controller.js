@@ -9,7 +9,7 @@
         $scope.filtrarFuncionarios = function (filtroFuncionario) {
             
             var filtro = {
-                Estacionamento: filtroFuncionario.Estacionamento.Id,
+                Estacionamento: (filtroFuncionario.Estacionamento) ? filtroFuncionario.Estacionamento.Id : null,
                 Matricula: filtroFuncionario.Matricula,
                 Nome: filtroFuncionario.Nome
             };
