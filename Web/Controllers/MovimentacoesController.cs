@@ -78,7 +78,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/movimentacoes/registrarentrada")]
-        public void RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
+        public MovimentacaoForm RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
         {
             try
             {
@@ -88,6 +88,8 @@ namespace Web.Controllers
             {
                 ThrowHttpResponseException(ex);
             }
+
+            return Mapper.Map<MovimentacaoForm>(movimentacao);
         }
 
         [HttpGet]

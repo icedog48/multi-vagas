@@ -253,6 +253,7 @@
     <Content Include="Scripts\app\funcionario\funcionario-service.js" />
     <Content Include="Scripts\app\funcionario\funcionario.js" />
     <Content Include="Scripts\app\login\usuario-service.js" />
+    <Content Include="Scripts\app\movimentacao\ticket-template.html" />
     <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorEstadia.html" />
     <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorEstadia-controller.js" />
     <Content Include="Scripts\app\relatorios\filtroMovimentacaoPorCategoria.html" />

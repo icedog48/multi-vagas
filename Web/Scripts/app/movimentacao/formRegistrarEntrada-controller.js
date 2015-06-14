@@ -1,5 +1,5 @@
 ﻿(function () {
-    var formRegistrarEntradaController = function ($scope, $state, Vaga, Movimentacao, $stateParams, $filter) {
+    var formRegistrarEntradaController = function ($scope, $state, Vaga, Movimentacao, $stateParams, $filter, printHelper) {
 
         var edicao = (typeof ($stateParams.id) != 'undefined');
 
@@ -27,9 +27,23 @@
             });
         };
 
+        var emitirTicket = function (entrada) {
+            var templateUrl = 'Scripts/app/movimentacao/ticket-template.html';
+
+            var data = {
+                movimentacao: entrada
+            };
+
+            return printHelper.printTemplate(templateUrl, data);
+
+        };
         var registrar = function (movimentacao) {
             Movimentacao.registrarEntrada(movimentacao).$promise.then(function (response) {
+
                 mensagemSucesso();
+
+                emitirTicket(response);
+
             }, function (errResponse) {
                 showErrorMessage(errResponse);
             });
@@ -112,5 +126,5 @@
         }, true);
     };
 
-    angular.module("movimentacao").controller("formRegistrarEntradaController", ["$scope", "$state", "Vaga", "Movimentacao", "$stateParams", "$filter", formRegistrarEntradaController]);
+    angular.module("movimentacao").controller("formRegistrarEntradaController", ["$scope", "$state", "Vaga", "Movimentacao", "$stateParams", "$filter", "printHelper", formRegistrarEntradaController]);
 }());
