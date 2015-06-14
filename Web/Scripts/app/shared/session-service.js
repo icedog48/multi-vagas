@@ -4,10 +4,11 @@
 
         var me = typeof ($window.sessionStorage.user) !== 'undefined' && JSON.parse($window.sessionStorage.user) || {};
 
-        me.create = function (token, user, userRoles) {
+        me.create = function (token, user, userRoles, alterarSenha) {
             me.token = token;
             me.user = user;
             me.userRoles = userRoles;
+            me.alterarSenha = alterarSenha;
 
             $window.sessionStorage.user = JSON.stringify(me);
         };
@@ -16,6 +17,7 @@
             me.token = null;
             me.user = null;
             me.userRoles = null;
+            me.alterarSenha = null;
 
             $window.sessionStorage.removeItem("user");
         };

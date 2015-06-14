@@ -10,9 +10,11 @@
 
             authService.login(credentials).then(function (user) {
 
+                console.log(user);
+
                 $scope.setCurrentUser(user);
 
-                if (user.AlterarSenha) {
+                if (user.alterarSenha) {
                     $state.go('alterar_senha');
                 } else if (authService.isAuthorized($scope.userRoles.funcionario)) {
                     $state.go('movimentacao_list');

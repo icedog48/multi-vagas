@@ -11,7 +11,7 @@
                       .post('/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                       .then(function (response) {
 
-                          sessionService.create(response.data.access_token, response.data.Usuario, JSON.parse(response.data.Permissoes));
+                          sessionService.create(response.data.access_token, response.data.Usuario, JSON.parse(response.data.Permissoes), response.data.AlterarSenha);
 
                           return sessionService;
                        });
