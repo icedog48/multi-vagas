@@ -20,11 +20,11 @@ namespace Web.Controllers
 {
     [NHSession]
     [MultivagasAuthorize]
-    public class FuncionariosController : ApiController
+    public class FuncionariosController : MultiVagasApiController<Funcionario>
     {
         public IFuncionarioService Service { get; set; }
 
-        public FuncionariosController(IFuncionarioService service)
+        public FuncionariosController(IFuncionarioService service) : base(service)
         {
             this.Service = service;
         }

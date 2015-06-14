@@ -14,17 +14,20 @@ using Service.Interfaces;
 using Service.Filters;
 using FluentValidation;
 using System.Text;
+using System.Web;
+using Web.App_Start;
+using System.Security.Claims;
 
 
 namespace Web.Controllers
 {
     [NHSession]
     [MultivagasAuthorize]
-    public class MovimentacoesController : ApiController
+    public class MovimentacoesController : MultiVagasApiController<Movimentacao>
     {
         public IMovimentacaoService Service { get; set; }
 
-        public MovimentacoesController(IMovimentacaoService service)
+        public MovimentacoesController(IMovimentacaoService service): base(service)
         {
             this.Service = service;
         }
@@ -132,6 +135,19 @@ namespace Web.Controllers
         [Route("api/movimentacoes/filtrar")]
         public IEnumerable<MovimentacaoTable> Filtrar(MovimentacaoFilter filtro) 
         {
+            if (string.IsNullOrEmpty(Service.UsuarioLogado.Email) && HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var container = StructuremapMvc.StructureMapDependencyScope.Container;
+
+                var usuarioService = container.GetInstance<IUsuarioService>();
+
+                var claimIdentity = (ClaimsIdentity)HttpContext.Current.User.Identity;
+
+                var usuario = usuarioService.GetByEmail(claimIdentity.FindFirst(ClaimTypes.Email).Value);
+
+                Service.UsuarioLogado = usuario;
+            }
+
             return Mapper.Map<IEnumerable<MovimentacaoTable>>(Service.GetByFilter(filtro));
         }
 

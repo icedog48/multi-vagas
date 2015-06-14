@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.Interfaces
 {
-    public interface ICategoriaVagaService : ICRUDService<CategoriaVaga>
+    public interface ICategoriaVagaService : IMultiVagasCRUDService<CategoriaVaga>
     {
         void Add(CategoriaVaga categoria, int vagas);
 

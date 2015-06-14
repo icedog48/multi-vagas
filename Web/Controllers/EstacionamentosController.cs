@@ -22,7 +22,7 @@ using Web.App_Start;
 namespace Web.Controllers
 {
     [NHSession]    
-    public class EstacionamentosController : ApiController
+    public class EstacionamentosController : MultiVagasApiController<Estacionamento>
     {
         public IEstacionamentoService Service { get; set; }
 
@@ -36,7 +36,7 @@ namespace Web.Controllers
         public EstacionamentosController
             (
                 IEstacionamentoService service
-            )
+            ) : base(service)
         {
             this.Service = service;
         }

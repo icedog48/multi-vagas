@@ -59,6 +59,7 @@
     <Compile Include="Filters\MovimentacaoFilter.cs" />
     <Compile Include="ClienteService.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
+    <Compile Include="Interfaces\IMultiVagasCRUDService.cs" />
     <Compile Include="MovimentacaoService.cs" />
     <Compile Include="Interfaces\IMovimentacaoService.cs" />
     <Compile Include="MultiVagasCRUDService.cs" />

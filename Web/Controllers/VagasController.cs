@@ -21,7 +21,7 @@ namespace Web.Controllers
 {
     [NHSession]
     [MultivagasAuthorize]
-    public class VagasController : ApiController
+    public class VagasController : MultiVagasApiController<CategoriaVaga>
     {
         public ICategoriaVagaService CategoriaVagaService { get; set; }
 
@@ -32,7 +32,7 @@ namespace Web.Controllers
         public VagasController
             (
                 ICategoriaVagaService categoriaVagaService
-            )
+            ) : base(categoriaVagaService)
         {
             this.CategoriaVagaService = categoriaVagaService;
         }

@@ -1,27 +1,37 @@
-﻿using Model;
-using Service.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Filters;
+using Web.ViewModels;
+using Storage;
+using AutoMapper;
+using Newtonsoft.Json;
+using Web.Controllers.Attributes;
+using Model;
+using Service.Interfaces;
+using Service.Filters;
 using Web.App_Start;
-using Web.DependencyResolution.Registries;
+using FluentValidation;
+using System.Text;
+using Model.Common;
+using System.Web;
+using System.Security.Claims;
 
-namespace Web.Controllers.Attributes
+
+namespace Web.Controllers
 {
-    public class MultivagasAuthorizeAttribute : AuthorizeAttribute
+    public class MultiVagasApiController<T> : ApiController where T : Entity
     {
-        public override void OnAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
+        public MultiVagasApiController(IMultiVagasCRUDService<T> service)
         {
             var container = StructuremapMvc.StructureMapDependencyScope.Container;
 
             var usuarioLogado = container.GetInstance<Usuario>("usuarioLogado");
 
             if (HttpContext.Current.User.Identity.IsAuthenticated && (usuarioLogado == null || string.IsNullOrEmpty(usuarioLogado.Email)))
-            {   
+            {
                 var usuarioService = container.GetInstance<IUsuarioService>();
 
                 var claimIdentity = (ClaimsIdentity)HttpContext.Current.User.Identity;
@@ -35,8 +45,7 @@ namespace Web.Controllers.Attributes
                 });
             }
 
-            base.OnAuthorization(actionContext);
-        }
-
+            service.UsuarioLogado = container.GetInstance<Usuario>("usuarioLogado");
+        }      
     }
 }

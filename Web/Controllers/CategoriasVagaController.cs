@@ -20,11 +20,11 @@ namespace Web.Controllers
 {
     [NHSession]
     [MultivagasAuthorize]
-    public class CategoriasVagaController : ApiController
+    public class CategoriasVagaController : MultiVagasApiController<CategoriaVaga>
     {
         public ICategoriaVagaService Service { get; set; }
 
-        public CategoriasVagaController(ICategoriaVagaService service)
+        public CategoriasVagaController(ICategoriaVagaService service) : base(service)
         {
             this.Service = service;
         }

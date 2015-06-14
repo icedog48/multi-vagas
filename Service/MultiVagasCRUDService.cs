@@ -15,6 +15,18 @@ namespace Service
     {
         protected Usuario usuarioLogado;
 
+        public Usuario UsuarioLogado
+        {
+            get
+            {
+                return usuarioLogado;
+            }
+            set
+            {
+                usuarioLogado = value;
+            }
+        }
+
         public MultiVagasCRUDService(IRepository<T> repository, AbstractValidator<T> validator, Usuario usuarioLogado):base(repository, validator)
         {
             this.usuarioLogado = usuarioLogado;

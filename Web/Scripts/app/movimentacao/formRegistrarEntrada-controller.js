@@ -40,9 +40,11 @@
         var registrar = function (movimentacao) {
             Movimentacao.registrarEntrada(movimentacao).$promise.then(function (response) {
 
-                mensagemSucesso();
+                if (confirm("Operação realizada com sucesso. Deseja imprimir o ticket de acesso ?")) {
+                    emitirTicket(response);
+                }
 
-                emitirTicket(response);
+                $state.go("movimentacao_list");
 
             }, function (errResponse) {
                 showErrorMessage(errResponse);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.Interfaces
 {
-    public interface IMovimentacaoService : ICRUDService<Movimentacao>
+    public interface IMovimentacaoService : IMultiVagasCRUDService<Movimentacao>
     {
         void RegistrarEntrada(Movimentacao movimentacao);
 

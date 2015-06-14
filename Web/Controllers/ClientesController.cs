@@ -19,11 +19,11 @@ using System.Text;
 namespace Web.Controllers
 {
     [NHSession]
-    public class ClientesController : ApiController
+    public class ClientesController : MultiVagasApiController<Cliente>
     {
         public IClienteService Service { get; set; }
 
-        public ClientesController(IClienteService service)
+        public ClientesController(IClienteService service): base(service)
         {
             this.Service = service;
         }

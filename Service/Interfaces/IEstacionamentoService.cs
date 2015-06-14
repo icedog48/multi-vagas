@@ -9,15 +9,8 @@ using System.Threading.Tasks;
 
 namespace Service.Interfaces
 {
-    public interface IEstacionamentoService : ICRUDService<Estacionamento>
+    public interface IEstacionamentoService : IMultiVagasCRUDService<Estacionamento>
     {
-
-        Usuario UsuarioLogado
-        {
-            get;
-            set;
-        }
-
         Usuario VerficaLogin(string login);
 
         IEnumerable<TipoPagamento> GetListTipoPagamento(int estacionamentoId);

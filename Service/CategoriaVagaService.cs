@@ -112,7 +112,7 @@ namespace Service
 
         public IEnumerable<Vaga> VagasDisponiveis(int categoriaId)
         {
-            return vagaRepository.Items.Where(vaga => vaga.Disponivel && vaga.CategoriaVaga.Id == categoriaId);
+            return vagaRepository.Items.Where(vaga => vaga.Disponivel && vaga.CategoriaVaga.Id == categoriaId && vaga.CategoriaVaga.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
         }
 
 

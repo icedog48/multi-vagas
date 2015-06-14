@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Service.Interfaces
 {
-    public interface IClienteService : ICRUDService<Cliente>
+    public interface IClienteService : IMultiVagasCRUDService<Cliente>
     {
 
         void Add(Cliente cliente, string senha);

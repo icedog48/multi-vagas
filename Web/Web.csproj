@@ -326,6 +326,7 @@
     <Compile Include="Controllers\MovimentacoesController.cs" />
     <Compile Include="Controllers\CategoriasVagaController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
+    <Compile Include="Controllers\MultiVagasApiController.cs" />
     <Compile Include="Controllers\VagasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AppController.cs">

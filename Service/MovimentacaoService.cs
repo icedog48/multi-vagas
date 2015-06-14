@@ -23,6 +23,8 @@ namespace Service
         private readonly IRepository<Vaga> vagaRepository;
         private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
+        public Usuario UsuarioLogado { get { return usuarioLogado; } set { usuarioLogado = value; } }
+
         public MovimentacaoService
             (
                 MovimentacaoValidator validator, 

@@ -24,17 +24,6 @@ namespace Service
         private readonly IFuncionarioService funcionarioService;
         private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
 
-        public Usuario UsuarioLogado
-        {
-            get
-            {
-                return usuarioLogado;
-            }
-            set
-            {
-                usuarioLogado = value;
-            }
-        }
 
         public EstacionamentoService
             (

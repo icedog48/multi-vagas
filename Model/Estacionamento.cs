@@ -46,7 +46,7 @@ namespace Model
         {
             get
             {
-                return this.cagetoriasVaga.SelectMany( x => x.Vagas).Where( x => x.Disponivel).Count();
+                return this.cagetoriasVaga.Where(x => x.SituacaoRegistro == SituacaoRegistroEnum.ATIVO).SelectMany(x => x.Vagas).Where(x => x.Disponivel).Count();
             }
         }
     }

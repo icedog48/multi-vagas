@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Service.Interfaces
 {
-    public interface IFuncionarioService : ICRUDService<Funcionario>
+    public interface IFuncionarioService : IMultiVagasCRUDService<Funcionario>
     {
 
         Funcionario GetFuncionarioByUsuario(Usuario usuario);
