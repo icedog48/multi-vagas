@@ -102,24 +102,40 @@ namespace Web.Controllers
             Service.Remove(new Estacionamento() { Id = id });
         }
 
+        
         [Route("api/estacionamentos/filtrar")]
         public IEnumerable<EstacionamentoTable> Filtrar(EstacionamentoFilter filtro) 
         {
-            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            var container = StructuremapMvc.StructureMapDependencyScope.Container;
+
+            var usuario = new Usuario()
             {
-                var container = StructuremapMvc.StructureMapDependencyScope.Container;
+            };
 
-                var usuario = new Usuario() 
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var usuarioService = container.GetInstance<IUsuarioService>();
+
+                var claimIdentity = (ClaimsIdentity)HttpContext.Current.User.Identity;
+
+                usuario = usuarioService.GetByEmail(claimIdentity.FindFirst(ClaimTypes.Email).Value);
+
+                if (usuario == null)
                 {
-                };
+                    var response = ControllerContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Usuário logado não foi encontrado. Por favor contacte o administrador do sistema.");
 
-                //Coloca uma instancia do objeto Usuario disponivel para ser injetado nos serviços            
-                container.Configure(c =>
-                { 
-                    c.For<Usuario>().Use(usuario).Named("usuarioLogado");
-                });
+                    throw new HttpResponseException(response);
+                }
             }
-            
+
+            //Coloca uma instancia do objeto Usuario disponivel para ser injetado nos serviços            
+            container.Configure(c =>
+            {
+                c.For<Usuario>().Use(usuario).Named("usuarioLogado");
+            });
+
+            Service.UsuarioLogado = usuario;
+
             var estacionamentos = Service.GetByFilter(filtro);
 
             return Mapper.Map<IEnumerable<EstacionamentoTable>>(estacionamentos);

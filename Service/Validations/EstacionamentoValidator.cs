@@ -14,7 +14,7 @@ namespace Service.Validations
     {
         private IRepository<Estacionamento> repository;
 
-        public EstacionamentoValidator(IRepository<Estacionamento> repository)
+        public EstacionamentoValidator(IRepository<Estacionamento> repository, IRepository<Usuario> usuarioRepository)
         {
             this.repository = repository;
 

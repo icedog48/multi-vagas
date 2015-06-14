@@ -1,4 +1,6 @@
-﻿using Model;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Model;
 using Model.Common;
 using Service.Common;
 using Service.Filters;
@@ -21,6 +23,18 @@ namespace Service
         private readonly IUsuarioService usuarioService;
         private readonly IFuncionarioService funcionarioService;
         private readonly IRepository<TipoPagamento> tipoPagamentoRepository;
+
+        public Usuario UsuarioLogado
+        {
+            get
+            {
+                return usuarioLogado;
+            }
+            set
+            {
+                usuarioLogado = value;
+            }
+        }
 
         public EstacionamentoService
             (
@@ -79,6 +93,10 @@ namespace Service
 
                     RegistrarAdministrador(obj.Usuario);
                 }
+                else if (!obj.Usuario.TemPerfil(PerfilEnum.ADMIN))
+                {
+                    GeraExcecaoDePerfilInvalido();
+                }
                 else if (obj.Usuario.SituacaoRegistro == SituacaoRegistroEnum.INATIVO)
                 {
                     usuarioService.ResetSenha(obj.Usuario);
@@ -86,6 +104,14 @@ namespace Service
 
                 base.Add(obj);
             });
+        }
+
+        private static void GeraExcecaoDePerfilInvalido()
+        {
+            var errors = new List<ValidationFailure>();
+            errors.Add(new ValidationFailure("Usuario", "O email informado não possui perfil válido de administrador. Por favor informe outro email."));
+
+            throw new ValidationException(errors);
         }
 
         public override void Update(Estacionamento estacionamento)
@@ -105,6 +131,10 @@ namespace Service
                     };
 
                     RegistrarAdministrador(estacionamento.Usuario);
+                }
+                else if (!estacionamento.Usuario.TemPerfil(PerfilEnum.ADMIN))
+                {
+                    GeraExcecaoDePerfilInvalido();
                 }
                 else if (estacionamento.Usuario.SituacaoRegistro == SituacaoRegistroEnum.INATIVO)
                 {
