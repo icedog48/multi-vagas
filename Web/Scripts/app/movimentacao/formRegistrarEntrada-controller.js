@@ -37,6 +37,7 @@
             return printHelper.printTemplate(templateUrl, data);
 
         };
+
         var registrar = function (movimentacao) {
             Movimentacao.registrarEntrada(movimentacao).$promise.then(function (response) {
 
@@ -86,6 +87,11 @@
             });
         };
 
+        var imprimirTicket = function (movimentacao) {
+            
+            emitirTicket(movimentacao);
+        };
+
         if (edicao) {
             carregarDados($stateParams.id);            
         } else {
@@ -126,6 +132,8 @@
                 }
             }
         }, true);
+
+        $scope.imprimirTicket = imprimirTicket;
     };
 
     angular.module("movimentacao").controller("formRegistrarEntradaController", ["$scope", "$state", "Vaga", "Movimentacao", "$stateParams", "$filter", "printHelper", formRegistrarEntradaController]);

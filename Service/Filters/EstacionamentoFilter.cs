@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Common;
 using Service.Common.Filters;
 using Service.Interfaces;
 using System;
@@ -38,7 +39,11 @@ namespace Service.Filters
                 query = query.Where(estacionamento => estacionamento.Cidade.Contains(Cidade));
 
             if (this.PermiteReserva.HasValue)
+            {
+                query = query.Where(estacionamento => estacionamento.CagetoriasVaga.Any(categoria => categoria.SituacaoRegistro == SituacaoRegistroEnum.ATIVO && categoria.Vagas.Any(vaga=> vaga.Disponivel )));
+
                 query = query.Where(estacionamento => estacionamento.PermiteReserva == this.PermiteReserva.Value);
+            }
 
             return query;
         }

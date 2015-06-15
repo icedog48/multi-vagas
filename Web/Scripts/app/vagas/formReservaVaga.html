@@ -35,7 +35,7 @@
                 <div class="form-group" ng-class="{ invalid_field: formReservaVaga.NumeroCartao.$dirty && formReservaVaga.NumeroCartao.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Cartão de crédito</label>
                     <div class="col-sm-3 col-md-3 col-lg-3">
-                        <input type="text" class="form-control" name="NumeroCartao" ng-model="reserva.CartaoCredito.Numero" required maxlength="16" >
+                        <input type="text" class="form-control" name="NumeroCartao" ng-model="reserva.CartaoCredito.Numero" required maxlength="16" input-number min-length="16">
                     </div>
                 </div>
 
@@ -43,12 +43,12 @@
                 <!-- Validade do cartão  -->
                 <div class="form-group">
                     <label class="col-sm-2 col-md-2 control-label">Validade</label>
-                    <div class="col-sm-1 col-md-1 col-lg-1">
-                        <input type="text" class="form-control" name="Ano" ng-model="reserva.CartaoCredito.Validade.Ano" required maxlength="4" placeholder="Ano">
+                    <div class="col-sm-1 col-md-1 col-lg-1" ng-class="{ invalid_field: formReservaVaga.Ano.$dirty && formReservaVaga.Ano.$invalid }">
+                        <input type="text" class="form-control" name="Ano" ng-model="reserva.CartaoCredito.Validade.Ano" required maxlength="4" placeholder="Ano" input-number min-length="4">
                     </div>
 
-                    <div class="col-sm-1 col-md-1 col-lg-1">
-                        <input type="text" class="form-control" name="Mes" ng-model="reserva.CartaoCredito.Validade.Mes" required maxlength="2" placeholder="Mes">
+                    <div class="col-sm-1 col-md-1 col-lg-1" ng-class="{ invalid_field: formReservaVaga.Mes.$dirty && formReservaVaga.Mes.$invalid }">
+                        <input type="text" class="form-control" name="Mes" ng-model="reserva.CartaoCredito.Validade.Mes" required maxlength="2" placeholder="Mes" input-number >
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                 <div class="form-group" ng-class="{ invalid_field: formReservaVaga.CodigoSeguranca.$dirty && formReservaVaga.CodigoSeguranca.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Código de Segurança</label>
                     <div class="col-sm-1 col-md-1 col-lg-1">
-                        <input type="text" class="form-control" name="CodigoSeguranca" ng-model="reserva.CartaoCredito.CodigoSeguranca" required maxlength="3">
+                        <input type="text" class="form-control" name="CodigoSeguranca" ng-model="reserva.CartaoCredito.CodigoSeguranca" required maxlength="3" input-number min-length="3">
                     </div>
                 </div>
 

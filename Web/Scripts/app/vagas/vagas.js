@@ -33,7 +33,7 @@
         $stateProvider
            .state("reservar_vaga", {
                parent: 'dashboard',
-               url: "/vagas/reservar",
+               url: "/vagas/reservar/:id",
                templateUrl: "Scripts/app/vagas/formReservaVaga.html",
                controller: 'formReservaVagaController',
                roles: [USER_ROLES.usuario]

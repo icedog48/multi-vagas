@@ -50,7 +50,11 @@ namespace Service
                 var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
                 query = query.Where(x => !x.Saida.HasValue && x.Vaga.CategoriaVaga.Estacionamento.Id == funcionario.Estacionamento.Id);
-            }   
+            }
+            else if (usuarioLogado.TemPerfil(PerfilEnum.ADMIN))
+            {
+                query = query.Where(x => x.Vaga.CategoriaVaga.Estacionamento.Usuario.Id == usuarioLogado.Id);
+            }
 
             return query;
         }
@@ -68,7 +72,7 @@ namespace Service
             });
         }
 
-        public void RegistrarEntrada(Movimentacao movimentacao)
+        public Movimentacao RegistrarEntrada(Movimentacao movimentacao)
         {
             var funcionario = funcionarioService.GetFuncionarioByUsuario(usuarioLogado);
 
@@ -80,6 +84,8 @@ namespace Service
 
                 this.Add(movimentacao);
             });
+
+            return movimentacao;
         }
 
         private Vaga GetVagaById(int vagaId)

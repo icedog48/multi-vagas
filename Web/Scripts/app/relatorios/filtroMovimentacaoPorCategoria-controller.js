@@ -2,17 +2,24 @@
     var filtroMovimentacaoPorCategoriaController = function ($scope, Movimentacao, Estacionamento, printHelper, Vaga) {
         
         var listarCategoriaVaga = function (estacionamento) {
+            $scope.filtro.CategoriaVaga = null;
+
             if (estacionamento) {
                 $scope.categoriasVaga = Vaga.categoriasVagaEstacionamento({ id: estacionamento.Id });
             } else {
-                $scope.categoriasVaga = [];
+                $scope.categoriasVaga = [];                
             }
             
         };
 
         var filtrar = function (filtro) {
 
-            Movimentacao.filtrarPorCategoria(filtro).$promise.then(function (data) {
+            var obj = {
+                Estacionamento: (filtro.Estacionamento) ? filtro.Estacionamento.Id : null,
+                Categoria: (filtro.CategoriaVaga) ? filtro.CategoriaVaga : null
+            };
+
+            Movimentacao.filtrarPorCategoria(obj).$promise.then(function (data) {
                 $scope.movimentacoes = data;
             }, function (err) {
                 console.log(err);

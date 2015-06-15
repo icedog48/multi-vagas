@@ -27,34 +27,14 @@
 
         };
 
-        $scope.categoriasVaga = Vaga.categoriasVagaEstacionamento($stateParams.id);
+        console.log($stateParams);
+        
+        $scope.categoriasVaga = Vaga.categoriasVagaEstacionamento({ id: $stateParams.id });
 
         $scope.reserva = {};
         $scope.reserva.Data = new Date();
 
         $scope.salvar = salvar;
-
-        $scope.$watch('reserva.CartaoCredito.Numero', function (newValue, oldValue) {
-
-            if (typeof (newValue) !== 'undefined') {
-
-                var numberPattern = /^\d+$/;
-
-                var isValid = true;
-
-                for (var i = 0; i < newValue.length; i++) {                    
-                    isValid = numberPattern.test(newValue.charAt(i));
-
-                    if (!isValid) break;
-                }
-
-                if (isValid) {
-                    $scope.reserva.CartaoCredito.Numero = newValue.toUpperCase();
-                } else {
-                    $scope.reserva.CartaoCredito.Numero = oldValue ? oldValue.toUpperCase() : '';
-                }
-            }
-        }, true);
     };
 
     angular.module("vagas").controller("formReservaVagaController", ["$scope", "$stateParams", "Vaga", "$state", "$filter", formReservaVagaController]);

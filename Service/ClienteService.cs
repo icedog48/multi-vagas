@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using FluentValidation;
+using Model;
 using Model.Common;
 using Service.Common;
 using Service.Interfaces;
@@ -50,6 +51,10 @@ namespace Service
                 usuarioService.Registrar(usuario);
 
                 cliente.Usuario = usuario;
+
+                var result = (new ClienteValidator(repository)).Validate(cliente);
+
+                if (!result.IsValid) throw new ValidationException(result.Errors);
 
                 repository.Add(cliente);
             });

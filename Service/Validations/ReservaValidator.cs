@@ -26,7 +26,7 @@ namespace Service.Validations
 
         private bool NaoTerReserva(Reserva reserva, DateTime data)
         {
-            return !repository.Items.Any(x => x.Data == data && x.Cliente.Id == reserva.Cliente.Id) ;
+            return !repository.Items.Any(x => x.Data.Date == data.Date && x.Cliente.Id == reserva.Cliente.Id);
         }
     }
 }

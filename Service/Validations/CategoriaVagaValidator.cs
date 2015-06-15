@@ -27,6 +27,9 @@ namespace Service.Validations
                 .NotEmpty()
                 .Must(SiglaNaoRepetida).WithMessage("Já existe uma categoria com a sigla informada.")
                 .Must(SiglaNaoRepetidaInactive).WithMessage("Já existe uma categoria INATIVA com a sigla informada.");
+
+            RuleFor(categoria => categoria.ValorHora)
+                .GreaterThan(0).WithMessage("O campo valor da hora deve ter valor maior que zero.");
         }
 
         private bool DescricaoNaoRepetida(CategoriaVaga categoriaVaga, string descricao)

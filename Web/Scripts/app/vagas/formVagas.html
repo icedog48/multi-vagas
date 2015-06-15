@@ -10,7 +10,7 @@
                     <label class="col-sm-2 col-md-2 control-label">Estacionamento</label>
                     <div class="col-sm-10">
                         
-                        <select name="Estacionamento" class="form-control" ng-model="categoriaVaga.Estacionamento" ng-options="estacionamento.Id as estacionamento.RazaoSocial for estacionamento in estacionamentos">
+                        <select required name="Estacionamento" class="form-control" ng-model="categoriaVaga.Estacionamento" ng-options="estacionamento.Id as estacionamento.RazaoSocial for estacionamento in estacionamentos">
                             <option value="" disabled> --- </option>
                         </select>
                             
@@ -27,14 +27,14 @@
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Sigla.$dirty && frmCategoriaVaga.Sigla.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Sigla</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Sigla" ng-model="categoriaVaga.Sigla" required ng-readonly="naoPodeAlterar" maxlength="3">
+                        <input type="text" class="form-control" name="Sigla" ng-model="categoriaVaga.Sigla" required ng-readonly="naoPodeAlterar" maxlength="3" input-letter>
                     </div>
                 </div>
 
                 <div class="form-group" ng-class="{ invalid_field: frmCategoriaVaga.Quantidade.$dirty && frmCategoriaVaga.Quantidade.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Quantidade</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Quantidade" ng-model="categoriaVaga.Quantidade" required ng-readonly="naoPodeAlterar">
+                        <input type="text" class="form-control" name="Quantidade" ng-model="categoriaVaga.Quantidade" required ng-readonly="naoPodeAlterar" input-number>
                     </div>
                 </div>
 

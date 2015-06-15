@@ -6,9 +6,14 @@
         };
 
         var filtrar = function (filtro) {
-            console.log(filtro);
+            
+            var obj = {
+                Estacionamento: (filtro.Estacionamento) ? filtro.Estacionamento.Id : null,
+                HoraInicio: filtro.HoraInicio,
+                HoraFim: filtro.HoraFim
+            };
 
-            Movimentacao.filtrarPorEstadia(filtro).$promise.then(function (data) {
+            Movimentacao.filtrarPorEstadia(obj).$promise.then(function (data) {
                 $scope.movimentacoes = data;
             }, function (err) {
                 console.log(err);

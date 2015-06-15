@@ -69,50 +69,7 @@
             }
         };
 
-        var inputSigla = function (newValue, oldValue) {
-
-            if (typeof (newValue) !== 'undefined' && newValue != '') {
-
-                var letterPattern = /^[a-zA-Z]+$/;
-
-                var isValid = letterPattern.test(newValue);                
-
-                if (isValid) {
-                    $scope.categoriaVaga.Sigla = newValue.toUpperCase();
-                } else if (typeof (oldValue) !== 'undefined') {
-                    $scope.categoriaVaga.Sigla = oldValue.toUpperCase();
-                } else {
-                    $scope.categoriaVaga.Sigla = '';
-                }
-            }
-
-        };
-
-        var inputQuantidade = function (newValue, oldValue) {
-            if (typeof (newValue) !== 'undefined') {
-
-                var numberPattern = /^\d+$/;
-
-                var isValid = true;
-
-                for (var i = 0; i < newValue.length; i++) {
-
-                    isValid = numberPattern.test(newValue.charAt(i));
-
-                    if (!isValid) break;
-                }
-
-                if (isValid) {
-                    $scope.categoriaVaga.Quantidade = newValue;
-                } else {
-                    $scope.categoriaVaga.Quantidade = oldValue ? oldValue : '';
-                }
-            }
-        };
-
-        $scope.$watch('categoriaVaga.Sigla', inputSigla, true);
-
-        $scope.$watch('categoriaVaga.Quantidade', inputQuantidade, true);
+       
     };
 
     angular.module("vagas").controller("formVagasController", ["$scope", "$stateParams", "CategoriaVaga", "$state", "Estacionamento", formVagasController]);

@@ -54,6 +54,65 @@
         $httpProvider.interceptors.push('httpInterceptor');
     };
 
+    var inputNumber = function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, modelCtrl) {
+
+                modelCtrl.$parsers.push(function (inputValue) {
+                    var transformedInput = inputValue ? inputValue.replace(/[^\d.-]/g, '') : null;
+
+                    if (transformedInput != inputValue) {
+                        modelCtrl.$setViewValue(transformedInput);
+                        modelCtrl.$render();
+                    }
+
+                    return transformedInput;
+                });
+            }
+        };
+    };
+
+    var inputLetter = function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, modelCtrl) {
+
+                modelCtrl.$parsers.push(function (inputValue) {                    
+                    var transformedInput = inputValue ? inputValue.replace(/[\d.-]/g, '') : null;
+
+                    if (transformedInput != inputValue) {
+                        modelCtrl.$setViewValue(transformedInput);
+                        modelCtrl.$render();
+                    }
+
+                    return transformedInput;
+                });
+            }
+        };
+    };
+
+    var minLength = function () {
+        return {
+            require: 'ngModel',
+            link: function (scope, element, attrs, modelCtrl) {
+
+                modelCtrl.$parsers.push(function (inputValue) {
+
+                    var div = element.parent().parent(".form-group");
+
+                    if (inputValue != null && (inputValue.length < attrs['minLength'])) {
+                        if (div.length > 0) div.addClass('invalid_field');
+                    } else {
+                        if (div.length > 0) div.removeClass('invalid_field');
+                    }
+
+                    return inputValue;
+                });
+            }
+        };
+    }
+
     var loaderDirective = function ($rootScope) {
 
         return {
@@ -82,6 +141,9 @@
         .constant("USER_ROLES", USER_ROLES)
         .config(["$httpProvider", config])
         .directive("loader", ["$rootScope", loaderDirective])
+        .directive('inputNumber', [inputNumber])
+        .directive('inputLetter', [inputLetter])
+        .directive('minLength', [minLength])
         .factory("httpInterceptor", ["$q", "$rootScope", "sessionService", httpInterceptor])
     ;
 }());

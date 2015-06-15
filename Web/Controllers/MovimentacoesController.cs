@@ -81,18 +81,20 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/movimentacoes/registrarentrada")]
-        public MovimentacaoForm RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
+        public MovimentacaoSaidaForm RegistrarEntrada(MovimentacaoEntradaForm movimentacao)
         {
+            Movimentacao entrada = null;
+
             try
             {
-                Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
+                entrada = Service.RegistrarEntrada(Mapper.Map<Movimentacao>(movimentacao));
             }
             catch (ValidationException ex)
             {
                 ThrowHttpResponseException(ex);
             }
 
-            return Mapper.Map<MovimentacaoForm>(movimentacao);
+            return Mapper.Map<MovimentacaoSaidaForm>(entrada);
         }
 
         [HttpGet]

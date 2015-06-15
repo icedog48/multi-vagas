@@ -269,8 +269,8 @@ namespace Web.App_Start
             Mapper.CreateMap<int, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Id = x });
             Mapper.CreateMap<TipoPagamento, int>().ConvertUsing(x => x.Id);
 
-            Mapper.CreateMap<string, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Descricao = x });
-            Mapper.CreateMap<TipoPagamento, string>().ConvertUsing(x => x.Descricao);
+            Mapper.CreateMap<string, TipoPagamento>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? new TipoPagamento() { Descricao = x } : new TipoPagamento() );
+            Mapper.CreateMap<TipoPagamento, string>().ConvertUsing(x => (x != null) ? x.Descricao : string.Empty);
 
             Mapper.CreateMap<TipoPagamento, TipoPagamentoCombo>();
 

@@ -9,10 +9,10 @@
 
             filtroEstacionamento.PermiteReserva = true;
 
-            console.log(filtroEstacionamento);
-
             Estacionamento.filtrar(filtroEstacionamento).$promise.then(function (data) {
                 $scope.estacionamentos = data;
+
+                console.log($scope.estacionamentos);
             }, function (err) {
                 console.log(err);
             });

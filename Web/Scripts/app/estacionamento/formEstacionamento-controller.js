@@ -68,41 +68,6 @@
                 alert("Ocorreu um erro inesperado. Por favor, contacte o administrador.");
             }
         };
-
-        var inputCnpj = function (newValue, oldValue) {
-            var isValid = true;
-
-            if (typeof (newValue) !== 'undefined') {
-                isValid = newValue.length == 14;
-            }
-
-            $scope.cnpjInvalido = !isValid;
-        };
-        
-        var inputUf = function (newValue, oldValue) {
-            if (typeof (newValue) !== 'undefined') {
-
-                var letterPattern = /^[a-zA-Z]+$/;
-
-                var isValid = true;
-
-                for (var i = 0; i < newValue.length; i++) {
-                    isValid = letterPattern.test(newValue.charAt(i));
-
-                    if (!isValid) break;
-                }
-
-                if (isValid) {
-                    $scope.estacionamento.UF = newValue.toUpperCase();
-                } else {
-                    $scope.estacionamento.UF = oldValue ? oldValue.toUpperCase() : '';
-                }
-            }
-        };
-
-        $scope.cnpjInvalido = false;
-        $scope.$watch('estacionamento.CNPJ', inputCnpj, true);
-        $scope.$watch('estacionamento.UF', inputUf, true);
     };
 
     angular.module("estacionamento").controller("formEstacionamentoController", ["$scope", "Estacionamento", "$state", "$stateParams", "$modal", "Usuario", formEstacionamentoController]);

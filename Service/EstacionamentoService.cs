@@ -172,19 +172,6 @@ namespace Service
         {
             return tipoPagamentoRepository.Items;
         }
-
-        public override void Remove(Estacionamento obj)
-        {
-            obj.Usuario = GetAdministradorById(obj.Id);
-            obj.Usuario.SituacaoRegistro = SituacaoRegistroEnum.INATIVO;
-
-            repository.ExecuteTransaction(() => 
-            {
-                usuarioService.Update(obj.Usuario);
-
-                base.Remove(obj);
-            });
-        }
     }
 
 }

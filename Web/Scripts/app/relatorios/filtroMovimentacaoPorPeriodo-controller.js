@@ -3,7 +3,13 @@
 
         var filtrar = function (filtro) {
 
-            Movimentacao.filtrarPorPeriodo(filtro).$promise.then(function (data) {                
+            var obj = {
+                Estacionamento: (filtro.Estacionamento) ? filtro.Estacionamento.Id : null,
+                DataInicial: filtro.DataInicial,
+                DataFinal: filtro.DataFinal
+            };
+
+            Movimentacao.filtrarPorPeriodo(obj).$promise.then(function (data) {
                 $scope.movimentacoes = data;
             }, function (err) {
                 console.log(err);
