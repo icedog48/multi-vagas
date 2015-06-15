@@ -109,12 +109,10 @@ namespace Service
             base.Update(categoriaVaga);
         }
 
-
         public IEnumerable<Vaga> VagasDisponiveis(int categoriaId)
         {
             return vagaRepository.Items.Where(vaga => vaga.Disponivel && vaga.CategoriaVaga.Id == categoriaId && vaga.CategoriaVaga.SituacaoRegistro == SituacaoRegistroEnum.ATIVO);
         }
-
 
         public Vaga GetVagaById(int id)
         {
@@ -125,13 +123,11 @@ namespace Service
         {
             reserva.Cliente = clienteService.GetClienteByUsuario(usuarioLogado);
 
+            var result = (new ReservaValidator(reservaRepository)).Validate(reserva);
+
+            if (!result.IsValid) throw new ValidationException(result.Errors);
+
             reserva.Vaga.Disponivel = false;
-
-            var reservaValidator = new ReservaValidator(reservaRepository);
-                
-            var result = reservaValidator.Validate(reserva);
-
-            if (!result.IsValid) throw new ValidationException(result.Errors);            
 
             this.reservaRepository.Add(reserva);
         }

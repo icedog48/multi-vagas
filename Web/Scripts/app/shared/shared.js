@@ -111,7 +111,7 @@
                 });
             }
         };
-    }
+    };
 
     var loaderDirective = function ($rootScope) {
 
