@@ -21,17 +21,20 @@ namespace Service
     {
         private readonly IRepository<Vaga> vagaRepository;
         private readonly IRepository<Reserva> reservaRepository;
+        private readonly IRepository<Movimentacao> movimentacaoRepository;
 
         private readonly CategoriaVagaValidator categoriaVagaValidator;
         
         private readonly IClienteService clienteService;
         private readonly IFuncionarioService funcionarioService;
 
+
         public CategoriaVagaService
             (
                 IRepository<CategoriaVaga> repository,
                 IRepository<Vaga> vagaRepository,
                 IRepository<Reserva> reservaRepository,
+                IRepository<Movimentacao> movimentacaoRepository,
 
                 IFuncionarioService funcionarioService,
                 IClienteService clienteService,
@@ -43,6 +46,7 @@ namespace Service
         {
             this.vagaRepository = vagaRepository;
             this.reservaRepository = reservaRepository;
+            this.movimentacaoRepository = movimentacaoRepository;
 
             this.funcionarioService = funcionarioService;
             this.clienteService = clienteService;
@@ -119,7 +123,7 @@ namespace Service
             return vagaRepository.Items.Where(vaga => vaga.Id == id).FirstOrDefault();
         }
 
-        public void ReservarVaga(Reserva reserva)
+        public Movimentacao ReservarVaga(Reserva reserva, decimal valorAPagar, string placa)
         {
             reserva.Cliente = clienteService.GetClienteByUsuario(usuarioLogado);
 
@@ -129,13 +133,33 @@ namespace Service
 
             reserva.Vaga.Disponivel = false;
 
-            this.reservaRepository.Add(reserva);
+            var movimentacao = new Movimentacao()
+            {
+                Cliente = reserva.Cliente,
+                Entrada = reserva.Data,
+                SituacaoRegistro = SituacaoRegistroEnum.ATIVO,
+                TipoPagamento = new TipoPagamento(TipoPagamentoEnum.CARTAO_CREDITO),
+                Vaga = reserva.Vaga,
+                ValorPago = valorAPagar,
+                Ticket = Movimentacao.EmitirTicketAcesso(reserva.Data),
+                Placa = placa
+            };
+
+            this.repository.ExecuteTransaction(() =>
+            {
+                this.movimentacaoRepository.Add(movimentacao);
+                
+                this.reservaRepository.Add(reserva);
+            });
+
+            return movimentacao;
         }
 
         public IList<CategoriaVaga> GetByEstacionamento(Estacionamento estacionamento)
         {
             return GetActiveItems().Where(x => x.Estacionamento.Id == estacionamento.Id).ToList();
         }
+
     }
 
 }

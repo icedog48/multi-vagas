@@ -13,6 +13,11 @@ namespace Model
 
         }
 
+        public TipoPagamento(TipoPagamentoEnum tipoPagamento) : this()
+        {
+            this.Id = (int)tipoPagamento;
+        }
+
         public virtual string Descricao { get; set; }
     }
 }

@@ -27,14 +27,14 @@ namespace Web.Controllers
 
         public IClienteService ClienteService { get; set; }
 
-        public Usuario UsuarioLogado { get; set; }
-
         public VagasController
             (
-                ICategoriaVagaService categoriaVagaService
+                ICategoriaVagaService categoriaVagaService,
+                IClienteService clienteService
             ) : base(categoriaVagaService)
         {
             this.CategoriaVagaService = categoriaVagaService;
+            this.ClienteService = clienteService;
         }
 
         [HttpGet]
@@ -74,26 +74,33 @@ namespace Web.Controllers
 
         [HttpPost]
         [Route("api/vagas/reservar")]
-        public void ReservarVaga(ReservaForm reservaForm)
+        public MovimentacaoSaidaForm ReservarVaga(ReservaForm reservaForm)
         {
+            reservaForm.Data = DateTime.Now;
+
             var vaga = CategoriaVagaService.VagasDisponiveis(reservaForm.CategoriaVaga).FirstOrDefault();
 
             var reserva = new Reserva() 
             {
                 Data = reservaForm.Data,
-                Vaga = vaga
+                Vaga = vaga,
+                Cliente = ClienteService.GetClienteByUsuario(CategoriaVagaService.UsuarioLogado)
             };
+
+            Movimentacao movimentacao = null;
 
             try
             {
-                CategoriaVagaService.ReservarVaga(reserva);
+                movimentacao = CategoriaVagaService.ReservarVaga(reserva, reservaForm.ValorAPagar, reservaForm.Placa);
             }
             catch (ValidationException ex)
             {
                 ThrowHttpResponseException(ex);
             }
-        }
 
+            return Mapper.Map<MovimentacaoSaidaForm>(movimentacao);
+        }
+        
         protected virtual void ThrowHttpResponseException(ValidationException ex)
         {
             var errors = new StringBuilder();

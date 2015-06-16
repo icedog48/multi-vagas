@@ -30,12 +30,17 @@ namespace Model
 
         public virtual decimal? ValorPago { get; set; }
 
+        public static string EmitirTicketAcesso(DateTime entrada) 
+        {
+            return entrada.ToString("yyyyMMddHHmmss");
+        }
+
         public virtual void RegistrarEntrada(DateTime entrada, Funcionario funcionario) 
         {
             this.FuncionarioEntrada = funcionario;
 
             this.Entrada = entrada;
-            this.Ticket = entrada.ToString("yyyyMMddHHmmss");
+            this.Ticket = EmitirTicketAcesso(entrada);
 
             if (this.Vaga != null)
                 this.Vaga.Disponivel = false;            

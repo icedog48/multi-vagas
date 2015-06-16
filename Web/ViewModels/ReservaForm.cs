@@ -10,5 +10,9 @@ namespace Web.ViewModels
         public DateTime Data { get; set; }
 
         public int CategoriaVaga { get; set; }
+
+        public decimal ValorAPagar { get; set; }
+
+        public string Placa { get; set; }
     }
 }

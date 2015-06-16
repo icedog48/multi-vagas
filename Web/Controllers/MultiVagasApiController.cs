@@ -30,7 +30,7 @@ namespace Web.Controllers
 
             var usuarioLogado = container.GetInstance<Usuario>("usuarioLogado");
 
-            if (HttpContext.Current.User.Identity.IsAuthenticated && (usuarioLogado == null || string.IsNullOrEmpty(usuarioLogado.Email)))
+            if (HttpContext.Current.User.Identity.IsAuthenticated) //&& (usuarioLogado == null || string.IsNullOrEmpty(usuarioLogado.Email))
             {
                 var usuarioService = container.GetInstance<IUsuarioService>();
 

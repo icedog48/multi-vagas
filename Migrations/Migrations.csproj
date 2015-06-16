@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="201502\1 - CreateTableEstacionamento.cs" />
     <Compile Include="201504\09 - CreateTableMovimentacao.cs" />
+    <Compile Include="201505\18 - AlterMovimentacaoFuncionarioEntrada.cs" />
     <Compile Include="201505\17 - AlterFuncionario.cs" />
     <Compile Include="201505\16- AlterMovimentacao.cs" />
     <Compile Include="201505\15- InsertIntoTipoPagamento.cs" />

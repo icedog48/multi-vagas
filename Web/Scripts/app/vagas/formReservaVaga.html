@@ -14,12 +14,20 @@
                     </div>
                 </div>
 
+                <!--Placa-->
+                <div class="form-group" ng-class="{ invalid_field: formReservaVaga.Placa.$dirty && formReservaVaga.Placa.$invalid }">
+                    <label class="col-sm-2 col-md-2 control-label">Placa</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="Placa" ng-model="reserva.Placa" required maxlength="7">
+                    </div>
+                </div>
+
                 <!-- Categoria Vaga-->
                 <div class="form-group" ng-class="{ invalid_field: formReservaVaga.CategoriaVaga.$dirty && formReservaVaga.CategoriaVaga.$invalid }">
                     <label class="col-sm-2 col-md-2 control-label">Categoria da vaga</label>
                     <div class="col-sm-10">
 
-                        <select name="CategoriaVaga" class="form-control" ng-model="reserva.CategoriaVaga" ng-options="categoriaVaga.Id as categoriaVaga.Descricao for categoriaVaga in categoriasVaga" required >
+                        <select name="CategoriaVaga" class="form-control" ng-model="reserva.CategoriaVaga" ng-change="calcularValorAPagar(reserva.CategoriaVaga)" ng-options="categoriaVaga.Descricao for categoriaVaga in categoriasVaga" required>
                             <option value="" disabled> --- </option>
                         </select>
 
@@ -30,6 +38,15 @@
 
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Dados de pagamento </h4>
+
+                <!-- Valor à Pagar  -->
+                <div class="form-group">
+                    <label class="col-sm-2 col-md-2 control-label">Valor à Pagar</label>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        <span ng-bind="reserva.ValorAPagarFormatado"></span>
+                    </div>
+                </div>
+
 
                 <!-- Cartão de credito  -->
                 <div class="form-group" ng-class="{ invalid_field: formReservaVaga.NumeroCartao.$dirty && formReservaVaga.NumeroCartao.$invalid }">

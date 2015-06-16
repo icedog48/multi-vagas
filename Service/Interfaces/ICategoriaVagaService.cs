@@ -16,8 +16,8 @@ namespace Service.Interfaces
 
         Vaga GetVagaById(int id);
 
-        void ReservarVaga(Reserva reserva);
-
         IList<CategoriaVaga> GetByEstacionamento(Estacionamento estacionamento);
+
+        Movimentacao ReservarVaga(Reserva reserva, decimal valorAPagar, string placa);
     }
 }

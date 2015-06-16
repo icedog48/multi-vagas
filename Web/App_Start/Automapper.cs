@@ -223,7 +223,6 @@ namespace Web.App_Start
 
             Mapper.CreateMap<Movimentacao, MovimentacaoSaidaForm>()
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
-                .ForMember(viewModel => viewModel.TipoPagamento, map => map.Ignore())
                 .ForMember(viewModel => viewModel.ValorVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga.ValorHora))
             ;
 
@@ -267,7 +266,7 @@ namespace Web.App_Start
             #region TipoPagamento
 
             Mapper.CreateMap<int, TipoPagamento>().ConvertUsing(x => new TipoPagamento() { Id = x });
-            Mapper.CreateMap<TipoPagamento, int>().ConvertUsing(x => x.Id);
+            Mapper.CreateMap<TipoPagamento, int>().ConvertUsing(x => (x != null) ? x.Id : 0);
 
             Mapper.CreateMap<string, TipoPagamento>().ConvertUsing(x => (!string.IsNullOrEmpty(x)) ? new TipoPagamento() { Descricao = x } : new TipoPagamento() );
             Mapper.CreateMap<TipoPagamento, string>().ConvertUsing(x => (x != null) ? x.Descricao : string.Empty);
