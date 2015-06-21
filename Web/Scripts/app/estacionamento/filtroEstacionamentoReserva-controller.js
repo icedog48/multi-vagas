@@ -19,9 +19,18 @@
 
         };
 
+        var reservarVaga = function (estacionamento) {
+            if (estacionamento.VagasDisponiveis <= 0) {
+                alert('O estacionamento selecionado não possui vagas disponíveis. Por favor selecione outro estacionamento.');
+            } else {
+                $state.go('reservar_vaga', { id: estacionamento.Id });
+            }
+        };
+
         filtrarEstacionamentos($scope.filtroEstacionamento);
 
         $scope.filtrarEstacionamentos = filtrarEstacionamentos;
+        $scope.reservarVaga = reservarVaga;
     };
 
     angular.module("estacionamento").controller("filtroEstacionamentoReservaController", ["$scope", "Estacionamento", "$state", filtroEstacionamentoReservaController]);

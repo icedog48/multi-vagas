@@ -46,8 +46,8 @@
                     <tr ng-repeat="vaga in vagas">
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Estacionamento"></td>
                         <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Categoria"></td>
-                        <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Vagas"></td>
-                        <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.ValorHora"></td>
+                        <td ui-sref="vagas_edit({ id: vaga.Id })" ng-bind="vaga.Vagas"></td>                        
+                        <td> {{vaga.ValorHora | currency:"R$ "}} </td>
                         <td>
                             <a ng-click="excluirVaga(vaga)"> <i class="fa fa-times fa-2x"></i> </a>
                         </td>

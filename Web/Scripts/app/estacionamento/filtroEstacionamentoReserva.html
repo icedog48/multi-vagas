@@ -63,10 +63,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="estacionamento in estacionamentos">
-                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.RazaoSocial"></td>
-                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.Telefone"></td>
-                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.Endereco"></td>
-                        <td ui-sref="reservar_vaga({ id: estacionamento.Id })" ng-bind="estacionamento.VagasDisponiveis"></td>
+                        <td ng-click="reservarVaga(estacionamento)" ng-bind="estacionamento.RazaoSocial"></td>
+                        <td ng-click="reservarVaga(estacionamento)" ng-bind="estacionamento.Telefone"></td>
+                        <td ng-click="reservarVaga(estacionamento)" ng-bind="estacionamento.Endereco"></td>
+                        <td ng-click="reservarVaga(estacionamento)" ng-bind="estacionamento.VagasDisponiveis"></td>
                     </tr>
                 </tbody>
             </table>
