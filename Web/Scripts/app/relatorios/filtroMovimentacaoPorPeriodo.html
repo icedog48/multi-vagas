@@ -45,6 +45,15 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th colspan="5"> Faturamento total no periodo de {{filtro.DataInicial | date:'dd/MM/yyyy'}} à {{filtro.DataFinal | date:'dd/MM/yyyy'}}</th>
+                        <th>{{calcularFaturamentoTotal(movimentacoes) | currency:"R$ "}}</th>
+                    </tr>
+                                        
+                    <tr>
+                        <th colspan="6" style="text-align: center !important; padding: 15px 0px 15px 0px !important; "> Detalhamento das movimentações </th>                        
+                    </tr>
+
+                    <tr>
                         <th>Estacionamento</th>
                         <th>Placa</th>
                         <th>Pagamento</th>

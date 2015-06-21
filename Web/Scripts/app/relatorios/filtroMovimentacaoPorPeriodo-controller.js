@@ -28,11 +28,26 @@
             return printHelper.printTemplate(templateUrl, data);
         };
 
+        var calcularFaturamentoTotal = function (movimentacoes) {
+            var faturamentoTotal = 0;
+
+            if (movimentacoes.length > 0) {
+                movimentacoes.forEach(function (movimentacao) {
+                    faturamentoTotal += parseFloat(movimentacao.ValorPago) || 0;
+                });
+            }
+
+            return faturamentoTotal;
+        };
+
         $scope.estacionamentos = Estacionamento.query();
+        $scope.movimentacoes = [];
 
         $scope.filtro = {};
         $scope.filtro.DataInicial = new Date();
         $scope.filtro.DataFinal = new Date();
+
+        $scope.calcularFaturamentoTotal = calcularFaturamentoTotal;
 
         $scope.filtrar = filtrar;
         $scope.filtrar($scope.filtro);

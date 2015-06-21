@@ -27,6 +27,18 @@
 
         };
 
+        var calcularFaturamentoTotal = function (movimentacoes) {
+            var faturamentoTotal = 0;
+
+            if (movimentacoes.length > 0) {
+                movimentacoes.forEach(function (movimentacao) {
+                    faturamentoTotal += parseFloat(movimentacao.ValorPago) || 0;
+                });
+            }
+
+            return faturamentoTotal;
+        };
+
         var printDiv = function (divName) {
             var templateUrl = 'Scripts/app/relatorios/movimentacaoPorCategoria-template.html';
 
@@ -45,6 +57,7 @@
         $scope.filtro = {};
         $scope.filtro.DataInicial = new Date();
         $scope.filtro.DataFinal = new Date();
+        $scope.calcularFaturamentoTotal = calcularFaturamentoTotal;
 
         $scope.filtrar = filtrar;
         $scope.filtrar($scope.filtro);

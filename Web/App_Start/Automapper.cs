@@ -232,7 +232,7 @@ namespace Web.App_Start
             ;
 
             Mapper.CreateMap<Movimentacao, MovimentacaoPorPeriodoTable>()
-                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.Vaga.CategoriaVaga.Estacionamento.RazaoSocial))
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
                 .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
@@ -242,7 +242,7 @@ namespace Web.App_Start
             ;
 
             Mapper.CreateMap<Movimentacao, MovimentacaoPorCategoriaTable>()
-                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.Vaga.CategoriaVaga.Estacionamento.RazaoSocial))
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
                 .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))
@@ -252,7 +252,7 @@ namespace Web.App_Start
             ;
 
             Mapper.CreateMap<Movimentacao, MovimentacaoPorEstadiaTable>()
-                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.FuncionarioEntrada.Estacionamento.RazaoSocial))
+                .ForMember(viewModel => viewModel.Estacionamento, map => map.MapFrom(model => model.Vaga.CategoriaVaga.Estacionamento.RazaoSocial))
                 .ForMember(viewModel => viewModel.CategoriaVaga, map => map.MapFrom(model => model.Vaga.CategoriaVaga))
                 .ForMember(viewModel => viewModel.Placa, map => map.MapFrom(model => model.Placa))
                 .ForMember(viewModel => viewModel.Vaga, map => map.MapFrom(model => model.Vaga.Codigo))

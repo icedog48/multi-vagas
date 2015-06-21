@@ -27,6 +27,8 @@ namespace Service.Filters
                 query = query.Where(x => x.Vaga.CategoriaVaga.Id == Categoria.Value);
             }
 
+            query = query.Where(x => x.Saida.HasValue);
+
             return query;
         }
     }

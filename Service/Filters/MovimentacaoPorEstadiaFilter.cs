@@ -38,6 +38,8 @@ namespace Service.Filters
                 query = query.Where(x => x.Estadia <= horaReferencia);
             }
 
+            query = query.Where(x => x.Saida.HasValue);
+
             return query;
         }
     }
